@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EXPRESO — Plataforma líder en noticias en el noroeste de México. Hermosillo, Sonora.">
+<title>EXPRESO — Noticias de Sonora y México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   EXPRESO v5 — CSS Custom Props + Keyframes
+   ═══════════════════════════════════════════════ */
+:root{
+  --v:   #1a7c3e; --vd: #0e5228; --vm: #25a457; --vp: #e8f5ee;
+  --n:   #111;    --gd: #1f1f1f; --gt: #333;    --gm: #666;
+  --gl:  #999;    --gx: #c8c8c8; --gb: #efefef; --gc: #f7f7f7;
+  --ge:  #e2e2e2; --w: #fff;     --r: #c0392b;  --y: #e8a400;
+  --fd:  'Playfair Display',Georgia,serif;
+  --fb:  'Source Sans 3',sans-serif;
+  --fc:  'Roboto Condensed',sans-serif;
+  --ra:8px; --rs:4px;
+  --s1:0 1px 4px rgba(0,0,0,.09);
+  --s2:0 4px 20px rgba(0,0,0,.13);
+  --s3:0 8px 40px rgba(0,0,0,.18);
+  --ef:.15s; --em:.28s; --es:.5s;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --sharp:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);font-size:15px;color:var(--gt);background:var(--gb);line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button{cursor:pointer;font-family:var(--fb)}
+
+/* ── KEYFRAMES ──────────────────────────────────── */
+@keyframes fadeUp    {from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeDown  {from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes fadeIn    {from{opacity:0}to{opacity:1}}
+@keyframes scaleIn   {from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@keyframes slideR    {from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+@keyframes slideL    {from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes blink     {0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.65)}}
+@keyframes pulseRing {0%{box-shadow:0 0 0 0 rgba(192,57,43,.55)}70%{box-shadow:0 0 0 9px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
+@keyframes tkScroll  {from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes slideEnter{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+@keyframes glow      {0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes shake     {0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes countUp   {from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes shimmer   {0%{background-position:-600px 0}100%{background-position:600px 0}}
+@keyframes spin      {to{transform:rotate(360deg)}}
+@keyframes barGrow   {from{width:0}to{width:var(--w,100%)}}
+
+/* ── PAGE LOAD STAGGER ──────────────────────────── */
+#utilbar   {animation:fadeDown .38s var(--sharp) both;animation-delay:.04s}
+#infobar   {animation:fadeDown .38s var(--sharp) both;animation-delay:.10s}
+#header    {animation:fadeDown .38s var(--sharp) both;animation-delay:.16s}
+#navbar    {animation:fadeDown .32s var(--sharp) both;animation-delay:.20s}
+#ticker    {animation:fadeIn  .45s both;animation-delay:.25s}
+.col-left  {animation:slideR  .55s var(--ease) both;animation-delay:.32s}
+.col-center{animation:fadeUp  .55s var(--ease) both;animation-delay:.38s}
+.col-right {animation:slideL  .55s var(--ease) both;animation-delay:.44s}
+
+/* ── SCROLL REVEAL ─────────────────────────────── */
+.rv  {opacity:0;transform:translateY(22px);transition:opacity .58s var(--ease),transform .58s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rvl {opacity:0;transform:translateX(-18px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.rvl.on{opacity:1;transform:none}
+.sg>*{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+.sg.on>*:nth-child(1){opacity:1;transform:none;transition-delay:.03s}
+.sg.on>*:nth-child(2){opacity:1;transform:none;transition-delay:.09s}
+.sg.on>*:nth-child(3){opacity:1;transform:none;transition-delay:.15s}
+.sg.on>*:nth-child(4){opacity:1;transform:none;transition-delay:.21s}
+.sg.on>*:nth-child(5){opacity:1;transform:none;transition-delay:.27s}
+.sg.on>*:nth-child(6){opacity:1;transform:none;transition-delay:.33s}
+.sg.on>*:nth-child(7){opacity:1;transform:none;transition-delay:.39s}
+.sg.on>*:nth-child(n+8){opacity:1;transform:none;transition-delay:.45s}
+
+/* ── SHARED MICRO UX ───────────────────────────── */
+.lift{transition:transform var(--em) var(--spring),box-shadow var(--em) var(--ease)}
+.lift:hover{transform:translateY(-4px) scale(1.005);box-shadow:var(--s3)}
+.izoom{overflow:hidden}
+.izoom img{transition:transform .52s var(--ease),filter .52s var(--ease);will-change:transform}
+.izoom:hover img{transform:scale(1.07);filter:brightness(1.04) saturate(1.1)}
+.press{transition:transform var(--ef) var(--sharp)}
+.press:active{transform:scale(.95)}
+.uline{position:relative}
+.uline::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:2px;background:var(--vm);transition:width .24s var(--ease)}
+.uline:hover::after{width:100%}
+
+/* ── PROGRESS BAR ──────────────────────────────── */
+#pbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--vd),var(--vm));width:0;z-index:9999;transition:width .1s linear;box-shadow:0 0 6px rgba(26,122,60,.5)}
+
+/* ── UTILITY BAR ───────────────────────────────── */
+#utilbar{background:var(--n);border-bottom:2px solid var(--v)}
+.ub{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:center;justify-content:space-between;overflow-x:auto;scrollbar-width:none}
+.ub::-webkit-scrollbar{display:none}
+.ub-l{display:flex}
+.ub-l a{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:7px 11px;border-right:1px solid rgba(255,255,255,.07);transition:color var(--em),background var(--em);white-space:nowrap}
+.ub-l a:hover{color:var(--vm);background:rgba(255,255,255,.05)}
+.ub-l a.hi{color:var(--vm)}
+.ub-r{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ub-r a{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.5);transition:color var(--ef)}
+.ub-r a:hover{color:var(--vm)}
+.ub-soc{display:flex;gap:5px}
+.ub-soc a{width:22px;height:22px;background:rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,.65);transition:background var(--em) var(--spring),transform var(--ef) var(--spring),color var(--ef)}
+.ub-soc a:hover{background:var(--v);color:#fff;transform:translateY(-2px) scale(1.14)}
+.ub-soc a:active{transform:scale(.9)}
+
+/* ── INFO BAR ──────────────────────────────────── */
+#infobar{background:var(--w);border-bottom:1px solid var(--ge)}
+.ib{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.ib::-webkit-scrollbar{display:none}
+.ib-it{display:flex;align-items:center;gap:10px;padding:9px 18px;border-right:1px solid var(--ge);min-width:180px;flex-shrink:0;transition:background var(--em);cursor:pointer}
+.ib-it:hover{background:var(--gc)}
+.ib-it:first-child{padding-left:0}
+.ib-lbl{font-size:10.5px;color:var(--gm);font-family:var(--fc);letter-spacing:.03em;line-height:1.2}
+.ib-ttl{font-size:13px;font-weight:600;color:var(--n);line-height:1.25;max-width:138px}
+.ib-th{width:42px;height:42px;border-radius:var(--rs);object-fit:cover;flex-shrink:0;transition:transform var(--em) var(--ease)}
+.ib-it:hover .ib-th{transform:scale(1.07)}
+.mkt{display:flex;flex-direction:column;gap:2px}
+.mkt-r{display:flex;align-items:center;gap:7px;font-family:var(--fc);font-size:12px}
+.mkt-n{color:var(--gm)}.mkt-v{font-weight:700;color:var(--n)}
+.mkt-c{font-size:11px;font-weight:700}
+.pos{color:#1a8a3c}.neg{color:var(--r)}
+
+/* ── HEADER ────────────────────────────────────── */
+#header{background:var(--w);padding:10px 0 8px;border-bottom:1px solid var(--ge);position:sticky;top:0;z-index:900;box-shadow:0 1px 8px rgba(0,0,0,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow var(--em) var(--ease)}
+#header.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.13)}
+.hd{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:center;gap:16px}
+.logo-w{margin-right:6px}
+.logo-svg{font-family:var(--fd);font-size:34px;font-weight:900;color:var(--vd);letter-spacing:-1.5px;line-height:1;transition:color var(--em) var(--ease)}
+.logo-svg:hover{color:var(--v)}
+.logo-svg em{color:var(--v);font-style:normal}
+.logo-sub{font-family:var(--fc);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gl);margin-top:1px}
+.srch{flex:1;max-width:520px;display:flex;align-items:center;background:var(--gb);border:1.5px solid var(--ge);border-radius:22px;overflow:hidden;transition:border-color var(--em),box-shadow var(--em),background var(--em)}
+.srch:focus-within{border-color:var(--v);background:var(--w);box-shadow:0 0 0 3px rgba(26,122,60,.1)}
+.srch input{flex:1;border:none;background:transparent;padding:8px 14px;font-size:14px;font-family:var(--fb);outline:none;color:var(--n)}
+.srch button{background:var(--v);border:none;padding:8px 15px;color:#fff;font-size:14px;transition:background var(--ef),transform var(--ef) var(--spring)}
+.srch button:hover{background:var(--vd)}
+.srch button:active{transform:scale(.9)}
+.hd-nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+.hd-nav a{font-family:var(--fc);font-size:14px;font-weight:700;color:var(--gt);padding:6px 10px;border-radius:var(--rs);transition:color var(--em),background var(--em)}
+.hd-nav a:hover{color:var(--vd);background:var(--gb)}
+.btn-ei{font-family:var(--fc);font-size:11px;font-weight:700;color:var(--gt);border:1.5px solid var(--ge);padding:6px 13px;border-radius:18px;background:none;transition:border-color var(--em),color var(--em);white-space:nowrap}
+.btn-ei:hover{border-color:var(--n);color:var(--n)}
+.btn-sus{font-family:var(--fc);font-size:12px;font-weight:700;color:#fff;background:var(--v);border:none;padding:7px 16px;border-radius:18px;box-shadow:0 2px 8px rgba(26,122,60,.3);transition:background var(--em),transform var(--ef) var(--spring),box-shadow var(--em);white-space:nowrap}
+.btn-sus:hover{background:var(--vd);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,122,60,.4)}
+.btn-sus:active{transform:scale(.95)}
+
+/* ── NAVBAR ────────────────────────────────────── */
+#navbar{background:var(--vd);position:sticky;top:68px;z-index:800}
+.nb{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.nb::-webkit-scrollbar{display:none}
+.nb-it{position:relative}
+.nb-a{display:block;font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.82);padding:10px 14px;border-bottom:2px solid transparent;white-space:nowrap;transition:color var(--ef),background var(--ef),border-color var(--em) var(--ease)}
+.nb-a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nb-a.on{color:#fff;border-bottom-color:var(--vm)}
+.nb-it:hover .nb-dd{opacity:1;visibility:visible;transform:translateY(0)}
+.nb-dd{position:absolute;top:100%;left:0;background:var(--w);min-width:200px;border-top:2px solid var(--v);box-shadow:var(--s2);border-radius:0 0 var(--rs) var(--rs);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;z-index:999}
+.nb-dd a{display:block;padding:9px 15px;font-family:var(--fc);font-size:13px;color:var(--gt);border-bottom:1px solid var(--ge);transition:background var(--ef),color var(--ef),padding-left var(--em) var(--ease)}
+.nb-dd a:last-child{border-bottom:none}
+.nb-dd a:hover{background:var(--gb);color:var(--vd);padding-left:20px}
+.nb-dd.two{display:grid;grid-template-columns:1fr 1fr;min-width:340px}
+.nb-dd.two a{border-right:1px solid var(--ge)}
+.nb-clima{margin-left:auto;font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.8);padding:0 14px;white-space:nowrap;flex-shrink:0}
+
+/* ── TICKER ────────────────────────────────────── */
+#ticker{background:var(--n);height:32px;display:flex;align-items:stretch;overflow:hidden}
+.tk-tag{background:var(--r);color:#fff;font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:0 13px;display:flex;align-items:center;gap:6px;flex-shrink:0;animation:pulseRing 2s infinite}
+.tk-dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:blink 1s infinite}
+.tk-b{flex:1;overflow:hidden;display:flex;align-items:center}
+.tk-i{display:flex;white-space:nowrap;animation:tkScroll 44s linear infinite}
+.tk-i:hover{animation-play-state:paused}
+.tk-i a{font-family:var(--fc);font-size:12.5px;color:rgba(255,255,255,.82);padding:0 22px;transition:color var(--ef);position:relative}
+.tk-i a::after{content:'◆';position:absolute;right:0;color:var(--vm);font-size:7px;top:50%;transform:translateY(-50%)}
+.tk-i a:hover{color:var(--vm)}
+
+/* ── 3-COL LAYOUT ──────────────────────────────── */
+.page{max-width:1280px;margin:0 auto;padding:14px}
+.three{display:grid;grid-template-columns:296px 1fr 300px;gap:14px;align-items:start}
+
+/* ── WIDGET BASE ───────────────────────────────── */
+.wg{background:var(--w);border-radius:var(--ra);padding:14px;margin-bottom:12px;box-shadow:var(--s1);transition:box-shadow var(--em) var(--ease)}
+.wg:hover{box-shadow:var(--s2)}
+.wg-h{font-family:var(--fc);font-size:15px;font-weight:700;color:var(--n);margin-bottom:11px;display:flex;align-items:center;gap:7px;border-left:3px solid var(--v);padding-left:9px}
+
+/* ── LEFT COL: TENDENCIAS ──────────────────────── */
+.tr-l li{display:flex;align-items:flex-start;gap:9px;padding:8px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em) var(--ease)}
+.tr-l li:last-child{border-bottom:none}
+.tr-l li:hover{background:var(--gc);padding-left:8px}
+.tr-n{font-family:var(--fc);font-size:13px;font-weight:700;color:var(--ge);min-width:16px;flex-shrink:0;padding-top:1px;transition:color var(--em) var(--ease)}
+.tr-l li:hover .tr-n{color:var(--v)}
+.tr-n.hi{color:var(--v)}
+.tr-th{width:52px;height:36px;border-radius:var(--rs);object-fit:cover;flex-shrink:0;transition:transform var(--em) var(--ease),filter var(--em)}
+.tr-l li:hover .tr-th{transform:scale(1.07);filter:brightness(1.05)}
+.tr-tx{font-size:12.5px;font-weight:600;line-height:1.3;color:var(--n);transition:color var(--ef)}
+.tr-l li:hover .tr-tx{color:var(--vd)}
+.tr-m{font-size:11px;color:var(--gm);font-family:var(--fc);margin-top:2px;display:flex;align-items:center;gap:6px}
+.bn{background:var(--y);color:#fff;font-family:var(--fc);font-size:9px;font-weight:700;padding:1px 5px;border-radius:2px;animation:fadeIn .4s both}
+.vm{display:block;text-align:center;font-family:var(--fc);font-size:11px;font-weight:700;color:var(--vd);padding:8px;margin-top:6px;border:1px solid var(--ge);border-radius:var(--rs);transition:background var(--em),color var(--em),border-color var(--em),transform var(--ef) var(--spring)}
+.vm:hover{background:var(--vd);color:#fff;border-color:var(--vd);transform:translateY(-1px)}
+.vm:active{transform:scale(.97)}
+
+/* ── LEFT COL: MÁS POPULARES (Yahoo style, numbered big) ── */
+.pop-l li{display:flex;align-items:flex-start;gap:10px;padding:9px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.pop-l li:last-child{border-bottom:none}
+.pop-l li:hover{background:var(--gc);padding-left:8px}
+.pop-num{font-family:var(--fd);font-size:28px;font-weight:900;color:var(--ge);line-height:1;min-width:28px;flex-shrink:0;transition:color var(--em) var(--ease)}
+.pop-l li:hover .pop-num{color:var(--v)}
+.pop-num.hi{color:var(--v)}
+.pop-th{width:54px;height:54px;border-radius:var(--rs);object-fit:cover;flex-shrink:0;transition:transform var(--em) var(--ease)}
+.pop-l li:hover .pop-th{transform:scale(1.06)}
+.pop-tx{font-size:13px;font-weight:600;line-height:1.35;color:var(--n);transition:color var(--ef)}
+.pop-l li:hover .pop-tx{color:var(--vd)}
+.pop-m{font-size:11px;color:var(--gm);font-family:var(--fc);margin-top:3px}
+
+/* ── LEFT COL: EXPLORAR / CATEGORÍAS (Yahoo: cuadrícula) ── */
+.exp-g{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.exp-it{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:var(--rs);background:var(--gc);border:1px solid var(--ge);font-family:var(--fc);font-size:12px;font-weight:700;color:var(--gt);cursor:pointer;transition:background var(--em),color var(--em),transform var(--ef) var(--spring),box-shadow var(--em)}
+.exp-it:hover{background:var(--vd);color:#fff;border-color:var(--vd);transform:translateY(-2px) scale(1.02);box-shadow:0 4px 12px rgba(14,82,40,.25)}
+.exp-it:active{transform:scale(.96)}
+.exp-it .ico{font-size:14px;transition:transform var(--em) var(--spring)}
+.exp-it:hover .ico{transform:scale(1.2)}
+
+/* ── LEFT COL: ORIGINALES (Yahoo style) ─────────── */
+.orig-l li{display:flex;align-items:flex-start;gap:10px;padding:9px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.orig-l li:last-child{border-bottom:none}
+.orig-l li:hover{background:var(--gc);padding-left:8px}
+.orig-badge{font-family:var(--fc);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;background:var(--v);padding:1px 6px;border-radius:2px;margin-bottom:4px;display:inline-block}
+.orig-th{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--vm);transition:transform var(--em) var(--spring),box-shadow var(--em)}
+.orig-l li:hover .orig-th{transform:scale(1.1);box-shadow:0 2px 10px rgba(26,122,60,.3)}
+.orig-tx{font-size:12.5px;font-weight:600;line-height:1.3;color:var(--n);transition:color var(--ef)}
+.orig-l li:hover .orig-tx{color:var(--vd)}
+
+/* ── LEFT COL: COLUMNAS OPINIÓN ─────────────────── */
+.col-l li{display:flex;align-items:center;gap:9px;padding:8px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.col-l li:last-child{border-bottom:none}
+.col-l li:hover{background:var(--gc);padding-left:8px}
+.col-av{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--vm);transition:border-color var(--em),transform var(--em) var(--spring),box-shadow var(--em)}
+.col-l li:hover .col-av{border-color:var(--v);transform:scale(1.1);box-shadow:0 2px 10px rgba(26,122,60,.3)}
+.col-n{font-family:var(--fc);font-size:11px;font-weight:700;color:var(--vd)}
+.col-t{font-size:12px;font-weight:600;line-height:1.3;color:var(--n)}
+.col-t a:hover{color:var(--vd)}
+
+/* ── HERO SLIDER ───────────────────────────────── */
+.hero{background:var(--n);border-radius:var(--ra);overflow:hidden;margin-bottom:12px;box-shadow:var(--s2);position:relative}
+.sl{display:none;position:relative}
+.sl.on{display:block}
+.sl.on .sl-img{animation:slideEnter .6s var(--ease) both}
+.sl.on .sl-cap{animation:fadeUp .5s var(--ease) .2s both}
+.sl-img{width:100%;height:350px;object-fit:cover;display:block}
+.sl-cap{position:absolute;bottom:0;left:0;right:0;padding:38px 18px 16px;background:linear-gradient(transparent,rgba(0,0,0,.88))}
+.sl-src{display:flex;align-items:center;gap:7px;font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.7);margin-bottom:5px}
+.sl-ico{width:20px;height:20px;background:var(--v);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700;flex-shrink:0}
+.sl-cap h2{font-family:var(--fd);font-size:21px;font-weight:700;color:#fff;line-height:1.25}
+.sl-cap h2 a{color:#fff}
+.sl-cap h2 a:hover{color:var(--vm)}
+.sl-ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background var(--em),transform var(--em) var(--spring),opacity var(--em);z-index:5;opacity:0}
+.hero:hover .sl-ctrl{opacity:1}
+.sl-ctrl:hover{background:rgba(0,0,0,.8);transform:translateY(-50%) scale(1.12)}
+.sl-ctrl:active{transform:translateY(-50%) scale(.9)}
+.sl-p{left:10px}.sl-n{right:10px}
+.sl-ctr{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-family:var(--fc);font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:9px;z-index:5;display:flex;align-items:center;gap:6px}
+.sl-pause{background:none;border:none;color:#fff;font-size:10px;padding:0;transition:transform var(--ef) var(--spring)}
+.sl-pause:hover{transform:scale(1.2)}
+.sl-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5}
+.sl-dot{width:6px;height:6px;background:rgba(255,255,255,.4);border-radius:50%;cursor:pointer;border:none;transition:background var(--em),width var(--em),border-radius var(--em)}
+.sl-dot.on{background:#fff;width:18px;border-radius:3px}
+
+/* ── SUB HERO 3 ────────────────────────────────── */
+.sub3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.sc{background:var(--w);border-radius:var(--ra);overflow:hidden;box-shadow:var(--s1);transition:transform var(--em) var(--spring),box-shadow var(--em)}
+.sc:hover{transform:translateY(-4px);box-shadow:var(--s3)}
+.sc-i{width:100%;height:106px;object-fit:cover;transition:transform .52s var(--ease),filter .52s var(--ease)}
+.sc:hover .sc-i{transform:scale(1.07);filter:brightness(1.04)}
+.sc-b{padding:9px 11px 11px}
+.sc-src{display:flex;align-items:center;gap:5px;font-family:var(--fc);font-size:11px;color:var(--gm);margin-bottom:3px}
+.sc-dot{width:15px;height:15px;border-radius:50%;background:var(--v);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700;flex-shrink:0}
+.sc-cm{margin-left:auto}
+.sc h4{font-size:12.5px;font-weight:600;line-height:1.3;color:var(--n);transition:color var(--ef)}
+.sc h4 a:hover{color:var(--vd)}
+
+/* ── FEED HEADER + TOGGLE ──────────────────────── */
+.fd-hd{background:var(--w);border-radius:var(--ra) var(--ra) 0 0;padding:12px 15px 0;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--ge);box-shadow:var(--s1)}
+.fd-ttl{font-family:var(--fc);font-size:16px;font-weight:700;color:var(--n);padding-bottom:11px;border-bottom:2px solid var(--v);margin-bottom:-1px}
+.fv-tog{margin-left:auto;display:flex;gap:2px;padding-bottom:11px}
+.fv-b{background:none;border:1px solid var(--ge);padding:4px 8px;border-radius:var(--rs);font-size:13px;color:var(--gm);transition:background var(--em),color var(--em),transform var(--ef) var(--spring)}
+.fv-b.on{background:var(--n);color:#fff;border-color:var(--n)}
+.fv-b:hover:not(.on){background:var(--gb);transform:scale(1.06)}
+
+/* ── FEED ITEMS ────────────────────────────────── */
+.fd-body{background:var(--w);border-radius:0 0 var(--ra) var(--ra);box-shadow:var(--s1)}
+.fi{display:flex;gap:13px;padding:13px 15px;border-bottom:1px solid var(--ge);cursor:pointer;opacity:0;transform:translateY(14px);transition:background var(--ef),padding-left var(--em) var(--ease),opacity .43s var(--ease),transform .43s var(--ease)}
+.fi.on{opacity:1;transform:none}
+.fi:last-child{border-bottom:none}
+.fi:hover{background:var(--gc);padding-left:18px}
+.fi-img{width:128px;height:88px;object-fit:cover;border-radius:var(--rs);flex-shrink:0;transition:transform .5s var(--ease),filter .5s var(--ease),box-shadow var(--em)}
+.fi:hover .fi-img{transform:scale(1.05);filter:brightness(1.04) saturate(1.08);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.fi-body{flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.fi-sec{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--vd);margin-bottom:3px;display:flex;align-items:center;gap:5px}
+.fi-hot{background:rgba(26,122,60,.1);border-radius:10px;padding:2px 8px;display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--vd)}
+.fi-hot::before{content:'🔥';font-size:10px}
+.fi h3{font-size:15px;font-weight:700;line-height:1.3;color:var(--n);margin-bottom:4px}
+.fi h3 a{transition:color var(--ef)}
+.fi h3 a:hover{color:var(--vd)}
+.fi-ex{font-size:13px;color:var(--gm);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:5px}
+.fi-m{display:flex;align-items:center;gap:8px;font-family:var(--fc);font-size:11px;color:var(--gm)}
+.fi-si{width:15px;height:15px;border-radius:50%;background:var(--v);display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700;flex-shrink:0}
+.fi-sep{color:var(--ge)}
+.fi-t{margin-left:auto}
+.fi.ad{background:#fffbf0}
+.fi.ad:hover{background:#fff8e0}
+.ad-b{font-family:var(--fc);font-size:9px;font-weight:700;border:1px solid var(--gx);color:var(--gl);padding:1px 5px;border-radius:2px;margin-right:3px}
+/* Feed card mode */
+.fd-body.card .fi{flex-direction:column;padding:0 0 14px;margin:0 14px}
+.fd-body.card .fi-img{width:100%;height:200px;border-radius:var(--rs) var(--rs) 0 0;margin-bottom:10px}
+.fd-body.card .fi-body{padding:0 4px}
+.fd-body.card .fi h3{font-size:17px}
+.fd-body.card .fi-ex{-webkit-line-clamp:3}
+
+/* ── RIGHT: CLIMA ──────────────────────────────── */
+.wg-cl{background:var(--w);border-radius:var(--ra);overflow:hidden;margin-bottom:12px;box-shadow:var(--s1)}
+.cl-hd{background:linear-gradient(135deg,var(--vd) 0%,var(--v) 60%,var(--vm) 100%);padding:14px;position:relative;overflow:hidden}
+.cl-hd::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.08) 0%,transparent 60%);animation:glow 4s ease-in-out infinite alternate}
+.cl-city{font-family:var(--fc);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:4px;margin-bottom:5px;position:relative;z-index:1}
+.cl-main{display:flex;align-items:flex-end;gap:8px;position:relative;z-index:1}
+.cl-temp{font-family:var(--fd);font-size:54px;font-weight:900;color:#fff;line-height:1;animation:scaleIn .6s var(--spring) .5s both}
+.cl-inf{color:rgba(255,255,255,.88)}
+.cl-desc{font-size:13px;font-weight:600}
+.cl-feel{font-size:11px;opacity:.8}
+.cl-days{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.2);margin-top:10px;padding-top:8px;position:relative;z-index:1}
+.cl-d{text-align:center;color:rgba(255,255,255,.85)}
+.cl-dl{font-family:var(--fc);font-size:9.5px;text-transform:uppercase;opacity:.7}
+.cl-di{font-size:20px;margin:3px 0;display:inline-block;transition:transform var(--em) var(--spring)}
+.cl-d:hover .cl-di{transform:scale(1.35) translateY(-2px)}
+.cl-dt{font-family:var(--fc);font-size:11.5px;font-weight:700}
+.cl-cta{display:block;text-align:center;font-family:var(--fc);font-size:11.5px;font-weight:700;color:var(--vd);padding:9px;border-top:1px solid var(--ge);transition:background var(--em),letter-spacing var(--em)}
+.cl-cta:hover{background:var(--gb);letter-spacing:.04em}
+
+/* ── RIGHT: AD SLOTS ───────────────────────────── */
+.ad-s{background:#f0f0f0;border:1px dashed #ccc;border-radius:var(--ra);margin-bottom:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#bbb;font-family:var(--fc);font-size:11px;text-align:center;transition:border-color var(--em),background var(--em)}
+.ad-s:hover{border-color:#aaa;background:#ebebeb}
+.ad-s .ai{font-size:18px;color:#d0d0d0;transition:transform var(--em) var(--spring)}
+.ad-s:hover .ai{transform:scale(1.15)}
+.a250{height:250px}.a300{height:300px}
+
+/* ── RIGHT: FINANZAS ───────────────────────────── */
+.fin-l li{display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid var(--ge);font-size:13px;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em);cursor:pointer}
+.fin-l li:last-child{border-bottom:none}
+.fin-l li:hover{background:var(--gc);padding-left:6px;padding-right:6px}
+.fin-s{font-family:var(--fc);font-weight:700;color:var(--n)}
+.fin-v{font-family:var(--fc);color:var(--n)}
+.fin-c{font-family:var(--fc);font-size:11px;font-weight:700}
+
+/* ── RIGHT: NEWSLETTER ─────────────────────────── */
+.nl{background:var(--gd);border-radius:var(--ra);padding:16px;margin-bottom:12px;text-align:center;overflow:hidden;position:relative}
+.nl::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(26,122,60,.3) 0%,transparent 70%);animation:glow 3s ease-in-out infinite alternate}
+.nl h4{font-family:var(--fd);font-size:15px;color:#fff;margin-bottom:5px;position:relative;z-index:1}
+.nl p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:11px;line-height:1.5;position:relative;z-index:1}
+.nl input{width:100%;padding:8px 11px;border:none;border-radius:var(--rs);font-size:13px;font-family:var(--fb);margin-bottom:7px;outline:none;position:relative;z-index:1;transition:box-shadow var(--em)}
+.nl input:focus{box-shadow:0 0 0 3px rgba(26,122,60,.3)}
+.nl button{width:100%;padding:8px;background:var(--v);color:#fff;border:none;border-radius:var(--rs);font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;position:relative;z-index:1;box-shadow:0 2px 8px rgba(26,122,60,.3);transition:background var(--em),transform var(--ef) var(--spring),box-shadow var(--em)}
+.nl button:hover{background:var(--vm);transform:translateY(-1px);box-shadow:0 4px 14px rgba(26,122,60,.4)}
+.nl button:active{transform:scale(.95)}
+
+/* ── RIGHT: TAGS ───────────────────────────────── */
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--fc);font-size:11px;font-weight:700;padding:4px 9px;background:var(--gb);border:1px solid var(--ge);border-radius:11px;color:var(--gm);transition:background var(--em),color var(--em),border-color var(--em),transform var(--ef) var(--spring),box-shadow var(--em)}
+.tag:hover{background:var(--v);color:#fff;border-color:var(--v);transform:translateY(-2px) scale(1.05);box-shadow:0 3px 10px rgba(26,122,60,.25)}
+.tag:active{transform:scale(.95)}
+
+/* ── RIGHT: BÚSQUEDAS TENDENCIA (Yahoo: top searches) ── */
+.srch-t li{display:flex;align-items:center;gap:10px;padding:7px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.srch-t li:last-child{border-bottom:none}
+.srch-t li:hover{background:var(--gc);padding-left:8px}
+.srch-t .sn{font-family:var(--fd);font-size:18px;font-weight:900;color:var(--ge);min-width:22px;transition:color var(--em)}
+.srch-t li:hover .sn{color:var(--v)}
+.srch-t .sn.hi{color:var(--v)}
+.srch-t .st{font-family:var(--fc);font-size:13px;font-weight:700;color:var(--n);transition:color var(--ef)}
+.srch-t li:hover .st{color:var(--vd)}
+.srch-t .sa{margin-left:auto;font-family:var(--fc);font-size:10px;color:var(--gl)}
+
+/* ── RIGHT: GALERÍA ────────────────────────────── */
+.gal-g{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px}
+.gal-g img{width:100%;height:80px;object-fit:cover;cursor:pointer;transition:transform .4s var(--ease),filter .4s var(--ease)}
+.gal-g img:hover{transform:scale(1.08);filter:brightness(1.09) saturate(1.1);z-index:1;position:relative}
+
+/* ── FOOTER ────────────────────────────────────── */
+#footer{background:var(--n);color:rgba(255,255,255,.7);margin-top:20px}
+.ft-m{padding:32px 0 22px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ft-g{max-width:1280px;margin:0 auto;padding:0 14px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:28px}
+.ft-lo{font-family:var(--fd);font-size:26px;font-weight:900;color:var(--vm);margin-bottom:8px}
+.ft-ab{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:10px}
+.ft-in{font-size:11px;color:rgba(255,255,255,.4);font-family:var(--fc);line-height:1.7}
+.ft-sc{display:flex;gap:6px;margin-top:10px}
+.ft-sc a{width:28px;height:28px;background:rgba(255,255,255,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.65);font-size:12px;transition:background var(--em) var(--spring),transform var(--ef) var(--spring),color var(--ef)}
+.ft-sc a:hover{background:var(--v);color:#fff;transform:translateY(-3px) scale(1.1)}
+.ft-sc a:active{transform:scale(.9)}
+.ft-c h5{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--vm);margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:7px}
+.ft-c li{margin-bottom:5px}
+.ft-c li a{font-size:12.5px;font-family:var(--fc);color:rgba(255,255,255,.55);transition:color var(--ef),padding-left var(--em)}
+.ft-c li a:hover{color:var(--vm);padding-left:4px}
+.ft-bot{max-width:1280px;margin:0 auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-bot p{font-size:11px;font-family:var(--fc);color:rgba(255,255,255,.35)}
+.ft-leg{display:flex;gap:12px}
+.ft-leg a{font-size:11px;font-family:var(--fc);color:rgba(255,255,255,.35);transition:color var(--ef)}
+.ft-leg a:hover{color:var(--vm)}
+
+/* ── BACK TO TOP ───────────────────────────────── */
+#btop{position:fixed;bottom:22px;right:22px;width:40px;height:40px;background:var(--v);color:#fff;border:none;border-radius:var(--ra);font-size:16px;box-shadow:0 4px 16px rgba(26,122,60,.4);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(14px) scale(.8);transition:opacity .32s var(--ease),transform .32s var(--spring),background var(--ef);z-index:999}
+#btop.show{opacity:1;transform:none}
+#btop:hover{background:var(--vd);transform:translateY(-2px) scale(1.06)}
+#btop:active{transform:scale(.92)}
+
+/* ── RESPONSIVE ────────────────────────────────── */
+@media(max-width:1100px){.three{grid-template-columns:260px 1fr 280px}}
+@media(max-width:900px){.three{grid-template-columns:1fr}.col-left{display:none}.col-right{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ft-g{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.sub3{grid-template-columns:1fr}.col-right{grid-template-columns:1fr}.sl-img{height:210px}.sl-cap h2{font-size:16px}.hd-nav,.btn-ei{display:none}.logo-svg{font-size:26px}.ft-g{grid-template-columns:1fr}.fi .fi-img{width:100px;height:70px}.fi h3{font-size:14px}}
+</style>
+</head>
+<body>
+
+<div id="pbar"></div>
+
+<!-- ── UTILITY BAR ──────────────────────────────── -->
+<div id="utilbar">
+  <div class="ub">
+    <div class="ub-l">
+      <a href="/sonora-grupera" class="hi">🎵 Sonora Grupera</a>
+      <a href="/10-4-noticias">📻 10-4 Noticias</a>
+      <a href="/eventos">🎟 Eventos Expreso</a>
+      <a href="/expreso-247">📺 Expreso 24/7</a>
+      <a href="/suplementos">📋 Suplementos</a>
+      <a href="/ultima-hora">⚡ Última Hora</a>
+      <a href="/edicion-impresa">🗞 Edición Impresa</a>
+      <a href="/empleate">💼 EMPLÉATE</a>
+      <a href="/directorio">📒 Directorio</a>
+    </div>
+    <div class="ub-r">
+      <a href="/contacto">Contáctanos</a>
+      <a href="/media-kit">Media Kit 2026</a>
+      <div class="ub-soc">
+        <a href="https://facebook.com/expresoweb" title="Facebook">f</a>
+        <a href="https://x.com/Expresoweb" title="X">𝕏</a>
+        <a href="https://instagram.com/expresomx" title="Instagram">ig</a>
+        <a href="https://youtube.com/user/expresoweb" title="YouTube">▶</a>
+        <a href="#" title="WhatsApp">W</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── INFO BAR ─────────────────────────────────── -->
+<div id="infobar">
+  <div class="ib">
+    <div class="ib-it">
+      <div><div class="ib-lbl">☀ Hermosillo, Sonora</div><div class="ib-ttl">38°C · Soleado · Hum. 18%</div></div>
+    </div>
+    <div class="ib-it">
+      <img class="ib-th" src="https://picsum.photos/seed/tv1/80/80" alt="">
+      <div><div class="ib-lbl">Qué ver hoy</div><div class="ib-ttl">Narcos: México · T3</div></div>
+    </div>
+    <div class="ib-it">
+      <img class="ib-th" src="https://picsum.photos/seed/hist/80/80" alt="">
+      <div><div class="ib-lbl">Hoy en la historia</div><div class="ib-ttl">Cruz Roja Int'l fundada (1863)</div></div>
+    </div>
+    <div class="ib-it">
+      <div><div class="ib-lbl">🏦 Mercados</div>
+        <div class="mkt">
+          <div class="mkt-r"><span class="mkt-n">IPC</span><span class="mkt-v">56,340</span><span class="mkt-c pos">▲ +1.40%</span></div>
+          <div class="mkt-r"><span class="mkt-n">USD/MXN</span><span class="mkt-v">17.32</span><span class="mkt-c neg">▼ -0.14%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ib-it" style="border-right:none">
+      <div><div class="ib-lbl">📻 En vivo ahora</div><div class="ib-ttl">Expreso 24/7 · Noticiero matutino</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── HEADER ────────────────────────────────────── -->
+<header id="header">
+  <div class="hd">
+    <div class="logo-w">
+      <img src="https://www.expreso.com.mx/images/logo-expreso.png" alt="EXPRESO" style="height:44px;width:auto" onerror="this.style.display='none';document.getElementById('lsvg').style.display='block'">
+      <div class="logo-svg" id="lsvg" style="display:none">expreso<em>.</em></div>
+      <div class="logo-sub">El periódico de Sonora</div>
+    </div>
+    <div class="srch">
+      <input type="text" placeholder="Buscar en Expreso…">
+      <button class="press">🔍</button>
+    </div>
+    <nav class="hd-nav">
+      <a href="/noticias" class="uline">Noticias</a>
+      <a href="/accion" class="uline">Acción</a>
+      <a href="/estelar" class="uline">Estelar</a>
+      <a href="/expresion" class="uline">Expresión</a>
+      <a href="/multimedia" class="uline">Multimedia</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0">
+      <button class="btn-ei press">🗞 Edición Impresa</button>
+      <button class="btn-sus press">Suscribirse</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── NAVBAR ─────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nb">
+    <a href="/" class="nb-a on">Inicio</a>
+    <div class="nb-it"><a href="/noticias" class="nb-a">Noticias ▾</a>
+      <div class="nb-dd"><a href="/noticias/hermosillo">Hermosillo</a><a href="/noticias/sonora">Sonora</a><a href="/noticias/mexico">México</a><a href="/noticias/mundo">Mundo</a><a href="/noticias/seguridad">Seguridad</a><a href="/noticias/negocios">Negocios</a><a href="/noticias/mundo-curioso">Mundo Curioso</a></div>
+    </div>
+    <div class="nb-it"><a href="/accion" class="nb-a">Acción ▾</a>
+      <div class="nb-dd"><a href="/accion/deportes-locales">Deportes Locales</a><a href="/accion/futbol">Fútbol</a><a href="/accion/beisbol">Béisbol</a><a href="/accion/otros-deportes">Otros Deportes</a></div>
+    </div>
+    <div class="nb-it"><a href="/estelar" class="nb-a">Estelar ▾</a>
+      <div class="nb-dd"><a href="/estelar/musica">Música</a><a href="/estelar/cine">Cine</a><a href="/estelar/television">Televisión</a><a href="/estelar/cultura">Cultura</a></div>
+    </div>
+    <div class="nb-it"><a href="/expresion" class="nb-a">Expresión ▾</a>
+      <div class="nb-dd two"><a href="/expresion/entre-nos">Entre Nos</a><a href="/expresion/en-privado">En Privado</a><a href="/expresion/estrictamente-personal">Estrictamente Personal</a><a href="/expresion/el-asalto-a-la-razon">El Asalto a la Razón</a><a href="/expresion/fuera-de-ruta">Fuera De Ruta</a><a href="/expresion/templo-mayor">Templo Mayor</a><a href="/expresion/serpientes-y-escaleras">Serpientes y Escaleras</a><a href="/expresion/entrevias">Entrevías</a><a href="/expresion/el-poder-de-las-ideas">El Poder de las Ideas</a><a href="/expresion/actitudes">Actitudes</a><a href="/expresion/historias-de-reportero">Historias de Reportero</a></div>
+    </div>
+    <div class="nb-it"><a href="/multimedia" class="nb-a">Multimedia ▾</a>
+      <div class="nb-dd"><a href="/multimedia/videos">Videos</a><a href="/multimedia/galerias">Galerías</a></div>
+    </div>
+    <div class="nb-it"><a href="#" class="nb-a">Ciudades ▾</a>
+      <div class="nb-dd"><a href="/noticias/hermosillo">Hermosillo</a><a href="/noticias/ciudad-obregon">Ciudad Obregón</a><a href="/noticias/nogales">Nogales</a><a href="/noticias/guaymas">Guaymas</a><a href="/noticias/navojoa">Navojoa</a></div>
+    </div>
+    <a href="/edicion-impresa" class="nb-a">Edición Impresa</a>
+    <a href="/suplementos" class="nb-a">Suplementos</a>
+    <span class="nb-clima">☀ 38°C Hermosillo</span>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div id="ticker">
+  <div class="tk-tag"><span class="tk-dot"></span> Última Hora</div>
+  <div class="tk-b">
+    <div class="tk-i">
+      <a href="/noticias/hermosillo">Gobernador Durazo anuncia becas para reducir abandono escolar en 13% en Sonora</a>
+      <a href="/noticias/sonora">Plan Sonora de Energías Sostenibles impulsa sectores automotriz y aeroespacial</a>
+      <a href="/noticias/mexico">Cámara de Diputados aprueba reforma al sistema de pensiones con 287 votos</a>
+      <a href="/accion/beisbol">Naranjeros de Hermosillo confirma tres refuerzos para la temporada 2026-27 de la LMP</a>
+      <a href="/noticias/negocios">Dólar cotiza en $17.32 pesos; IPC BMV sube 1.40% impulsado por sector minero</a>
+      <a href="/noticias/mundo">ONU llama a cese al fuego inmediato ante escalada de tensiones en Medio Oriente</a>
+      <a href="/noticias/hermosillo">Gobernador Durazo anuncia becas para reducir abandono escolar en 13% en Sonora</a>
+      <a href="/noticias/sonora">Plan Sonora de Energías Sostenibles impulsa sectores automotriz y aeroespacial</a>
+      <a href="/noticias/mexico">Cámara de Diputados aprueba reforma al sistema de pensiones con 287 votos</a>
+      <a href="/accion/beisbol">Naranjeros de Hermosillo confirma tres refuerzos para la temporada 2026-27 de la LMP</a>
+      <a href="/noticias/negocios">Dólar cotiza en $17.32 pesos; IPC BMV sube 1.40% impulsado por sector minero</a>
+      <a href="/noticias/mundo">ONU llama a cese al fuego inmediato ante escalada de tensiones en Medio Oriente</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     3 COLUMNAS
+     ══════════════════════════════════════ -->
+<div class="page">
+<div class="three">
+
+<!-- ═══════ COL IZQUIERDA ═══════ -->
+<aside class="col-left">
+
+  <!-- MÁS POPULARES (Yahoo: numeración grande con foto cuadrada) -->
+  <div class="wg rv">
+    <div class="wg-h"><span>🔥</span> Más populares</div>
+    <ul class="pop-l sg">
+      <li><span class="pop-num hi">1</span><img class="pop-th" src="https://picsum.photos/seed/pop1/80/80" alt=""><div><div class="pop-tx">Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030</div><div class="pop-m">Hermosillo · 12,400 lecturas</div></div></li>
+      <li><span class="pop-num hi">2</span><img class="pop-th" src="https://picsum.photos/seed/pop2/80/80" alt=""><div><div class="pop-tx">Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre</div><div class="pop-m">Sonora · 9,870 lecturas</div></div></li>
+      <li><span class="pop-num hi">3</span><img class="pop-th" src="https://picsum.photos/seed/pop3/80/80" alt=""><div><div class="pop-tx">SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo de Hermosillo</div><div class="pop-m">Seguridad · 7,210 lecturas</div></div></li>
+      <li><span class="pop-num">4</span><img class="pop-th" src="https://picsum.photos/seed/pop4/80/80" alt=""><div><div class="pop-tx">Naranjeros de Hermosillo rompe récord de asistencia en la LMP 2026</div><div class="pop-m">Béisbol · 6,550 lecturas</div></div></li>
+      <li><span class="pop-num">5</span><img class="pop-th" src="https://picsum.photos/seed/pop5/80/80" alt=""><div><div class="pop-tx">Washington impone aranceles a electrónicos de Asia; México analiza respuesta</div><div class="pop-m">Mundo · 4,320 lecturas</div></div></li>
+    </ul>
+    <a href="/noticias" class="vm">Ver más en Expreso 100 →</a>
+  </div>
+
+  <!-- ORIGINALES DE EXPRESO (Yahoo: Originales de Yahoo, avatar circular) -->
+  <div class="wg rv">
+    <div class="wg-h"><span>⭐</span> Originales Expreso</div>
+    <ul class="orig-l sg">
+      <li>
+        <img class="orig-th" src="https://picsum.photos/seed/or1/60/60" alt="">
+        <div><div class="orig-badge">Exclusivo</div><div class="orig-tx">El domo de calor sobre Sonora: por qué las temperaturas se disparan cada año</div></div>
+      </li>
+      <li>
+        <img class="orig-th" src="https://picsum.photos/seed/or2/60/60" alt="">
+        <div><div class="orig-badge">Reportaje</div><div class="orig-tx">Naranjeros: la historia detrás del equipo más ganador del noroeste de México</div></div>
+      </li>
+      <li>
+        <img class="orig-th" src="https://picsum.photos/seed/or3/60/60" alt="">
+        <div><div class="orig-badge">Especial</div><div class="orig-tx">Nearshoring en Sonora: las empresas que eligieron Hermosillo sobre otras ciudades</div></div>
+      </li>
+    </ul>
+    <a href="/originales" class="vm">Ver todos los originales →</a>
+  </div>
+
+  <!-- EXPLORAR MÁS (Yahoo: Explorar más, cuadrícula) -->
+  <div class="wg rv">
+    <div class="wg-h">🧭 Explorar más</div>
+    <div class="exp-g">
+      <a href="/noticias" class="exp-it"><span class="ico">📰</span> Noticias</a>
+      <a href="/noticias/negocios" class="exp-it"><span class="ico">💰</span> Finanzas</a>
+      <a href="/accion" class="exp-it"><span class="ico">⚽</span> Deportes</a>
+      <a href="/estelar" class="exp-it"><span class="ico">🎬</span> Estelar</a>
+      <a href="/noticias/mundo" class="exp-it"><span class="ico">🌍</span> Mundo</a>
+      <a href="/expresion" class="exp-it"><span class="ico">✍</span> Opinión</a>
+      <a href="/multimedia/videos" class="exp-it"><span class="ico">▶</span> Videos</a>
+      <a href="/multimedia/galerias" class="exp-it"><span class="ico">📷</span> Galerías</a>
+      <a href="/empleate" class="exp-it"><span class="ico">💼</span> EMPLÉATE</a>
+      <a href="/directorio" class="exp-it"><span class="ico">📒</span> Directorio</a>
+    </div>
+  </div>
+
+  <!-- EXPRESIÓN / COLUMNAS -->
+  <div class="wg rv">
+    <div class="wg-h">✍ Expresión</div>
+    <ul class="col-l sg">
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=11" alt=""><div><div class="col-n">Entre Nos · Columna</div><div class="col-t"><a href="/expresion/entre-nos">Lo que dice Mr. X: el proyecto del hospital en Río Sonora avanza</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=33" alt=""><div><div class="col-n">Pbro. José Martínez Colín</div><div class="col-t"><a href="/expresion/vivir-en-cristiano">"La medida del amor" · Vivir en Cristiano</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=25" alt=""><div><div class="col-n">Fuera de Ruta</div><div class="col-t"><a href="/expresion/fuera-de-ruta">El camino del agua en la sierra sonorense</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=44" alt=""><div><div class="col-n">El Asalto a la Razón</div><div class="col-t"><a href="/expresion/el-asalto-a-la-razon">Serpientes y Escaleras: las becas de Durazo</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=57" alt=""><div><div class="col-n">Actitudes</div><div class="col-t"><a href="/expresion/actitudes">El poder de las ideas en la era digital</a></div></div></li>
+    </ul>
+    <a href="/expresion" class="vm">Ver todas las columnas →</a>
+  </div>
+
+</aside>
+
+<!-- ═══════ COL CENTRO ═══════ -->
+<main class="col-center">
+
+  <!-- HERO SLIDER -->
+  <div class="hero rv" id="hero">
+    <div class="sl on">
+      <img class="sl-img" src="https://picsum.photos/seed/h1/760/370" alt="">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico">EX</div> Expreso · Hermosillo · 💬 186</div>
+        <h2><a href="/noticias/hermosillo/plan-maestro-2026">Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030 con inversión histórica de 2 mil mdp</a></h2>
+      </div>
+    </div>
+    <div class="sl">
+      <img class="sl-img" src="https://picsum.photos/seed/h2/760/370" alt="">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico" style="background:#1a7c3e">EX</div> Expreso · Sonora · 💬 94</div>
+        <h2><a href="/noticias/sonora/plan-sonora-energias">Plan Sonora de Energías Sostenibles impulsa industrias automotriz y aeroespacial de la entidad</a></h2>
+      </div>
+    </div>
+    <div class="sl">
+      <img class="sl-img" src="https://picsum.photos/seed/h3/760/370" alt="">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico" style="background:#c0392b">EX</div> Expreso · Béisbol · 💬 312</div>
+        <h2><a href="/accion/beisbol/naranjeros-refuerzos-lmp">Naranjeros de Hermosillo anuncia tres refuerzos estelares para la temporada 2026–27 de la LMP</a></h2>
+      </div>
+    </div>
+    <div class="sl">
+      <img class="sl-img" src="https://picsum.photos/seed/h4/760/370" alt="">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico" style="background:#8e44ad">EX</div> Expreso · Mundo · 💬 47</div>
+        <h2><a href="/noticias/mundo/aranceles-washington">Washington impone nuevos aranceles a Asia; México analiza respuesta ante la escalada comercial global</a></h2>
+      </div>
+    </div>
+    <div class="sl-ctr"><span id="slLbl">1 de 4</span><button class="sl-pause" id="slPause">⏸</button></div>
+    <button class="sl-ctrl sl-p" id="slPrev">‹</button>
+    <button class="sl-ctrl sl-n" id="slNext">›</button>
+    <div class="sl-dots" id="slDots">
+      <button class="sl-dot on"></button><button class="sl-dot"></button>
+      <button class="sl-dot"></button><button class="sl-dot"></button>
+    </div>
+  </div>
+
+  <!-- SUB HERO 3 -->
+  <div class="sub3 sg rv">
+    <div class="sc izoom">
+      <img class="sc-i" src="https://picsum.photos/seed/sc1/400/130" alt="">
+      <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Seguridad</span><span class="sc-cm">💬 528</span></div><h4><a href="/noticias/seguridad/ssp-operativo">SSP Sonora refuerza operativos nocturnos en zonas de riesgo de Hermosillo y Cajeme</a></h4></div>
+    </div>
+    <div class="sc izoom">
+      <img class="sc-i" src="https://picsum.photos/seed/sc2/400/130" alt="">
+      <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Salud</span><span class="sc-cm">💬 1.2k</span></div><h4><a href="/noticias/sonora/sueros-celulas-madre">Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre</a></h4></div>
+    </div>
+    <div class="sc izoom">
+      <img class="sc-i" src="https://picsum.photos/seed/sc3/400/130" alt="">
+      <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Deportes</span><span class="sc-cm">💬 74</span></div><h4><a href="/accion/otros-deportes/torneo-g1">Hermosillo recibe 180 tenistas en el Torneo Nacional G1; récord en Club Los Lagos</a></h4></div>
+    </div>
+  </div>
+
+  <!-- FEED PARA TI -->
+  <div class="fd-hd">
+    <span class="fd-ttl">Para ti</span>
+    <div class="fv-tog">
+      <button class="fv-b" id="btnL">☰</button>
+      <button class="fv-b on" id="btnC">▤</button>
+    </div>
+  </div>
+  <div class="fd-body" id="fdBody">
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi1/200/130" alt=""><div class="fi-body"><div class="fi-sec"><span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/hermosillo/plan-maestro">Plan Maestro contempla 12 parques lineales y ampliación del transporte público en Hermosillo</a></h3><div class="fi-ex">La inversión histórica busca transformar la movilidad urbana y la calidad de vida de los hermosillenses para la próxima década.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 186</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 25 min</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi2/200/130" alt=""><div class="fi-body"><div class="fi-sec">Seguridad</div><h3><a href="/noticias/seguridad/operativo">SSP Sonora despliega 300 elementos en operativo nocturno en Hermosillo y Cajeme</a></h3><div class="fi-ex">La Secretaría de Seguridad reforzó vigilancia en puntos estratégicos durante el fin de semana vacacional.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 412</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 h</span></div></div></div>
+    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi/200/130" alt=""><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi3/200/130" alt=""><div class="fi-body"><div class="fi-sec">Negocios · <span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/negocios/plan-sonora">Plan Sonora de Energías Sostenibles: la apuesta del estado por la industria limpia y el nearshoring</a></h3><div class="fi-ex">El programa busca atraer inversión en los sectores automotriz, aeroespacial y tecnológico aprovechando la posición estratégica de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 238</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 2 h</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi4/200/130" alt=""><div class="fi-body"><div class="fi-sec">Acción · Béisbol</div><h3><a href="/accion/beisbol/naranjeros">Naranjeros de Hermosillo: los tres peloteros que refuerzan la plantilla para la LMP 2026–27</a></h3><div class="fi-ex">El equipo sonorense presentó sus nuevas adquisiciones buscando recuperar el campeonato de la Serie del Caribe.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 892</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 3 h</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi5/200/130" alt=""><div class="fi-body"><div class="fi-sec">Salud · Sonora</div><h3><a href="/noticias/sonora/celulas-madre">Hombre guaymense sufre daños renales tras tratamiento con sueros de células madre en Hermosillo</a></h3><div class="fi-ex">El caso se vincula al médico señalado como probable responsable del fallecimiento de ocho pacientes en la capital del estado.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 1.4k</span><span class="fi-sep">·</span><span>5 min</span><span class="fi-t">Hace 4 h</span></div></div></div>
+    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi2/200/130" alt=""><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed 2 · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi6/200/130" alt=""><div class="fi-body"><div class="fi-sec">Mundo</div><h3><a href="/noticias/mundo/aranceles">Washington impone aranceles a electrónicos de Asia; México analiza respuesta diplomática</a></h3><div class="fi-ex">La medida afecta semiconductores y dispositivos móviles, con potencial impacto en la cadena de suministro del norte de México.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 317</span><span class="fi-sep">·</span><span>6 min</span><span class="fi-t">Hace 5 h</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi7/200/130" alt=""><div class="fi-body"><div class="fi-sec">Acción · Otros Deportes</div><h3><a href="/accion/otros-deportes/g1">Torneo Nacional G1 de Tenis reúne 180 jugadores en Hermosillo con récord histórico</a></h3><div class="fi-ex">El evento se desarrolla del 28 de abril al 2 de mayo con Festival de Mini Tenis como novedad en Club Los Lagos.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 56</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi8/200/130" alt=""><div class="fi-body"><div class="fi-sec">Expresión · Mr. X</div><h3><a href="/expresion/entre-nos/mrx-becas">Lo que dice Mr. X: con las becas, Durazo apunta a reducir abandono escolar en 13%</a></h3><div class="fi-ex">La columna analiza la estrategia educativa del gobernador y sus implicaciones en el escenario preelectoral de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Expresión</span><span class="fi-sep">·</span><span>💬 203</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
+  </div>
+
+</main>
+
+<!-- ═══════ COL DERECHA ═══════ -->
+<aside class="col-right">
+
+  <!-- CLIMA -->
+  <div class="wg-cl rv">
+    <div class="cl-hd">
+      <div class="cl-city"><span>📍</span> Hermosillo, Sonora</div>
+      <div class="cl-main">
+        <div class="cl-temp">38°</div>
+        <div class="cl-inf"><div class="cl-desc">☀ Soleado</div><div class="cl-feel">Sensación: 41° · Hum. 18%</div></div>
+      </div>
+      <div class="cl-days">
+        <div class="cl-d"><div class="cl-dl">Hoy</div><div class="cl-di">☀</div><div class="cl-dt">38° / 22°</div></div>
+        <div class="cl-d"><div class="cl-dl">Mié</div><div class="cl-di">🌤</div><div class="cl-dt">39° / 23°</div></div>
+        <div class="cl-d"><div class="cl-dl">Jue</div><div class="cl-di">⛅</div><div class="cl-dt">37° / 21°</div></div>
+      </div>
+    </div>
+    <a href="/clima" class="cl-cta">Revisar UV, calidad del aire y más →</a>
+  </div>
+
+  <!-- AD 300×250 -->
+  <div class="ad-s a250 rv"><div class="ai">📢</div>Espacio publicitario<br>300 × 250</div>
+
+  <!-- TENDENCIAS DE BÚSQUEDA (Yahoo: lista numerada de tendencias) -->
+  <div class="wg rv">
+    <div class="wg-h">🔍 Tendencias de búsqueda</div>
+    <ul class="srch-t sg">
+      <li><span class="sn hi">1</span><span class="st">Gobernador Durazo</span><span class="sa">↑ +340%</span></li>
+      <li><span class="sn hi">2</span><span class="st">Naranjeros LMP 2026</span><span class="sa">↑ +210%</span></li>
+      <li><span class="sn hi">3</span><span class="st">Célula madre Hermosillo</span><span class="sa">↑ +890%</span></li>
+      <li><span class="sn">4</span><span class="st">Plan Sonora Energías</span><span class="sa">↑ +145%</span></li>
+      <li><span class="sn">5</span><span class="st">Dólar hoy México</span><span class="sa">Estable</span></li>
+      <li><span class="sn">6</span><span class="st">Torneo G1 tenis Hermosillo</span><span class="sa">↑ +76%</span></li>
+      <li><span class="sn">7</span><span class="st">SSP Sonora operativo</span><span class="sa">↑ +123%</span></li>
+      <li><span class="sn">8</span><span class="st">Champions League semifinal</span><span class="sa">↑ +567%</span></li>
+      <li><span class="sn">9</span><span class="st">Reforma pensiones México</span><span class="sa">↑ +88%</span></li>
+      <li><span class="sn">10</span><span class="st">Temperatura Hermosillo</span><span class="sa">↑ +234%</span></li>
+    </ul>
+    <a href="/buscar" class="vm">Ver todas las búsquedas →</a>
+  </div>
+
+  <!-- MERCADOS -->
+  <div class="wg rv">
+    <div class="wg-h">📈 Mercados</div>
+    <ul class="fin-l">
+      <li><span class="fin-s">USD/MXN</span><span class="fin-v">$17.32</span><span class="fin-c neg">▼ 0.14%</span></li>
+      <li><span class="fin-s">EUR/MXN</span><span class="fin-v">$18.89</span><span class="fin-c pos">▲ 0.08%</span></li>
+      <li><span class="fin-s">IPC BMV</span><span class="fin-v">56,340</span><span class="fin-c pos">▲ 1.40%</span></li>
+      <li><span class="fin-s">Petróleo</span><span class="fin-v">$78.50</span><span class="fin-c neg">▼ 0.32%</span></li>
+      <li><span class="fin-s">Oro</span><span class="fin-v">$2,318</span><span class="fin-c pos">▲ 0.21%</span></li>
+    </ul>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="nl rv">
+    <h4>📧 Expreso al Día</h4>
+    <p>Las noticias más importantes de Sonora en tu correo cada mañana. Gratis.</p>
+    <input type="email" placeholder="tucorreo@ejemplo.com" id="nlE">
+    <button id="nlB">Suscribirme gratis</button>
+  </div>
+
+  <!-- AD 300×600 -->
+  <div class="ad-s a300 rv"><div class="ai">📢</div>Espacio publicitario<br>300 × 600</div>
+
+  <!-- TEMAS DEL DÍA -->
+  <div class="wg rv">
+    <div class="wg-h">🏷 Temas del día</div>
+    <div class="tags">
+      <a href="/noticias/hermosillo" class="tag">Hermosillo</a>
+      <a href="/noticias/sonora" class="tag">Sonora</a>
+      <a href="/noticias/sonora/durazo" class="tag">Durazo</a>
+      <a href="/accion/beisbol" class="tag">Béisbol</a>
+      <a href="/noticias/negocios" class="tag">Negocios</a>
+      <a href="/noticias/seguridad" class="tag">Seguridad</a>
+      <a href="/accion/beisbol/naranjeros" class="tag">Naranjeros</a>
+      <a href="/noticias/negocios/nearshoring" class="tag">Nearshoring</a>
+      <a href="/noticias/ciudad-obregon" class="tag">Cajeme</a>
+      <a href="/noticias/nogales" class="tag">Nogales</a>
+      <a href="/noticias/salud" class="tag">Salud</a>
+      <a href="/noticias/mundo" class="tag">Mundo</a>
+      <a href="/expresion" class="tag">Opinión</a>
+      <a href="/multimedia/videos" class="tag">Videos</a>
+    </div>
+  </div>
+
+  <!-- GALERÍA -->
+  <div class="wg rv" style="padding:0;overflow:hidden">
+    <div style="padding:12px 14px 8px;border-bottom:1px solid var(--ge)"><div class="wg-h" style="margin:0">📷 Galería del día</div></div>
+    <div class="gal-g">
+      <img src="https://picsum.photos/seed/g1/200/130" alt="">
+      <img src="https://picsum.photos/seed/g2/200/130" alt="">
+      <img src="https://picsum.photos/seed/g3/200/130" alt="">
+      <img src="https://picsum.photos/seed/g4/200/130" alt="">
+    </div>
+    <a href="/multimedia/galerias" style="display:block;text-align:center;font-family:var(--fc);font-size:11px;font-weight:700;color:var(--vd);padding:9px;border-top:1px solid var(--ge);transition:background var(--em),letter-spacing var(--em)" onmouseover="this.style.background='var(--gb)';this.style.letterSpacing='.04em'" onmouseout="this.style.background='';this.style.letterSpacing=''">Ver todas las galerías →</a>
+  </div>
+
+</aside>
+
+</div><!-- /three -->
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="ft-m">
+    <div class="ft-g">
+      <div>
+        <div class="ft-lo">expreso.</div>
+        <p class="ft-ab">Plataforma líder en noticias en el noroeste de México. El periódico de Sonora desde 1986.</p>
+        <div class="ft-in"><div>📍 Blvd. Abelardo L. Rodríguez No. 16, Col. San Benito</div><div>Hermosillo, Sonora, CP 83190 · 📞 (662) 108-3000</div></div>
+        <div class="ft-sc"><a href="https://facebook.com/expresoweb">f</a><a href="https://x.com/Expresoweb">𝕏</a><a href="https://instagram.com/expresomx">ig</a><a href="https://youtube.com/user/expresoweb">▶</a><a href="#">W</a></div>
+      </div>
+      <div class="ft-c"><h5>Noticias</h5><ul><li><a href="/noticias/hermosillo">Hermosillo</a></li><li><a href="/noticias/sonora">Sonora</a></li><li><a href="/noticias/mexico">México</a></li><li><a href="/noticias/mundo">Mundo</a></li><li><a href="/noticias/seguridad">Seguridad</a></li><li><a href="/noticias/negocios">Negocios</a></li><li><a href="/noticias/mundo-curioso">Mundo Curioso</a></li><li><a href="/ultima-hora">Última Hora</a></li></ul></div>
+      <div class="ft-c"><h5>Acción · Estelar</h5><ul><li><a href="/accion/deportes-locales">Deportes Locales</a></li><li><a href="/accion/futbol">Fútbol</a></li><li><a href="/accion/beisbol">Béisbol</a></li><li><a href="/accion/otros-deportes">Otros Deportes</a></li><li><a href="/estelar/musica">Música</a></li><li><a href="/estelar/cine">Cine</a></li><li><a href="/estelar/television">Televisión</a></li><li><a href="/estelar/cultura">Cultura</a></li></ul></div>
+      <div class="ft-c"><h5>Expresión</h5><ul><li><a href="/expresion/entre-nos">Entre Nos</a></li><li><a href="/expresion/en-privado">En Privado</a></li><li><a href="/expresion/estrictamente-personal">Estrictamente Personal</a></li><li><a href="/expresion/el-asalto-a-la-razon">El Asalto a la Razón</a></li><li><a href="/expresion/fuera-de-ruta">Fuera De Ruta</a></li><li><a href="/expresion/templo-mayor">Templo Mayor</a></li><li><a href="/expresion/serpientes-y-escaleras">Serpientes y Escaleras</a></li><li><a href="/expresion/actitudes">Actitudes</a></li></ul></div>
+      <div class="ft-c"><h5>Servicios</h5><ul><li><a href="/suscripciones">Suscripciones</a></li><li><a href="/edicion-impresa">Edición Impresa</a></li><li><a href="/suplementos">Suplementos</a></li><li><a href="/multimedia/videos">Videos</a></li><li><a href="/multimedia/galerias">Galerías</a></li><li><a href="/empleate">EMPLÉATE</a></li><li><a href="/directorio">Directorio</a></li><li><a href="/media-kit">Media Kit 2026</a></li></ul></div>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 14px">
+    <div class="ft-bot">
+      <p>© 2026 Expreso · Medios y Editorial de Sonora, S.A. de C.V. · Todos los derechos reservados · Hermosillo, Sonora, México</p>
+      <div class="ft-leg"><a href="/aviso-legal">Aviso Legal</a><a href="/aviso-privacidad">Aviso de Privacidad</a><a href="/terminos">Términos de Uso</a><a href="/contacto">Contacto</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="btop">↑</button>
+
+<script>
+'use strict';
+
+/* SLIDER */
+(function(){
+  const sls=document.querySelectorAll('.sl'),dots=document.querySelectorAll('.sl-dot');
+  const lbl=document.getElementById('slLbl'),pauseBtn=document.getElementById('slPause');
+  let c=0,paused=false,t;
+  function go(i){
+    sls[c].classList.remove('on');dots[c].classList.remove('on');
+    c=(i+sls.length)%sls.length;
+    sls[c].classList.add('on');dots[c].classList.add('on');
+    lbl.textContent=(c+1)+' de '+sls.length;
+  }
+  function start(){t=setInterval(()=>{if(!paused)go(c+1)},5000)}
+  function stop(){clearInterval(t)}
+  document.getElementById('slPrev').addEventListener('click',()=>{stop();go(c-1);start()});
+  document.getElementById('slNext').addEventListener('click',()=>{stop();go(c+1);start()});
+  dots.forEach((d,i)=>d.addEventListener('click',()=>{stop();go(i);start()}));
+  pauseBtn.addEventListener('click',()=>{paused=!paused;pauseBtn.textContent=paused?'▶':'⏸'});
+  /* Touch swipe */
+  let tx=0;const h=document.getElementById('hero');
+  h.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+  h.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40){stop();go(dx<0?c+1:c-1);start()}},{passive:true});
+  start();
+})();
+
+/* SCROLL REVEAL — IntersectionObserver */
+(function(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
+  },{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+  document.querySelectorAll('.rv,.rvl,.sg').forEach(el=>io.observe(el));
+
+  /* Feed items individuales con stagger */
+  const fio=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('on'),i*65);
+        fio.unobserve(e.target);
+      }
+    });
+  },{threshold:.06,rootMargin:'0px 0px -16px 0px'});
+  document.querySelectorAll('.fi').forEach(el=>fio.observe(el));
+})();
+
+/* FEED VIEW TOGGLE */
+(function(){
+  const body=document.getElementById('fdBody');
+  function reAnimate(){
+    body.querySelectorAll('.fi').forEach((el,i)=>{el.classList.remove('on');setTimeout(()=>el.classList.add('on'),i*55)});
+  }
+  document.getElementById('btnL').addEventListener('click',function(){body.classList.remove('card');this.classList.add('on');document.getElementById('btnC').classList.remove('on');reAnimate()});
+  document.getElementById('btnC').addEventListener('click',function(){body.classList.add('card');this.classList.add('on');document.getElementById('btnL').classList.remove('on');reAnimate()});
+})();
+
+/* NAVBAR OFFSET */
+(function(){
+  const hd=document.getElementById('header'),nb=document.getElementById('navbar');
+  function a(){nb.style.top=hd.offsetHeight+'px'}a();
+  window.addEventListener('resize',a,{passive:true});
+})();
+
+/* HEADER SCROLL SHADOW */
+(function(){
+  const hd=document.getElementById('header');
+  window.addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>10),{passive:true});
+})();
+
+/* PROGRESS BAR */
+(function(){
+  const bar=document.getElementById('pbar');
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    bar.style.width=Math.min((scrollY/(h.scrollHeight-h.clientHeight))*100,100)+'%';
+  },{passive:true});
+})();
+
+/* BACK TO TOP */
+(function(){
+  const b=document.getElementById('btop');
+  window.addEventListener('scroll',()=>b.classList.toggle('show',scrollY>300),{passive:true});
+  b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+
+/* NEWSLETTER */
+(function(){
+  document.getElementById('nlB').addEventListener('click',function(){
+    const e=document.getElementById('nlE');
+    if(e.value&&e.value.includes('@')){
+      this.textContent='✔ ¡Suscrito!';this.style.background='#1a8a3c';
+      e.value='';
+      setTimeout(()=>{this.textContent='Suscribirme gratis';this.style.background=''},3000);
+    }else{
+      e.style.outline='2px solid var(--r)';
+      e.style.animation='shake .35s ease';
+      setTimeout(()=>{e.style.outline='';e.style.animation=''},1500);
+    }
+  });
+})();
+
+/* DATE */
+(function(){
+  const m=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const d=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const n=new Date();
+  document.title='EXPRESO — '+d[n.getDay()]+' '+n.getDate()+' de '+m[n.getMonth()]+' de '+n.getFullYear()+' — Hermosillo, Sonora';
+})();
+
+/* INJECT SHAKE KEYFRAME */
+(()=>{const s=document.createElement('style');s.textContent='@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';document.head.appendChild(s)})();
+</script>
+</body>
+</html>
