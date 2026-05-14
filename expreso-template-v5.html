@@ -4,9 +4,82 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="EXPRESO — Plataforma líder en noticias en el noroeste de México. Hermosillo, Sonora.">
+<meta name="theme-color" content="#0e5228">
+<meta name="color-scheme" content="light">
 <title>EXPRESO — Noticias de Sonora y México</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- ═══ OPEN GRAPH / SEO ═══════════════════════════ -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="EXPRESO">
+<meta property="og:title"       content="EXPRESO — Noticias de Sonora y México">
+<meta property="og:description" content="Plataforma líder en noticias en el noroeste de México. Hermosillo, Sonora.">
+<meta property="og:url"         content="https://expreso.com.mx/">
+<meta property="og:locale"      content="es_MX">
+<meta name="twitter:card"       content="summary_large_image">
+<meta name="robots"             content="index,follow,max-image-preview:large">
+<link rel="canonical"           href="https://expreso.com.mx/">
+
+<!-- ═══ PERFORMANCE: DNS + CONEXIONES ══════════════
+     Cada dominio externo = 1 RTT extra.
+     preconnect  → handshake TLS anticipado (recursos críticos)
+     dns-prefetch → solo DNS (recursos secundarios)
+  ════════════════════════════════════════════════ -->
+<link rel="preconnect"   href="https://fonts.googleapis.com">
+<link rel="preconnect"   href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://picsum.photos">
+<link rel="dns-prefetch" href="https://i.pravatar.cc">
+
+<!-- ═══ LCP: PRELOAD imagen hero (slide 1) ══════════
+     La imagen más grande visible al cargar = LCP.
+     Preload con fetchpriority=high garantiza que el
+     navegador la descargue antes de parsear el HTML.
+     En producción: reemplazar src con la URL real del CMS.
+  ════════════════════════════════════════════════ -->
+<link rel="preload"
+      as="image"
+      href="https://picsum.photos/seed/h1/760/370"
+      fetchpriority="high">
+
+<!-- ═══ FUENTES: swap + subsets ════════════════════
+     display=swap → texto visible mientras carga la fuente (no FOIT)
+     subset latin → -30% de peso por fuente
+  ════════════════════════════════════════════════ -->
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap&subset=latin"
+      onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- ═══ STRUCTURED DATA: NewsMediaOrganization ═════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsMediaOrganization",
+  "name": "EXPRESO",
+  "url": "https://expreso.com.mx",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://blob.expreso.com.mx/images/logos-expreso/300x47px.webp",
+    "width": 200, "height": 60
+  },
+  "sameAs": [
+    "https://facebook.com/expresoweb",
+    "https://x.com/Expresoweb",
+    "https://instagram.com/expresomx",
+    "https://youtube.com/user/expresoweb"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Blvd. Abelardo L. Rodríguez No. 16, Col. San Benito",
+    "addressLocality": "Hermosillo",
+    "addressRegion": "Sonora",
+    "postalCode": "83190",
+    "addressCountry": "MX"
+  }
+}
+</script>
 <style>
 /* ═══════════════════════════════════════════════
    EXPRESO v5 — CSS Custom Props + Keyframes
@@ -416,10 +489,130 @@ button{cursor:pointer;font-family:var(--fb)}
 #btop:hover{background:var(--vd);transform:translateY(-2px) scale(1.06)}
 #btop:active{transform:scale(.92)}
 
+/* ── SKELETON LOADER (Más populares) ───────────── */
+@keyframes skshimmer{0%{background-position:-300px 0}100%{background-position:300px 0}}
+.pop-sk{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--ge)}
+.pop-sk:last-child{border-bottom:none}
+.pop-sk-th{width:54px;height:54px;border-radius:var(--rs);flex-shrink:0;background:linear-gradient(90deg,#ececec 25%,#f5f5f5 50%,#ececec 75%);background-size:300px 100%;animation:skshimmer 1.4s infinite linear}
+.pop-sk-lines{flex:1;display:flex;flex-direction:column;gap:7px}
+.pop-sk-t{height:12px;border-radius:3px;background:linear-gradient(90deg,#ececec 25%,#f5f5f5 50%,#ececec 75%);background-size:300px 100%;animation:skshimmer 1.4s infinite linear;width:90%}
+.pop-sk-m{height:10px;border-radius:3px;background:linear-gradient(90deg,#ececec 25%,#f5f5f5 50%,#ececec 75%);background-size:300px 100%;animation:skshimmer 1.4s infinite linear;width:55%}
+/* Indicador de actualización */
+.pop-pulse{display:inline-block;width:6px;height:6px;background:var(--v);border-radius:50%;margin-right:4px;animation:blink .8s infinite}
+/* Flash de cambio en contador */
+.pv-up{color:#1a8a3c!important;font-weight:700!important;transition:color .4s}
+.pv-down{color:var(--r)!important;font-weight:700!important;transition:color .4s}
+/* Badges de ranking ── sutiles, inline ── */
+.rank-badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--fc);font-size:9px;font-weight:700;
+  padding:1px 5px;border-radius:10px;
+  letter-spacing:.02em;line-height:1.6;
+  white-space:nowrap;
+}
+.rank-up-b{
+  background:rgba(26,138,60,.1);color:#1a8a3c;
+  border:1px solid rgba(26,138,60,.2);
+}
+.rank-dn-b{
+  background:rgba(192,57,43,.08);color:var(--r);
+  border:1px solid rgba(192,57,43,.18);
+}
+.rank-new{
+  background:rgba(232,164,0,.12);color:#b07d00;
+  border:1px solid rgba(232,164,0,.3);
+  animation:fadeIn .4s ease both;
+}
 /* ── RESPONSIVE ────────────────────────────────── */
 @media(max-width:1100px){.three{grid-template-columns:260px 1fr 280px}}
 @media(max-width:900px){.three{grid-template-columns:1fr}.col-left{display:none}.col-right{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ft-g{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.sub3{grid-template-columns:1fr}.col-right{grid-template-columns:1fr}.sl-img{height:210px}.sl-cap h2{font-size:16px}.hd-nav,.btn-ei{display:none}.logo-svg{font-size:26px}.ft-g{grid-template-columns:1fr}.fi .fi-img{width:100px;height:70px}.fi h3{font-size:14px}}
+
+/* ══════════════════════════════════════════════════
+   CORE WEB VITALS — Optimizaciones de rendimiento
+   ══════════════════════════════════════════════════ */
+
+/* ── LCP: Evitar layout shift en imagen hero ────────
+   aspect-ratio reserva el espacio antes de que cargue
+   la imagen → CLS = 0 en el área del hero
+ ─────────────────────────────────────────────────── */
+.hero { aspect-ratio: auto; contain: layout style; }
+.sl-img {
+  width: 100%;
+  height: 350px;           /* fallback para navegadores sin aspect-ratio */
+  aspect-ratio: 760 / 370;
+  object-fit: cover;
+  display: block;
+}
+/* Imágenes sub-hero: reservar espacio explícito */
+.sc-i  { aspect-ratio: 400 / 106; width: 100%; height: auto; object-fit: cover; }
+/* Feed thumbnails */
+.fi-img { aspect-ratio: 128 / 88; height: auto; object-fit: cover; flex-shrink: 0; }
+/* Thumbnails pequeños: definir w/h explícitos en CSS para que el navegador
+   los conozca antes de parsear los atributos HTML */
+.pop-th  { width: 54px;  height: 54px;  object-fit: cover; border-radius: var(--rs); }
+.tr-th   { width: 52px;  height: 36px;  object-fit: cover; border-radius: var(--rs); }
+.orig-th { width: 52px;  height: 52px;  object-fit: cover; border-radius: 50%; }
+.col-av  { width: 36px;  height: 36px;  object-fit: cover; border-radius: 50%; }
+.ib-th   { width: 42px;  height: 42px;  object-fit: cover; border-radius: var(--rs); }
+.gal-g img { aspect-ratio: 200 / 80; width: 100%; height: auto; object-fit: cover; }
+
+/* ── CLS: contain en widgets del sidebar ────────────
+   Impide que el reflow de un widget afecte a otros
+ ─────────────────────────────────────────────────── */
+.wg   { contain: layout style; }
+.wg-cl{ contain: layout style; }
+.fd-body{ contain: layout; }
+
+/* ── INP: Reducir tiempo de respuesta a interacciones
+   will-change solo en elementos que REALMENTE animan
+   (no en toda la página — eso aumenta memoria GPU)
+ ─────────────────────────────────────────────────── */
+.izoom img      { will-change: transform; }   /* zoom en hover */
+.sl-img         { will-change: transform, opacity; } /* slides */
+.fi             { will-change: opacity, transform; } /* feed entrance */
+#btop           { will-change: transform, opacity; }
+
+/* ── content-visibility: offscreen sections ─────────
+   El navegador omite el render de lo que está fuera
+   del viewport → mejora FCP y TTI en páginas largas.
+   contain-intrinsic-size evita layout shift al estimar
+   el tamaño antes de renderizar.
+ ─────────────────────────────────────────────────── */
+#footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 420px;
+}
+.col-left .wg:nth-child(n+3) {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 280px;
+}
+
+/* ── REDUCE MOTION: respetar preferencia del usuario ─
+   Desactiva todas las animaciones si el usuario
+   tiene configurado "reducir movimiento" en su SO.
+   Obligatorio para accesibilidad y Lighthouse.
+ ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rv, .rvl, .sg > * { opacity: 1 !important; transform: none !important; }
+  .fi { opacity: 1 !important; transform: none !important; }
+  #utilbar, #infobar, #header, #navbar, #ticker,
+  .col-left, .col-center, .col-right { animation: none !important; }
+}
+
+/* ── PRINT: estilos mínimos ─────────────────────── */
+@media print {
+  #utilbar, #navbar, #ticker, #pbar, #btop,
+  .nl, .ad-s, .srch, .btn-sus, .btn-ei { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  a[href]::after { content: ' (' attr(href) ')'; font-size: 10pt; color: #555; }
+}
 </style>
 </head>
 <body>
@@ -461,11 +654,11 @@ button{cursor:pointer;font-family:var(--fb)}
       <div><div class="ib-lbl">☀ Hermosillo, Sonora</div><div class="ib-ttl">38°C · Soleado · Hum. 18%</div></div>
     </div>
     <div class="ib-it">
-      <img class="ib-th" src="https://picsum.photos/seed/tv1/80/80" alt="">
+      <img class="ib-th" src="https://picsum.photos/seed/tv1/80/80" alt="Qué ver hoy" width="42" height="42" loading="lazy" decoding="async">
       <div><div class="ib-lbl">Qué ver hoy</div><div class="ib-ttl">Narcos: México · T3</div></div>
     </div>
     <div class="ib-it">
-      <img class="ib-th" src="https://picsum.photos/seed/hist/80/80" alt="">
+      <img class="ib-th" src="https://picsum.photos/seed/hist/80/80" alt="Hoy en la historia" width="42" height="42" loading="lazy" decoding="async">
       <div><div class="ib-lbl">Hoy en la historia</div><div class="ib-ttl">Cruz Roja Int'l fundada (1863)</div></div>
     </div>
     <div class="ib-it">
@@ -486,7 +679,7 @@ button{cursor:pointer;font-family:var(--fb)}
 <header id="header">
   <div class="hd">
     <div class="logo-w">
-      <img src="https://www.expreso.com.mx/images/logo-expreso.png" alt="EXPRESO" style="height:44px;width:auto" onerror="this.style.display='none';document.getElementById('lsvg').style.display='block'">
+      <img src="https://blob.expreso.com.mx/images/logos-expreso/300x47px.webp" alt="EXPRESO" style="height:44px;width:auto" onerror="this.style.display='none';document.getElementById('lsvg').style.display='block'">
       <div class="logo-svg" id="lsvg" style="display:none">expreso<em>.</em></div>
       <div class="logo-sub">El periódico de Sonora</div>
     </div>
@@ -568,13 +761,17 @@ button{cursor:pointer;font-family:var(--fb)}
 
   <!-- MÁS POPULARES (Yahoo: numeración grande con foto cuadrada) -->
   <div class="wg rv">
-    <div class="wg-h"><span>🔥</span> Más populares</div>
-    <ul class="pop-l sg">
-      <li><span class="pop-num hi">1</span><img class="pop-th" src="https://picsum.photos/seed/pop1/80/80" alt=""><div><div class="pop-tx">Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030</div><div class="pop-m">Hermosillo · 12,400 lecturas</div></div></li>
-      <li><span class="pop-num hi">2</span><img class="pop-th" src="https://picsum.photos/seed/pop2/80/80" alt=""><div><div class="pop-tx">Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre</div><div class="pop-m">Sonora · 9,870 lecturas</div></div></li>
-      <li><span class="pop-num hi">3</span><img class="pop-th" src="https://picsum.photos/seed/pop3/80/80" alt=""><div><div class="pop-tx">SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo de Hermosillo</div><div class="pop-m">Seguridad · 7,210 lecturas</div></div></li>
-      <li><span class="pop-num">4</span><img class="pop-th" src="https://picsum.photos/seed/pop4/80/80" alt=""><div><div class="pop-tx">Naranjeros de Hermosillo rompe récord de asistencia en la LMP 2026</div><div class="pop-m">Béisbol · 6,550 lecturas</div></div></li>
-      <li><span class="pop-num">5</span><img class="pop-th" src="https://picsum.photos/seed/pop5/80/80" alt=""><div><div class="pop-tx">Washington impone aranceles a electrónicos de Asia; México analiza respuesta</div><div class="pop-m">Mundo · 4,320 lecturas</div></div></li>
+    <div class="wg-h">
+      <span>🔥</span> Más populares
+      <span id="pop-status" style="margin-left:auto;font-size:10px;font-weight:400;color:var(--gl);font-family:var(--fc);letter-spacing:0"></span>
+    </div>
+    <ul class="pop-l" id="pop-list">
+      <!-- Skeleton inicial mientras carga -->
+      <li class="pop-sk"><span class="pop-num hi">1</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num hi">2</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num hi">3</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num">4</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num">5</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
     </ul>
     <a href="/noticias" class="vm">Ver más en Expreso 100 →</a>
   </div>
@@ -584,15 +781,15 @@ button{cursor:pointer;font-family:var(--fb)}
     <div class="wg-h"><span>⭐</span> Originales Expreso</div>
     <ul class="orig-l sg">
       <li>
-        <img class="orig-th" src="https://picsum.photos/seed/or1/60/60" alt="">
+        <img class="orig-th" src="https://picsum.photos/seed/or1/60/60" alt="" width="52" height="52" loading="lazy" decoding="async">
         <div><div class="orig-badge">Exclusivo</div><div class="orig-tx">El domo de calor sobre Sonora: por qué las temperaturas se disparan cada año</div></div>
       </li>
       <li>
-        <img class="orig-th" src="https://picsum.photos/seed/or2/60/60" alt="">
+        <img class="orig-th" src="https://picsum.photos/seed/or2/60/60" alt="" width="52" height="52" loading="lazy" decoding="async">
         <div><div class="orig-badge">Reportaje</div><div class="orig-tx">Naranjeros: la historia detrás del equipo más ganador del noroeste de México</div></div>
       </li>
       <li>
-        <img class="orig-th" src="https://picsum.photos/seed/or3/60/60" alt="">
+        <img class="orig-th" src="https://picsum.photos/seed/or3/60/60" alt="" width="52" height="52" loading="lazy" decoding="async">
         <div><div class="orig-badge">Especial</div><div class="orig-tx">Nearshoring en Sonora: las empresas que eligieron Hermosillo sobre otras ciudades</div></div>
       </li>
     </ul>
@@ -620,11 +817,11 @@ button{cursor:pointer;font-family:var(--fb)}
   <div class="wg rv">
     <div class="wg-h">✍ Expresión</div>
     <ul class="col-l sg">
-      <li><img class="col-av" src="https://i.pravatar.cc/40?img=11" alt=""><div><div class="col-n">Entre Nos · Columna</div><div class="col-t"><a href="/expresion/entre-nos">Lo que dice Mr. X: el proyecto del hospital en Río Sonora avanza</a></div></div></li>
-      <li><img class="col-av" src="https://i.pravatar.cc/40?img=33" alt=""><div><div class="col-n">Pbro. José Martínez Colín</div><div class="col-t"><a href="/expresion/vivir-en-cristiano">"La medida del amor" · Vivir en Cristiano</a></div></div></li>
-      <li><img class="col-av" src="https://i.pravatar.cc/40?img=25" alt=""><div><div class="col-n">Fuera de Ruta</div><div class="col-t"><a href="/expresion/fuera-de-ruta">El camino del agua en la sierra sonorense</a></div></div></li>
-      <li><img class="col-av" src="https://i.pravatar.cc/40?img=44" alt=""><div><div class="col-n">El Asalto a la Razón</div><div class="col-t"><a href="/expresion/el-asalto-a-la-razon">Serpientes y Escaleras: las becas de Durazo</a></div></div></li>
-      <li><img class="col-av" src="https://i.pravatar.cc/40?img=57" alt=""><div><div class="col-n">Actitudes</div><div class="col-t"><a href="/expresion/actitudes">El poder de las ideas en la era digital</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=11" alt="Entre Nos" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Entre Nos · Columna</div><div class="col-t"><a href="/expresion/entre-nos">Lo que dice Mr. X: el proyecto del hospital en Río Sonora avanza</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=33" alt="Pbro. José Martínez" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Pbro. José Martínez Colín</div><div class="col-t"><a href="/expresion/vivir-en-cristiano">"La medida del amor" · Vivir en Cristiano</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=25" alt="Fuera de Ruta" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Fuera de Ruta</div><div class="col-t"><a href="/expresion/fuera-de-ruta">El camino del agua en la sierra sonorense</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=44" alt="El Asalto a la Razón" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">El Asalto a la Razón</div><div class="col-t"><a href="/expresion/el-asalto-a-la-razon">Serpientes y Escaleras: las becas de Durazo</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=57" alt="Actitudes" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Actitudes</div><div class="col-t"><a href="/expresion/actitudes">El poder de las ideas en la era digital</a></div></div></li>
     </ul>
     <a href="/expresion" class="vm">Ver todas las columnas →</a>
   </div>
@@ -637,28 +834,46 @@ button{cursor:pointer;font-family:var(--fb)}
   <!-- HERO SLIDER -->
   <div class="hero rv" id="hero">
     <div class="sl on">
-      <img class="sl-img" src="https://picsum.photos/seed/h1/760/370" alt="">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h1/760/370"
+           alt="Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026"
+           width="760" height="370"
+           fetchpriority="high"
+           decoding="sync"
+           loading="eager">
       <div class="sl-cap">
         <div class="sl-src"><div class="sl-ico">EX</div> Expreso · Hermosillo · 💬 186</div>
         <h2><a href="/noticias/hermosillo/plan-maestro-2026">Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030 con inversión histórica de 2 mil mdp</a></h2>
       </div>
     </div>
     <div class="sl">
-      <img class="sl-img" src="https://picsum.photos/seed/h2/760/370" alt="">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h2/760/370"
+           alt="Plan Sonora de Energías Sostenibles"
+           width="760" height="370"
+           loading="lazy" decoding="async">
       <div class="sl-cap">
         <div class="sl-src"><div class="sl-ico" style="background:#1a7c3e">EX</div> Expreso · Sonora · 💬 94</div>
         <h2><a href="/noticias/sonora/plan-sonora-energias">Plan Sonora de Energías Sostenibles impulsa industrias automotriz y aeroespacial de la entidad</a></h2>
       </div>
     </div>
     <div class="sl">
-      <img class="sl-img" src="https://picsum.photos/seed/h3/760/370" alt="">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h3/760/370"
+           alt="Naranjeros de Hermosillo refuerzos LMP"
+           width="760" height="370"
+           loading="lazy" decoding="async">
       <div class="sl-cap">
         <div class="sl-src"><div class="sl-ico" style="background:#c0392b">EX</div> Expreso · Béisbol · 💬 312</div>
         <h2><a href="/accion/beisbol/naranjeros-refuerzos-lmp">Naranjeros de Hermosillo anuncia tres refuerzos estelares para la temporada 2026–27 de la LMP</a></h2>
       </div>
     </div>
     <div class="sl">
-      <img class="sl-img" src="https://picsum.photos/seed/h4/760/370" alt="">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h4/760/370"
+           alt="Washington aranceles Asia México"
+           width="760" height="370"
+           loading="lazy" decoding="async">
       <div class="sl-cap">
         <div class="sl-src"><div class="sl-ico" style="background:#8e44ad">EX</div> Expreso · Mundo · 💬 47</div>
         <h2><a href="/noticias/mundo/aranceles-washington">Washington impone nuevos aranceles a Asia; México analiza respuesta ante la escalada comercial global</a></h2>
@@ -676,15 +891,15 @@ button{cursor:pointer;font-family:var(--fb)}
   <!-- SUB HERO 3 -->
   <div class="sub3 sg rv">
     <div class="sc izoom">
-      <img class="sc-i" src="https://picsum.photos/seed/sc1/400/130" alt="">
+      <img class="sc-i" src="https://picsum.photos/seed/sc1/400/130" alt="SSP Sonora operativo nocturno" width="400" height="130" loading="lazy" decoding="async">
       <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Seguridad</span><span class="sc-cm">💬 528</span></div><h4><a href="/noticias/seguridad/ssp-operativo">SSP Sonora refuerza operativos nocturnos en zonas de riesgo de Hermosillo y Cajeme</a></h4></div>
     </div>
     <div class="sc izoom">
-      <img class="sc-i" src="https://picsum.photos/seed/sc2/400/130" alt="">
+      <img class="sc-i" src="https://picsum.photos/seed/sc2/400/130" alt="Paciente guaymense células madre" width="400" height="130" loading="lazy" decoding="async">
       <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Salud</span><span class="sc-cm">💬 1.2k</span></div><h4><a href="/noticias/sonora/sueros-celulas-madre">Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre</a></h4></div>
     </div>
     <div class="sc izoom">
-      <img class="sc-i" src="https://picsum.photos/seed/sc3/400/130" alt="">
+      <img class="sc-i" src="https://picsum.photos/seed/sc3/400/130" alt="Torneo G1 tenis Hermosillo" width="400" height="130" loading="lazy" decoding="async">
       <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Deportes</span><span class="sc-cm">💬 74</span></div><h4><a href="/accion/otros-deportes/torneo-g1">Hermosillo recibe 180 tenistas en el Torneo Nacional G1; récord en Club Los Lagos</a></h4></div>
     </div>
   </div>
@@ -698,16 +913,16 @@ button{cursor:pointer;font-family:var(--fb)}
     </div>
   </div>
   <div class="fd-body" id="fdBody">
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi1/200/130" alt=""><div class="fi-body"><div class="fi-sec"><span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/hermosillo/plan-maestro">Plan Maestro contempla 12 parques lineales y ampliación del transporte público en Hermosillo</a></h3><div class="fi-ex">La inversión histórica busca transformar la movilidad urbana y la calidad de vida de los hermosillenses para la próxima década.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 186</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 25 min</span></div></div></div>
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi2/200/130" alt=""><div class="fi-body"><div class="fi-sec">Seguridad</div><h3><a href="/noticias/seguridad/operativo">SSP Sonora despliega 300 elementos en operativo nocturno en Hermosillo y Cajeme</a></h3><div class="fi-ex">La Secretaría de Seguridad reforzó vigilancia en puntos estratégicos durante el fin de semana vacacional.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 412</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 h</span></div></div></div>
-    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi/200/130" alt=""><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi3/200/130" alt=""><div class="fi-body"><div class="fi-sec">Negocios · <span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/negocios/plan-sonora">Plan Sonora de Energías Sostenibles: la apuesta del estado por la industria limpia y el nearshoring</a></h3><div class="fi-ex">El programa busca atraer inversión en los sectores automotriz, aeroespacial y tecnológico aprovechando la posición estratégica de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 238</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 2 h</span></div></div></div>
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi4/200/130" alt=""><div class="fi-body"><div class="fi-sec">Acción · Béisbol</div><h3><a href="/accion/beisbol/naranjeros">Naranjeros de Hermosillo: los tres peloteros que refuerzan la plantilla para la LMP 2026–27</a></h3><div class="fi-ex">El equipo sonorense presentó sus nuevas adquisiciones buscando recuperar el campeonato de la Serie del Caribe.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 892</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 3 h</span></div></div></div>
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi5/200/130" alt=""><div class="fi-body"><div class="fi-sec">Salud · Sonora</div><h3><a href="/noticias/sonora/celulas-madre">Hombre guaymense sufre daños renales tras tratamiento con sueros de células madre en Hermosillo</a></h3><div class="fi-ex">El caso se vincula al médico señalado como probable responsable del fallecimiento de ocho pacientes en la capital del estado.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 1.4k</span><span class="fi-sep">·</span><span>5 min</span><span class="fi-t">Hace 4 h</span></div></div></div>
-    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi2/200/130" alt=""><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed 2 · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi6/200/130" alt=""><div class="fi-body"><div class="fi-sec">Mundo</div><h3><a href="/noticias/mundo/aranceles">Washington impone aranceles a electrónicos de Asia; México analiza respuesta diplomática</a></h3><div class="fi-ex">La medida afecta semiconductores y dispositivos móviles, con potencial impacto en la cadena de suministro del norte de México.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 317</span><span class="fi-sep">·</span><span>6 min</span><span class="fi-t">Hace 5 h</span></div></div></div>
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi7/200/130" alt=""><div class="fi-body"><div class="fi-sec">Acción · Otros Deportes</div><h3><a href="/accion/otros-deportes/g1">Torneo Nacional G1 de Tenis reúne 180 jugadores en Hermosillo con récord histórico</a></h3><div class="fi-ex">El evento se desarrolla del 28 de abril al 2 de mayo con Festival de Mini Tenis como novedad en Club Los Lagos.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 56</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
-    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi8/200/130" alt=""><div class="fi-body"><div class="fi-sec">Expresión · Mr. X</div><h3><a href="/expresion/entre-nos/mrx-becas">Lo que dice Mr. X: con las becas, Durazo apunta a reducir abandono escolar en 13%</a></h3><div class="fi-ex">La columna analiza la estrategia educativa del gobernador y sus implicaciones en el escenario preelectoral de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Expresión</span><span class="fi-sep">·</span><span>💬 203</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi1/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec"><span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/hermosillo/plan-maestro">Plan Maestro contempla 12 parques lineales y ampliación del transporte público en Hermosillo</a></h3><div class="fi-ex">La inversión histórica busca transformar la movilidad urbana y la calidad de vida de los hermosillenses para la próxima década.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 186</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 25 min</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi2/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Seguridad</div><h3><a href="/noticias/seguridad/operativo">SSP Sonora despliega 300 elementos en operativo nocturno en Hermosillo y Cajeme</a></h3><div class="fi-ex">La Secretaría de Seguridad reforzó vigilancia en puntos estratégicos durante el fin de semana vacacional.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 412</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 h</span></div></div></div>
+    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi3/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Negocios · <span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/negocios/plan-sonora">Plan Sonora de Energías Sostenibles: la apuesta del estado por la industria limpia y el nearshoring</a></h3><div class="fi-ex">El programa busca atraer inversión en los sectores automotriz, aeroespacial y tecnológico aprovechando la posición estratégica de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 238</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 2 h</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi4/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Acción · Béisbol</div><h3><a href="/accion/beisbol/naranjeros">Naranjeros de Hermosillo: los tres peloteros que refuerzan la plantilla para la LMP 2026–27</a></h3><div class="fi-ex">El equipo sonorense presentó sus nuevas adquisiciones buscando recuperar el campeonato de la Serie del Caribe.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 892</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 3 h</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi5/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Salud · Sonora</div><h3><a href="/noticias/sonora/celulas-madre">Hombre guaymense sufre daños renales tras tratamiento con sueros de células madre en Hermosillo</a></h3><div class="fi-ex">El caso se vincula al médico señalado como probable responsable del fallecimiento de ocho pacientes en la capital del estado.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 1.4k</span><span class="fi-sep">·</span><span>5 min</span><span class="fi-t">Hace 4 h</span></div></div></div>
+    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi2/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed 2 · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi6/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Mundo</div><h3><a href="/noticias/mundo/aranceles">Washington impone aranceles a electrónicos de Asia; México analiza respuesta diplomática</a></h3><div class="fi-ex">La medida afecta semiconductores y dispositivos móviles, con potencial impacto en la cadena de suministro del norte de México.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 317</span><span class="fi-sep">·</span><span>6 min</span><span class="fi-t">Hace 5 h</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi7/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Acción · Otros Deportes</div><h3><a href="/accion/otros-deportes/g1">Torneo Nacional G1 de Tenis reúne 180 jugadores en Hermosillo con récord histórico</a></h3><div class="fi-ex">El evento se desarrolla del 28 de abril al 2 de mayo con Festival de Mini Tenis como novedad en Club Los Lagos.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 56</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
+    <div class="fi"><img class="fi-img" src="https://picsum.photos/seed/fi8/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Expresión · Mr. X</div><h3><a href="/expresion/entre-nos/mrx-becas">Lo que dice Mr. X: con las becas, Durazo apunta a reducir abandono escolar en 13%</a></h3><div class="fi-ex">La columna analiza la estrategia educativa del gobernador y sus implicaciones en el escenario preelectoral de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Expresión</span><span class="fi-sep">·</span><span>💬 203</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
   </div>
 
 </main>
@@ -801,10 +1016,10 @@ button{cursor:pointer;font-family:var(--fb)}
   <div class="wg rv" style="padding:0;overflow:hidden">
     <div style="padding:12px 14px 8px;border-bottom:1px solid var(--ge)"><div class="wg-h" style="margin:0">📷 Galería del día</div></div>
     <div class="gal-g">
-      <img src="https://picsum.photos/seed/g1/200/130" alt="">
-      <img src="https://picsum.photos/seed/g2/200/130" alt="">
-      <img src="https://picsum.photos/seed/g3/200/130" alt="">
-      <img src="https://picsum.photos/seed/g4/200/130" alt="">
+      <img src="https://picsum.photos/seed/g1/200/130" alt="Galería 1" width="200" height="80" loading="lazy" decoding="async">
+      <img src="https://picsum.photos/seed/g2/200/130" alt="Galería 2" width="200" height="80" loading="lazy" decoding="async">
+      <img src="https://picsum.photos/seed/g3/200/130" alt="Galería 3" width="200" height="80" loading="lazy" decoding="async">
+      <img src="https://picsum.photos/seed/g4/200/130" alt="Galería 4" width="200" height="80" loading="lazy" decoding="async">
     </div>
     <a href="/multimedia/galerias" style="display:block;text-align:center;font-family:var(--fc);font-size:11px;font-weight:700;color:var(--vd);padding:9px;border-top:1px solid var(--ge);transition:background var(--em),letter-spacing var(--em)" onmouseover="this.style.background='var(--gb)';this.style.letterSpacing='.04em'" onmouseout="this.style.background='';this.style.letterSpacing=''">Ver todas las galerías →</a>
   </div>
@@ -815,6 +1030,287 @@ button{cursor:pointer;font-family:var(--fb)}
 </div><!-- /page -->
 
 <!-- FOOTER -->
+
+<!-- ═══════════════════════════════════════════════
+     EXPRESO VIDEO — Videos reales del canal @expresoweb
+     IDs hardcoded para demo · En producción: RSS auto-feed
+     ═══════════════════════════════════════════════ -->
+<section id="yt-section" style="background:var(--n);padding:28px 0 34px">
+<div style="max-width:1280px;margin:0 auto;padding:0 14px">
+
+  <!-- HEADER -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1)">
+    <div style="display:flex;align-items:center;gap:11px">
+      <div style="width:40px;height:40px;background:#c0392b;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="white" aria-hidden="true"><rect width="20" height="14" rx="3" fill="#c0392b"/><path d="M8 10V4l7 3z" fill="white"/></svg>
+      </div>
+      <div>
+        <div style="font-family:var(--fc);font-size:18px;font-weight:700;color:#fff;letter-spacing:-.2px">
+          Expreso <span style="color:#c0392b">Video</span>
+        </div>
+        <div style="font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.45);margin-top:1px">
+          youtube.com/@expresoweb · Canal oficial de noticias
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="display:flex;align-items:center;gap:5px;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#e85d5d;font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:20px">
+        <span style="width:6px;height:6px;background:#c0392b;border-radius:50%;display:inline-block;animation:blink 1s infinite"></span> En vivo
+      </div>
+      <a href="https://youtube.com/@expresoweb" target="_blank" rel="noopener noreferrer"
+         style="font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.65);border:1.5px solid rgba(255,255,255,.18);padding:6px 14px;border-radius:20px;transition:all .2s;text-decoration:none"
+         onmouseover="this.style.borderColor='#c0392b';this.style.color='#fff'"
+         onmouseout="this.style.borderColor='rgba(255,255,255,.18)';this.style.color='rgba(255,255,255,.65)'">
+        Ver canal →
+      </a>
+    </div>
+  </div>
+
+  <!-- GRID: featured izq + stack 3 der + strip 3 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+    <div id="ytFeat"></div>
+    <div id="ytStack" style="display:flex;flex-direction:column;gap:10px"></div>
+  </div>
+  <div id="ytStrip" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"></div>
+
+</div>
+</section>
+
+<!-- MODAL PLAYER -->
+<div id="ytModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9000;align-items:center;justify-content:center;padding:16px"
+     onclick="ytClose(event)">
+  <div style="background:var(--w);border-radius:12px;width:min(700px,100%);overflow:hidden;position:relative;box-shadow:0 28px 70px rgba(0,0,0,.55)">
+    <div id="ytIframe" style="position:relative;aspect-ratio:16/9;background:#000"></div>
+    <div style="height:3px;background:rgba(0,0,0,.08)">
+      <div id="ytBar" style="height:100%;background:linear-gradient(90deg,#c0392b,#e85d5d);width:0;transition:width 1.4s ease"></div>
+    </div>
+    <div style="padding:15px 18px 18px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+        <div>
+          <div id="ytMCat" style="font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--vm);margin-bottom:4px"></div>
+          <div id="ytMTitle" style="font-family:var(--fd);font-size:17px;font-weight:700;line-height:1.3;color:var(--n)"></div>
+        </div>
+        <button onclick="ytClose(null,true)" aria-label="Cerrar"
+          style="width:32px;height:32px;min-width:32px;background:var(--gc);border:0.5px solid var(--ge);border-radius:50%;cursor:pointer;font-size:15px;color:var(--gm);flex-shrink:0">✕</button>
+      </div>
+      <div id="ytMMeta" style="display:flex;align-items:center;gap:12px;font-family:var(--fc);font-size:12px;color:var(--gm);padding-top:10px;border-top:1px solid var(--ge);margin-top:10px"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+.ytc{position:relative;border-radius:9px;overflow:hidden;cursor:pointer;
+  background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.08);
+  transition:transform var(--em) var(--spring),box-shadow var(--em),border-color var(--em)}
+.ytc:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 14px 38px rgba(0,0,0,.5);border-color:rgba(255,255,255,.2)}
+.ytc .yt-th{position:relative;overflow:hidden;aspect-ratio:16/9;background:#000}
+.ytc .yt-th img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease),filter .5s var(--ease)}
+.ytc:hover .yt-th img{transform:scale(1.06);filter:brightness(.72)}
+.ytc .yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);
+  width:48px;height:48px;background:rgba(192,57,43,.9);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s,transform .2s}
+.ytc:hover .yt-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.ytc .yt-play svg{margin-left:4px}
+.ytc .yt-dur{position:absolute;bottom:7px;right:8px;background:rgba(0,0,0,.8);
+  color:#fff;font-family:var(--fc);font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px}
+.ytc .yt-new{position:absolute;top:7px;left:8px;background:#c0392b;color:#fff;
+  font-family:var(--fc);font-size:9px;font-weight:700;padding:2px 7px;border-radius:2px;
+  letter-spacing:.05em;text-transform:uppercase;animation:fadeIn .4s both}
+.ytc .yt-info{padding:11px 13px 13px}
+.ytc .yt-cat{font-family:var(--fc);font-size:9.5px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--vm);margin-bottom:4px}
+.ytc .yt-ttl{font-family:var(--fb);font-size:13px;font-weight:600;line-height:1.32;
+  color:rgba(255,255,255,.9);display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px}
+.ytc.feat .yt-ttl{font-family:var(--fd);font-size:15px;font-weight:700;-webkit-line-clamp:3;color:#fff}
+.ytc .yt-meta{display:flex;align-items:center;gap:7px;font-family:var(--fc);
+  font-size:10.5px;color:rgba(255,255,255,.45)}
+.ytc .yt-bar-w{height:2px;background:rgba(255,255,255,.08);border-radius:1px;margin-top:7px;overflow:hidden}
+.ytc .yt-bar{height:100%;border-radius:1px;background:linear-gradient(90deg,var(--v),var(--vm));transition:width .7s ease}
+.ytc.feat .yt-play{width:60px;height:60px}
+@media(max-width:900px){#ytStrip{grid-template-columns:1fr 1fr!important}}
+@media(max-width:600px){#ytStrip{grid-template-columns:1fr!important}}
+</style>
+
+<script>
+(function(){
+  // ── VIDEOS REALES DEL CANAL @expresoweb ──────────────
+  // Thumbnails: img.youtube.com/vi/{ID}/hqdefault.jpg (CDN oficial)
+  // En producción estos datos vienen del RSS / YouTube API
+  const VIDEOS = [
+    {
+      id:'d-Yff-uOq4Y',
+      cat:'Expreso 24/7',
+      title:'Noticias Expreso 24/7 desde Hermosillo — En vivo',
+      meta:'En vivo · Expreso Noticias',
+      bar:95, isNew:true, feat:true
+    },
+    {
+      id:'C3V0PG-Fksc',
+      cat:'Seguridad',
+      title:'Asesinan a joven en Hermosillo · Bienestar entrega tarjetas · Expreso 24/7 — 23 septiembre',
+      meta:'Sep 23, 2025 · Expreso',
+      bar:72, isNew:false
+    },
+    {
+      id:'40lYeUI-F1I',
+      cat:'Estelar',
+      title:'Tropicalísimo Apache en Expogan Hermosillo, Sonora 2025 — Parte 5',
+      meta:'Ago 31, 2025 · Expreso',
+      bar:58, isNew:false
+    },
+    {
+      id:'VDhIqYZpmSc',
+      cat:'Hermosillo',
+      title:'Mercado Municipal de Hermosillo · Aumenta depresión en Sonora — 08 Sep 2025',
+      meta:'Sep 8, 2025 · Expreso',
+      bar:61, isNew:false
+    },
+    {
+      id:'wQa3c8et-Cs',
+      cat:'Seguridad',
+      title:'Detrás de la sonrisa: La realidad de la salud mental materna',
+      meta:'Ago 12, 2025 · Expreso',
+      bar:80, isNew:false
+    },
+    {
+      id:'oO7xndzLhok',
+      cat:'Estelar',
+      title:'Grupo Laberinto regresa a la Expogan Sonora 2026: Entrevista exclusiva',
+      meta:'Ago 6, 2025 · Expreso',
+      bar:44, isNew:false
+    },
+    {
+      id:'Ox3kpti1y1g',
+      cat:'México',
+      title:'Familia sonorense llenó el álbum del Mundial 2026... ¡en solo 3 días!',
+      meta:'Jul 31, 2025 · Expreso',
+      bar:38, isNew:false
+    }
+  ];
+
+  function thumb(id){ return `https://img.youtube.com/vi/${id}/hqdefault.jpg`; }
+  function embed(id){ return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`; }
+
+  function renderCard(v, idx){
+    const isFeat = v.feat === true;
+    const cs = '';
+    return `
+    <div class="ytc${isFeat?' feat':''}" style="${cs}"
+         onclick="ytOpen(${idx})" role="button" tabindex="0"
+         aria-label="Reproducir: ${v.title.replace(/"/g,'&quot;')}">
+      <div class="yt-th">
+        <img src="${thumb(v.id)}"
+             alt="${v.title.replace(/"/g,'&quot;')}"
+             width="${isFeat?640:320}" height="${isFeat?360:180}"
+             loading="${idx<2?'eager':'lazy'}"
+             decoding="${idx===0?'sync':'async'}"
+             onerror="this.src='https://picsum.photos/seed/ytf${idx}/320/180'">
+        <div class="yt-play">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="white" aria-hidden="true"><path d="M5 3.5l11 5.5-11 5.5z"/></svg>
+        </div>
+        ${v.isNew ? '<span class="yt-new">Nuevo</span>' : ''}
+      </div>
+      <div class="yt-info">
+        <div class="yt-cat">${v.cat}</div>
+        <div class="yt-ttl">${v.title}</div>
+        <div class="yt-meta">${v.meta}</div>
+        <div class="yt-bar-w"><div class="yt-bar" style="width:${v.bar}%"></div></div>
+      </div>
+    </div>`;
+  }
+
+  // Featured (slot dedicado)
+  const feat  = document.getElementById('ytFeat');
+  const stack = document.getElementById('ytStack');
+  const strip = document.getElementById('ytStrip');
+
+  // Featured: primer video, sin grid-column span
+  if(feat) feat.innerHTML = renderCard(VIDEOS[0], 0);
+
+  // Stack lateral: videos 1, 2, 3 como cards horizontales
+  if(stack) stack.innerHTML = VIDEOS.slice(1,4).map((v,i) => {
+    return `<div class="ytc" onclick="ytOpen(${i+1})" role="button" tabindex="0"
+      style="display:flex;gap:10px;padding:8px;border-radius:8px"
+      aria-label="Reproducir: ${v.title.replace(/"/g,'&quot;')}">
+      <div style="position:relative;width:130px;min-width:130px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#000;flex-shrink:0">
+        <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg"
+             alt="" width="130" height="73"
+             loading="lazy" decoding="async"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s,filter .4s"
+             onerror="this.src='https://picsum.photos/seed/ytst${i}/260/146'">
+        <div class="yt-play" style="width:32px;height:32px">
+          <svg width="12" height="12" viewBox="0 0 18 18" fill="white" aria-hidden="true"><path d="M5 3.5l11 5.5-11 5.5z"/></svg>
+        </div>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:2px 0">
+        <div>
+          <div class="yt-cat">${v.cat}</div>
+          <div style="font-family:var(--fb);font-size:12px;font-weight:600;line-height:1.32;color:rgba(255,255,255,.9);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:4px">${v.title}</div>
+        </div>
+        <div class="yt-meta">${v.meta}</div>
+        <div class="yt-bar-w"><div class="yt-bar" style="width:${v.bar}%"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Strip inferior: videos 4, 5, 6
+  if(strip) strip.innerHTML = VIDEOS.slice(4,7).map((v,i)=>renderCard(v,i+4)).join('');
+
+  // Teclado
+  document.querySelectorAll('.ytc').forEach(c=>{
+    c.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}
+    });
+  });
+
+  // Exponer VIDEOS para el modal
+  window._ytVideos = VIDEOS;
+})();
+
+function ytOpen(idx){
+  const v = window._ytVideos[idx];
+  const modal = document.getElementById('ytModal');
+  const iframe = document.getElementById('ytIframe');
+
+  iframe.innerHTML = `<iframe
+    src="${'https://www.youtube.com/embed/'+v.id+'?autoplay=1&rel=0'}"
+    title="${v.title}"
+    width="100%" height="100%"
+    style="position:absolute;inset:0;width:100%;height:100%;border:none"
+    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+    allowfullscreen loading="lazy"></iframe>`;
+  iframe.style.position='relative';
+
+  document.getElementById('ytMCat').textContent   = v.cat;
+  document.getElementById('ytMTitle').textContent = v.title;
+  document.getElementById('ytMMeta').innerHTML    =
+    `<span>📺 ${v.meta}</span>
+     <span style="margin-left:auto">
+       <a href="https://youtube.com/watch?v=${v.id}" target="_blank" rel="noopener"
+          style="color:var(--vm);font-family:var(--fc);font-size:11px;font-weight:700;text-decoration:none">
+         Abrir en YouTube →
+       </a>
+     </span>`;
+
+  const bar = document.getElementById('ytBar');
+  bar.style.width='0';
+  requestAnimationFrame(()=>{ bar.style.width = v.bar+'%'; });
+
+  modal.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+
+function ytClose(e, force){
+  if(force||(e&&e.target===document.getElementById('ytModal'))){
+    document.getElementById('ytIframe').innerHTML='';
+    document.getElementById('ytModal').style.display='none';
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')ytClose(null,true)});
+</script>
 <footer id="footer">
   <div class="ft-m">
     <div class="ft-g">
@@ -951,6 +1447,437 @@ button{cursor:pointer;font-family:var(--fb)}
 
 /* INJECT SHAKE KEYFRAME */
 (()=>{const s=document.createElement('style');s.textContent='@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';document.head.appendChild(s)})();
+
+/* ══════════════════════════════════════════════
+   CORE WEB VITALS — Runtime optimizations
+   ══════════════════════════════════════════════ */
+(function(){
+  'use strict';
+
+  /* ── 1. INP: defer non-critical event listeners ──
+     Registrar listeners pesados DESPUÉS del primer
+     frame para no bloquear la interacción inicial.
+  ─────────────────────────────────────────────── */
+  function onIdle(cb){
+    if('requestIdleCallback' in window) requestIdleCallback(cb, {timeout:2000});
+    else setTimeout(cb, 200);
+  }
+
+  /* ── 2. Scroll listeners pasivos ────────────────
+     {passive:true} ya está en todos los listeners
+     del código anterior — confirmado ✓
+     Aquí aseguramos el wheel y touchmove globales.
+  ─────────────────────────────────────────────── */
+  document.addEventListener('touchmove', ()=>{}, {passive:true});
+  document.addEventListener('wheel',     ()=>{}, {passive:true});
+
+  /* ── 3. Intersection Observer para imágenes lazy
+     Las imágenes con loading="lazy" nativas son
+     suficientes en Chrome/Safari modernos. Este
+     observer añade soporte para navegadores viejos
+     y permite precargar el siguiente slide del hero.
+  ─────────────────────────────────────────────── */
+  onIdle(()=>{
+    // Precargar slide 2 después de que el LCP esté listo
+    const nextSlide = document.querySelector('.sl:nth-child(2) .sl-img');
+    if(nextSlide && nextSlide.loading === 'lazy'){
+      const link = document.createElement('link');
+      link.rel  = 'preload';
+      link.as   = 'image';
+      link.href = nextSlide.src;
+      document.head.appendChild(link);
+    }
+  });
+
+  /* ── 4. will-change cleanup ──────────────────────
+     will-change consume memoria GPU. Lo aplicamos
+     solo justo antes de la animación y lo quitamos
+     cuando termina para liberar recursos.
+  ─────────────────────────────────────────────── */
+  document.querySelectorAll('.izoom').forEach(el=>{
+    const img = el.querySelector('img');
+    if(!img) return;
+    el.addEventListener('mouseenter', ()=>{ img.style.willChange = 'transform'; },  {passive:true});
+    el.addEventListener('mouseleave', ()=>{ img.style.willChange = 'auto'; },        {passive:true});
+  });
+
+  /* ── 5. Font display fallback metric ────────────
+     Ajusta el tamaño del font fallback para reducir
+     CLS cuando cambia de system-font a web font.
+     Valores aproximados para Source Sans 3 → Arial.
+  ─────────────────────────────────────────────── */
+  onIdle(()=>{
+    const style = document.createElement('style');
+    style.textContent = `
+      @font-face {
+        font-family: 'Source Sans 3 Fallback';
+        src: local('Arial');
+        size-adjust: 104%;
+        ascent-override: 104%;
+        descent-override: 28%;
+        line-gap-override: 0%;
+      }`;
+    document.head.appendChild(style);
+  });
+
+  /* ── 6. Reducir animaciones continuas en background
+     Las animaciones CSS como tkScroll, pulseRing y
+     skshimmer consumen CPU en background. Las pausamos
+     cuando la pestaña no está visible.
+  ─────────────────────────────────────────────── */
+  const ANIM_TARGETS = ['#ticker .tk-i', '.tk-tag', '.pop-sk-t', '.pop-sk-m', '.cl-hd::before'];
+  function setAnimState(state){
+    document.querySelectorAll('#ticker .tk-i, .tk-tag, .pop-sk-t, .pop-sk-m')
+      .forEach(el=>{ el.style.animationPlayState = state; });
+  }
+  document.addEventListener('visibilitychange',()=>{
+    setAnimState(document.hidden ? 'paused' : 'running');
+  });
+
+  /* ── 7. Intersection Observer: pausar ticker fuera
+     del viewport (ahorra CPU en scroll)
+  ─────────────────────────────────────────────── */
+  onIdle(()=>{
+    const ticker = document.getElementById('ticker');
+    if(!ticker) return;
+    const io = new IntersectionObserver(([e])=>{
+      const inner = ticker.querySelector('.tk-i');
+      if(inner) inner.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+    }, {threshold: 0});
+    io.observe(ticker);
+  });
+
+  /* ── 8. Cleanup will-change en elementos animados
+     Después de que las animaciones de entrada terminan
+     liberamos will-change para reducir uso de memoria.
+  ─────────────────────────────────────────────── */
+  onIdle(()=>{
+    setTimeout(()=>{
+      document.querySelectorAll('.fi, .rv, .sg > *').forEach(el=>{
+        el.style.willChange = 'auto';
+      });
+    }, 2000);
+  });
+
+  /* ── 9. Resource hints dinámicos ─────────────────
+     Al hacer hover en un link de noticia, preconectar
+     el dominio destino para reducir latencia de clic.
+  ─────────────────────────────────────────────── */
+  onIdle(()=>{
+    let lastHref = '';
+    document.addEventListener('mouseover', e=>{
+      const a = e.target.closest('a[href]');
+      if(!a || a.href === lastHref) return;
+      lastHref = a.href;
+      try {
+        const url = new URL(a.href, location.origin);
+        if(url.origin !== location.origin) return; // solo links internos
+        // prefetch la siguiente página al hacer hover
+        const link = document.createElement('link');
+        link.rel  = 'prefetch';
+        link.href = a.href;
+        link.as   = 'document';
+        document.head.appendChild(link);
+      } catch(err){}
+    }, {passive:true});
+  });
+
+})();
+
+/* ══════════════════════════════════════════════
+   MÁS POPULARES — Polling automático
+   ══════════════════════════════════════════════
+   En producción: reemplazar MOCK_DATA con
+   fetch('/api/mas-populares') al endpoint real
+   de SacsPro/Yii2.
+   ══════════════════════════════════════════════ */
+(function(){
+  'use strict';
+
+  const POLL_INTERVAL = 30000; // 30s — ajustar en producción
+  const list    = document.getElementById('pop-list');
+  const status  = document.getElementById('pop-status');
+  let   prevIds = [];     // Para detectar cambio de orden
+  let   timer   = null;
+  let   tick    = 0;      // Ciclos de demo
+
+  /* ── DATOS DE DEMOSTRACIÓN ─────────────────────
+     Simula cambios de ranking cada ciclo.
+     EN PRODUCCIÓN: borrar MOCK_DATA y usar fetch()
+  ──────────────────────────────────────────────── */
+  const MOCK_DATA = [
+    [
+      {id:1,titulo:'Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030',slug:'/noticias/hermosillo/plan-maestro-2026',img:'https://picsum.photos/seed/pop1/80/80',seccion:'Hermosillo',pv:12400},
+      {id:2,titulo:'Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre',slug:'/noticias/sonora/celulas-madre',img:'https://picsum.photos/seed/pop2/80/80',seccion:'Sonora',pv:9870},
+      {id:3,titulo:'SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo de Hermosillo',slug:'/noticias/seguridad/ssp-operativo',img:'https://picsum.photos/seed/pop3/80/80',seccion:'Seguridad',pv:7210},
+      {id:4,titulo:'Naranjeros de Hermosillo rompe récord de asistencia en la LMP 2026',slug:'/accion/beisbol/naranjeros-record',img:'https://picsum.photos/seed/pop4/80/80',seccion:'Béisbol',pv:6550},
+      {id:5,titulo:'Washington impone aranceles a electrónicos de Asia; México analiza respuesta',slug:'/noticias/mundo/aranceles',img:'https://picsum.photos/seed/pop5/80/80',seccion:'Mundo',pv:4320}
+    ],
+    // Ciclo 2: nota #2 sube al #1, cambios en contadores
+    [
+      {id:2,titulo:'Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre',slug:'/noticias/sonora/celulas-madre',img:'https://picsum.photos/seed/pop2/80/80',seccion:'Sonora',pv:11240},
+      {id:1,titulo:'Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030',slug:'/noticias/hermosillo/plan-maestro-2026',img:'https://picsum.photos/seed/pop1/80/80',seccion:'Hermosillo',pv:12650},
+      {id:3,titulo:'SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo de Hermosillo',slug:'/noticias/seguridad/ssp-operativo',img:'https://picsum.photos/seed/pop3/80/80',seccion:'Seguridad',pv:7890},
+      {id:5,titulo:'Washington impone aranceles a electrónicos de Asia; México analiza respuesta',slug:'/noticias/mundo/aranceles',img:'https://picsum.photos/seed/pop5/80/80',seccion:'Mundo',pv:6100},
+      {id:4,titulo:'Naranjeros de Hermosillo rompe récord de asistencia en la LMP 2026',slug:'/accion/beisbol/naranjeros-record',img:'https://picsum.photos/seed/pop4/80/80',seccion:'Béisbol',pv:5980}
+    ],
+    // Ciclo 3: nota nueva entra al ranking
+    [
+      {id:1,titulo:'Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030',slug:'/noticias/hermosillo/plan-maestro-2026',img:'https://picsum.photos/seed/pop1/80/80',seccion:'Hermosillo',pv:13100},
+      {id:6,titulo:'Temperatura en Hermosillo alcanza récord histórico de 47°C este miércoles',slug:'/noticias/sonora/temperatura-record',img:'https://picsum.photos/seed/pop6/80/80',seccion:'Sonora',pv:9450},
+      {id:2,titulo:'Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre',slug:'/noticias/sonora/celulas-madre',img:'https://picsum.photos/seed/pop2/80/80',seccion:'Sonora',pv:9200},
+      {id:3,titulo:'SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo de Hermosillo',slug:'/noticias/seguridad/ssp-operativo',img:'https://picsum.photos/seed/pop3/80/80',seccion:'Seguridad',pv:8100},
+      {id:5,titulo:'Washington impone aranceles a electrónicos de Asia; México analiza respuesta',slug:'/noticias/mundo/aranceles',img:'https://picsum.photos/seed/pop5/80/80',seccion:'Mundo',pv:6800}
+    ]
+  ];
+
+  /* ── HELPERS ───────────────────────────────── */
+  function fmtNum(n){
+    if(n>=1000000) return (n/1000000).toFixed(1)+'M';
+    if(n>=1000)    return (n/1000).toFixed(1)+'k';
+    return n.toLocaleString('es-MX');
+  }
+
+  function timeAgo(){
+    const now = new Date();
+    return now.getHours().toString().padStart(2,'0')+':'+
+           now.getMinutes().toString().padStart(2,'0');
+  }
+
+  /* ── OBTENER DATOS ─────────────────────────────
+     En producción reemplazar este bloque con:
+     return fetch('/api/mas-populares').then(r=>r.json())
+  ──────────────────────────────────────────────── */
+  function getData(){
+    return Promise.resolve(MOCK_DATA[tick % MOCK_DATA.length]);
+  }
+
+  /* ── BADGE DE MOVIMIENTO ───────────────────────
+     delta > 0 = subió  |  delta < 0 = bajó  |  null = nuevo
+  ──────────────────────────────────────────────── */
+  function rankBadgeHTML(delta, isNew){
+    if(isNew) return `<span class="rank-badge rank-new">Nuevo</span>`;
+    if(delta === 0 || delta === undefined) return '';
+    if(delta > 0)  return `<span class="rank-badge rank-up-b">▲ ${delta}</span>`;
+    return             `<span class="rank-badge rank-dn-b">▼ ${Math.abs(delta)}</span>`;
+  }
+
+  /* ── CREAR ELEMENTO LI ─────────────────────── */
+  function createItem(item, idx, delta, isNew){
+    const li = document.createElement('li');
+    li.dataset.id    = item.id;
+    li.dataset.rank  = idx;
+    li.style.cssText = `display:flex;align-items:flex-start;gap:10px;
+      padding:9px 4px;border-bottom:1px solid var(--ge);
+      cursor:pointer;border-radius:var(--rs);
+      transition:background var(--ef),padding-left var(--em)`;
+    li.onmouseover = ()=>{ li.style.background='var(--gc)'; li.style.paddingLeft='8px' };
+    li.onmouseout  = ()=>{ li.style.background=''; li.style.paddingLeft='' };
+
+    const isHi = idx < 3 ? 'hi' : '';
+    li.innerHTML = `
+      <span class="pop-num ${isHi}">${idx+1}</span>
+      <img class="pop-th" src="${item.img}" alt="" loading="lazy"
+           style="width:54px;height:54px;border-radius:var(--rs);object-fit:cover;
+                  flex-shrink:0;transition:transform var(--em) var(--ease)"
+           onmouseover="this.style.transform='scale(1.06)'"
+           onmouseout="this.style.transform=''">
+      <div style="flex:1;min-width:0">
+        <div class="pop-tx" style="display:flex;align-items:flex-start;gap:5px;flex-wrap:wrap">
+          <a href="${item.slug}" style="color:inherit;flex:1;min-width:0">${item.titulo}</a>
+        </div>
+        <div class="pop-m" style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+          ${item.seccion} ·
+          <span class="pv-num" data-id="${item.id}" data-val="${item.pv}">
+            ${fmtNum(item.pv)} lecturas
+          </span>
+          <span class="rank-ind">${rankBadgeHTML(delta, isNew)}</span>
+        </div>
+      </div>`;
+    return li;
+  }
+
+  /* ── ACTUALIZAR NÚMERO SIN MOVER EL ITEM ───── */
+  function flashCounter(item){
+    const el = list.querySelector(`.pv-num[data-id="${item.id}"]`);
+    if(!el) return;
+    const prev = parseInt(el.dataset.val || 0);
+    if(item.pv === prev) return;
+    el.classList.remove('pv-up','pv-down');
+    void el.offsetWidth;
+    el.classList.add(item.pv > prev ? 'pv-up' : 'pv-down');
+    el.textContent = fmtNum(item.pv) + ' lecturas';
+    el.dataset.val = item.pv;
+    setTimeout(()=>el.classList.remove('pv-up','pv-down'), 1400);
+  }
+
+  /* ── ACTUALIZAR NÚMERO DEL BADGE ───────────── */
+  function updateBadge(li, newIdx, oldIdx){
+    const badge = li.querySelector('.pop-num');
+    if(badge){
+      badge.textContent = newIdx + 1;
+      badge.className   = 'pop-num' + (newIdx < 3 ? ' hi' : '');
+    }
+    // Actualizar indicador de movimiento si el rank cambió
+    const ind = li.querySelector('.rank-ind');
+    if(!ind) return;
+    const delta = oldIdx - newIdx; // positivo = subió
+    if(delta === 0){ ind.innerHTML = ''; return; }
+    ind.innerHTML = rankBadgeHTML(delta, false);
+    // Desvanecer badge tras 4 segundos
+    setTimeout(()=>{
+      const b = ind.querySelector('.rank-badge');
+      if(b){ b.style.opacity='0'; b.style.transition='opacity .6s ease'; }
+      setTimeout(()=>{ ind.innerHTML='' }, 650);
+    }, 4000);
+  }
+
+  /* ── PRIMERA CARGA: render limpio sin animación */
+  function firstRender(data){
+    list.innerHTML = '';
+    data.forEach((item, idx)=>{
+      list.appendChild(createItem(item, idx, 0, false));
+    });
+  }
+
+  /* ── FLIP: anima solo los items que se movieron ─
+     Técnica: grabar posición ANTES, reordenar DOM,
+     calcular delta, aplicar transform inverso,
+     soltar para que CSS transition lleve al destino.
+  ──────────────────────────────────────────────── */
+  function flipUpdate(data){
+    const items = [...list.querySelectorAll('li[data-id]')];
+
+    // Mapa id → índice anterior para calcular delta
+    const prevRankMap = new Map(items.map((li,i)=>[li.dataset.id, i]));
+
+    // 1. FIRST — capturar posición Y actual de cada item
+    const firstPos = new Map();
+    items.forEach(li=>{
+      firstPos.set(li.dataset.id, li.getBoundingClientRect().top);
+    });
+
+    // 2. Detectar items nuevos (entraron al ranking)
+    const existingIds = new Set(items.map(li=>li.dataset.id));
+    const newIds      = new Set(data.map(d=>String(d.id)));
+
+    // Añadir items nuevos al DOM (ocultos) para que tengan posición
+    data.forEach((item, idx)=>{
+      if(!existingIds.has(String(item.id))){
+        const li = createItem(item, idx, null, true);
+        li.style.opacity = '0';
+        list.appendChild(li);
+        firstPos.set(String(item.id), li.getBoundingClientRect().top);
+        // Badge "Nuevo" se desvanece tras 5s
+        setTimeout(()=>{
+          const b = li.querySelector('.rank-badge');
+          if(b){ b.style.opacity='0'; b.style.transition='opacity .6s ease'; }
+          setTimeout(()=>{ const ind=li.querySelector('.rank-ind'); if(ind) ind.innerHTML='' }, 650);
+        }, 5000);
+      }
+    });
+
+    // Remover items que salieron del ranking
+    [...list.querySelectorAll('li[data-id]')].forEach(li=>{
+      if(!newIds.has(li.dataset.id)){
+        li.style.transition = 'opacity .25s ease, transform .25s ease';
+        li.style.transform  = 'translateX(20px)';
+        li.style.opacity    = '0';
+        setTimeout(()=>li.remove(), 260);
+      }
+    });
+
+    // 3. Reordenar DOM según nuevo ranking
+    data.forEach((item, newIdx)=>{
+      const li = list.querySelector(`li[data-id="${item.id}"]`);
+      if(li){
+        const oldIdx = prevRankMap.has(String(item.id))
+          ? prevRankMap.get(String(item.id))
+          : newIdx;
+        list.appendChild(li);
+        updateBadge(li, newIdx, oldIdx);
+        flashCounter(item);
+      }
+    });
+
+    // 4. LAST + INVERT + PLAY
+    data.forEach(item=>{
+      const li = list.querySelector(`li[data-id="${item.id}"]`);
+      if(!li) return;
+      const first = firstPos.get(String(item.id));
+      const last  = li.getBoundingClientRect().top;
+      const delta = first - last;
+
+      if(Math.abs(delta) < 2){
+        if(li.style.opacity === '0'){
+          li.style.transition = 'opacity .3s ease';
+          li.style.opacity    = '1';
+        }
+        return;
+      }
+
+      li.style.transition = 'none';
+      li.style.transform  = `translateY(${delta}px)`;
+      li.style.opacity    = li.style.opacity === '0' ? '0' : '1';
+
+      requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
+          li.style.transition = 'transform .42s cubic-bezier(.25,.46,.45,.94), opacity .35s ease';
+          li.style.transform  = 'translateY(0)';
+          li.style.opacity    = '1';
+        });
+      });
+    });
+  }
+
+  /* ── LÓGICA PRINCIPAL ──────────────────────── */
+  function fetchAndRender(){
+    getData().then(data=>{
+      const newIds       = data.map(d=>String(d.id));
+      const orderChanged = JSON.stringify(prevIds) !== JSON.stringify(newIds);
+      const isFirst      = prevIds.length === 0;
+
+      if(isFirst){
+        firstRender(data);
+      } else if(orderChanged){
+        // Solo mueven los que cambiaron — FLIP
+        flipUpdate(data);
+      } else {
+        // Solo flashear contadores, nadie se mueve
+        data.forEach(flashCounter);
+      }
+
+      prevIds = newIds;
+      tick++;
+      status.innerHTML = `<span class="pop-pulse"></span>Act. ${timeAgo()}`;
+
+    }).catch(()=>{
+      status.textContent = '⚠ Sin conexión';
+    });
+  }
+
+  /* ── ARRANQUE ──────────────────────────────── */
+  // Carga inmediata
+  fetchAndRender();
+
+  // Polling periódico
+  timer = setInterval(fetchAndRender, POLL_INTERVAL);
+
+  // Re-fetch cuando la pestaña vuelve a ser visible
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden){
+      clearInterval(timer);
+      fetchAndRender();
+      timer = setInterval(fetchAndRender, POLL_INTERVAL);
+    }
+  });
+
+  /* ── DEMO: ciclar cada 8s para ver los cambios ─
+     BORRAR EN PRODUCCIÓN — solo sirve para el demo
+  ──────────────────────────────────────────────── */
+  setInterval(fetchAndRender, 8000);
+
+})();
 </script>
 </body>
 </html>
