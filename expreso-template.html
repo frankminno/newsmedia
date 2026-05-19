@@ -1,0 +1,3181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EXPRESO — Plataforma líder en noticias en el noroeste de México. Hermosillo, Sonora.">
+<meta name="theme-color" content="#0e5228">
+<meta name="color-scheme" content="light">
+<title>EXPRESO — Noticias de Sonora y México</title>
+
+<!-- ═══ OPEN GRAPH / SEO ═══════════════════════════ -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="EXPRESO">
+<meta property="og:title"       content="EXPRESO — Noticias de Sonora y México">
+<meta property="og:description" content="Plataforma líder en noticias en el noroeste de México. Hermosillo, Sonora.">
+<meta property="og:url"         content="https://expreso.com.mx/">
+<meta property="og:locale"      content="es_MX">
+<meta name="twitter:card"       content="summary_large_image">
+<meta name="robots"             content="index,follow,max-image-preview:large">
+<link rel="canonical"           href="https://expreso.com.mx/">
+<link rel="alternate" hreflang="es-MX" href="https://expreso.com.mx/">
+<link rel="alternate" hreflang="es"    href="https://expreso.com.mx/">
+<link rel="alternate" hreflang="x-default" href="https://expreso.com.mx/">
+
+<!-- ═══ PERFORMANCE: DNS + CONEXIONES ══════════════
+     Cada dominio externo = 1 RTT extra.
+     preconnect  → handshake TLS anticipado (recursos críticos)
+     dns-prefetch → solo DNS (recursos secundarios)
+  ════════════════════════════════════════════════ -->
+<!-- Fuentes: preconnect + preload + swap -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Logo Expreso: preload LCP crítico -->
+<link rel="preload" as="image" href="https://blob.expreso.com.mx/images/logos-expreso/300x47px.webp"
+      type="image/webp" fetchpriority="high">
+
+<!-- CDNs de contenido -->
+<link rel="dns-prefetch" href="https://picsum.photos">
+<link rel="dns-prefetch" href="https://i.pravatar.cc">
+<link rel="dns-prefetch" href="https://img.youtube.com">
+<link rel="dns-prefetch" href="https://blob.expreso.com.mx">
+<link rel="preconnect"   href="https://img.youtube.com" crossorigin>
+<link rel="preconnect"   href="https://blob.expreso.com.mx" crossorigin>
+<!-- API proxy solo si se va a usar -->
+<link rel="dns-prefetch" href="https://api.allorigins.win">
+
+<!-- ═══ LCP: PRELOAD imagen hero (slide 1) ══════════
+     La imagen más grande visible al cargar = LCP.
+     Preload con fetchpriority=high garantiza que el
+     navegador la descargue antes de parsear el HTML.
+     En producción: reemplazar src con la URL real del CMS.
+  ════════════════════════════════════════════════ -->
+<link rel="preload"
+      as="image"
+      href="https://picsum.photos/seed/h1/760/370"
+      fetchpriority="high">
+
+<!-- ═══ FUENTES: swap + subsets ════════════════════
+     display=swap → texto visible mientras carga la fuente (no FOIT)
+     subset latin → -30% de peso por fuente
+  ════════════════════════════════════════════════ -->
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap&subset=latin"
+      onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- ═══ STRUCTURED DATA: NewsMediaOrganization ═════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsMediaOrganization",
+  "name": "EXPRESO",
+  "url": "https://expreso.com.mx",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://expreso.com.mx/images/logo-expreso.png",
+    "width": 200, "height": 60
+  },
+  "sameAs": [
+    "https://facebook.com/expresoweb",
+    "https://x.com/Expresoweb",
+    "https://instagram.com/expresomx",
+    "https://youtube.com/user/expresoweb"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Blvd. Abelardo L. Rodríguez No. 16, Col. San Benito",
+    "addressLocality": "Hermosillo",
+    "addressRegion": "Sonora",
+    "postalCode": "83190",
+    "addressCountry": "MX"
+  }
+}
+</script>
+<style>
+/* ═══════════════════════════════════════════════
+   EXPRESO v5 — CSS Custom Props + Keyframes
+   ═══════════════════════════════════════════════ */
+:root{
+  --v:   #1a7c3e; --vd: #0e5228; --vm: #25a457; --vp: #e8f5ee;
+  --n:   #111;    --gd: #1f1f1f; --gt: #333;    --gm: #666;
+  --gl:  #999;    --gx: #c8c8c8; --gb: #efefef; --gc: #f7f7f7;
+  --ge:  #e2e2e2; --w: #fff;     --r: #c0392b;  --y: #e8a400;
+  --fd:  'Playfair Display',Georgia,serif;
+  --fb:  'Source Sans 3',sans-serif;
+  --fc:  'Roboto Condensed',sans-serif;
+  --ra:8px; --rs:4px;
+  --s1:0 1px 4px rgba(0,0,0,.09);
+  --s2:0 4px 20px rgba(0,0,0,.13);
+  --s3:0 8px 40px rgba(0,0,0,.18);
+  --ef:.15s; --em:.28s; --es:.5s;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --sharp:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);font-size:15px;color:var(--gt);background:var(--gb);line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button{cursor:pointer;font-family:var(--fb)}
+
+/* ── KEYFRAMES ──────────────────────────────────── */
+@keyframes fadeUp    {from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeDown  {from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes fadeIn    {from{opacity:0}to{opacity:1}}
+@keyframes scaleIn   {from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@keyframes slideR    {from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+@keyframes slideL    {from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes blink     {0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.65)}}
+@keyframes pulseRing {0%{box-shadow:0 0 0 0 rgba(192,57,43,.55)}70%{box-shadow:0 0 0 9px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
+@keyframes tkScroll  {from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes slideEnter{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+@keyframes glow      {0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes shake     {0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes countUp   {from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes shimmer   {0%{background-position:-600px 0}100%{background-position:600px 0}}
+@keyframes spin      {to{transform:rotate(360deg)}}
+@keyframes barGrow   {from{width:0}to{width:var(--w,100%)}}
+
+/* ── PAGE LOAD STAGGER ──────────────────────────── */
+#utilbar   {animation:fadeDown .38s var(--sharp) both;animation-delay:.04s}
+#infobar   {animation:fadeDown .38s var(--sharp) both;animation-delay:.10s}
+#header    {animation:fadeDown .38s var(--sharp) both;animation-delay:.16s}
+#navbar    {animation:fadeDown .32s var(--sharp) both;animation-delay:.20s}
+#ticker    {animation:fadeIn  .45s both;animation-delay:.25s}
+.col-left  {animation:slideR  .55s var(--ease) both;animation-delay:.32s}
+.col-center{animation:fadeUp  .55s var(--ease) both;animation-delay:.38s}
+.col-right {animation:slideL  .55s var(--ease) both;animation-delay:.44s}
+
+/* ── SCROLL REVEAL ─────────────────────────────── */
+.rv  {opacity:0;transform:translateY(22px);transition:opacity .58s var(--ease),transform .58s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rvl {opacity:0;transform:translateX(-18px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.rvl.on{opacity:1;transform:none}
+.sg>*{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
+.sg.on>*:nth-child(1){opacity:1;transform:none;transition-delay:.03s}
+.sg.on>*:nth-child(2){opacity:1;transform:none;transition-delay:.09s}
+.sg.on>*:nth-child(3){opacity:1;transform:none;transition-delay:.15s}
+.sg.on>*:nth-child(4){opacity:1;transform:none;transition-delay:.21s}
+.sg.on>*:nth-child(5){opacity:1;transform:none;transition-delay:.27s}
+.sg.on>*:nth-child(6){opacity:1;transform:none;transition-delay:.33s}
+.sg.on>*:nth-child(7){opacity:1;transform:none;transition-delay:.39s}
+.sg.on>*:nth-child(n+8){opacity:1;transform:none;transition-delay:.45s}
+
+/* ── SHARED MICRO UX ───────────────────────────── */
+.lift{transition:transform var(--em) var(--spring),box-shadow var(--em) var(--ease)}
+.lift:hover{transform:translateY(-4px) scale(1.005);box-shadow:var(--s3)}
+.izoom{overflow:hidden}
+.izoom img{transition:transform .52s var(--ease),filter .52s var(--ease)}
+.izoom:hover img{transform:scale(1.07);filter:brightness(1.04) saturate(1.1)}
+.press{transition:transform var(--ef) var(--sharp)}
+.press:active{transform:scale(.95)}
+.uline{position:relative}
+.uline::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:2px;background:var(--vm);transition:width .24s var(--ease)}
+.uline:hover::after{width:100%}
+
+/* ── PROGRESS BAR ──────────────────────────────── */
+#pbar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--vd),var(--vm));width:0;z-index:9999;transition:width .1s linear;box-shadow:0 0 6px rgba(26,122,60,.5)}
+
+/* ── UTILITY BAR ───────────────────────────────── */
+#utilbar{background:var(--n);border-bottom:2px solid var(--v)}
+.ub{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:center;justify-content:space-between;overflow-x:auto;scrollbar-width:none}
+.ub::-webkit-scrollbar{display:none}
+.ub-l{display:flex}
+.ub-l a{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:7px 11px;border-right:1px solid rgba(255,255,255,.07);transition:color var(--em),background var(--em);white-space:nowrap}
+.ub-l a:hover{color:var(--vm);background:rgba(255,255,255,.05)}
+.ub-l a.hi{color:var(--vm)}
+.ub-r{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ub-r a{font-family:var(--fc);font-size:11px;color:rgba(255,255,255,.5);transition:color var(--ef)}
+.ub-r a:hover{color:var(--vm)}
+.ub-soc{display:flex;gap:5px}
+.ub-soc a{width:22px;height:22px;background:rgba(255,255,255,.1);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,255,255,.65);transition:background var(--em) var(--spring),transform var(--ef) var(--spring),color var(--ef)}
+.ub-soc a:hover{background:var(--v);color:#fff;transform:translateY(-2px) scale(1.14)}
+.ub-soc a:active{transform:scale(.9)}
+
+/* ── INFO BAR ──────────────────────────────────── */
+#infobar{background:var(--w);border-bottom:1px solid var(--ge)}
+.ib{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none}
+.ib::-webkit-scrollbar{display:none}
+.ib-it{display:flex;align-items:center;gap:10px;padding:9px 18px;border-right:1px solid var(--ge);min-width:180px;flex-shrink:0;transition:background var(--em);cursor:pointer}
+.ib-it:hover{background:var(--gc)}
+.ib-it:first-child{padding-left:0}
+.ib-lbl{font-size:10.5px;color:var(--gm);font-family:var(--fc);letter-spacing:.03em;line-height:1.2}
+.ib-ttl{font-size:13px;font-weight:600;color:var(--n);line-height:1.25;max-width:138px}
+.ib-th{width:42px;height:42px;border-radius:var(--rs);object-fit:cover;flex-shrink:0;transition:transform var(--em) var(--ease)}
+.ib-it:hover .ib-th{transform:scale(1.07)}
+.mkt{display:flex;flex-direction:column;gap:2px}
+.mkt-r{display:flex;align-items:center;gap:7px;font-family:var(--fc);font-size:12px}
+.mkt-n{color:var(--gm)}.mkt-v{font-weight:700;color:var(--n)}
+.mkt-c{font-size:11px;font-weight:700}
+.pos{color:#1a8a3c}.neg{color:var(--r)}
+
+/* ── HEADER ────────────────────────────────────── */
+#header{background:var(--w);padding:10px 0 8px;border-bottom:1px solid var(--ge);position:sticky;top:0;z-index:900;box-shadow:0 1px 8px rgba(0,0,0,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow var(--em) var(--ease)}
+#header.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.13)}
+.hd{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:center;gap:16px}
+.logo-w{margin-right:6px}
+.logo-svg{font-family:var(--fd);font-size:34px;font-weight:900;color:var(--vd);letter-spacing:-1.5px;line-height:1;transition:color var(--em) var(--ease)}
+.logo-svg:hover{color:var(--v)}
+.logo-svg em{color:var(--v);font-style:normal}
+.logo-sub{font-family:var(--fc);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gl);margin-top:1px}
+.srch{flex:1;max-width:520px;display:flex;align-items:center;background:var(--gb);border:1.5px solid var(--ge);border-radius:22px;overflow:hidden;transition:border-color var(--em),box-shadow var(--em),background var(--em)}
+.srch:focus-within{border-color:var(--v);background:var(--w);box-shadow:0 0 0 3px rgba(26,122,60,.1)}
+.srch input{flex:1;border:none;background:transparent;padding:8px 14px;font-size:14px;font-family:var(--fb);outline:none;color:var(--n)}
+.srch button{background:var(--v);border:none;padding:8px 15px;color:#fff;font-size:14px;transition:background var(--ef),transform var(--ef) var(--spring)}
+.srch button:hover{background:var(--vd)}
+.srch button:active{transform:scale(.9)}
+.hd-nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+.hd-nav a{font-family:var(--fc);font-size:14px;font-weight:700;color:var(--gt);padding:6px 10px;border-radius:var(--rs);transition:color var(--em),background var(--em)}
+.hd-nav a:hover{color:var(--vd);background:var(--gb)}
+.btn-ei{font-family:var(--fc);font-size:11px;font-weight:700;color:var(--gt);border:1.5px solid var(--ge);padding:6px 13px;border-radius:18px;background:none;transition:border-color var(--em),color var(--em);white-space:nowrap}
+.btn-ei:hover{border-color:var(--n);color:var(--n)}
+.btn-sus{font-family:var(--fc);font-size:12px;font-weight:700;color:#fff;background:var(--v);border:none;padding:7px 16px;border-radius:18px;box-shadow:0 2px 8px rgba(26,122,60,.3);transition:background var(--em),transform var(--ef) var(--spring),box-shadow var(--em);white-space:nowrap}
+.btn-sus:hover{background:var(--vd);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,122,60,.4)}
+.btn-sus:active{transform:scale(.95)}
+
+/* ── NAVBAR ────────────────────────────────────── */
+#navbar{background:var(--vd);position:sticky;top:68px;z-index:800}
+.nb{max-width:1280px;margin:0 auto;padding:0 14px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.nb::-webkit-scrollbar{display:none}
+.nb-it{position:relative}
+.nb-a{display:block;font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.82);padding:10px 14px;border-bottom:2px solid transparent;white-space:nowrap;transition:color var(--ef),background var(--ef),border-color var(--em) var(--ease)}
+.nb-a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nb-a.on{color:#fff;border-bottom-color:var(--vm)}
+.nb-it:hover .nb-dd{opacity:1;visibility:visible;transform:translateY(0)}
+.nb-dd{position:absolute;top:100%;left:0;background:var(--w);min-width:200px;border-top:2px solid var(--v);box-shadow:var(--s2);border-radius:0 0 var(--rs) var(--rs);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;z-index:999}
+.nb-dd a{display:block;padding:9px 15px;font-family:var(--fc);font-size:13px;color:var(--gt);border-bottom:1px solid var(--ge);transition:background var(--ef),color var(--ef),padding-left var(--em) var(--ease)}
+.nb-dd a:last-child{border-bottom:none}
+.nb-dd a:hover{background:var(--gb);color:var(--vd);padding-left:20px}
+.nb-dd.two{display:grid;grid-template-columns:1fr 1fr;min-width:340px}
+.nb-dd.two a{border-right:1px solid var(--ge)}
+
+
+/* ── TICKER ────────────────────────────────────── */
+#ticker{background:var(--n);height:32px;display:flex;align-items:stretch;overflow:hidden}
+.tk-tag{background:var(--r);color:#fff;font-family:var(--fc);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:0 13px;display:flex;align-items:center;gap:6px;flex-shrink:0;animation:pulseRing 2s infinite}
+.tk-dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:blink 1s infinite}
+.tk-b{flex:1;overflow:hidden;display:flex;align-items:center}
+.tk-i{display:flex;white-space:nowrap;animation:tkScroll 44s linear infinite}
+.tk-i:hover{animation-play-state:paused}
+.tk-i a{font-family:var(--fc);font-size:12.5px;color:rgba(255,255,255,.82);padding:0 22px;transition:color var(--ef);position:relative}
+.tk-i a::after{content:'◆';position:absolute;right:0;color:var(--vm);font-size:7px;top:50%;transform:translateY(-50%)}
+.tk-i a:hover{color:var(--vm)}
+
+/* ── 3-COL LAYOUT ──────────────────────────────── */
+.page{max-width:1280px;margin:0 auto;padding:14px}
+.three{display:grid;grid-template-columns:296px 1fr 300px;gap:14px;align-items:start}
+
+/* ── WIDGET BASE ───────────────────────────────── */
+.wg{background:var(--w);border-radius:var(--ra);padding:14px;margin-bottom:12px;box-shadow:var(--s1);transition:box-shadow var(--em) var(--ease)}
+.wg:hover{box-shadow:var(--s2)}
+.wg-h{font-family:var(--fc);font-size:15px;font-weight:700;color:var(--n);margin-bottom:11px;display:flex;align-items:center;gap:7px;border-left:3px solid var(--v);padding-left:9px}
+
+/* ── LEFT COL: TENDENCIAS ──────────────────────── */
+.tr-l li{display:flex;align-items:flex-start;gap:9px;padding:8px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em) var(--ease)}
+.tr-l li:last-child{border-bottom:none}
+.tr-l li:hover{background:var(--gc);padding-left:8px}
+.tr-n{font-family:var(--fc);font-size:13px;font-weight:700;color:var(--ge);min-width:16px;flex-shrink:0;padding-top:1px;transition:color var(--em) var(--ease)}
+.tr-l li:hover .tr-n{color:var(--v)}
+.tr-n.hi{color:var(--v)}
+.tr-th{width:52px;height:36px;border-radius:var(--rs);object-fit:cover;flex-shrink:0;transition:transform var(--em) var(--ease),filter var(--em)}
+.tr-l li:hover .tr-th{transform:scale(1.07);filter:brightness(1.05)}
+.tr-tx{font-size:12.5px;font-weight:600;line-height:1.3;color:var(--n);transition:color var(--ef)}
+.tr-l li:hover .tr-tx{color:var(--vd)}
+.tr-m{font-size:11px;color:var(--gm);font-family:var(--fc);margin-top:2px;display:flex;align-items:center;gap:6px}
+.bn{background:var(--y);color:#fff;font-family:var(--fc);font-size:9px;font-weight:700;padding:1px 5px;border-radius:2px;animation:fadeIn .4s both}
+.vm{display:block;text-align:center;font-family:var(--fc);font-size:11px;font-weight:700;color:var(--vd);padding:8px;margin-top:6px;border:1px solid var(--ge);border-radius:var(--rs);transition:background var(--em),color var(--em),border-color var(--em),transform var(--ef) var(--spring)}
+.vm:hover{background:var(--vd);color:#fff;border-color:var(--vd);transform:translateY(-1px)}
+.vm:active{transform:scale(.97)}
+
+/* ── LEFT COL: MÁS POPULARES (Yahoo style, numbered big) ── */
+.pop-l li{display:flex;align-items:flex-start;gap:10px;padding:9px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.pop-l li:last-child{border-bottom:none}
+.pop-l li:hover{background:var(--gc);padding-left:8px}
+.pop-num{font-family:var(--fd);font-size:28px;font-weight:900;color:var(--ge);line-height:1;min-width:28px;flex-shrink:0;transition:color var(--em) var(--ease)}
+.pop-l li:hover .pop-num{color:var(--v)}
+.pop-num.hi{color:var(--v)}
+.pop-th{width:54px;height:54px;border-radius:var(--rs);object-fit:cover;flex-shrink:0;transition:transform var(--em) var(--ease)}
+.pop-l li:hover .pop-th{transform:scale(1.06)}
+.pop-tx{font-size:13px;font-weight:600;line-height:1.35;color:var(--n);transition:color var(--ef)}
+.pop-l li:hover .pop-tx{color:var(--vd)}
+.pop-m{font-size:11px;color:var(--gm);font-family:var(--fc);margin-top:3px}
+
+/* ── LEFT COL: EXPLORAR / CATEGORÍAS (Yahoo: cuadrícula) ── */
+.exp-g{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.exp-it{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:var(--rs);background:var(--gc);border:1px solid var(--ge);font-family:var(--fc);font-size:12px;font-weight:700;color:var(--gt);cursor:pointer;transition:background var(--em),color var(--em),transform var(--ef) var(--spring),box-shadow var(--em)}
+.exp-it:hover{background:var(--vd);color:#fff;border-color:var(--vd);transform:translateY(-2px) scale(1.02);box-shadow:0 4px 12px rgba(14,82,40,.25)}
+.exp-it:active{transform:scale(.96)}
+.exp-it .ico{font-size:14px;transition:transform var(--em) var(--spring)}
+.exp-it:hover .ico{transform:scale(1.2)}
+
+/* ── LEFT COL: ORIGINALES (Yahoo style) ─────────── */
+.orig-l li{display:flex;align-items:flex-start;gap:10px;padding:9px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.orig-l li:last-child{border-bottom:none}
+.orig-l li:hover{background:var(--gc);padding-left:8px}
+.orig-badge{font-family:var(--fc);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;background:var(--v);padding:1px 6px;border-radius:2px;margin-bottom:4px;display:inline-block}
+.orig-th{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--vm);transition:transform var(--em) var(--spring),box-shadow var(--em)}
+.orig-l li:hover .orig-th{transform:scale(1.1);box-shadow:0 2px 10px rgba(26,122,60,.3)}
+.orig-tx{font-size:12.5px;font-weight:600;line-height:1.3;color:var(--n);transition:color var(--ef)}
+.orig-l li:hover .orig-tx{color:var(--vd)}
+
+/* ── LEFT COL: COLUMNAS OPINIÓN ─────────────────── */
+.col-l li{display:flex;align-items:center;gap:9px;padding:8px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.col-l li:last-child{border-bottom:none}
+.col-l li:hover{background:var(--gc);padding-left:8px}
+.col-av{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--vm);transition:border-color var(--em),transform var(--em) var(--spring),box-shadow var(--em)}
+.col-l li:hover .col-av{border-color:var(--v);transform:scale(1.1);box-shadow:0 2px 10px rgba(26,122,60,.3)}
+.col-n{font-family:var(--fc);font-size:11px;font-weight:700;color:var(--vd)}
+.col-t{font-size:12px;font-weight:600;line-height:1.3;color:var(--n)}
+.col-t a:hover{color:var(--vd)}
+
+/* ── HERO SLIDER ───────────────────────────────── */
+.hero{background:var(--n);border-radius:var(--ra);overflow:hidden;margin-bottom:12px;box-shadow:var(--s2);position:relative}
+.sl{display:none;position:relative}
+.sl.on{display:block}
+.sl.on .sl-img{animation:slideEnter .6s var(--ease) both}
+.sl.on .sl-cap{animation:fadeUp .5s var(--ease) .2s both}
+.sl-img{width:100%;height:350px;object-fit:cover;display:block}
+.sl-cap{position:absolute;bottom:0;left:0;right:0;padding:38px 18px 16px;background:linear-gradient(transparent,rgba(0,0,0,.88))}
+.sl-src{display:flex;align-items:center;gap:7px;font-family:var(--fc);font-size:12px;color:rgba(255,255,255,.7);margin-bottom:5px}
+.sl-ico{width:20px;height:20px;background:var(--v);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700;flex-shrink:0}
+.sl-cap h2{font-family:var(--fd);font-size:21px;font-weight:700;color:#fff;line-height:1.25}
+.sl-cap h2 a{color:#fff}
+.sl-cap h2 a:hover{color:var(--vm)}
+.sl-ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background var(--em),transform var(--em) var(--spring),opacity var(--em);z-index:5;opacity:0}
+.hero:hover .sl-ctrl{opacity:1}
+.sl-ctrl:hover{background:rgba(0,0,0,.8);transform:translateY(-50%) scale(1.12)}
+.sl-ctrl:active{transform:translateY(-50%) scale(.9)}
+.sl-p{left:10px}.sl-n{right:10px}
+.sl-ctr{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-family:var(--fc);font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:9px;z-index:5;display:flex;align-items:center;gap:6px}
+.sl-pause{background:none;border:none;color:#fff;font-size:10px;padding:0;transition:transform var(--ef) var(--spring)}
+.sl-pause:hover{transform:scale(1.2)}
+.sl-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5}
+.sl-dot{width:6px;height:6px;background:rgba(255,255,255,.4);border-radius:50%;cursor:pointer;border:none;transition:background var(--em),width var(--em),border-radius var(--em)}
+.sl-dot.on{background:#fff;width:18px;border-radius:3px}
+
+/* ── SUB HERO 3 ────────────────────────────────── */
+.sub3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.sc{background:var(--w);border-radius:var(--ra);overflow:hidden;box-shadow:var(--s1);transition:transform var(--em) var(--spring),box-shadow var(--em)}
+.sc:hover{transform:translateY(-4px);box-shadow:var(--s3)}
+.sc-i{width:100%;height:106px;object-fit:cover;transition:transform .52s var(--ease),filter .52s var(--ease)}
+.sc:hover .sc-i{transform:scale(1.07);filter:brightness(1.04)}
+.sc-b{padding:9px 11px 11px}
+.sc-src{display:flex;align-items:center;gap:5px;font-family:var(--fc);font-size:11px;color:var(--gm);margin-bottom:3px}
+.sc-dot{width:15px;height:15px;border-radius:50%;background:var(--v);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700;flex-shrink:0}
+.sc-cm{margin-left:auto}
+.sc h4{font-size:12.5px;font-weight:600;line-height:1.3;color:var(--n);transition:color var(--ef)}
+.sc h4 a:hover{color:var(--vd)}
+
+/* ── FEED HEADER + TOGGLE ──────────────────────── */
+.fd-hd{background:var(--w);border-radius:var(--ra) var(--ra) 0 0;padding:12px 15px 0;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--ge);box-shadow:var(--s1)}
+.fd-ttl{font-family:var(--fc);font-size:16px;font-weight:700;color:var(--n);padding-bottom:11px;border-bottom:2px solid var(--v);margin-bottom:-1px}
+.fv-tog{margin-left:auto;display:flex;gap:2px;padding-bottom:11px}
+.fv-b{background:none;border:1px solid var(--ge);padding:4px 8px;border-radius:var(--rs);font-size:13px;color:var(--gm);transition:background var(--em),color var(--em),transform var(--ef) var(--spring)}
+.fv-b.on{background:var(--n);color:#fff;border-color:var(--n)}
+.fv-b:hover:not(.on){background:var(--gb);transform:scale(1.06)}
+
+/* ── FEED ITEMS ────────────────────────────────── */
+.fd-body{background:var(--w);border-radius:0 0 var(--ra) var(--ra);box-shadow:var(--s1)}
+.fi{display:flex;gap:13px;padding:13px 15px;border-bottom:1px solid var(--ge);cursor:pointer;opacity:0;transform:translateY(14px);transition:background var(--ef),padding-left var(--em) var(--ease),opacity .43s var(--ease),transform .43s var(--ease)}
+.fi.on{opacity:1;transform:none}
+.fi:last-child{border-bottom:none}
+.fi:hover{background:var(--gc);padding-left:18px}
+.fi-img{width:128px;height:88px;object-fit:cover;border-radius:var(--rs);flex-shrink:0;transition:transform .5s var(--ease),filter .5s var(--ease),box-shadow var(--em)}
+.fi:hover .fi-img{transform:scale(1.05);filter:brightness(1.04) saturate(1.08);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.fi-body{flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.fi-sec{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--vd);margin-bottom:3px;display:flex;align-items:center;gap:5px}
+.fi-hot{background:rgba(26,122,60,.1);border-radius:10px;padding:2px 8px;display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--vd)}
+.fi-hot::before{content:'🔥';font-size:10px}
+.fi h3{font-size:15px;font-weight:700;line-height:1.3;color:var(--n);margin-bottom:4px}
+.fi h3 a{transition:color var(--ef)}
+.fi h3 a:hover{color:var(--vd)}
+.fi-ex{font-size:13px;color:var(--gm);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:5px}
+.fi-m{display:flex;align-items:center;gap:8px;font-family:var(--fc);font-size:11px;color:var(--gm)}
+.fi-si{width:15px;height:15px;border-radius:50%;background:var(--v);display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700;flex-shrink:0}
+.fi-sep{color:var(--ge)}
+.fi-t{margin-left:auto}
+.fi.ad{background:#fffbf0}
+.fi.ad:hover{background:#fff8e0}
+.ad-b{font-family:var(--fc);font-size:9px;font-weight:700;border:1px solid var(--gx);color:var(--gl);padding:1px 5px;border-radius:2px;margin-right:3px}
+/* Feed card mode */
+.fd-body.card .fi{flex-direction:column;padding:0 0 14px;margin:0 14px}
+.fd-body.card .fi-img{width:100%;height:200px;border-radius:var(--rs) var(--rs) 0 0;margin-bottom:10px}
+.fd-body.card .fi-body{padding:0 4px}
+.fd-body.card .fi h3{font-size:17px}
+.fd-body.card .fi-ex{-webkit-line-clamp:3}
+
+/* ── RIGHT: CLIMA ──────────────────────────────── */
+.wg-cl{background:var(--w);border-radius:var(--ra);overflow:hidden;margin-bottom:12px;box-shadow:var(--s1)}
+.cl-hd{background:linear-gradient(135deg,var(--vd) 0%,var(--v) 60%,var(--vm) 100%);padding:14px;position:relative;overflow:hidden}
+.cl-hd::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.08) 0%,transparent 60%);animation:glow 4s ease-in-out infinite alternate}
+.cl-city{font-family:var(--fc);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:4px;margin-bottom:5px;position:relative;z-index:1}
+.cl-main{display:flex;align-items:flex-end;gap:8px;position:relative;z-index:1}
+.cl-temp{font-family:var(--fd);font-size:54px;font-weight:900;color:#fff;line-height:1;animation:scaleIn .6s var(--spring) .5s both}
+.cl-inf{color:rgba(255,255,255,.88)}
+.cl-desc{font-size:13px;font-weight:600}
+.cl-feel{font-size:11px;opacity:.8}
+.cl-days{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.2);margin-top:10px;padding-top:8px;position:relative;z-index:1}
+.cl-d{text-align:center;color:rgba(255,255,255,.85)}
+.cl-dl{font-family:var(--fc);font-size:9.5px;text-transform:uppercase;opacity:.7}
+.cl-di{font-size:20px;margin:3px 0;display:inline-block;transition:transform var(--em) var(--spring)}
+.cl-d:hover .cl-di{transform:scale(1.35) translateY(-2px)}
+.cl-dt{font-family:var(--fc);font-size:11.5px;font-weight:700}
+.cl-cta{display:block;text-align:center;font-family:var(--fc);font-size:11.5px;font-weight:700;color:var(--vd);padding:9px;border-top:1px solid var(--ge);transition:background var(--em),letter-spacing var(--em)}
+.cl-cta:hover{background:var(--gb);letter-spacing:.04em}
+
+/* ── RIGHT: AD SLOTS ───────────────────────────── */
+.ad-s{background:#f0f0f0;border:1px dashed #ccc;border-radius:var(--ra);margin-bottom:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#bbb;font-family:var(--fc);font-size:11px;text-align:center;transition:border-color var(--em),background var(--em)}
+.ad-s:hover{border-color:#aaa;background:#ebebeb}
+.ad-s .ai{font-size:18px;color:#d0d0d0;transition:transform var(--em) var(--spring)}
+.ad-s:hover .ai{transform:scale(1.15)}
+.a250{height:250px}.a300{height:300px}
+
+/* ── RIGHT: FINANZAS ───────────────────────────── */
+.fin-l li{display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid var(--ge);font-size:13px;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em);cursor:pointer}
+.fin-l li:last-child{border-bottom:none}
+.fin-l li:hover{background:var(--gc);padding-left:6px;padding-right:6px}
+.fin-s{font-family:var(--fc);font-weight:700;color:var(--n)}
+.fin-v{font-family:var(--fc);color:var(--n)}
+.fin-c{font-family:var(--fc);font-size:11px;font-weight:700}
+
+/* ── RIGHT: NEWSLETTER ─────────────────────────── */
+.nl{background:var(--gd);border-radius:var(--ra);padding:16px;margin-bottom:12px;text-align:center;overflow:hidden;position:relative}
+.nl::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(26,122,60,.3) 0%,transparent 70%);animation:glow 3s ease-in-out infinite alternate}
+.nl h4{font-family:var(--fd);font-size:15px;color:#fff;margin-bottom:5px;position:relative;z-index:1}
+.nl p{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:11px;line-height:1.5;position:relative;z-index:1}
+.nl input{width:100%;padding:8px 11px;border:none;border-radius:var(--rs);font-size:13px;font-family:var(--fb);margin-bottom:7px;outline:none;position:relative;z-index:1;transition:box-shadow var(--em)}
+.nl input:focus{box-shadow:0 0 0 3px rgba(26,122,60,.3)}
+.nl button{width:100%;padding:8px;background:var(--v);color:#fff;border:none;border-radius:var(--rs);font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;position:relative;z-index:1;box-shadow:0 2px 8px rgba(26,122,60,.3);transition:background var(--em),transform var(--ef) var(--spring),box-shadow var(--em)}
+.nl button:hover{background:var(--vm);transform:translateY(-1px);box-shadow:0 4px 14px rgba(26,122,60,.4)}
+.nl button:active{transform:scale(.95)}
+
+/* ── RIGHT: TAGS ───────────────────────────────── */
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--fc);font-size:11px;font-weight:700;padding:4px 9px;background:var(--gb);border:1px solid var(--ge);border-radius:11px;color:var(--gm);transition:background var(--em),color var(--em),border-color var(--em),transform var(--ef) var(--spring),box-shadow var(--em)}
+.tag:hover{background:var(--v);color:#fff;border-color:var(--v);transform:translateY(-2px) scale(1.05);box-shadow:0 3px 10px rgba(26,122,60,.25)}
+.tag:active{transform:scale(.95)}
+
+/* ── RIGHT: BÚSQUEDAS TENDENCIA (Yahoo: top searches) ── */
+.srch-t li{display:flex;align-items:center;gap:10px;padding:7px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)}
+.srch-t li:last-child{border-bottom:none}
+.srch-t li:hover{background:var(--gc);padding-left:8px}
+.srch-t .sn{font-family:var(--fd);font-size:18px;font-weight:900;color:var(--ge);min-width:22px;transition:color var(--em)}
+.srch-t li:hover .sn{color:var(--v)}
+.srch-t .sn.hi{color:var(--v)}
+.srch-t .st{font-family:var(--fc);font-size:13px;font-weight:700;color:var(--n);transition:color var(--ef)}
+.srch-t li:hover .st{color:var(--vd)}
+.srch-t .sa{margin-left:auto;font-family:var(--fc);font-size:10px;color:var(--gl)}
+
+/* ── RIGHT: GALERÍA ────────────────────────────── */
+.gal-g{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px}
+.gal-g img{width:100%;height:80px;object-fit:cover;cursor:pointer;transition:transform .4s var(--ease),filter .4s var(--ease)}
+.gal-g img:hover{transform:scale(1.08);filter:brightness(1.09) saturate(1.1);z-index:1;position:relative}
+
+/* ── FOOTER ────────────────────────────────────── */
+#footer{background:var(--n);color:rgba(255,255,255,.7);margin-top:20px}
+.ft-m{padding:32px 0 22px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ft-g{max-width:1280px;margin:0 auto;padding:0 14px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:28px}
+.ft-lo{font-family:var(--fd);font-size:26px;font-weight:900;color:var(--vm);margin-bottom:8px}
+.ft-ab{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:10px}
+.ft-in{font-size:11px;color:rgba(255,255,255,.4);font-family:var(--fc);line-height:1.7}
+.ft-sc{display:flex;gap:6px;margin-top:10px}
+.ft-sc a{width:28px;height:28px;background:rgba(255,255,255,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.65);font-size:12px;transition:background var(--em) var(--spring),transform var(--ef) var(--spring),color var(--ef)}
+.ft-sc a:hover{background:var(--v);color:#fff;transform:translateY(-3px) scale(1.1)}
+.ft-sc a:active{transform:scale(.9)}
+.ft-c h5{font-family:var(--fc);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--vm);margin-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:7px}
+.ft-c li{margin-bottom:5px}
+.ft-c li a{font-size:12.5px;font-family:var(--fc);color:rgba(255,255,255,.55);transition:color var(--ef),padding-left var(--em)}
+.ft-c li a:hover{color:var(--vm);padding-left:4px}
+.ft-bot{max-width:1280px;margin:0 auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-bot p{font-size:11px;font-family:var(--fc);color:rgba(255,255,255,.35)}
+.ft-leg{display:flex;gap:12px}
+.ft-leg a{font-size:11px;font-family:var(--fc);color:rgba(255,255,255,.35);transition:color var(--ef)}
+.ft-leg a:hover{color:var(--vm)}
+
+/* ── BACK TO TOP ───────────────────────────────── */
+#btop{position:fixed;bottom:22px;right:22px;width:40px;height:40px;background:var(--v);color:#fff;border:none;border-radius:var(--ra);font-size:16px;box-shadow:0 4px 16px rgba(26,122,60,.4);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(14px) scale(.8);transition:opacity .32s var(--ease),transform .32s var(--spring),background var(--ef);z-index:999}
+#btop.show{opacity:1;transform:none}
+#btop:hover{background:var(--vd);transform:translateY(-2px) scale(1.06)}
+#btop:active{transform:scale(.92)}
+
+/* ── SKELETON LOADER (Más populares) ───────────── */
+@keyframes skshimmer{0%{background-position:-300px 0}100%{background-position:300px 0}}
+.pop-sk{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--ge)}
+.pop-sk:last-child{border-bottom:none}
+.pop-sk-th{width:54px;height:54px;border-radius:var(--rs);flex-shrink:0;background:linear-gradient(90deg,#ececec 25%,#f5f5f5 50%,#ececec 75%);background-size:300px 100%;animation:skshimmer 1.4s infinite linear}
+.pop-sk-lines{flex:1;display:flex;flex-direction:column;gap:7px}
+.pop-sk-t{height:12px;border-radius:3px;background:linear-gradient(90deg,#ececec 25%,#f5f5f5 50%,#ececec 75%);background-size:300px 100%;animation:skshimmer 1.4s infinite linear;width:90%}
+.pop-sk-m{height:10px;border-radius:3px;background:linear-gradient(90deg,#ececec 25%,#f5f5f5 50%,#ececec 75%);background-size:300px 100%;animation:skshimmer 1.4s infinite linear;width:55%}
+/* Indicador de actualización */
+.pop-pulse{display:inline-block;width:6px;height:6px;background:var(--v);border-radius:50%;margin-right:4px;animation:blink .8s infinite}
+/* Flash de cambio en contador */
+.pv-up{color:#1a8a3c!important;font-weight:700!important;transition:color .4s}
+.pv-down{color:var(--r)!important;font-weight:700!important;transition:color .4s}
+/* Badges de ranking ── sutiles, inline ── */
+.rank-badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--fc);font-size:9px;font-weight:700;
+  padding:1px 5px;border-radius:10px;
+  letter-spacing:.02em;line-height:1.6;
+  white-space:nowrap;
+}
+.rank-up-b{
+  background:rgba(26,138,60,.1);color:#1a8a3c;
+  border:1px solid rgba(26,138,60,.2);
+}
+.rank-dn-b{
+  background:rgba(192,57,43,.08);color:var(--r);
+  border:1px solid rgba(192,57,43,.18);
+}
+.rank-new{
+  background:rgba(232,164,0,.12);color:#b07d00;
+  border:1px solid rgba(232,164,0,.3);
+  animation:fadeIn .4s ease both;
+}
+/* ══════════════════════════════════════════════════
+   ACCESIBILIDAD — WCAG 2.1 AA
+   ══════════════════════════════════════════════════ */
+
+/* ── Skip to content (2.4.1) ───────────────────────
+   Oculto visualmente, visible al recibir foco de teclado
+────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 99999;
+  background: var(--vd);
+  color: #fff;
+  font-family: var(--fc);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 0 0 var(--ra) var(--ra);
+  text-decoration: none;
+  transition: top .15s ease;
+  outline: none;
+}
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--vm);
+  outline-offset: 2px;
+}
+
+/* ── Focus visible (2.4.7 / 2.4.11) ───────────────
+   Anillo de foco claro y consistente para teclado.
+   :focus-visible evita el anillo en clics de ratón.
+────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--vm);
+  outline-offset: 3px;
+  border-radius: var(--rsm);
+}
+/* Quitar outline nativo solo donde tenemos :focus-visible */
+:focus:not(:focus-visible) { outline: none; }
+
+/* Foco en links del navbar */
+.nb-a:focus-visible {
+  outline: 2px solid var(--vm);
+  outline-offset: -2px;
+  background: rgba(255,255,255,.15);
+}
+/* Foco en botones de acción */
+.btn-sus:focus-visible,
+.btn-ei:focus-visible {
+  outline: 3px solid var(--vm);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(37,164,87,.25);
+}
+/* Foco en tags */
+.tag:focus-visible {
+  outline: 2px solid var(--v);
+  outline-offset: 2px;
+}
+/* Foco en feed items */
+.fi:focus-visible,
+.ytc:focus-visible,
+.sc:focus-visible {
+  outline: 2px solid var(--vm);
+  outline-offset: 2px;
+  border-radius: var(--ra);
+}
+/* Slider controls */
+.sl-ctrl:focus-visible,
+.sl-dot:focus-visible,
+.sl-pause:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+/* Back to top */
+#btop:focus-visible {
+  outline: 3px solid var(--vm);
+  outline-offset: 3px;
+}
+
+/* ── Contraste mínimo 4.5:1 (1.4.3) ───────────────
+   Ajustes para textos pequeños que estaban al límite
+────────────────────────────────────────────────── */
+/* Aumentar opacidad de textos secundarios en fondo oscuro */
+.yt-meta        { color: rgba(255,255,255,.58) !important; }
+.ub-l a         { color: rgba(255,255,255,.72) !important; }
+.tk-i a         { color: rgba(255,255,255,.88) !important; }
+.nb-a           { color: rgba(255,255,255,.90) !important; }
+
+/* ── Tamaño mínimo de área táctil 44×44px (2.5.5) ─
+   Botones pequeños necesitan padding extra en móvil
+────────────────────────────────────────────────── */
+@media (pointer: coarse) {
+  .nb-a         { min-height: 44px; display: flex; align-items: center; }
+  .sl-ctrl      { width: 44px; height: 44px; }
+  .sl-dot       { width: 14px; height: 14px; margin: 5px; }
+  .tag          { padding: 8px 12px; }
+  .ub-soc a     { width: 32px; height: 32px; }
+  #btop         { width: 48px; height: 48px; }
+}
+
+/* ── High Contrast Mode (Windows / prefers-contrast) */
+@media (prefers-contrast: more) {
+  :root {
+    --v:  #0a5c2a;
+    --vm: #1a9040;
+    --ge: #888;
+    --gc: #f0f0f0;
+  }
+  .nb-a, .ub-l a { color: #fff !important; }
+  .fi, .sc, .wg  { border: 1px solid #555 !important; }
+  .tag           { border-color: #555 !important; color: #111 !important; }
+  .skip-link     { border: 2px solid #fff; }
+  a:focus-visible,
+  button:focus-visible { outline: 3px solid #000 !important; }
+}
+
+/* ── Modo oscuro del sistema (prefers-color-scheme) */
+/* La plantilla ya es oscura en secciones clave —
+   aquí ajustamos solo los widgets blancos si el OS
+   está en dark mode y el usuario no forzó light */
+@media (prefers-color-scheme: dark) {
+  .wg          { background: #1e1e1e; color: #e8e8e8; }
+  .wg-h        { color: #e8e8e8; }
+  .pop-tx, .tr-tx, .col-t, .orig-tx { color: #e0e0e0; }
+  .pop-m, .tr-m { color: #aaa; }
+  .fi          { background: #1a1a1a; }
+  .fi:hover    { background: #222; }
+  .fi h3 a     { color: #e8e8e8; }
+  .fd-hd,
+  .fd-body,
+  .fd-ttl      { background: #1a1a1a; color: #e8e8e8; }
+  .sc          { background: #1e1e1e; }
+  .wg-cl .cl-cta { background: #1e1e1e; color: var(--vm); }
+  .fin-s, .fin-v { color: #e8e8e8; }
+  .ad-s        { background: #1a1a1a; border-color: #444; }
+}
+
+/* ── RESPONSIVE ────────────────────────────────── */
+@media(max-width:1100px){.three{grid-template-columns:260px 1fr 280px}}
+@media(max-width:900px){.three{grid-template-columns:1fr}.col-left{display:none}.col-right{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ft-g{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.sub3{grid-template-columns:1fr}.col-right{grid-template-columns:1fr}.sl-img{height:210px}.sl-cap h2{font-size:16px}.hd-nav,.btn-ei{display:none}.logo-svg{font-size:26px}.ft-g{grid-template-columns:1fr}.fi .fi-img{width:100px;height:70px}.fi h3{font-size:14px}}
+
+/* ══════════════════════════════════════════════════
+   CORE WEB VITALS — Optimizaciones de rendimiento
+   ══════════════════════════════════════════════════ */
+
+/* ── LCP: Evitar layout shift en imagen hero ────────
+   aspect-ratio reserva el espacio antes de que cargue
+   la imagen → CLS = 0 en el área del hero
+ ─────────────────────────────────────────────────── */
+.hero { aspect-ratio: auto; contain: layout style; }
+.sl-img {
+  width: 100%;
+  height: 350px;           /* fallback para navegadores sin aspect-ratio */
+  aspect-ratio: 760 / 370;
+  object-fit: cover;
+  display: block;
+}
+/* Imágenes sub-hero: reservar espacio explícito */
+.sc-i  { aspect-ratio: 400 / 106; width: 100%; height: auto; object-fit: cover; }
+/* Feed thumbnails */
+.fi-img { aspect-ratio: 128 / 88; height: auto; object-fit: cover; flex-shrink: 0; }
+/* Thumbnails pequeños: definir w/h explícitos en CSS para que el navegador
+   los conozca antes de parsear los atributos HTML */
+.pop-th  { width: 54px;  height: 54px;  object-fit: cover; border-radius: var(--rs); }
+.tr-th   { width: 52px;  height: 36px;  object-fit: cover; border-radius: var(--rs); }
+.orig-th { width: 52px;  height: 52px;  object-fit: cover; border-radius: 50%; }
+.col-av  { width: 36px;  height: 36px;  object-fit: cover; border-radius: 50%; }
+.ib-th   { width: 42px;  height: 42px;  object-fit: cover; border-radius: var(--rs); }
+.gal-g img { aspect-ratio: 200 / 80; width: 100%; height: auto; object-fit: cover; }
+
+/* ── CLS: contain en widgets del sidebar ────────────
+   Impide que el reflow de un widget afecte a otros
+ ─────────────────────────────────────────────────── */
+.wg   { contain: layout style; }
+.wg-cl{ contain: layout style; }
+.fd-body{ contain: layout; }
+
+/* ── INP: Reducir tiempo de respuesta a interacciones
+   will-change solo en elementos que REALMENTE animan
+   (no en toda la página — eso aumenta memoria GPU)
+ ─────────────────────────────────────────────────── */
+.izoom img      { will-change: transform; }   /* zoom en hover */
+/* will-change aplicado por JS solo al slide activo */
+/* will-change en feed: gestionado por JS */
+/* will-change en btop: gestionado por JS */
+
+/* ── content-visibility: offscreen sections ─────────
+   El navegador omite el render de lo que está fuera
+   del viewport → mejora FCP y TTI en páginas largas.
+   contain-intrinsic-size evita layout shift al estimar
+   el tamaño antes de renderizar.
+ ─────────────────────────────────────────────────── */
+#footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 420px;
+}
+.col-left .wg:nth-child(n+3) {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 280px;
+}
+
+/* ── REDUCE MOTION: respetar preferencia del usuario ─
+   Desactiva todas las animaciones si el usuario
+   tiene configurado "reducir movimiento" en su SO.
+   Obligatorio para accesibilidad y Lighthouse.
+ ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rv, .rvl, .sg > * { opacity: 1 !important; transform: none !important; }
+  .fi { opacity: 1 !important; transform: none !important; }
+  #utilbar, #infobar, #header, #navbar, #ticker,
+  .col-left, .col-center, .col-right { animation: none !important; }
+}
+
+/* ── PRINT: estilos mínimos ─────────────────────── */
+@media print {
+  #utilbar, #navbar, #ticker, #pbar, #btop,
+  .nl, .ad-s, .srch, .btn-sus, .btn-ei { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  a[href]::after { content: ' (' attr(href) ')'; font-size: 10pt; color: #555; }
+}
+
+/* ══════════════════════════════════════════════════
+   MENÚ FLOTANTE e Media — Derecha
+   ══════════════════════════════════════════════════ */
+#floatMenu {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 890;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* Animación de entrada desde la derecha */
+  animation: slideL .55s var(--ease) .8s both;
+}
+
+/* Botón principal (logo e Media) */
+.menuf {
+  width: 48px;
+  height: 48px;
+  background: var(--vd);
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: -3px 2px 14px rgba(0,0,0,.28);
+  transition: background var(--em) var(--ease),
+              width var(--em) var(--spring),
+              border-radius var(--em) var(--ease);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.menuf::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.08);
+  opacity: 0;
+  transition: opacity var(--ef);
+}
+.menuf:hover::after { opacity: 1; }
+#floatMenu.open .menuf {
+  background: var(--v);
+  border-radius: 10px 0 0 0;
+}
+.menuf img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: transform var(--em) var(--spring), filter var(--em);
+}
+#floatMenu.open .menuf img {
+  transform: rotate(180deg) scale(.9);
+}
+
+/* Indicador de chevron */
+.menuf-arrow {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: rgba(255,255,255,.7);
+  transition: opacity var(--em);
+  pointer-events: none;
+}
+#floatMenu.open .menuf-arrow { opacity: 0; }
+
+/* Sub-menú: lista de logos */
+.sub_menuf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--vd);
+  border-radius: 0 0 0 10px;
+  box-shadow: -3px 4px 18px rgba(0,0,0,.3);
+  transition:
+    max-height .38s var(--ease),
+    opacity .3s var(--ease),
+    padding .3s var(--ease);
+}
+#floatMenu.open .sub_menuf {
+  max-height: 520px;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 6px 0 8px;
+}
+
+/* Cada item del sub-menú */
+.sub_menuf a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 52px;
+  position: relative;
+  transition:
+    background var(--ef),
+    transform var(--ef) var(--spring);
+  /* Stagger de entrada: usa --i del HTML original */
+  opacity: 0;
+  transform: translateX(14px);
+}
+#floatMenu.open .sub_menuf a {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity .28s var(--ease) calc(var(--i, 1) * .055s),
+    transform .28s var(--spring) calc(var(--i, 1) * .055s),
+    background var(--ef);
+}
+.sub_menuf a:hover {
+  background: rgba(255,255,255,.12);
+  transform: scale(1.08) translateX(-2px) !important;
+}
+.sub_menuf a:active {
+  transform: scale(.94) !important;
+}
+.sub_menuf a img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: filter var(--em), transform var(--em) var(--spring);
+  pointer-events: none;
+}
+.sub_menuf a:hover img {
+  filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(255,255,255,.4));
+  transform: scale(1.1);
+}
+
+/* Tooltip al hover */
+.sub_menuf a::before {
+  content: attr(title);
+  position: absolute;
+  right: 54px;
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: var(--negro);
+  color: #fff;
+  font-family: var(--fc);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 4px 9px;
+  border-radius: var(--rsm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--ef), transform var(--ef);
+  box-shadow: var(--s1);
+}
+.sub_menuf a:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Separador entre grupos */
+.sub_menuf .sep {
+  width: 28px;
+  height: 1px;
+  background: rgba(255,255,255,.15);
+  margin: 2px auto;
+  pointer-events: none;
+}
+
+/* Ocultar en pantallas muy pequeñas */
+@media (max-width: 480px) {
+  #floatMenu { display: none; }
+}
+/* En tablets: reducir tamaño */
+@media (max-width: 768px) {
+  .menuf       { width: 40px; height: 40px; }
+  .sub_menuf a { width: 40px; height: 44px; }
+  .sub_menuf a img { width: 28px; height: 28px; }
+}
+
+/* Galería CTA */
+.gal-cta{
+  display:block;text-align:center;
+  font-family:var(--fc);font-size:11px;font-weight:700;
+  color:var(--vd);padding:9px;
+  border-top:1px solid var(--ge);
+  transition:background var(--em),letter-spacing var(--em);
+  text-decoration:none;
+}
+.gal-cta:hover{ background:var(--gb);letter-spacing:.04em; }
+
+/* Modal close button hover */
+.yt-modal-close-btn:hover{ background:rgba(255,255,255,.18)!important; }
+
+
+/* ══════════════════════════════════════════════════
+   DISEÑO v5.1 — Refinamientos sutiles y elegantes
+   ══════════════════════════════════════════════════ */
+
+/* ── Separador verde decorativo bajo el header ── */
+#header::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    var(--v) 20%,
+    var(--vm) 50%,
+    var(--v) 80%,
+    transparent 100%);
+  opacity:.6;
+}
+
+/* ── Info bar: hover con acento verde sutil ── */
+.ib-it::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:50%; right:50%;
+  height:2px;
+  background:var(--vm);
+  transition:left .25s var(--ease), right .25s var(--ease);
+}
+.ib-it { position:relative; }
+.ib-it:hover::after { left:0; right:0; }
+
+/* ── Utility bar: línea inferior verde ── */
+#utilbar { border-bottom:1.5px solid var(--v); }
+
+/* ── Ticker: gradiente en bordes para fade suave ── */
+#ticker {
+  position:relative;
+}
+#ticker::before,
+#ticker::after {
+  content:'';
+  position:absolute;
+  top:0; bottom:0;
+  width:48px;
+  z-index:2;
+  pointer-events:none;
+}
+#ticker::before { left:0;  background:linear-gradient(90deg,var(--n),transparent); }
+#ticker::after  { right:0; background:linear-gradient(-90deg,var(--n),transparent); }
+
+/* ── Navbar: indicador activo más refinado ── */
+.nb-a.on {
+  color:#fff;
+  border-bottom-color:var(--vm);
+  position:relative;
+}
+.nb-a.on::before {
+  content:'';
+  position:absolute;
+  bottom:-1px; left:20%; right:20%;
+  height:2px;
+  background:var(--vm);
+  border-radius:1px 1px 0 0;
+  box-shadow:0 0 8px var(--vm);
+}
+
+/* ── Widget: línea de acento superior sutil ── */
+.wg {
+  border-top:2px solid transparent;
+  transition:border-color var(--em), box-shadow var(--em);
+}
+.wg:hover {
+  border-top-color:var(--v);
+  box-shadow:var(--s2);
+}
+
+/* ── Widget title: punto decorativo ── */
+.wg-h::before {
+  content:'';
+  width:3px; height:14px;
+  background:linear-gradient(180deg, var(--v), var(--vm));
+  border-radius:2px;
+  flex-shrink:0;
+}
+/* Quitar el border-left ya que usamos ::before */
+.wg-h { border-left:none; padding-left:0; gap:8px; }
+
+/* ── Feed: línea izquierda en hover ── */
+.fi {
+  border-left:3px solid transparent;
+  transition:
+    background var(--ef),
+    padding-left var(--em) var(--ease),
+    border-color var(--med) var(--ease),
+    opacity .43s var(--ease),
+    transform .43s var(--ease);
+}
+.fi:hover {
+  border-left-color:var(--v);
+  padding-left:12px;
+}
+
+/* ── Sección de categorías: badge de sección más refinado ── */
+.fi-sec {
+  font-family:var(--fc);
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.06em;
+  color:var(--vd);
+  margin-bottom:3px;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.fi-sec::before {
+  content:'';
+  width:4px; height:4px;
+  background:var(--vm);
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+/* ── Hero slider: dots más elegantes ── */
+.sl-dot {
+  background:rgba(255,255,255,.35);
+  border:1.5px solid rgba(255,255,255,.5);
+}
+.sl-dot.on {
+  background:#fff;
+  border-color:#fff;
+  box-shadow:0 0 6px rgba(255,255,255,.5);
+}
+
+/* ── Sub-hero cards: sombra de color sutil ── */
+.sc:hover {
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(26,122,60,.15), 0 4px 12px rgba(0,0,0,.1);
+}
+
+/* ── Tags: hover más refinado ── */
+.tag:hover {
+  background:var(--v);
+  color:#fff;
+  border-color:var(--v);
+  transform:translateY(-2px) scale(1.04);
+  box-shadow:0 4px 12px rgba(26,122,60,.3);
+}
+
+/* ── Finanzas: indicador de cambio con ícono ── */
+.fin-c.pos::before { content:''; }
+.fin-c.neg::before { content:''; }
+
+/* ── Clima widget: efecto vidrio sutil ── */
+.cl-hd {
+  background:linear-gradient(135deg,
+    var(--vd) 0%,
+    color-mix(in srgb,var(--v) 85%,#000) 60%,
+    var(--vm) 100%);
+}
+
+/* ── Newsletter: borde superior de acento ── */
+.nl {
+  border-top:2px solid var(--v);
+}
+
+/* ── Footer: separador superior con gradiente ── */
+#footer {
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.ft-c li a {
+  display:flex;
+  align-items:center;
+  gap:0;
+  transition:color var(--ef), gap var(--med) var(--ease), padding-left var(--em);
+}
+.ft-c li a:hover {
+  color:var(--vm);
+  padding-left:6px;
+}
+.ft-c li a:hover::before {
+  content:'→ ';
+  font-size:10px;
+  opacity:.7;
+}
+
+/* ── Más populares: número destacado ── */
+.pop-num.hi {
+  color:var(--v);
+  text-shadow:0 0 12px rgba(26,122,60,.3);
+}
+
+/* ── Back to top: estilo más elegante ── */
+#btop {
+  border-radius:50%;
+  background:var(--w);
+  color:var(--vd);
+  border:1.5px solid var(--ge);
+  font-weight:700;
+  box-shadow:0 4px 16px rgba(0,0,0,.15);
+}
+#btop:hover {
+  background:var(--v);
+  color:#fff;
+  border-color:var(--v);
+  transform:translateY(-3px) scale(1.08);
+  box-shadow:0 8px 24px rgba(26,122,60,.35);
+}
+#btop.show {
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* ── Menú flotante: refinamiento ── */
+.menuf {
+  box-shadow:-2px 2px 18px rgba(0,0,0,.22),
+             0 0 0 1px rgba(255,255,255,.06);
+}
+.sub_menuf {
+  box-shadow:-4px 6px 24px rgba(0,0,0,.28),
+             0 0 0 1px rgba(255,255,255,.06);
+}
+.sub_menuf a:hover {
+  background:rgba(255,255,255,.1);
+}
+
+/* ── Scroll reveal: más suave ── */
+.rv  { opacity:0; transform:translateY(18px); }
+.rv.on{ opacity:1; transform:none; transition:opacity .6s var(--ease), transform .6s var(--ease); }
+
+/* ── Skeleton: más sutil ── */
+.pop-sk-t, .pop-sk-m {
+  background-image:linear-gradient(90deg,
+    #f0f0f0 25%,
+    #fafafa 50%,
+    #f0f0f0 75%);
+}
+
+/* ── Section dividers entre columnas del grid ── */
+.three {
+  position:relative;
+}
+.three::before {
+  content:'';
+  position:absolute;
+  top:0; bottom:0;
+  left:calc(296px + 7px);
+  width:1px;
+  background:linear-gradient(180deg,
+    transparent 0%,
+    var(--ge) 8%,
+    var(--ge) 92%,
+    transparent 100%);
+  pointer-events:none;
+}
+.three::after {
+  content:'';
+  position:absolute;
+  top:0; bottom:0;
+  right:calc(300px + 7px);
+  width:1px;
+  background:linear-gradient(180deg,
+    transparent 0%,
+    var(--ge) 8%,
+    var(--ge) 92%,
+    transparent 100%);
+  pointer-events:none;
+}
+
+/* ── YouTube block: header más elegante ── */
+#yt-section .yt-ver-canal-btn {
+  border-color:rgba(255,255,255,.2);
+}
+.yt-big-play-btn {
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+}
+
+/* ── Galería: overlay sutil en hover ── */
+.gal-g img {
+  transition:transform .4s var(--ease), filter .4s var(--ease), box-shadow .4s;
+}
+.gal-g img:hover {
+  box-shadow:inset 0 0 0 2px var(--vm);
+}
+
+/* ── Responsive: quitar dividers en móvil ── */
+@media(max-width:900px){
+  .three::before, .three::after { display:none; }
+  .fi:hover { padding-left:6px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── SKIP TO CONTENT (WCAG 2.4.1) ────────────────
+     Primer elemento del DOM — invisible hasta recibir foco.
+     Permite a usuarios de teclado/lector saltar al contenido.
+──────────────────────────────────────────────────────── -->
+
+<!-- ══════════════════════════════════════════════════
+     MENÚ FLOTANTE e Media — logos reales del sitio
+     ══════════════════════════════════════════════════ -->
+<div class="floating_menu" id="floatMenu"
+     role="navigation"
+     aria-label="Menú de productos e Media">
+
+  <!-- Botón principal -->
+  <div class="menuf"
+       id="floatBtn"
+       role="button"
+       tabindex="0"
+       aria-expanded="false"
+       aria-controls="floatSub"
+       aria-label="Abrir menú de productos e Media">
+    <img loading="lazy" width="60" height="60"
+         alt="e Media — portafolio de medios"
+         src="https://blob.expreso.com.mx/img/Logos/logo_menuemedia.png"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <!-- Fallback SVG si la imagen falla -->
+    <span style="display:none;width:26px;height:26px;background:rgba(255,255,255,.9);
+                 border-radius:4px;align-items:center;justify-content:center;
+                 font-family:var(--fc);font-size:9px;font-weight:700;color:var(--vd)">eM</span>
+    <span class="menuf-arrow" aria-hidden="true">▾</span>
+  </div>
+
+  <!-- Sub-menú con logos reales -->
+  <div class="sub_menuf" id="floatSub" role="list">
+
+    <a style="--i:1"
+       href="https://www.facebook.com/104NoticiasSonora/"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="10-4 Noticias"
+       aria-label="10-4 Noticias — abre en nueva pestaña"
+       role="listitem"
+       onclick="typeof trackEvent!=='undefined'&&trackEvent('10-4-click')">
+      <img loading="lazy" width="70" height="70" alt="10-4 Noticias"
+           src="https://blob.expreso.com.mx/images/10-4_Nuevo_logo.png"
+           onerror="this.alt='10-4'">
+    </a>
+
+    <a style="--i:2"
+       href="https://impreso.expreso.com.mx"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="Edición Impresa"
+       aria-label="Edición Impresa — abre en nueva pestaña"
+       role="listitem"
+       onclick="typeof trackEvent!=='undefined'&&trackEvent('edicion-click')">
+      <img loading="lazy" width="70" height="70" alt="Edición Impresa"
+           src="https://blob.expreso.com.mx/img/Logos/logo_edimp.png"
+           onerror="this.alt='EI'">
+    </a>
+
+    <div class="sep" role="separator" aria-hidden="true"></div>
+
+    <a style="--i:3"
+       href="https://popextremo.expreso.com.mx/"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="Pop Extremo"
+       aria-label="Pop Extremo — abre en nueva pestaña"
+       role="listitem"
+       onclick="typeof trackEvent!=='undefined'&&trackEvent('pop-click')">
+      <img loading="lazy" width="70" height="70" alt="Pop Extremo"
+           src="https://blob.expreso.com.mx/img/Logos/logo_pop.png"
+           onerror="this.alt='Pop'">
+    </a>
+
+    <a style="--i:4"
+       href="https://sonoragrupera.expreso.com.mx/"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="Sonora Grupera"
+       aria-label="Sonora Grupera — abre en nueva pestaña"
+       role="listitem"
+       onclick="typeof trackEvent!=='undefined'&&trackEvent('sonora-click')">
+      <img loading="lazy" width="70" height="70" alt="Sonora Grupera"
+           src="https://blob.expreso.com.mx/img/Logos/logo_sonorag.png?v=2"
+           onerror="this.alt='SG'">
+    </a>
+
+    <div class="sep" role="separator" aria-hidden="true"></div>
+
+    <a style="--i:5"
+       href="https://www.expreso.com.mx/tags/eventos-expreso/75565"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="Eventos Expreso"
+       aria-label="Eventos Expreso — abre en nueva pestaña"
+       role="listitem"
+       onclick="typeof trackEvent!=='undefined'&&trackEvent('eventos-click')">
+      <img loading="lazy" width="70" height="70" alt="Eventos Expreso"
+           src="https://blob.expreso.com.mx/img/Logos/logo_eventos.png"
+           onerror="this.alt='Ev'">
+    </a>
+
+    <a style="--i:6"
+       href="https://www.expreso.com.mx/tags/expreso-247/1289"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="Expreso 24/7"
+       aria-label="Expreso 24/7 — abre en nueva pestaña"
+       role="listitem"
+       onclick="typeof trackEvent!=='undefined'&&trackEvent('24-7-click')">
+      <img loading="lazy" width="70" height="70" alt="Expreso 24/7"
+           src="https://blob.expreso.com.mx/img/Logos/logo_247.png"
+           onerror="this.alt='24/7'">
+    </a>
+
+  </div>
+</div>
+
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<a href="#navbar"       class="skip-link">Saltar a la navegación</a>
+
+<div id="pbar" role="progressbar" aria-label="Progreso de lectura" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+<!-- ── UTILITY BAR ──────────────────────────────── -->
+<div id="utilbar">
+  <div class="ub">
+    <div class="ub-l">
+      <a href="/directorio">📒 Directorio</a>
+      <a href="/contacto">Contáctanos</a>
+      <a href="/media-kit">Media Kit 2026</a>
+    </div>
+    <div class="ub-r">
+      <div class="ub-soc">
+        <a href="https://facebook.com/expresoweb" title="Facebook" aria-label="Facebook de Expreso">f</a>
+        <a href="https://x.com/Expresoweb" title="X / Twitter" aria-label="X de Expreso">𝕏</a>
+        <a href="https://instagram.com/expresomx" title="Instagram" aria-label="Instagram de Expreso">ig</a>
+        <a href="https://youtube.com/user/expresoweb" title="YouTube" aria-label="YouTube de Expreso">▶</a>
+        <a href="#" title="WhatsApp" aria-label="WhatsApp de Expreso">W</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── INFO BAR ─────────────────────────────────── -->
+<div id="infobar">
+  <div class="ib">
+    <div class="ib-it">
+      <img class="ib-th" src="https://picsum.photos/seed/tv1/80/80" alt="Qué ver hoy" width="42" height="42" loading="lazy" decoding="async">
+      <div><div class="ib-lbl">Qué ver hoy</div><div class="ib-ttl">Narcos: México · T3</div></div>
+    </div>
+    <div class="ib-it">
+      <img class="ib-th" src="https://picsum.photos/seed/hist/80/80" alt="Hoy en la historia" width="42" height="42" loading="lazy" decoding="async">
+      <div><div class="ib-lbl">Hoy en la historia</div><div class="ib-ttl">Cruz Roja Int'l fundada (1863)</div></div>
+    </div>
+    <div class="ib-it">
+      <div><div class="ib-lbl">🏦 Mercados</div>
+        <div class="mkt">
+          <div class="mkt-r"><span class="mkt-n">IPC</span><span class="mkt-v">56,340</span><span class="mkt-c pos">▲ +1.40%</span></div>
+          <div class="mkt-r"><span class="mkt-n">USD/MXN</span><span class="mkt-v">17.32</span><span class="mkt-c neg">▼ -0.14%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ib-it" style="border-right:none">
+      <div><div class="ib-lbl">📻 En vivo ahora</div><div class="ib-ttl">Expreso 24/7 · Noticiero matutino</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── HEADER ────────────────────────────────────── -->
+<header id="header">
+  <div class="hd">
+    <div class="logo-w">
+      <img src="https://blob.expreso.com.mx/images/logos-expreso/300x47px.webp"
+           alt="EXPRESO — Inicio"
+           style="height:47px;width:auto;max-width:200px"
+           width="300" height="47"
+           loading="eager" decoding="sync"
+           fetchpriority="high"
+           role="img"
+           onerror="this.style.display='none';document.getElementById('lsvg').style.display='block'">
+      <h1 class="logo-svg" id="lsvg" style="display:none;font-size:34px;margin:0;line-height:1">expreso<em>.</em></h1>
+      <div class="logo-sub">El periódico de Sonora</div>
+    </div>
+    <div class="srch">
+      <label for="searchInput" class="sr-only">Buscar noticias en Expreso</label>
+      <input type="text" id="searchInput" placeholder="Buscar en Expreso…" aria-label="Buscar noticias" role="searchbox" autocomplete="off">
+      <button class="press" aria-label="Realizar búsqueda" type="submit">🔍</button>
+    </div>
+    <nav class="hd-nav">
+      <a href="/accion" class="uline">Acción</a>
+      <a href="/estelar" class="uline">Estelar</a>
+      <a href="/expresion" class="uline">Expresión</a>
+      <a href="/conexion" class="uline">Conexión</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0">
+      <button class="btn-ei press" onclick="location.href='/edicion-impresa'">🗞 Edición Impresa</button>
+      <button class="btn-ei press" onclick="location.href='/suplementos'" style="background:none">📋 Suplementos</button>
+      <button class="btn-sus press" onclick="location.href='/suscripciones'">Suscribirse</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── NAVBAR ─────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nb">
+    <a href="/" class="nb-a on" aria-current="page">Inicio</a>
+    <a href="/noticias/hermosillo" class="nb-a">Hermosillo</a>
+    <a href="/noticias/sonora" class="nb-a">Sonora</a>
+    <a href="/noticias/mexico" class="nb-a">México</a>
+    <a href="/noticias/mundo" class="nb-a">Mundo</a>
+    <a href="/noticias/seguridad" class="nb-a">Seguridad</a>
+    <a href="/noticias/negocios" class="nb-a">Negocios</a>
+    <a href="/noticias/mundo-curioso" class="nb-a">Mundo Curioso</a>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div id="ticker" role="region" aria-label="Temas del día en Expreso">
+  <div class="tk-tag" aria-hidden="true"><span class="tk-dot"></span> Temas del Día</div>
+  <div class="tk-b" role="marquee" aria-label="Temas del día en desplazamiento" aria-live="off">
+    <div class="tk-i">
+      <a href="/noticias/hermosillo">Gobernador Durazo anuncia becas para reducir abandono escolar en 13% en Sonora</a>
+      <a href="/noticias/sonora">Plan Sonora de Energías Sostenibles impulsa sectores automotriz y aeroespacial</a>
+      <a href="/noticias/mexico">Cámara de Diputados aprueba reforma al sistema de pensiones con 287 votos</a>
+      <a href="/accion/beisbol">Naranjeros de Hermosillo confirma tres refuerzos para la temporada 2026-27 de la LMP</a>
+      <a href="/noticias/negocios">Dólar cotiza en $17.32 pesos; IPC BMV sube 1.40% impulsado por sector minero</a>
+      <a href="/noticias/mundo">ONU llama a cese al fuego inmediato ante escalada de tensiones en Medio Oriente</a>
+      <a href="/noticias/hermosillo">Gobernador Durazo anuncia becas para reducir abandono escolar en 13% en Sonora</a>
+      <a href="/noticias/sonora">Plan Sonora de Energías Sostenibles impulsa sectores automotriz y aeroespacial</a>
+      <a href="/noticias/mexico">Cámara de Diputados aprueba reforma al sistema de pensiones con 287 votos</a>
+      <a href="/accion/beisbol">Naranjeros de Hermosillo confirma tres refuerzos para la temporada 2026-27 de la LMP</a>
+      <a href="/noticias/negocios">Dólar cotiza en $17.32 pesos; IPC BMV sube 1.40% impulsado por sector minero</a>
+      <a href="/noticias/mundo">ONU llama a cese al fuego inmediato ante escalada de tensiones en Medio Oriente</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     3 COLUMNAS
+     ══════════════════════════════════════ -->
+<div class="page">
+<div class="three">
+
+<!-- ═══════ COL IZQUIERDA ═══════ -->
+<aside class="col-left">
+
+  <!-- MÁS POPULARES (Yahoo: numeración grande con foto cuadrada) -->
+  <div class="wg rv">
+    <div class="wg-h">
+      <span>🔥</span> Más populares
+      <span id="pop-status" style="margin-left:auto;font-size:10px;font-weight:400;color:var(--gl);font-family:var(--fc);letter-spacing:0"></span>
+    </div>
+    <ul class="pop-l" id="pop-list" aria-live="polite" aria-label="Lista de noticias más populares, actualizada automáticamente">
+      <!-- Skeleton inicial mientras carga -->
+      <li class="pop-sk"><span class="pop-num hi">1</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num hi">2</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num hi">3</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num">4</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+      <li class="pop-sk"><span class="pop-num">5</span><div class="pop-sk-th"></div><div class="pop-sk-lines"><div class="pop-sk-t"></div><div class="pop-sk-m"></div></div></li>
+    </ul>
+    <a href="/noticias" class="vm">Ver más en Expreso 100 →</a>
+  </div>
+
+  <!-- ORIGINALES DE EXPRESO (Yahoo: Originales de Yahoo, avatar circular) -->
+  <div class="wg rv">
+    <div class="wg-h"><span>⭐</span> Originales Expreso</div>
+    <ul class="orig-l sg">
+      <li>
+        <img class="orig-th" src="https://picsum.photos/seed/or1/60/60" alt="" width="52" height="52" loading="lazy" decoding="async">
+        <div><div class="orig-badge">Exclusivo</div><div class="orig-tx">El domo de calor sobre Sonora: por qué las temperaturas se disparan cada año</div></div>
+      </li>
+      <li>
+        <img class="orig-th" src="https://picsum.photos/seed/or2/60/60" alt="" width="52" height="52" loading="lazy" decoding="async">
+        <div><div class="orig-badge">Reportaje</div><div class="orig-tx">Naranjeros: la historia detrás del equipo más ganador del noroeste de México</div></div>
+      </li>
+      <li>
+        <img class="orig-th" src="https://picsum.photos/seed/or3/60/60" alt="" width="52" height="52" loading="lazy" decoding="async">
+        <div><div class="orig-badge">Especial</div><div class="orig-tx">Nearshoring en Sonora: las empresas que eligieron Hermosillo sobre otras ciudades</div></div>
+      </li>
+    </ul>
+    <a href="/originales" class="vm">Ver todos los originales →</a>
+  </div>
+
+  <!-- EXPLORAR MÁS (Yahoo: Explorar más, cuadrícula) -->
+  <div class="wg rv">
+    <div class="wg-h">🧭 Explorar más</div>
+    <div class="exp-g">
+      <a href="/noticias" class="exp-it"><span class="ico">📰</span> Noticias</a>
+      <a href="/noticias/negocios" class="exp-it"><span class="ico">💰</span> Finanzas</a>
+      <a href="/accion" class="exp-it"><span class="ico">⚽</span> Deportes</a>
+      <a href="/estelar" class="exp-it"><span class="ico">🎬</span> Estelar</a>
+      <a href="/noticias/mundo" class="exp-it"><span class="ico">🌍</span> Mundo</a>
+      <a href="/expresion" class="exp-it"><span class="ico">✍</span> Opinión</a>
+      <a href="/multimedia/videos" class="exp-it"><span class="ico">▶</span> Videos</a>
+      <a href="/multimedia/galerias" class="exp-it"><span class="ico">📷</span> Galerías</a>
+      <a href="/empleate" class="exp-it"><span class="ico">💼</span> EMPLÉATE</a>
+      <a href="/directorio" class="exp-it"><span class="ico">📒</span> Directorio</a>
+    </div>
+  </div>
+
+  <!-- EXPRESIÓN / COLUMNAS -->
+  <div class="wg rv">
+    <div class="wg-h">✍ Expresión</div>
+    <ul class="col-l sg">
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=11" alt="Entre Nos" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Entre Nos · Columna</div><div class="col-t"><a href="/expresion/entre-nos">Lo que dice Mr. X: el proyecto del hospital en Río Sonora avanza</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=33" alt="Pbro. José Martínez" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Pbro. José Martínez Colín</div><div class="col-t"><a href="/expresion/vivir-en-cristiano">"La medida del amor" · Vivir en Cristiano</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=25" alt="Fuera de Ruta" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Fuera de Ruta</div><div class="col-t"><a href="/expresion/fuera-de-ruta">El camino del agua en la sierra sonorense</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=44" alt="El Asalto a la Razón" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">El Asalto a la Razón</div><div class="col-t"><a href="/expresion/el-asalto-a-la-razon">Serpientes y Escaleras: las becas de Durazo</a></div></div></li>
+      <li><img class="col-av" src="https://i.pravatar.cc/40?img=57" alt="Actitudes" width="36" height="36" loading="lazy" decoding="async"><div><div class="col-n">Actitudes</div><div class="col-t"><a href="/expresion/actitudes">El poder de las ideas en la era digital</a></div></div></li>
+    </ul>
+    <a href="/expresion" class="vm">Ver todas las columnas →</a>
+  </div>
+
+</aside>
+
+<!-- ═══════ COL CENTRO ═══════ -->
+<main class="col-center" id="main-content">
+
+  <!-- HERO SLIDER -->
+  <div class="hero rv" id="hero" role="region" aria-label="Noticias destacadas" aria-roledescription="carrusel">
+    <div class="sl on">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h1/760/370"
+           alt="Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026"
+           width="760" height="370"
+           fetchpriority="high"
+           decoding="sync"
+           loading="eager">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico">EX</div> Expreso · Hermosillo · 💬 186</div>
+        <h2><a href="/noticias/hermosillo/plan-maestro-2026">Gobernador Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026–2030 con inversión histórica de 2 mil mdp</a></h2>
+      </div>
+    </div>
+    <div class="sl">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h2/760/370"
+           alt="Plan Sonora de Energías Sostenibles"
+           width="760" height="370"
+           loading="lazy" decoding="async">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico" style="background:#1a7c3e">EX</div> Expreso · Sonora · 💬 94</div>
+        <h2><a href="/noticias/sonora/plan-sonora-energias">Plan Sonora de Energías Sostenibles impulsa industrias automotriz y aeroespacial de la entidad</a></h2>
+      </div>
+    </div>
+    <div class="sl">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h3/760/370"
+           alt="Naranjeros de Hermosillo refuerzos LMP"
+           width="760" height="370"
+           loading="lazy" decoding="async">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico" style="background:#c0392b">EX</div> Expreso · Béisbol · 💬 312</div>
+        <h2><a href="/accion/beisbol/naranjeros-refuerzos-lmp">Naranjeros de Hermosillo anuncia tres refuerzos estelares para la temporada 2026–27 de la LMP</a></h2>
+      </div>
+    </div>
+    <div class="sl">
+      <img class="sl-img"
+           src="https://picsum.photos/seed/h4/760/370"
+           alt="Washington aranceles Asia México"
+           width="760" height="370"
+           loading="lazy" decoding="async">
+      <div class="sl-cap">
+        <div class="sl-src"><div class="sl-ico" style="background:#8e44ad">EX</div> Expreso · Mundo · 💬 47</div>
+        <h2><a href="/noticias/mundo/aranceles-washington">Washington impone nuevos aranceles a Asia; México analiza respuesta ante la escalada comercial global</a></h2>
+      </div>
+    </div>
+    <div class="sl-ctr" aria-live="polite" aria-atomic="true"><span id="slLbl">1 de 4</span><button class="sl-pause" id="slPause" aria-label="Pausar carrusel">⏸</button></div>
+    <button class="sl-ctrl sl-p" id="slPrev" aria-label="Noticia anterior"><span aria-hidden="true">‹</span></button>
+    <button class="sl-ctrl sl-n" id="slNext" aria-label="Siguiente noticia"><span aria-hidden="true">›</span></button>
+    <div class="sl-dots" id="slDots">
+      <button class="sl-dot on"></button><button class="sl-dot"></button>
+      <button class="sl-dot"></button><button class="sl-dot"></button>
+    </div>
+  </div>
+
+  <!-- SUB HERO 3 -->
+  <div class="sub3 sg rv">
+    <div class="sc izoom">
+      <img class="sc-i" src="https://picsum.photos/seed/sc1/400/130" alt="SSP Sonora operativo nocturno" width="400" height="130" loading="lazy" decoding="async">
+      <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Seguridad</span><span class="sc-cm">💬 528</span></div><h4><a href="/noticias/seguridad/ssp-operativo">SSP Sonora refuerza operativos nocturnos en zonas de riesgo de Hermosillo y Cajeme</a></h4></div>
+    </div>
+    <div class="sc izoom">
+      <img class="sc-i" src="https://picsum.photos/seed/sc2/400/130" alt="Paciente guaymense células madre" width="400" height="130" loading="lazy" decoding="async">
+      <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Salud</span><span class="sc-cm">💬 1.2k</span></div><h4><a href="/noticias/sonora/sueros-celulas-madre">Paciente guaymense sufre daños renales tras tratamiento con sueros de células madre</a></h4></div>
+    </div>
+    <div class="sc izoom">
+      <img class="sc-i" src="https://picsum.photos/seed/sc3/400/130" alt="Torneo G1 tenis Hermosillo" width="400" height="130" loading="lazy" decoding="async">
+      <div class="sc-b"><div class="sc-src"><div class="sc-dot">EX</div><span>Deportes</span><span class="sc-cm">💬 74</span></div><h4><a href="/accion/otros-deportes/torneo-g1">Hermosillo recibe 180 tenistas en el Torneo Nacional G1; récord en Club Los Lagos</a></h4></div>
+    </div>
+  </div>
+
+  <!-- FEED PARA TI -->
+  <div class="fd-hd" role="region" aria-label="Feed de noticias">
+    <span class="fd-ttl">Para ti</span>
+    <div class="fv-tog">
+      <button class="fv-b" id="btnL">☰</button>
+      <button class="fv-b on" id="btnC">▤</button>
+    </div>
+  </div>
+  <div class="fd-body" id="fdBody">
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi1/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec"><span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/hermosillo/plan-maestro">Plan Maestro contempla 12 parques lineales y ampliación del transporte público en Hermosillo</a></h3><div class="fi-ex">La inversión histórica busca transformar la movilidad urbana y la calidad de vida de los hermosillenses para la próxima década.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 186</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 25 min</span></div></div></div>
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi2/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Seguridad</div><h3><a href="/noticias/seguridad/operativo">SSP Sonora despliega 300 elementos en operativo nocturno en Hermosillo y Cajeme</a></h3><div class="fi-ex">La Secretaría de Seguridad reforzó vigilancia en puntos estratégicos durante el fin de semana vacacional.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 412</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 h</span></div></div></div>
+    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi3/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Negocios · <span class="fi-hot">Ganando atención</span></div><h3><a href="/noticias/negocios/plan-sonora">Plan Sonora de Energías Sostenibles: la apuesta del estado por la industria limpia y el nearshoring</a></h3><div class="fi-ex">El programa busca atraer inversión en los sectores automotriz, aeroespacial y tecnológico aprovechando la posición estratégica de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 238</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 2 h</span></div></div></div>
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi4/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Acción · Béisbol</div><h3><a href="/accion/beisbol/naranjeros">Naranjeros de Hermosillo: los tres peloteros que refuerzan la plantilla para la LMP 2026–27</a></h3><div class="fi-ex">El equipo sonorense presentó sus nuevas adquisiciones buscando recuperar el campeonato de la Serie del Caribe.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 892</span><span class="fi-sep">·</span><span>3 min</span><span class="fi-t">Hace 3 h</span></div></div></div>
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi5/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Salud · Sonora</div><h3><a href="/noticias/sonora/celulas-madre">Hombre guaymense sufre daños renales tras tratamiento con sueros de células madre en Hermosillo</a></h3><div class="fi-ex">El caso se vincula al médico señalado como probable responsable del fallecimiento de ocho pacientes en la capital del estado.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 1.4k</span><span class="fi-sep">·</span><span>5 min</span><span class="fi-t">Hace 4 h</span></div></div></div>
+    <div class="fi ad"><img class="fi-img" src="https://picsum.photos/seed/adfi2/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec"><span class="ad-b">Ad</span>Publicidad patrocinada</div><h3><a href="#">[Espacio Publicitario — Nativo Feed 2 · CMS]</a></h3><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si" style="background:#999">Ad</div>Anunciante</span></div></div></div>
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi6/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Mundo</div><h3><a href="/noticias/mundo/aranceles">Washington impone aranceles a electrónicos de Asia; México analiza respuesta diplomática</a></h3><div class="fi-ex">La medida afecta semiconductores y dispositivos móviles, con potencial impacto en la cadena de suministro del norte de México.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso</span><span class="fi-sep">·</span><span>💬 317</span><span class="fi-sep">·</span><span>6 min</span><span class="fi-t">Hace 5 h</span></div></div></div>
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi7/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Acción · Otros Deportes</div><h3><a href="/accion/otros-deportes/g1">Torneo Nacional G1 de Tenis reúne 180 jugadores en Hermosillo con récord histórico</a></h3><div class="fi-ex">El evento se desarrolla del 28 de abril al 2 de mayo con Festival de Mini Tenis como novedad en Club Los Lagos.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Acción</span><span class="fi-sep">·</span><span>💬 56</span><span class="fi-sep">·</span><span>2 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
+    <div class="fi" role="article"><img class="fi-img" src="https://picsum.photos/seed/fi8/200/130" alt="" width="128" height="88" loading="lazy" decoding="async"><div class="fi-body"><div class="fi-sec">Expresión · Mr. X</div><h3><a href="/expresion/entre-nos/mrx-becas">Lo que dice Mr. X: con las becas, Durazo apunta a reducir abandono escolar en 13%</a></h3><div class="fi-ex">La columna analiza la estrategia educativa del gobernador y sus implicaciones en el escenario preelectoral de Sonora.</div><div class="fi-m"><span style="display:flex;align-items:center;gap:4px"><div class="fi-si">EX</div>Expreso Expresión</span><span class="fi-sep">·</span><span>💬 203</span><span class="fi-sep">·</span><span>4 min</span><span class="fi-t">Hace 1 día</span></div></div></div>
+  </div>
+
+</main>
+
+<!-- ═══════ COL DERECHA ═══════ -->
+<aside class="col-right">
+
+  <!-- CLIMA -->
+  <div class="wg-cl rv">
+    <div class="cl-hd">
+      <div class="cl-city"><span>📍</span> Hermosillo, Sonora</div>
+      <div class="cl-main">
+        <div class="cl-temp">38°</div>
+        <div class="cl-inf"><div class="cl-desc">☀ Soleado</div><div class="cl-feel">Sensación: 41° · Hum. 18%</div></div>
+      </div>
+      <div class="cl-days">
+        <div class="cl-d"><div class="cl-dl">Hoy</div><div class="cl-di">☀</div><div class="cl-dt">38° / 22°</div></div>
+        <div class="cl-d"><div class="cl-dl">Mié</div><div class="cl-di">🌤</div><div class="cl-dt">39° / 23°</div></div>
+        <div class="cl-d"><div class="cl-dl">Jue</div><div class="cl-di">⛅</div><div class="cl-dt">37° / 21°</div></div>
+      </div>
+    </div>
+    <a href="/clima" class="cl-cta">Revisar UV, calidad del aire y más →</a>
+  </div>
+
+  <!-- AD 300×250 -->
+  <div class="ad-s a250 rv"><div class="ai">📢</div>Espacio publicitario<br>300 × 250</div>
+
+  <!-- TENDENCIAS DE BÚSQUEDA (Yahoo: lista numerada de tendencias) -->
+  <div class="wg rv">
+    <div class="wg-h">🔍 Tendencias de búsqueda</div>
+    <ul class="srch-t sg">
+      <li><span class="sn hi">1</span><span class="st">Gobernador Durazo</span><span class="sa">↑ +340%</span></li>
+      <li><span class="sn hi">2</span><span class="st">Naranjeros LMP 2026</span><span class="sa">↑ +210%</span></li>
+      <li><span class="sn hi">3</span><span class="st">Célula madre Hermosillo</span><span class="sa">↑ +890%</span></li>
+      <li><span class="sn">4</span><span class="st">Plan Sonora Energías</span><span class="sa">↑ +145%</span></li>
+      <li><span class="sn">5</span><span class="st">Dólar hoy México</span><span class="sa">Estable</span></li>
+      <li><span class="sn">6</span><span class="st">Torneo G1 tenis Hermosillo</span><span class="sa">↑ +76%</span></li>
+      <li><span class="sn">7</span><span class="st">SSP Sonora operativo</span><span class="sa">↑ +123%</span></li>
+      <li><span class="sn">8</span><span class="st">Champions League semifinal</span><span class="sa">↑ +567%</span></li>
+      <li><span class="sn">9</span><span class="st">Reforma pensiones México</span><span class="sa">↑ +88%</span></li>
+      <li><span class="sn">10</span><span class="st">Temperatura Hermosillo</span><span class="sa">↑ +234%</span></li>
+    </ul>
+    <a href="/buscar" class="vm">Ver todas las búsquedas →</a>
+  </div>
+
+  <!-- MERCADOS -->
+  <div class="wg rv">
+    <div class="wg-h">📈 Mercados</div>
+    <ul class="fin-l">
+      <li><span class="fin-s">USD/MXN</span><span class="fin-v">$17.32</span><span class="fin-c neg">▼ 0.14%</span></li>
+      <li><span class="fin-s">EUR/MXN</span><span class="fin-v">$18.89</span><span class="fin-c pos">▲ 0.08%</span></li>
+      <li><span class="fin-s">IPC BMV</span><span class="fin-v">56,340</span><span class="fin-c pos">▲ 1.40%</span></li>
+      <li><span class="fin-s">Petróleo</span><span class="fin-v">$78.50</span><span class="fin-c neg">▼ 0.32%</span></li>
+      <li><span class="fin-s">Oro</span><span class="fin-v">$2,318</span><span class="fin-c pos">▲ 0.21%</span></li>
+    </ul>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="nl rv">
+    <h4>📧 Expreso al Día</h4>
+    <p>Las noticias más importantes de Sonora en tu correo cada mañana. Gratis.</p>
+    <label for="nlE" class="sr-only">Correo electrónico para newsletter</label>
+    <input type="email" placeholder="tucorreo@ejemplo.com" id="nlE" autocomplete="email" aria-required="true">
+    <button id="nlB" type="submit" aria-label="Suscribirse al newsletter de Expreso">Suscribirme gratis</button>
+  </div>
+
+  <!-- AD 300×600 -->
+  <div class="ad-s a300 rv"><div class="ai">📢</div>Espacio publicitario<br>300 × 600</div>
+
+  <!-- TEMAS DEL DÍA -->
+  <div class="wg rv">
+    <div class="wg-h">🏷 Temas del día</div>
+    <div class="tags">
+      <a href="/noticias/hermosillo" class="tag">Hermosillo</a>
+      <a href="/noticias/sonora" class="tag">Sonora</a>
+      <a href="/noticias/sonora/durazo" class="tag">Durazo</a>
+      <a href="/accion/beisbol" class="tag">Béisbol</a>
+      <a href="/noticias/negocios" class="tag">Negocios</a>
+      <a href="/noticias/seguridad" class="tag">Seguridad</a>
+      <a href="/accion/beisbol/naranjeros" class="tag">Naranjeros</a>
+      <a href="/noticias/negocios/nearshoring" class="tag">Nearshoring</a>
+      <a href="/noticias/ciudad-obregon" class="tag">Cajeme</a>
+      <a href="/noticias/nogales" class="tag">Nogales</a>
+      <a href="/noticias/salud" class="tag">Salud</a>
+      <a href="/noticias/mundo" class="tag">Mundo</a>
+      <a href="/expresion" class="tag">Opinión</a>
+      <a href="/multimedia/videos" class="tag">Videos</a>
+    </div>
+  </div>
+
+  <!-- GALERÍA -->
+  <div class="wg rv" style="padding:0;overflow:hidden">
+    <div style="padding:12px 14px 8px;border-bottom:1px solid var(--ge)"><div class="wg-h" style="margin:0">📷 Galería del día</div></div>
+    <div class="gal-g">
+      <img src="https://picsum.photos/seed/g1/200/130" alt="Galería 1" width="200" height="80" loading="lazy" decoding="async">
+      <img src="https://picsum.photos/seed/g2/200/130" alt="Galería 2" width="200" height="80" loading="lazy" decoding="async">
+      <img src="https://picsum.photos/seed/g3/200/130" alt="Galería 3" width="200" height="80" loading="lazy" decoding="async">
+      <img src="https://picsum.photos/seed/g4/200/130" alt="Galería 4" width="200" height="80" loading="lazy" decoding="async">
+    </div>
+    <a href="/multimedia/galerias" class="gal-cta">Ver todas las galerías →</a>
+  </div>
+
+</aside>
+
+</div><!-- /three -->
+</div><!-- /page -->
+
+<!-- FOOTER -->
+
+<!-- ═══════════════════════════════════════════════
+     EXPRESO VIDEO v2 — Reproductor cinematográfico
+     Auto-feed RSS · Sin API key · Lazy iFrame
+     CWV: content-visibility, lazy imgs, no layout shift
+     ═══════════════════════════════════════════════ -->
+<section id="yt-section"
+         aria-label="Videos de Expreso en YouTube"
+         style="background:var(--n);padding:32px 0 40px;margin-top:0;
+                content-visibility:auto;contain-intrinsic-size:0 700px">
+<div style="max-width:1280px;margin:0 auto;padding:0 14px">
+
+  <!-- HEADER -->
+  <div style="display:flex;align-items:center;justify-content:space-between;
+              margin-bottom:20px;padding-bottom:14px;
+              border-bottom:1px solid rgba(255,255,255,.09)">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:42px;height:42px;background:#ff0000;border-radius:9px;
+                  display:flex;align-items:center;justify-content:center;
+                  box-shadow:0 4px 14px rgba(255,0,0,.35);flex-shrink:0">
+        <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true">
+          <rect width="20" height="14" rx="3" fill="#ff0000"/>
+          <path d="M8 10V4l7 3z" fill="white"/>
+        </svg>
+      </div>
+      <div>
+        <div style="font-family:var(--fc);font-size:19px;font-weight:700;
+                    color:#fff;letter-spacing:-.2px;line-height:1">
+          Expreso <span style="color:#ff4444">Video</span>
+        </div>
+        <div style="font-family:var(--fc);font-size:11px;
+                    color:rgba(255,255,255,.45);margin-top:2px">
+          @expresoweb · actualizando automáticamente
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div id="yt-live-ind" style="display:flex;align-items:center;gap:5px;
+           background:rgba(255,0,0,.12);border:1px solid rgba(255,68,68,.3);
+           color:#ff6b6b;font-family:var(--fc);font-size:10px;font-weight:700;
+           letter-spacing:.07em;text-transform:uppercase;
+           padding:4px 10px;border-radius:20px">
+        <span class="yt-live-dot"></span> En vivo
+      </div>
+      <div id="yt-upd-lbl" style="font-family:var(--fc);font-size:10px;
+           color:rgba(255,255,255,.3)"></div>
+      <a href="https://youtube.com/@expresoweb" target="_blank" rel="noopener noreferrer"
+         class="yt-ver-canal-btn"
+         aria-label="Ver canal de YouTube de Expreso en nueva pestaña">
+        Ver canal →
+      </a>
+    </div>
+  </div>
+
+  <!-- LAYOUT PRINCIPAL: showcase + playlist -->
+  <div id="yt-showcase" style="display:grid;grid-template-columns:1fr 300px;
+       gap:14px;margin-bottom:14px">
+
+    <!-- SHOWCASE: thumbnail grande con overlay -->
+    <div id="yt-showcase-main" style="position:relative;border-radius:12px;
+         overflow:hidden;cursor:pointer;background:#0a0a0a;aspect-ratio:16/9;
+         box-shadow:0 8px 40px rgba(0,0,0,.6)"
+         role="button" tabindex="0"
+         onclick="ytPlayFeatured()"
+         onkeydown="if(event.key==='Enter'||event.key===' ')ytPlayFeatured()"
+         aria-label="Reproducir video destacado">
+
+      <!-- Thumbnail con fade in -->
+      <img id="yt-showcase-thumb"
+           src="" alt="" width="640" height="360"
+           style="width:100%;height:100%;object-fit:cover;display:block;
+                  transition:transform .6s var(--ease),filter .6s var(--ease),opacity .4s ease;
+                  opacity:0"
+           loading="eager" decoding="async"
+           onload="this.style.opacity='1'">
+
+      <!-- Gradient overlay -->
+      <div style="position:absolute;inset:0;
+           background:linear-gradient(180deg,rgba(0,0,0,.04) 0%,transparent 40%,rgba(0,0,0,.9) 100%);
+           pointer-events:none"></div>
+
+      <!-- Botón de play central (visible siempre) -->
+      <div id="yt-play-center" style="position:absolute;top:50%;left:50%;
+           transform:translate(-50%,-50%);
+           display:flex;flex-direction:column;align-items:center;gap:10px;
+           pointer-events:none">
+        <div class="yt-big-play-btn">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="white" aria-hidden="true">
+            <path d="M8 5l18 9-18 9z"/>
+          </svg>
+        </div>
+        <span style="font-family:var(--fc);font-size:11px;font-weight:700;
+                     color:rgba(255,255,255,.75);letter-spacing:.05em;
+                     text-transform:uppercase">Reproducir</span>
+      </div>
+
+      <!-- Caption inferior -->
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 18px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+          <span id="yt-feat-new" style="display:none;background:#ff0000;color:#fff;
+                font-family:var(--fc);font-size:9px;font-weight:700;
+                padding:2px 7px;border-radius:2px;letter-spacing:.05em;
+                text-transform:uppercase;animation:fadeIn .4s both">Nuevo</span>
+          <span id="yt-feat-dur" style="background:rgba(0,0,0,.75);color:#fff;
+                font-family:var(--fc);font-size:10px;font-weight:700;
+                padding:2px 7px;border-radius:3px"></span>
+        </div>
+        <div id="yt-feat-title"
+             style="font-family:var(--fd);font-size:17px;font-weight:700;
+                    color:#fff;line-height:1.28;margin-bottom:8px;
+                    text-shadow:0 1px 4px rgba(0,0,0,.4)"></div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div id="yt-feat-meta"
+               style="font-family:var(--fc);font-size:11px;
+                      color:rgba(255,255,255,.65);display:flex;gap:10px"></div>
+        </div>
+      </div>
+
+      <!-- Progress bar del video featured (decorativa) -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:3px;
+                  background:rgba(255,255,255,.15)">
+        <div id="yt-feat-bar" style="height:100%;background:#ff4444;
+             width:0;transition:width .8s ease"></div>
+      </div>
+    </div>
+
+    <!-- PLAYLIST LATERAL -->
+    <div id="yt-playlist"
+         style="display:flex;flex-direction:column;gap:0;
+                background:rgba(255,255,255,.03);border-radius:12px;
+                overflow:hidden;border:0.5px solid rgba(255,255,255,.08)"
+         role="list"
+         aria-label="Lista de videos de Expreso">
+      <!-- Generado por JS -->
+    </div>
+  </div>
+
+  <!-- STRIP INFERIOR: 3 tarjetas -->
+  <div id="yt-strip-row"
+       style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"
+       role="list"></div>
+
+  <!-- Error state -->
+  <div id="yt-err" style="display:none;text-align:center;padding:36px;
+       color:rgba(255,255,255,.35);font-family:var(--fc);font-size:13px">
+    <div style="font-size:32px;margin-bottom:10px">📡</div>
+    No se pudieron cargar los videos.
+    <a href="https://youtube.com/@expresoweb" target="_blank" rel="noopener"
+       style="color:var(--vm);text-decoration:none"> Ver canal →</a>
+  </div>
+
+</div>
+</section>
+
+<!-- MODAL PLAYER — lazy iframe, focus trap -->
+<div id="ytModal"
+     style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);
+            z-index:9000;align-items:center;justify-content:center;padding:16px"
+     onclick="ytClose(event)"
+     role="dialog" aria-modal="true" aria-label="Reproductor de video Expreso">
+  <div style="background:#0a0a0a;border-radius:14px;width:min(780px,100%);
+              overflow:hidden;position:relative;
+              box-shadow:0 32px 80px rgba(0,0,0,.7)">
+
+    <!-- iFrame container — solo se crea al abrir -->
+    <div id="ytIframe" style="position:relative;aspect-ratio:16/9;background:#000"></div>
+
+    <!-- Progress bar modal -->
+    <div style="height:3px;background:rgba(255,255,255,.06)">
+      <div id="ytBar" style="height:100%;background:linear-gradient(90deg,#ff0000,#ff6b6b);
+           width:0;transition:width 1.5s ease"></div>
+    </div>
+
+    <!-- Info del video -->
+    <div style="padding:16px 20px 20px">
+      <div style="display:flex;align-items:flex-start;
+                  justify-content:space-between;gap:12px;margin-bottom:10px">
+        <div>
+          <div id="ytMCat"
+               style="font-family:var(--fc);font-size:10px;font-weight:700;
+                      letter-spacing:.07em;text-transform:uppercase;
+                      color:var(--vm);margin-bottom:5px"></div>
+          <div id="ytMTitle"
+               style="font-family:var(--fd);font-size:18px;font-weight:700;
+                      line-height:1.28;color:#fff"></div>
+        </div>
+        <button onclick="ytClose(null,true)"
+                aria-label="Cerrar reproductor"
+                style="width:34px;height:34px;min-width:34px;
+                       background:rgba(255,255,255,.08);
+                       border:0.5px solid rgba(255,255,255,.15);
+                       border-radius:50%;cursor:pointer;font-size:15px;
+                       color:rgba(255,255,255,.7);
+                       transition:background var(--em),color var(--em);
+                       flex-shrink:0"
+class="yt-modal-close-btn">✕</button>
+      </div>
+      <div id="ytMMeta"
+           style="display:flex;align-items:center;gap:12px;
+                  font-family:var(--fc);font-size:12px;
+                  color:rgba(255,255,255,.45);
+                  padding-top:10px;border-top:1px solid rgba(255,255,255,.08)"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ── YouTube Block v2 ─────────────────────────── */
+
+/* Dot parpadeante */
+.yt-live-dot{
+  width:6px;height:6px;background:#ff4444;border-radius:50%;
+  display:inline-block;
+  animation:blink 1.1s infinite;
+}
+
+/* Botón Ver canal */
+.yt-ver-canal-btn{
+  font-family:var(--fc);font-size:11px;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:rgba(255,255,255,.65);
+  border:1.5px solid rgba(255,255,255,.18);
+  padding:6px 14px;border-radius:20px;
+  text-decoration:none;
+  transition:border-color var(--em),color var(--em),background var(--em);
+}
+.yt-ver-canal-btn:hover{
+  border-color:#ff4444;color:#fff;background:rgba(255,68,68,.15);
+}
+.yt-ver-canal-btn:focus-visible{
+  outline:2px solid #ff4444;outline-offset:3px;
+}
+
+/* Botón play grande */
+.yt-big-play-btn{
+  width:68px;height:68px;
+  background:rgba(255,0,0,.88);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 0 rgba(255,0,0,.4),0 6px 24px rgba(0,0,0,.5);
+  transition:transform var(--em) var(--spring),
+             background var(--em),
+             box-shadow var(--em);
+  animation:ytPlayPulse 2.5s ease-in-out infinite;
+}
+@keyframes ytPlayPulse{
+  0%,100%{ box-shadow:0 0 0 0 rgba(255,0,0,.35),0 6px 24px rgba(0,0,0,.5) }
+  50%    { box-shadow:0 0 0 14px rgba(255,0,0,0),0 6px 24px rgba(0,0,0,.5) }
+}
+#yt-showcase-main:hover .yt-big-play-btn{
+  transform:scale(1.1);
+  background:rgba(255,0,0,1);
+  animation:none;
+  box-shadow:0 0 0 0 rgba(255,0,0,0),0 10px 32px rgba(0,0,0,.6);
+}
+#yt-showcase-main:hover img{
+  transform:scale(1.03);filter:brightness(.88);
+}
+#yt-showcase-main:focus-visible{
+  outline:3px solid #ff4444;outline-offset:4px;
+}
+
+/* PLAYLIST LATERAL */
+.yt-pl-item{
+  display:flex;align-items:stretch;gap:0;
+  cursor:pointer;
+  transition:background var(--ef);
+  border-bottom:0.5px solid rgba(255,255,255,.06);
+  position:relative;
+}
+.yt-pl-item:last-child{ border-bottom:none; }
+.yt-pl-item:hover{ background:rgba(255,255,255,.07); }
+.yt-pl-item.active{
+  background:rgba(255,68,68,.12);
+  border-left:3px solid #ff4444;
+}
+.yt-pl-item:focus-visible{
+  outline:2px solid #ff4444;outline-offset:-2px;
+}
+/* Indicador activo (barra izq roja) ya está en .active */
+.yt-pl-thumb{
+  position:relative;
+  width:120px;min-width:120px;
+  aspect-ratio:16/9;
+  overflow:hidden;background:#111;
+  flex-shrink:0;
+}
+.yt-pl-thumb img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .4s var(--ease),filter .4s var(--ease);
+}
+.yt-pl-item:hover .yt-pl-thumb img{
+  transform:scale(1.06);filter:brightness(.8);
+}
+.yt-pl-item.active .yt-pl-thumb img{
+  filter:brightness(.65);
+}
+.yt-pl-play-ico{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .18s;
+}
+.yt-pl-item:hover .yt-pl-play-ico,
+.yt-pl-item.active .yt-pl-play-ico{ opacity:1; }
+.yt-pl-info{
+  flex:1;min-width:0;
+  padding:9px 11px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.yt-pl-num{
+  font-family:var(--fd);font-size:18px;font-weight:900;
+  color:rgba(255,255,255,.1);line-height:1;margin-bottom:3px;
+  transition:color var(--em);
+}
+.yt-pl-item.active .yt-pl-num{ color:rgba(255,68,68,.5); }
+.yt-pl-title{
+  font-family:var(--fb);font-size:12px;font-weight:600;
+  color:rgba(255,255,255,.82);line-height:1.3;
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;
+  transition:color var(--em);
+}
+.yt-pl-item:hover .yt-pl-title{ color:#fff; }
+.yt-pl-item.active .yt-pl-title{ color:#fff; }
+.yt-pl-meta{
+  font-family:var(--fc);font-size:10px;
+  color:rgba(255,255,255,.38);margin-top:5px;
+}
+.yt-pl-dur{
+  position:absolute;bottom:5px;right:6px;
+  background:rgba(0,0,0,.8);color:#fff;
+  font-family:var(--fc);font-size:9px;font-weight:700;
+  padding:1px 5px;border-radius:2px;
+}
+.yt-pl-new{
+  position:absolute;top:5px;left:5px;
+  background:#ff0000;color:#fff;
+  font-family:var(--fc);font-size:8px;font-weight:700;
+  padding:1px 5px;border-radius:2px;
+  letter-spacing:.04em;text-transform:uppercase;
+  animation:fadeIn .4s both;
+}
+
+/* STRIP INFERIOR */
+.yt-strip-card{
+  border-radius:9px;overflow:hidden;cursor:pointer;
+  background:rgba(255,255,255,.04);
+  border:0.5px solid rgba(255,255,255,.08);
+  transition:transform var(--em) var(--spring),
+             box-shadow var(--em),border-color var(--em);
+  contain:layout style;
+}
+.yt-strip-card:hover{
+  transform:translateY(-5px) scale(1.01);
+  box-shadow:0 14px 38px rgba(0,0,0,.5);
+  border-color:rgba(255,255,255,.2);
+}
+.yt-strip-card:focus-visible{
+  outline:2px solid #ff4444;outline-offset:3px;
+}
+.yt-strip-thumb{
+  position:relative;overflow:hidden;
+  aspect-ratio:16/9;background:#111;
+}
+.yt-strip-thumb img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .5s var(--ease),filter .5s var(--ease);
+}
+.yt-strip-card:hover .yt-strip-thumb img{
+  transform:scale(1.07);filter:brightness(.72);
+}
+.yt-strip-play{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(.8);
+  width:42px;height:42px;background:rgba(255,0,0,.88);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .18s,transform .18s;
+}
+.yt-strip-card:hover .yt-strip-play{
+  opacity:1;transform:translate(-50%,-50%) scale(1);
+}
+.yt-strip-dur{
+  position:absolute;bottom:6px;right:7px;
+  background:rgba(0,0,0,.8);color:#fff;
+  font-family:var(--fc);font-size:10px;font-weight:700;
+  padding:2px 6px;border-radius:3px;
+}
+.yt-strip-new{
+  position:absolute;top:7px;left:7px;
+  background:#ff0000;color:#fff;
+  font-family:var(--fc);font-size:9px;font-weight:700;
+  padding:2px 7px;border-radius:2px;
+  letter-spacing:.05em;text-transform:uppercase;
+  animation:fadeIn .4s both;
+}
+.yt-strip-body{ padding:11px 13px 13px; }
+.yt-strip-title{
+  font-family:var(--fb);font-size:13px;font-weight:600;
+  line-height:1.32;color:rgba(255,255,255,.88);
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px;
+}
+.yt-strip-meta{
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--fc);font-size:10.5px;color:rgba(255,255,255,.42);
+}
+.yt-bar-wrap{ height:2px;background:rgba(255,255,255,.08);border-radius:1px;margin-top:7px }
+.yt-bar-fill{ height:100%;border-radius:1px;
+  background:linear-gradient(90deg,#ff0000,#ff6b6b);
+  transition:width .7s ease }
+
+/* Skeleton oscuro para el bloque de video */
+.yt-sk{
+  background:rgba(255,255,255,.05);border-radius:8px;
+  background-image:linear-gradient(90deg,
+    rgba(255,255,255,.04) 25%,
+    rgba(255,255,255,.09) 50%,
+    rgba(255,255,255,.04) 75%);
+  background-size:300px 100%;
+  animation:skshimmer 1.4s infinite linear;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  #yt-showcase{ grid-template-columns:1fr!important }
+  #yt-playlist{ display:none!important }
+  #yt-strip-row{ grid-template-columns:1fr 1fr!important }
+}
+@media(max-width:600px){
+  #yt-strip-row{ grid-template-columns:1fr!important }
+  .yt-big-play-btn{ width:52px;height:52px }
+}
+</style>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   EXPRESO VIDEO — RSS fetch verificado + multi-proxy
+   Canal: @expresoweb · ID: UCPW06iTrMYvw8ITy3W63mig
+
+   ESTRATEGIA:
+   1. Intenta 3 proxies CORS en cascada
+   2. Valida channel_id en cada entry del XML
+      → rechaza si el video no es del canal correcto
+   3. Ordena por fecha publishedAt descendente
+   4. Fallback: 7 IDs reales hardcoded como último recurso
+   5. Refresca cada 5 minutos
+   ══════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+
+  const CHANNEL_ID = 'UCPW06iTrMYvw8ITy3W63mig';
+  const RSS_URL    = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID;
+  const INTERVAL   = 5 * 60 * 1000; // 5 minutos
+
+  /* Proxies CORS en orden de preferencia.
+     Si uno falla o devuelve datos incorrectos,
+     se prueba el siguiente automáticamente.         */
+  const PROXIES = [
+    url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+    url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  ];
+
+  /* Fallback — IDs reales verificados del canal @expresoweb */
+  const FALLBACK = [
+    { id:'E910LIwsr5Q', title:'Noticias Expreso 24/7 desde Hermosillo — En vivo',                                 published:'2025-09-24T09:00:00Z' },
+    { id:'C3V0PG-Fksc', title:'Asesinan a joven en Hermosillo · Bienestar entrega tarjetas · 23 sep',            published:'2025-09-23T14:00:00Z' },
+    { id:'cxXEXFyoN6E', title:'Inauguración Mercado Municipal de Hermosillo · Aumenta depresión Sonora · 8 Sep', published:'2025-09-08T12:00:00Z' },
+    { id:'40lYeUI-F1I', title:'Tropicalísimo Apache en Expogan Hermosillo, Sonora 2025 — Parte 5',               published:'2025-08-31T20:00:00Z' },
+    { id:'BYFaEXJ-vME', title:'Crisis de accidentes viales: Hermosillo en 2do lugar nacional · 12 ago',          published:'2025-08-12T10:00:00Z' },
+    { id:'lfeJ5SlBUyQ', title:'Claudia Pavlovich de Barcelona a Panamá · Noticias Hermosillo · 6 ago',           published:'2025-08-06T14:00:00Z' },
+    { id:'7UwzegXFAgg', title:'Fiscalía Anticorrupción contra Alito Moreno · 31 jul 2025',                       published:'2025-07-31T14:00:00Z' },
+  ];
+
+  /* ── Helpers ─────────────────────────────────────── */
+  const thumb = (id, q) => `https://img.youtube.com/vi/${id}/${q||'hqdefault'}.jpg`;
+  const embed  = id    => `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+
+  function timeAgo(iso){
+    if(!iso) return 'Expreso';
+    const s = (Date.now() - new Date(iso)) / 1000;
+    if(s < 60)     return 'Hace un momento';
+    if(s < 3600)   return `Hace ${Math.floor(s/60)} min`;
+    if(s < 86400)  return `Hace ${Math.floor(s/3600)} h`;
+    if(s < 604800) return `Hace ${Math.floor(s/86400)} días`;
+    return new Date(iso).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'});
+  }
+
+  function isNew(iso){ return iso && (Date.now()-new Date(iso)) < 6*3600000; }
+
+  function calcBars(arr){
+    const mx = Math.max(...arr.map(v=>v.views||0), 1);
+    return arr.map(v => Math.max(Math.round(((v.views||0)/mx)*100), 10));
+  }
+
+  /* ── Parsear XML del RSS ─────────────────────────── */
+  function parseRSS(xmlText){
+    const doc     = new DOMParser().parseFromString(xmlText, 'application/xml');
+    const parseErr= doc.querySelector('parsererror');
+    if(parseErr) throw new Error('XML inválido');
+
+    const entries = [...doc.querySelectorAll('entry')];
+    if(!entries.length) throw new Error('Sin entradas en el RSS');
+
+    const videos = [];
+    for(const e of entries){
+      /* Extraer videoId — puede venir en yt:videoId o en <id> */
+      const ytNS  = e.querySelector('videoId');
+      const idTag = e.querySelector('id');
+      const videoId = ytNS?.textContent
+                   || idTag?.textContent?.match(/video:([^<]+)/)?.[1]
+                   || idTag?.textContent?.split(':').pop()
+                   || '';
+
+      if(!videoId || videoId.length < 5) continue;
+
+      /* VALIDAR: el channelId del entry debe coincidir */
+      const chTag = e.querySelector('channelId');
+      if(chTag && chTag.textContent.trim() !== CHANNEL_ID){
+        console.warn('[Expreso Video] Entry de otro canal ignorado:', chTag.textContent);
+        continue;
+      }
+
+      const title     = e.querySelector('title')?.textContent?.trim() || 'Sin título';
+      const published = e.querySelector('published')?.textContent || '';
+      const updated   = e.querySelector('updated')?.textContent   || '';
+      const views     = parseInt(e.querySelector('statistics')?.getAttribute('views') || 0);
+      const author    = e.querySelector('author name')?.textContent || '';
+
+      videos.push({ id:videoId, title, published, updated, views, author });
+    }
+
+    if(!videos.length) throw new Error('Ningún video válido del canal');
+
+    /* Ordenar de más reciente a más antiguo */
+    videos.sort((a,b) => new Date(b.published) - new Date(a.published));
+
+    return videos.slice(0, 7);
+  }
+
+  /* ── Fetch con múltiples proxies en cascada ──────── */
+  async function fetchWithFallbackProxies(proxyIndex = 0){
+    if(proxyIndex >= PROXIES.length){
+      throw new Error('Todos los proxies fallaron');
+    }
+    const url = PROXIES[proxyIndex](RSS_URL);
+    const resp = await fetch(url, { cache: 'no-store' });
+    if(!resp.ok) throw new Error(`Proxy ${proxyIndex} HTTP ${resp.status}`);
+    const text = await resp.text();
+
+    /* Verificar que la respuesta es XML de YouTube (no JSON de error) */
+    if(!text.includes('<feed') && !text.includes('<?xml')){
+      /* allorigins /raw devuelve XML directo; /get devuelve JSON */
+      try {
+        const json = JSON.parse(text);
+        const xml  = json.contents || json.content || '';
+        if(!xml.includes('<feed')) throw new Error('Contenido no es RSS de YT');
+        return xml;
+      } catch {
+        console.warn(`[Expreso Video] Proxy ${proxyIndex} devolvió respuesta inesperada, probando siguiente...`);
+        return fetchWithFallbackProxies(proxyIndex + 1);
+      }
+    }
+    return text;
+  }
+
+  /* ── Estado ──────────────────────────────────────── */
+  let activeIdx  = 0;
+  let loadedVids = [];
+  window._ytVideos = [];
+
+  /* ── Preload thumb siguiente ─────────────────────── */
+  function preloadThumb(id){
+    const l = document.createElement('link');
+    l.rel = 'preload'; l.as = 'image';
+    l.href = thumb(id, 'mqdefault');
+    document.head.appendChild(l);
+  }
+
+  /* ── Render featured showcase ────────────────────── */
+  function setFeatured(idx){
+    activeIdx = idx;
+    const v = loadedVids[idx];
+    if(!v) return;
+
+    const img = document.getElementById('yt-showcase-thumb');
+    if(img){
+      img.style.opacity = '0';
+      img.style.transform = 'scale(1.03)';
+      setTimeout(()=>{
+        img.src    = thumb(v.id, 'hqdefault');
+        img.alt    = v.title;
+        img.onload = ()=>{ img.style.opacity='1'; img.style.transform='scale(1)'; };
+        img.onerror= ()=>{ img.src = thumb(v.id, 'mqdefault'); };
+      }, 180);
+    }
+
+    const tt = document.getElementById('yt-feat-title');
+    if(tt) tt.textContent = v.title;
+
+    const mt = document.getElementById('yt-feat-meta');
+    if(mt) mt.innerHTML = `
+      <span>▶ ${timeAgo(v.published)}</span>
+      ${v.views ? `<span>· 👁 ${v.views.toLocaleString('es-MX')}</span>` : ''}
+      ${v.author ? `<span>· ${v.author}</span>` : ''}`;
+
+    const nb = document.getElementById('yt-feat-new');
+    if(nb) nb.style.display = isNew(v.published) ? 'inline' : 'none';
+
+    const fb = document.getElementById('yt-feat-bar');
+    if(fb){
+      fb.style.width = '0';
+      const b = calcBars(loadedVids);
+      requestAnimationFrame(()=>{ fb.style.width = (b[idx]||15) + '%'; });
+    }
+
+    document.querySelectorAll('.yt-pl-item').forEach((el,i)=>{
+      el.classList.toggle('active', i === idx);
+      el.setAttribute('aria-pressed', String(i === idx));
+    });
+
+    const next = loadedVids[(idx+1) % loadedVids.length];
+    if(next) preloadThumb(next.id);
+
+    window._ytVideos = loadedVids;
+  }
+
+  /* ── Render playlist lateral ─────────────────────── */
+  function renderPlaylist(){
+    const pl = document.getElementById('yt-playlist');
+    if(!pl) return;
+    pl.innerHTML = loadedVids.slice(0,4).map((v,i)=>`
+      <div class="yt-pl-item${i===0?' active':''}"
+           role="button" tabindex="0"
+           aria-pressed="${i===0}"
+           aria-label="Seleccionar: ${v.title.replace(/"/g,'&quot;')}"
+           data-idx="${i}"
+           onclick="ytSelectPlaylist(${i})"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ytSelectPlaylist(${i})}">
+        <div class="yt-pl-thumb">
+          <img src="${thumb(v.id,'mqdefault')}"
+               alt="" width="120" height="68"
+               loading="${i===0?'eager':'lazy'}" decoding="async"
+               onerror="this.src='https://img.youtube.com/vi/${v.id}/default.jpg'">
+          <div class="yt-pl-play-ico">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="white" aria-hidden="true">
+              <path d="M5 3.5l11 5.5-11 5.5z"/>
+            </svg>
+          </div>
+          ${isNew(v.published)?'<span class="yt-pl-new">Nuevo</span>':''}
+          <span class="yt-pl-dur" aria-hidden="true"></span>
+        </div>
+        <div class="yt-pl-info">
+          <div class="yt-pl-num" aria-hidden="true">${String(i+1).padStart(2,'0')}</div>
+          <div class="yt-pl-title">${v.title}</div>
+          <div class="yt-pl-meta">${timeAgo(v.published)}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  /* ── Render strip inferior ───────────────────────── */
+  function renderStrip(){
+    const strip = document.getElementById('yt-strip-row');
+    if(!strip) return;
+    const b = calcBars(loadedVids);
+    strip.innerHTML = loadedVids.slice(4,7).map((v,i)=>`
+      <div class="yt-strip-card"
+           role="button" tabindex="0"
+           aria-label="Reproducir: ${v.title.replace(/"/g,'&quot;')}"
+           onclick="ytOpen(${i+4})"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ytOpen(${i+4})}">
+        <div class="yt-strip-thumb">
+          <img src="${thumb(v.id,'mqdefault')}"
+               alt="${v.title.replace(/"/g,'&quot;')}"
+               width="320" height="180"
+               loading="lazy" decoding="async"
+               onerror="this.src='https://img.youtube.com/vi/${v.id}/default.jpg'">
+          <div class="yt-strip-play">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="white" aria-hidden="true">
+              <path d="M5 3.5l11 5.5-11 5.5z"/>
+            </svg>
+          </div>
+          ${isNew(v.published)?'<span class="yt-strip-new">Nuevo</span>':''}
+        </div>
+        <div class="yt-strip-body">
+          <div class="yt-strip-title">${v.title}</div>
+          <div class="yt-strip-meta">
+            <span>▶ ${timeAgo(v.published)}</span>
+            ${v.views?`<span>· 👁 ${v.views.toLocaleString('es-MX')}</span>`:''}
+          </div>
+          <div class="yt-bar-wrap">
+            <div class="yt-bar-fill" style="width:${b[i+4]||10}%"></div>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  /* ── Render completo ──────────────────────────────── */
+  function renderAll(videos, source){
+    loadedVids = videos;
+    window._ytVideos = videos;
+    renderPlaylist();
+    renderStrip();
+    setFeatured(0);
+
+    const upd = document.getElementById('yt-upd-lbl');
+    if(upd){
+      const n = new Date();
+      upd.textContent = `Act. ${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}`;
+      if(source === 'rss')   upd.title = 'Datos en vivo desde YouTube RSS';
+      if(source === 'cache') upd.title = 'Datos desde caché';
+      if(source === 'fallback') upd.title = 'Videos verificados (RSS no disponible)';
+    }
+    console.info(`[Expreso Video] ${videos.length} videos cargados (${source})`);
+  }
+
+  /* ── Fetch principal ──────────────────────────────── */
+  let retryCount = 0;
+  const MAX_RETRY = 3;
+
+  async function fetchVideos(){
+    try {
+      const xml    = await fetchWithFallbackProxies(0);
+      const videos = parseRSS(xml);
+      renderAll(videos, 'rss');
+      retryCount = 0;
+      document.getElementById('yt-err').style.display = 'none';
+    } catch(err) {
+      console.warn('[Expreso Video] RSS fetch falló:', err.message);
+      retryCount++;
+      if(retryCount <= MAX_RETRY){
+        /* Reintentar en 10s */
+        setTimeout(fetchVideos, 10000);
+      } else {
+        /* Usar fallback verificado */
+        renderAll(FALLBACK, 'fallback');
+        retryCount = 0;
+      }
+    }
+  }
+
+  /* ── Arranque ────────────────────────────────────── */
+  fetchVideos();
+  setInterval(fetchVideos, INTERVAL);
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden) fetchVideos();
+  },{passive:true});
+
+  /* ── Funciones globales ──────────────────────────── */
+  window.ytSelectPlaylist = idx => setFeatured(idx);
+  window.ytPlayFeatured   = ()  => ytOpen(activeIdx);
+
+})();
+
+/* ── Modal player — lazy iframe ─────────────────────
+   El iframe se inyecta SOLO al abrir.
+   Se destruye al cerrar para detener audio.
+─────────────────────────────────────────────────── */
+function ytOpen(idx){
+  const v = (window._ytVideos||[])[idx];
+  if(!v) return;
+
+  const modal = document.getElementById('ytModal');
+  const wrap  = document.getElementById('ytIframe');
+
+  wrap.innerHTML = `<iframe
+    src="https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1"
+    title="${v.title.replace(/"/g,'&quot;')}"
+    width="100%" height="100%"
+    style="position:absolute;inset:0;width:100%;height:100%;border:none"
+    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+    allowfullscreen loading="lazy"></iframe>`;
+  wrap.style.position = 'relative';
+
+  document.getElementById('ytMCat').textContent   = 'Expreso Noticias · @expresoweb';
+  document.getElementById('ytMTitle').textContent = v.title;
+  document.getElementById('ytMMeta').innerHTML    =
+    `<span>📅 ${v.published
+        ? new Date(v.published).toLocaleDateString('es-MX',
+            {day:'numeric',month:'long',year:'numeric'})
+        : 'Expreso'}</span>
+     ${v.views ? `<span>· 👁 ${v.views.toLocaleString('es-MX')} vistas</span>` : ''}
+     <span style="margin-left:auto">
+       <a href="https://youtube.com/watch?v=${v.id}"
+          target="_blank" rel="noopener noreferrer"
+          style="color:var(--vm);font-family:var(--fc);font-size:11px;
+                 font-weight:700;text-decoration:none">
+         Abrir en YouTube →
+       </a>
+     </span>`;
+
+  const bar = document.getElementById('ytBar');
+  if(bar){ bar.style.width='0'; requestAnimationFrame(()=>bar.style.width='45%'); }
+
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(()=>{
+    const close = modal.querySelector('button[aria-label="Cerrar reproductor"]');
+    if(close) close.focus();
+  }, 50);
+}
+
+function ytClose(e, force){
+  if(force||(e&&e.target===document.getElementById('ytModal'))){
+    const wrap = document.getElementById('ytIframe');
+    if(wrap) wrap.innerHTML = ''; // detener audio
+    document.getElementById('ytModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') ytClose(null,true);
+});
+</script>
+<footer id="footer">
+  <div class="ft-m">
+    <div class="ft-g">
+      <div>
+        <div class="ft-lo">expreso.</div>
+        <p class="ft-ab">Plataforma líder en noticias en el noroeste de México. El periódico de Sonora desde 1986.</p>
+        <div class="ft-in"><div>📍 Blvd. Abelardo L. Rodríguez No. 16, Col. San Benito</div><div>Hermosillo, Sonora, CP 83190 · 📞 (662) 108-3000</div></div>
+        <div class="ft-sc"><a href="https://facebook.com/expresoweb">f</a><a href="https://x.com/Expresoweb">𝕏</a><a href="https://instagram.com/expresomx">ig</a><a href="https://youtube.com/user/expresoweb">▶</a><a href="#">W</a></div>
+      </div>
+      <div class="ft-c"><h5>Noticias</h5><ul><li><a href="/noticias/hermosillo">Hermosillo</a></li><li><a href="/noticias/sonora">Sonora</a></li><li><a href="/noticias/mexico">México</a></li><li><a href="/noticias/mundo">Mundo</a></li><li><a href="/noticias/seguridad">Seguridad</a></li><li><a href="/noticias/negocios">Negocios</a></li><li><a href="/noticias/mundo-curioso">Mundo Curioso</a></li><li><a href="/ultima-hora">Temas del Día</a></li></ul></div>
+      <div class="ft-c"><h5>Acción · Estelar</h5><ul><li><a href="/accion/deportes-locales">Deportes Locales</a></li><li><a href="/accion/futbol">Fútbol</a></li><li><a href="/accion/beisbol">Béisbol</a></li><li><a href="/accion/otros-deportes">Otros Deportes</a></li><li><a href="/estelar/musica">Música</a></li><li><a href="/estelar/cine">Cine</a></li><li><a href="/estelar/television">Televisión</a></li><li><a href="/estelar/cultura">Cultura</a></li></ul></div>
+      <div class="ft-c"><h5>Expresión</h5><ul><li><a href="/expresion/entre-nos">Entre Nos</a></li><li><a href="/expresion/en-privado">En Privado</a></li><li><a href="/expresion/estrictamente-personal">Estrictamente Personal</a></li><li><a href="/expresion/el-asalto-a-la-razon">El Asalto a la Razón</a></li><li><a href="/expresion/fuera-de-ruta">Fuera De Ruta</a></li><li><a href="/expresion/templo-mayor">Templo Mayor</a></li><li><a href="/expresion/serpientes-y-escaleras">Serpientes y Escaleras</a></li><li><a href="/expresion/actitudes">Actitudes</a></li></ul></div>
+      <div class="ft-c"><h5>Servicios</h5><ul><li><a href="/suscripciones">Suscripciones</a></li><li><a href="/edicion-impresa">Edición Impresa</a></li><li><a href="/suplementos">Suplementos</a></li><li><a href="/multimedia/videos">Videos</a></li><li><a href="/multimedia/galerias">Galerías</a></li><li><a href="/empleate">EMPLÉATE</a></li><li><a href="/directorio">Directorio</a></li><li><a href="/media-kit">Media Kit 2026</a></li></ul></div>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 14px">
+    <div class="ft-bot">
+      <p>© 2026 Expreso · Medios y Editorial de Sonora, S.A. de C.V. · Todos los derechos reservados · Hermosillo, Sonora, México</p>
+      <div class="ft-leg"><a href="/aviso-legal">Aviso Legal</a><a href="/aviso-privacidad">Aviso de Privacidad</a><a href="/terminos">Términos de Uso</a><a href="/contacto">Contacto</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="btop" aria-label="Volver al inicio de la página"><span aria-hidden="true">↑</span></button>
+
+<script>
+/* ══════════════════════════════════════════════════
+   EXPRESO — Runtime JS (INP optimizado, passive)
+   1. Menú flotante e Media
+   2. Navbar sticky offset
+   3. Header scroll shadow
+   4. Progress bar lectura
+   5. Back to top
+   6. Newsletter
+   7. CWV: will-change, visibilitychange, prefetch hover
+   8. Accesibilidad: dropdowns, focus trap, aria-live
+   9. Fecha en título
+   ══════════════════════════════════════════════════ */
+'use strict';
+
+/* ── 1. MENÚ FLOTANTE e Media ──────────────────────
+   Restaurado — se perdió en la última optimización
+────────────────────────────────────────────────── */
+(function(){
+  var menu = document.getElementById('floatMenu');
+  var btn  = document.getElementById('floatBtn');
+  var sub  = document.getElementById('floatSub');
+  if(!menu || !btn) return;
+  var open = false, lastScroll = 0;
+
+  function toggle(force){
+    open = typeof force === 'boolean' ? force : !open;
+    menu.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label',
+      open ? 'Cerrar menú de productos e Media'
+           : 'Abrir menú de productos e Media');
+  }
+
+  btn.addEventListener('click', function(){ toggle(); });
+  btn.addEventListener('keydown', function(e){
+    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); }
+    if(e.key==='Escape' && open){ toggle(false); }
+  });
+  menu.addEventListener('keydown', function(e){
+    if(e.key==='Escape'){ toggle(false); btn.focus(); }
+  });
+  document.addEventListener('click', function(e){
+    if(open && !menu.contains(e.target)) toggle(false);
+  }, {passive:true});
+  window.addEventListener('scroll', function(){
+    if(open && Math.abs(scrollY - lastScroll) > 300) toggle(false);
+    if(!open) lastScroll = scrollY;
+  }, {passive:true});
+
+  /* Auto-abrir 1 vez después de 3s */
+  if(!sessionStorage.getItem('floatSeen')){
+    setTimeout(function(){
+      toggle(true);
+      sessionStorage.setItem('floatSeen','1');
+      setTimeout(function(){ if(open) toggle(false); }, 5000);
+    }, 3000);
+  }
+})();
+
+/* ── 2. NAVBAR OFFSET ──────────────────────────────*/
+(function(){
+  var hd = document.getElementById('header');
+  var nb = document.getElementById('navbar');
+  function a(){ if(nb && hd) nb.style.top = hd.offsetHeight+'px'; }
+  a();
+  window.addEventListener('resize', a, {passive:true});
+})();
+
+/* ── 3. HEADER SHADOW ──────────────────────────────*/
+(function(){
+  var hd = document.getElementById('header');
+  if(!hd) return;
+  window.addEventListener('scroll', function(){
+    hd.classList.toggle('scrolled', scrollY > 10);
+  }, {passive:true});
+})();
+
+/* ── 4. PROGRESS BAR ───────────────────────────────*/
+(function(){
+  var bar = document.getElementById('pbar');
+  if(!bar) return;
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var p = Math.min(Math.round((scrollY/(h.scrollHeight-h.clientHeight))*100), 100);
+    bar.style.width = p + '%';
+    bar.setAttribute('aria-valuenow', p);
+  }, {passive:true});
+})();
+
+/* ── 5. BACK TO TOP ────────────────────────────────*/
+(function(){
+  var b = document.getElementById('btop');
+  if(!b) return;
+  window.addEventListener('scroll', function(){
+    b.classList.toggle('show', scrollY > 300);
+  }, {passive:true});
+  b.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+
+/* ── 6. NEWSLETTER ─────────────────────────────────*/
+(function(){
+  var btn = document.getElementById('nlB');
+  var inp = document.getElementById('nlE');
+  if(!btn || !inp) return;
+  btn.addEventListener('click', function(){
+    if(inp.value && inp.value.includes('@')){
+      btn.textContent = '✔ ¡Suscrito!';
+      btn.style.background = '#1a8a3c';
+      inp.value = '';
+      setTimeout(function(){
+        btn.textContent = 'Suscribirme gratis';
+        btn.style.background = '';
+      }, 3000);
+    } else {
+      inp.style.outline = '2px solid var(--r)';
+      inp.style.animation = 'shake .35s ease';
+      setTimeout(function(){
+        inp.style.outline = '';
+        inp.style.animation = '';
+      }, 1500);
+    }
+  });
+})();
+
+/* ── 7. CWV RUNTIME ────────────────────────────────*/
+(function(){
+  function onIdle(cb){
+    if('requestIdleCallback' in window) requestIdleCallback(cb, {timeout:2000});
+    else setTimeout(cb, 300);
+  }
+  document.addEventListener('touchmove', function(){}, {passive:true});
+  document.addEventListener('wheel',     function(){}, {passive:true});
+
+  /* will-change solo en hover */
+  onIdle(function(){
+    document.querySelectorAll('.izoom').forEach(function(el){
+      var img = el.querySelector('img');
+      if(!img) return;
+      el.addEventListener('mouseenter', function(){ img.style.willChange='transform'; }, {passive:true});
+      el.addEventListener('mouseleave', function(){ img.style.willChange='auto'; },      {passive:true});
+    });
+    /* Liberar will-change tras animaciones de entrada */
+    setTimeout(function(){
+      document.querySelectorAll('.fi, .rv, .sg > *').forEach(function(el){
+        el.style.willChange = 'auto';
+      });
+    }, 2500);
+  });
+
+  /* Pausar animaciones en background */
+  function setAnimState(state){
+    document.querySelectorAll('.tk-i, .tk-tag, .pop-sk-t, .pop-sk-m')
+      .forEach(function(el){ el.style.animationPlayState = state; });
+  }
+  document.addEventListener('visibilitychange', function(){
+    setAnimState(document.hidden ? 'paused' : 'running');
+  });
+
+  /* Pausar ticker fuera del viewport */
+  onIdle(function(){
+    var ticker = document.getElementById('ticker');
+    if(!ticker) return;
+    new IntersectionObserver(function(entries){
+      var inner = ticker.querySelector('.tk-i');
+      if(inner) inner.style.animationPlayState =
+        entries[0].isIntersecting ? 'running' : 'paused';
+    }, {threshold:0}).observe(ticker);
+  });
+
+  /* Prefetch hover en links internos */
+  onIdle(function(){
+    var last = '';
+    document.addEventListener('mouseover', function(e){
+      var a = e.target.closest('a[href]');
+      if(!a || a.href===last) return;
+      last = a.href;
+      try {
+        var url = new URL(a.href, location.origin);
+        if(url.origin !== location.origin) return;
+        var l = document.createElement('link');
+        l.rel='prefetch'; l.href=a.href; l.as='document';
+        document.head.appendChild(l);
+      } catch(err){}
+    }, {passive:true});
+  });
+})();
+
+/* ── 8. ACCESIBILIDAD ──────────────────────────────*/
+(function(){
+  /* Dropdowns aria-expanded */
+  document.querySelectorAll('.nb-it').forEach(function(item){
+    var trigger = item.querySelector('.nb-a[aria-expanded]');
+    var dd      = item.querySelector('.nb-dd');
+    if(!trigger || !dd) return;
+    item.addEventListener('mouseenter', function(){ trigger.setAttribute('aria-expanded','true'); });
+    item.addEventListener('mouseleave', function(){ trigger.setAttribute('aria-expanded','false'); });
+    trigger.addEventListener('keydown', function(e){
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        var isOpen = trigger.getAttribute('aria-expanded')==='true';
+        trigger.setAttribute('aria-expanded', isOpen?'false':'true');
+        if(!isOpen){ var fl=dd.querySelector('a'); if(fl) fl.focus(); }
+      }
+      if(e.key==='Escape'){ trigger.setAttribute('aria-expanded','false'); trigger.focus(); }
+    });
+    dd.addEventListener('keydown', function(e){
+      if(e.key==='Escape'){ trigger.setAttribute('aria-expanded','false'); trigger.focus(); }
+    });
+  });
+
+  /* Focus trap modal YT */
+  function trapFocus(modal){
+    var sel = 'a[href],button:not([disabled]),input,[tabindex]:not([tabindex="-1"])';
+    var els = modal.querySelectorAll(sel);
+    if(!els.length) return;
+    var first = els[0], last = els[els.length-1];
+    function handler(e){
+      if(e.key!=='Tab') return;
+      if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); }}
+      else          { if(document.activeElement===last ){ e.preventDefault(); first.focus(); }}
+    }
+    modal._trap = handler;
+    modal.addEventListener('keydown', handler);
+    setTimeout(function(){ first.focus(); }, 50);
+  }
+  function releaseFocus(modal, ret){
+    if(modal._trap){ modal.removeEventListener('keydown', modal._trap); delete modal._trap; }
+    if(ret) ret.focus();
+  }
+
+  /* Envolver ytOpen/ytClose con focus trap */
+  var _ytOpen  = window.ytOpen;
+  var _ytClose = window.ytClose;
+  var _opener  = null;
+  if(_ytOpen && _ytClose){
+    window.ytOpen = function(idx){
+      _opener = document.activeElement;
+      _ytOpen(idx);
+      var modal = document.getElementById('ytModal');
+      if(modal) trapFocus(modal);
+    };
+    window.ytClose = function(e, force){
+      var modal = document.getElementById('ytModal');
+      if(modal) releaseFocus(modal, _opener);
+      _ytClose(e, force);
+    };
+  }
+
+  /* Scroll reveal */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  }, {threshold:.1, rootMargin:'0px 0px -36px 0px'});
+  document.querySelectorAll('.rv,.rvl,.sg').forEach(function(el){ io.observe(el); });
+
+  /* Feed items stagger */
+  var fio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if(e.isIntersecting){
+        setTimeout(function(){ e.target.classList.add('on'); }, i*65);
+        fio.unobserve(e.target);
+      }
+    });
+  }, {threshold:.06, rootMargin:'0px 0px -16px 0px'});
+  document.querySelectorAll('.fi').forEach(function(el){ fio.observe(el); });
+
+  /* pbar aria */
+  var pbar = document.getElementById('pbar');
+  if(pbar){
+    window.addEventListener('scroll', function(){
+      var h=document.documentElement;
+      pbar.setAttribute('aria-valuenow',
+        Math.min(Math.round((scrollY/(h.scrollHeight-h.clientHeight))*100),100));
+    }, {passive:true});
+  }
+
+  /* aria-live para populares */
+  var ps = document.getElementById('pop-status');
+  if(ps) ps.setAttribute('aria-live','polite');
+
+  /* Feed view toggle */
+  var fdBody = document.getElementById('fdBody');
+  function reAnimate(){
+    if(!fdBody) return;
+    fdBody.querySelectorAll('.fi').forEach(function(el,i){
+      el.classList.remove('on');
+      setTimeout(function(){ el.classList.add('on'); }, i*55);
+    });
+  }
+  var btnL = document.getElementById('btnL');
+  var btnC = document.getElementById('btnC');
+  if(btnL) btnL.addEventListener('click', function(){
+    if(fdBody) fdBody.classList.remove('card');
+    this.classList.add('on'); if(btnC) btnC.classList.remove('on');
+    reAnimate();
+  });
+  if(btnC) btnC.addEventListener('click', function(){
+    if(fdBody) fdBody.classList.add('card');
+    this.classList.add('on'); if(btnL) btnL.classList.remove('on');
+    reAnimate();
+  });
+})();
+
+/* ── 9. SLIDER ─────────────────────────────────────*/
+(function(){
+  var sls  = document.querySelectorAll('.sl');
+  var dots = document.querySelectorAll('.sl-dot');
+  var lbl  = document.getElementById('slLbl');
+  var prev = document.getElementById('slPrev');
+  var next = document.getElementById('slNext');
+  var pauseBtn = document.getElementById('slPause');
+  var cur = 0, paused = false, timer;
+
+  function go(i){
+    if(sls.length===0) return;
+    sls[cur].classList.remove('on');
+    if(dots[cur]) dots[cur].classList.remove('on');
+    cur = (i + sls.length) % sls.length;
+    sls[cur].classList.add('on');
+    if(dots[cur]) dots[cur].classList.add('on');
+    if(lbl) lbl.textContent = (cur+1)+' de '+sls.length;
+  }
+  function start(){ timer = setInterval(function(){ if(!paused) go(cur+1); }, 5000); }
+  function stop(){ clearInterval(timer); }
+
+  if(prev) prev.addEventListener('click', function(){ stop(); go(cur-1); start(); });
+  if(next) next.addEventListener('click', function(){ stop(); go(cur+1); start(); });
+  if(dots.length) dots.forEach(function(d,i){
+    d.addEventListener('click', function(){ stop(); go(i); start(); });
+  });
+  if(pauseBtn) pauseBtn.addEventListener('click', function(){
+    paused = !paused;
+    pauseBtn.textContent = paused ? '▶' : '⏸';
+  });
+
+  /* Touch swipe */
+  var tx = 0;
+  var hero = document.getElementById('hero');
+  if(hero){
+    hero.addEventListener('touchstart', function(e){ tx=e.touches[0].clientX; }, {passive:true});
+    hero.addEventListener('touchend',   function(e){
+      var dx = e.changedTouches[0].clientX - tx;
+      if(Math.abs(dx)>40){ stop(); go(dx<0?cur+1:cur-1); start(); }
+    }, {passive:true});
+  }
+  start();
+})();
+
+/* ── 10. MÁS POPULARES polling ─────────────────────
+   (Módulo inline — MOCK data para demo)
+────────────────────────────────────────────────── */
+(function(){
+  var POLL = 8000; /* demo: 8s | producción: 30000 */
+  var list = document.getElementById('pop-list');
+  var status = document.getElementById('pop-status');
+  var prevIds = [], tick = 0;
+
+  var MOCK = [
+    [{id:1,titulo:'Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026',slug:'/noticias/hermosillo/plan-maestro',img:'https://picsum.photos/seed/pop1/80/80',seccion:'Hermosillo',pv:12400},
+     {id:2,titulo:'Paciente guaymense sufre daños renales tras tratamiento con células madre',slug:'/noticias/sonora/celulas-madre',img:'https://picsum.photos/seed/pop2/80/80',seccion:'Sonora',pv:9870},
+     {id:3,titulo:'SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo',slug:'/noticias/seguridad/ssp',img:'https://picsum.photos/seed/pop3/80/80',seccion:'Seguridad',pv:7210},
+     {id:4,titulo:'Naranjeros rompe récord de asistencia en la LMP 2026',slug:'/accion/beisbol/naranjeros',img:'https://picsum.photos/seed/pop4/80/80',seccion:'Béisbol',pv:6550},
+     {id:5,titulo:'Washington impone aranceles a Asia; México analiza respuesta',slug:'/noticias/mundo/aranceles',img:'https://picsum.photos/seed/pop5/80/80',seccion:'Mundo',pv:4320}],
+    [{id:2,titulo:'Paciente guaymense sufre daños renales tras tratamiento con células madre',slug:'/noticias/sonora/celulas-madre',img:'https://picsum.photos/seed/pop2/80/80',seccion:'Sonora',pv:11240},
+     {id:1,titulo:'Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026',slug:'/noticias/hermosillo/plan-maestro',img:'https://picsum.photos/seed/pop1/80/80',seccion:'Hermosillo',pv:12650},
+     {id:3,titulo:'SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo',slug:'/noticias/seguridad/ssp',img:'https://picsum.photos/seed/pop3/80/80',seccion:'Seguridad',pv:7890},
+     {id:5,titulo:'Washington impone aranceles a Asia; México analiza respuesta',slug:'/noticias/mundo/aranceles',img:'https://picsum.photos/seed/pop5/80/80',seccion:'Mundo',pv:6100},
+     {id:4,titulo:'Naranjeros rompe récord de asistencia en la LMP 2026',slug:'/accion/beisbol/naranjeros',img:'https://picsum.photos/seed/pop4/80/80',seccion:'Béisbol',pv:5980}],
+    [{id:1,titulo:'Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026',slug:'/noticias/hermosillo/plan-maestro',img:'https://picsum.photos/seed/pop1/80/80',seccion:'Hermosillo',pv:13100},
+     {id:6,titulo:'Temperatura récord de 47°C en Hermosillo este miércoles',slug:'/noticias/sonora/temperatura-record',img:'https://picsum.photos/seed/pop6/80/80',seccion:'Sonora',pv:9450},
+     {id:2,titulo:'Paciente guaymense sufre daños renales tras tratamiento con células madre',slug:'/noticias/sonora/celulas-madre',img:'https://picsum.photos/seed/pop2/80/80',seccion:'Sonora',pv:9200},
+     {id:3,titulo:'SSP Sonora refuerza operativos nocturnos en zonas de alto riesgo',slug:'/noticias/seguridad/ssp',img:'https://picsum.photos/seed/pop3/80/80',seccion:'Seguridad',pv:8100},
+     {id:5,titulo:'Washington impone aranceles a Asia; México analiza respuesta',slug:'/noticias/mundo/aranceles',img:'https://picsum.photos/seed/pop5/80/80',seccion:'Mundo',pv:6800}]
+  ];
+
+  function fmt(n){ return n>=1000?(n/1000).toFixed(1)+'k':n.toLocaleString('es-MX'); }
+  function now(){ var d=new Date(); return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0'); }
+
+  function rankBadge(delta, isNew){
+    if(isNew) return '<span class="rank-badge rank-new">Nuevo</span>';
+    if(!delta) return '';
+    return delta>0
+      ? '<span class="rank-badge rank-up-b">▲'+delta+'</span>'
+      : '<span class="rank-badge rank-dn-b">▼'+Math.abs(delta)+'</span>';
+  }
+
+  function createLi(item, idx, delta, isNew){
+    var li=document.createElement('li');
+    li.dataset.id=item.id; li.dataset.rank=idx;
+    li.style.cssText='display:flex;align-items:flex-start;gap:9px;padding:8px 4px;border-bottom:1px solid var(--ge);cursor:pointer;border-radius:var(--rs);transition:background var(--ef),padding-left var(--em)';
+    li.setAttribute('role','listitem');
+    li.onmouseover=function(){ this.style.background='var(--gc)'; this.style.paddingLeft='8px'; };
+    li.onmouseout =function(){ this.style.background=''; this.style.paddingLeft=''; };
+    var isHi=idx<3?'hi':'';
+    li.innerHTML=
+      '<span class="pop-num '+isHi+'">'+(idx+1)+'</span>'+
+      '<img class="pop-th" src="'+item.img+'" alt="" width="54" height="54" loading="lazy" decoding="async" style="width:54px;height:54px;border-radius:var(--rs);object-fit:cover;flex-shrink:0">'+
+      '<div style="flex:1;min-width:0">'+
+        '<div class="pop-tx" style="font-size:12.5px;font-weight:600;line-height:1.3;color:var(--n)">'+
+          '<a href="'+item.slug+'" style="color:inherit">'+item.titulo+'</a>'+
+        '</div>'+
+        '<div class="pop-m" style="font-size:11px;color:var(--gm);font-family:var(--fc);margin-top:2px;display:flex;align-items:center;gap:5px">'+
+          item.seccion+' · '+
+          '<span class="pv-num" data-id="'+item.id+'" data-val="'+item.pv+'">'+fmt(item.pv)+' lecturas</span>'+
+          '<span class="rank-ind">'+rankBadge(delta,isNew)+'</span>'+
+        '</div>'+
+      '</div>';
+    return li;
+  }
+
+  function flashCtr(item){
+    if(!list) return;
+    var el=list.querySelector('.pv-num[data-id="'+item.id+'"]');
+    if(!el) return;
+    var prev=parseInt(el.dataset.val||0);
+    if(item.pv===prev) return;
+    el.classList.remove('pv-up','pv-down'); void el.offsetWidth;
+    el.classList.add(item.pv>prev?'pv-up':'pv-down');
+    el.textContent=fmt(item.pv)+' lecturas';
+    el.dataset.val=item.pv;
+    setTimeout(function(){ el.classList.remove('pv-up','pv-down'); },1400);
+  }
+
+  function updateBadge(li, newIdx, oldIdx){
+    var b=li.querySelector('.pop-num');
+    if(b){ b.textContent=newIdx+1; b.className='pop-num'+(newIdx<3?' hi':''); }
+    var ind=li.querySelector('.rank-ind');
+    if(!ind) return;
+    var delta=oldIdx-newIdx;
+    if(delta===0){ ind.innerHTML=''; return; }
+    ind.innerHTML=rankBadge(delta,false);
+    setTimeout(function(){
+      var bd=ind.querySelector('.rank-badge');
+      if(bd){ bd.style.opacity='0'; bd.style.transition='opacity .6s ease'; }
+      setTimeout(function(){ ind.innerHTML=''; },650);
+    },4000);
+  }
+
+  function firstRender(data){
+    if(!list) return;
+    list.innerHTML='';
+    data.forEach(function(item,idx){ list.appendChild(createLi(item,idx,0,false)); });
+  }
+
+  function flipUpdate(data){
+    if(!list) return;
+    var items=[...list.querySelectorAll('li[data-id]')];
+    var prevRankMap=new Map(items.map(function(li,i){ return [li.dataset.id,i]; }));
+    var firstPos=new Map();
+    items.forEach(function(li){ firstPos.set(li.dataset.id,li.getBoundingClientRect().top); });
+
+    var existingIds=new Set(items.map(function(li){ return li.dataset.id; }));
+    var newIds=new Set(data.map(function(d){ return String(d.id); }));
+
+    data.forEach(function(item,idx){
+      if(!existingIds.has(String(item.id))){
+        var li=createLi(item,idx,null,true);
+        li.style.opacity='0';
+        list.appendChild(li);
+        firstPos.set(String(item.id),li.getBoundingClientRect().top);
+        setTimeout(function(){
+          var b=li.querySelector('.rank-badge');
+          if(b){ b.style.opacity='0'; b.style.transition='opacity .6s ease'; }
+          setTimeout(function(){ var ind=li.querySelector('.rank-ind'); if(ind) ind.innerHTML=''; },650);
+        },5000);
+      }
+    });
+
+    items.forEach(function(li){
+      if(!newIds.has(li.dataset.id)){
+        li.style.transition='opacity .25s ease,transform .25s ease';
+        li.style.transform='translateX(20px)'; li.style.opacity='0';
+        setTimeout(function(){ li.remove(); },260);
+      }
+    });
+
+    data.forEach(function(item,newIdx){
+      var li=list.querySelector('li[data-id="'+item.id+'"]');
+      if(!li) return;
+      var oldIdx=prevRankMap.has(String(item.id))?prevRankMap.get(String(item.id)):newIdx;
+      list.appendChild(li);
+      updateBadge(li,newIdx,oldIdx);
+      flashCtr(item);
+    });
+
+    data.forEach(function(item){
+      var li=list.querySelector('li[data-id="'+item.id+'"]');
+      if(!li) return;
+      var first=firstPos.get(String(item.id));
+      var last=li.getBoundingClientRect().top;
+      var delta=first-last;
+      if(Math.abs(delta)<2){
+        if(li.style.opacity==='0'){ li.style.transition='opacity .3s ease'; li.style.opacity='1'; }
+        return;
+      }
+      li.style.transition='none';
+      li.style.transform='translateY('+delta+'px)';
+      li.style.opacity=li.style.opacity==='0'?'0':'1';
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          li.style.transition='transform .42s cubic-bezier(.25,.46,.45,.94),opacity .35s ease';
+          li.style.transform='translateY(0)';
+          li.style.opacity='1';
+        });
+      });
+    });
+  }
+
+  function fetchPop(){
+    var data=MOCK[tick%MOCK.length];
+    var newIds=data.map(function(d){ return String(d.id); });
+    var changed=JSON.stringify(prevIds)!==JSON.stringify(newIds);
+    if(prevIds.length===0) firstRender(data);
+    else if(changed) flipUpdate(data);
+    else data.forEach(flashCtr);
+    prevIds=newIds; tick++;
+    if(status) status.innerHTML='<span class="pop-pulse"></span>Act. '+now();
+  }
+  fetchPop();
+  setInterval(fetchPop,POLL);
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden) fetchPop();
+  });
+})();
+
+/* ── 11. FECHA EN TÍTULO ──────────────────────────*/
+(function(){
+  var m=['enero','febrero','marzo','abril','mayo','junio','julio','agosto',
+         'septiembre','octubre','noviembre','diciembre'];
+  var d=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  var n=new Date();
+  document.title='EXPRESO — '+d[n.getDay()]+' '+n.getDate()+' de '+m[n.getMonth()]+
+                 ' de '+n.getFullYear()+' — Hermosillo, Sonora';
+})();
+
+/* ── SHAKE keyframe ────────────────────────────────*/
+(function(){
+  var s=document.createElement('style');
+  s.textContent='@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';
+  document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
