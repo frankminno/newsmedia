@@ -11,7 +11,21 @@
 <meta property="og:site_name" content="EXPRESO">
 <meta property="og:title" content="EXPRESO — Noticias de Sonora y México">
 <meta property="og:description" content="Plataforma líder en noticias en el noroeste de México. Hermosillo, Sonora.">
-<link rel="preload" as="font" href="fonts/CanvaSans-VF.ttf" type="font/ttf">
+<!-- ═══ Rendimiento: hints de conexión (Core Web Vitals) ═══ -->
+<link rel="preconnect" href="https://img.youtube.com" crossorigin>
+<link rel="preconnect" href="https://blob.expreso.com.mx" crossorigin>
+<link rel="dns-prefetch" href="https://graph.instagram.com">
+<!-- Demos: quítalos en producción si dejas de usar estos CDN -->
+<link rel="dns-prefetch" href="https://picsum.photos">
+<link rel="dns-prefetch" href="https://i.pravatar.cc">
+<link rel="dns-prefetch" href="https://api.allorigins.win">
+
+<!-- Fuente: preload con crossorigin (evita doble descarga); el swap va en el CSS -->
+<link rel="preload" as="font" href="fonts/CanvaSans-VF.ttf" type="font/ttf" crossorigin>
+
+<!-- LCP: en producción precarga aquí la 1ª imagen del hero para bajar el LCP:
+     <link rel="preload" as="image" href="URL_REAL_DEL_HERO" fetchpriority="high"> -->
+
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -107,7 +121,7 @@
       <aside class="col-left">
 
         <!-- Más populares -->
-        <section class="card card-pad">
+        <section class="card card-pad" id="cardPopulares">
           <h2 class="card-h">Más populares</h2>
           <div class="pop" id="popList">
             <div class="pop-item"><span class="pop-num">1</span><img class="pop-thumb" src="" alt="" data-ph><div class="pop-body"><div class="pop-title">Durazo presenta Plan Maestro de Desarrollo Urbano Hermosillo 2026</div><div class="pop-meta">Hermosillo · 12.4k lecturas</div></div></div>
@@ -128,7 +142,7 @@
         </section>
 
         <!-- Originales Expreso -->
-        <section class="card card-pad">
+        <section class="card card-pad" id="cardOriginales">
           <h2 class="card-h">Originales Expreso</h2>
           <div>
             <div class="orig-item"><img class="orig-avatar" src="" alt="" data-ph><div><span class="orig-badge">Exclusivo</span><div class="orig-title">El domo de calor sobre Sonora</div></div></div>
@@ -139,7 +153,7 @@
         </section>
 
         <!-- Expresión -->
-        <section class="card card-pad">
+        <section class="card card-pad" id="cardExpresion">
           <h2 class="card-h">Expresión</h2>
           <div>
             <div class="col-item"><img class="col-avatar" src="" alt="" data-ph><div><div class="col-name">Entre Nos</div><div class="col-title">Lo que dice Mr. X: hospital en Río Sonora avanza</div></div></div>
@@ -349,7 +363,7 @@
         <div class="ad-box ad-300-250"><span class="ico">📢</span>Espacio publicitario<br>300 × 250</div>
 
         <!-- Mercado -->
-        <section class="card card-pad">
+        <section class="card card-pad" id="cardMercado">
           <h2 class="card-h">Mercado</h2>
           <ul class="market">
             <li><span class="sym">USD/MXN</span><span class="val">$17.32</span><span class="chg down">▼ 0.14%</span></li>
@@ -361,7 +375,7 @@
         </section>
 
         <!-- Edición Impresa -->
-        <section class="card card-pad">
+        <section class="card card-pad" id="cardEdimp">
           <h2 class="card-h">Edición Impresa</h2>
           <a href="/edicion-impresa" class="edimp-cover">
             <img src="" alt="Portada de la Edición Impresa" data-ph>
@@ -371,7 +385,7 @@
         </section>
 
         <!-- Galería del día -->
-        <section class="card">
+        <section class="card" id="cardGaleria">
           <div style="padding:16px 16px 8px"><h2 class="card-h" style="margin:0">Galería del día</h2></div>
           <div class="gallery-grid">
             <img src="" alt="Galería 1" data-ph>
@@ -388,6 +402,11 @@
 
     <!-- Ad banner full width -->
     <div class="ad-box ad-banner"><span class="ico">📢</span>Espacio publicitario</div>
+
+    <!-- Slots de publicidad solo para móvil (se ocultan en escritorio; ordenados por CSS) -->
+    <div class="ad-box ad-mobile" id="adMobile1"><span class="ico">📢</span>Espacio publicitario</div>
+    <div class="ad-box ad-mobile" id="adMobile2"><span class="ico">📢</span>Espacio publicitario</div>
+    <div class="ad-box ad-mobile" id="adMobile3"><span class="ico">📢</span>Espacio publicitario</div>
 
   </div>
 </main>
@@ -534,6 +553,6 @@
 
 <button class="btop" id="btop" aria-label="Volver arriba">↑</button>
 
-<script src="js/main.js"></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
