@@ -652,3 +652,112 @@ a.logo {width: 150px; }
 .social    { content-visibility: auto; contain-intrinsic-size: 0 420px; }
 .video-sec { content-visibility: auto; contain-intrinsic-size: 0 700px; }
 .footer    { content-visibility: auto; contain-intrinsic-size: 0 460px; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   26 · VISTA DE NOTICIA (nota.html)
+   ───────────────────────────────────────────────────────────────────────
+   Pega este bloque AL FINAL de tu css/styles.css.
+   Usa los tokens que ya existen en :root (--v-500, --ink, --linea, etc.).
+   El utility bar, header, navbar, ticker y footer NO necesitan estilos
+   nuevos: reutilizan los del index.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Skip links accesibles */
+.skip-link { position: absolute; left: -999px; top: 0; z-index: 999; background: var(--v-700); color: #fff; padding: 8px 14px; border-radius: 0 0 var(--r-s) 0; font-size: 13px; font-weight: 700; }
+.skip-link:focus { left: 0; }
+
+/* Barra de progreso de lectura */
+#pbar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--v-500), var(--v-400)); z-index: 400; transition: width .1s linear; }
+
+/* Reveal al hacer scroll */
+.rv { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.rv.on { opacity: 1; transform: none; }
+
+/* Breadcrumb */
+.bc { max-width: var(--wrap); margin: 0 auto; padding: 14px 16px 0; font-size: 12px; color: var(--g-500); }
+.bc a { color: var(--g-500); transition: color var(--t); }
+.bc a:hover { color: var(--v-700); }
+.bc span { margin: 0 6px; color: var(--g-300); }
+
+/* Layout artículo + sidebar */
+.art-wrap { max-width: var(--wrap); margin: 0 auto; padding: 14px 16px; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; align-items: start; }
+
+/* Cabecera del artículo */
+.art-cat { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--v-500); padding: 4px 11px; border-radius: 3px; margin-bottom: 14px; }
+.art-h1 { font-size: 34px; font-weight: 900; line-height: 1.18; color: var(--ink); margin-bottom: 12px; letter-spacing: -.3px; }
+.art-deck { font-size: 17px; line-height: 1.5; color: var(--g-700); margin-bottom: 18px; }
+.art-byline { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 0; border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); margin-bottom: 20px; }
+.art-av { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.art-by-n { font-size: 13px; font-weight: 700; color: var(--ink); }
+.art-by-m { font-size: 11.5px; color: var(--g-500); }
+.art-share { margin-left: auto; display: flex; gap: 6px; }
+.art-share a { width: 32px; height: 32px; border-radius: 50%; background: var(--g-050); border: 1px solid var(--linea); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--g-700); transition: background var(--spring), transform var(--spring), color var(--t); }
+.art-share a:hover { background: var(--v-500); color: #fff; border-color: var(--v-500); transform: translateY(-2px) scale(1.08); }
+
+/* Imagen hero del artículo */
+.art-hero { border-radius: var(--r); overflow: hidden; margin-bottom: 8px; box-shadow: var(--s-2); }
+.art-hero img { width: 100%; aspect-ratio: 1280 / 460; object-fit: cover; display: block; }
+.art-cap { font-size: 12px; color: var(--g-500); padding: 8px 2px 22px; line-height: 1.4; }
+
+/* Cuerpo del artículo */
+.art-body { font-size: 17px; line-height: 1.75; color: #232323; }
+.art-body p { margin-bottom: 20px; }
+.art-body p:first-of-type::first-letter { font-size: 58px; font-weight: 900; float: left; line-height: .82; padding: 6px 8px 0 0; color: var(--v-700); }
+.art-body h2 { font-size: 22px; font-weight: 800; color: var(--ink); margin: 28px 0 14px; }
+.art-body blockquote { font-size: 22px; font-weight: 700; color: var(--v-700); border-left: 4px solid var(--v-500); padding: 6px 0 6px 20px; margin: 26px 0; line-height: 1.4; }
+.art-body a { color: var(--v-700); text-decoration: underline; text-underline-offset: 2px; }
+.art-inline-img { border-radius: var(--r-s); width: 100%; aspect-ratio: 900 / 500; object-fit: cover; margin: 22px 0 8px; }
+.art-inline-cap { font-size: 12px; color: var(--g-500); margin-bottom: 22px; }
+
+/* Ad nativo dentro del cuerpo */
+.art-ad { background: #f0f1f0; border: 1px dashed #cdd0cd; border-radius: var(--r); min-height: 120px; display: flex; align-items: center; justify-content: center; color: #b6bab6; font-size: 12px; margin: 26px 0; text-align: center; }
+
+/* Tags de cierre */
+.art-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 26px; }
+.art-tags .tag { font-size: 12px; font-weight: 600; color: var(--v-700); background: var(--v-050); border: 1px solid var(--v-100); padding: 5px 12px; border-radius: 16px; transition: background var(--t), color var(--t); }
+.art-tags .tag:hover { background: var(--v-500); color: #fff; border-color: var(--v-500); }
+
+/* Caja de autor */
+.art-author-box { display: flex; gap: 14px; background: var(--g-050); border-radius: var(--r); padding: 16px; margin-bottom: 28px; }
+.art-author-box img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.art-author-box h5 { font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+.art-author-box p { font-size: 12.5px; color: var(--g-500); line-height: 1.5; }
+
+/* Relacionadas (reutilizan .sh-card del index; solo el encabezado y la grid) */
+.art-rel-h { font-size: 16px; font-weight: 800; color: var(--ink); padding-bottom: 11px; border-bottom: 2px solid var(--v-500); margin-bottom: 16px; }
+.art-rel-g { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 30px; }
+.sh-cm { margin-left: auto; }
+
+/* Comentarios */
+.art-comments { background: var(--blanco); border-radius: var(--r); box-shadow: var(--s-1); padding: 18px; }
+.art-comments textarea { width: 100%; min-height: 80px; border: 1.5px solid var(--linea); border-radius: var(--r-s); padding: 10px 12px; font-family: inherit; font-size: 14px; resize: vertical; outline: none; transition: border-color var(--t); }
+.art-comments textarea:focus { border-color: var(--v-500); }
+.art-comments button { margin-top: 10px; background: var(--v-500); color: #fff; padding: 9px 20px; border-radius: 18px; font-size: 13px; font-weight: 700; transition: background var(--t); }
+.art-comments button:hover { background: var(--v-700); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .art-wrap { grid-template-columns: 1fr; }
+  .art-rel-g { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .art-h1 { font-size: 24px; }
+  .art-deck { font-size: 15px; }
+  .art-body { font-size: 15.5px; }
+  .art-rel-g { grid-template-columns: 1fr; }
+  .art-body p:first-of-type::first-letter { font-size: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Utilidad para lectores de pantalla (la usan las <label> ocultas) ── */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* ── Corrección: en el home, los anuncios de escritorio se ocultan en móvil
+   porque ahí se usan los slots .ad-mobile. La vista de noticia NO tiene esos
+   slots, así que aquí sí debe verse el 300×250 del sidebar. ── */
+@media (max-width: 980px) {
+  .art-wrap .ad-300-250 { display: flex; }
+}
