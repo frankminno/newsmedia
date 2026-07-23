@@ -1,6 +1,17 @@
 /* ═══════════════════════════════════════════════════════════════
    MÓDULO "MÁS POPULARES" — polling + reordenamiento con FLIP
    ───────────────────────────────────────────────────────────────
+   Pega este bloque AL FINAL de tu js/main.js.
+   Va aislado en su propio IIFE, no choca con el resto de main.js.
+
+   Qué hace:
+     · cada POLL ms pide la lista ordenada por lecturas/sesiones,
+     · anima el cambio de posición (técnica FLIP),
+     · muestra badge ▲/▼ del salto y flash en el contador,
+     · marca "Nuevo" a las notas que entran a la lista,
+     · se refresca al volver a la pestaña.
+
+   ⭐ ÚNICO PUNTO A CAMBIAR PARA EL CMS: obtenerPopulares()
    ═══════════════════════════════════════════════════════════════ */
    (function () {
     'use strict';
@@ -69,7 +80,10 @@
       return Promise.resolve(data);
     }
   
-   
+    /* ══════════════════════════════════════════════════════════════
+       De aquí para abajo NO necesitas tocar nada al conectar el CMS.
+       ══════════════════════════════════════════════════════════════ */
+  
     function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n.toLocaleString('es-MX'); }
     function now() { var d = new Date(); return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0'); }
   
@@ -238,7 +252,18 @@
   /* ═══════════════════════════════════════════════════════════════
      MÓDULO "EXPRESO VIDEO" — últimos videos del canal (auto)
      ───────────────────────────────────────────────────────────────
-      ═══════════════════════════════════════════════════════════════ */
+     Pega este bloque AL FINAL de tu js/main.js (después del anterior).
+     Aislado en su propio IIFE; arranca solo si existe #videoMain.
+  
+     Qué hace:
+       · trae los últimos videos del canal de YouTube,
+       · pinta destacado + playlist (4) + tira inferior (3),
+       · reproduce en un modal (iframe lazy que se destruye al cerrar),
+       · marca "Nuevo" a los subidos en las últimas 6 h,
+       · se refresca cada 5 min y al volver a la pestaña.
+  
+     ⭐ ÚNICO PUNTO A CAMBIAR PARA EL CMS / API: obtenerVideos()
+     ═══════════════════════════════════════════════════════════════ */
   (function () {
     'use strict';
   
@@ -347,7 +372,27 @@
     }
   
     /* ══════════════════════════════════════════════════════════════
-          De aquí para abajo NO necesitas tocar nada.
+       FUENTE DE DATOS  ← AQUÍ cambias el origen si hace falta
+       ──────────────────────────────────────────────────────────────
+       Por defecto lee el RSS público del canal (sin API key). Si falla,
+       el ciclo de abajo reintenta antes de recurrir al FALLBACK. Si el
+       CMS o la YouTube Data API van a servir los videos, reemplaza el
+       cuerpo por tu fetch. Debe resolver un arreglo con la forma:
+       { id, title, published, views, author }.
+       ══════════════════════════════════════════════════════════════ */
+    function obtenerVideos() {
+      /* ─── PRODUCCIÓN alterna (CMS o API): descomenta y ajusta ───
+      return fetch('/api/videos?limit=7', { cache: 'no-store' })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+      ────────────────────────────────────────────────────────────── */
+  
+      /* Intenta el RSS y LANZA error si falla (no cae solo al fallback):
+         así el ciclo puede reintentar por los videos actuales, igual v5. */
+      return fetchWithProxies(0).then(parseRSS);
+    }
+  
+    /* ══════════════════════════════════════════════════════════════
+       De aquí para abajo NO necesitas tocar nada.
        ══════════════════════════════════════════════════════════════ */
   
     var loadedVids = [];
@@ -546,6 +591,7 @@
        un tropiezo puntual del proxy). ── */
     var MAX_RETRY = 3;
     var retryCount = 0;
+    var rssOk = false;
   
     function pintar(videos) {
       if (!videos || !videos.length) return;
@@ -563,14 +609,18 @@
     function actualizar() {
       obtenerVideos().then(function (videos) {
         pintar(videos);            /* RSS OK → videos actuales del canal */
+        rssOk = true;
         retryCount = 0;
       }).catch(function (err) {
         console.warn('[Expreso Video] RSS falló:', err.message);
+        /* Para que el bloque nunca se vea vacío, pintamos el respaldo de
+           inmediato la primera vez; si un reintento posterior trae el RSS,
+           se reemplaza solo por los videos actuales. */
+        if (!rssOk && !loadedVids.length) pintar(FALLBACK.slice());
         retryCount++;
         if (retryCount <= MAX_RETRY) {
-          setTimeout(actualizar, 10000);   /* reintenta en 10 s por los actuales */
+          setTimeout(actualizar, 10000);   /* sigue insistiendo por los actuales */
         } else {
-          pintar(FALLBACK.slice());        /* último recurso: lista verificada */
           retryCount = 0;
         }
       });
@@ -600,6 +650,14 @@
   /* ═══════════════════════════════════════════════════════════════
      MÓDULO "REDES SOCIALES" — feed de Instagram (@expresomx)
      ───────────────────────────────────────────────────────────────
+     Pega este bloque AL FINAL de tu js/main.js.
+     Aislado en su IIFE; arranca solo si existe .social-grid.
+  
+     IMPORTANTE: el frontend NUNCA habla directo con Instagram ni
+     lleva el token. Habla con tu backend PHP (instagram.php), que
+     guarda el token, llama a la Graph API y cachea. Ver ese archivo.
+  
+     ⭐ ÚNICO PUNTO A CAMBIAR PARA PRODUCCIÓN: obtenerInstagram()
      ═══════════════════════════════════════════════════════════════ */
   (function () {
     'use strict';
@@ -639,7 +697,11 @@
   
       return Promise.resolve(MOCK);
     }
-    
+  
+    /* ══════════════════════════════════════════════════════════════
+       De aquí para abajo NO necesitas tocar nada.
+       ══════════════════════════════════════════════════════════════ */
+  
     function timeAgo(iso) {
       if (!iso) return '@expresomx';
       var s = (Date.now() - new Date(iso)) / 1000;
@@ -709,4 +771,189 @@
       arrancar();
     }
   
+  })();
+  
+  
+  /* ═══════════════════════════════════════════════════════════════
+     MÓDULOS DE INTERFAZ — slider, feed, newsletter, back-to-top, encuesta
+     ───────────────────────────────────────────────────────────────
+     Faltaban en main.js: por eso el slider del hero no respondía.
+     Cada uno va en su propio IIFE y arranca solo si su marcado existe,
+     así el mismo main.js sirve para el home y para la vista de noticia.
+     ═══════════════════════════════════════════════════════════════ */
+  
+  /* ── 1 · HERO SLIDER ──────────────────────────────────────────── */
+  (function () {
+    'use strict';
+  
+    var hero = document.getElementById('hero');
+    if (!hero) return;
+  
+    var slides = hero.querySelectorAll('.hero-slide');
+    if (slides.length < 2) return;
+  
+    var dots  = hero.querySelectorAll('.hero-dot');
+    var count = document.getElementById('heroCount');
+    var prev  = document.getElementById('heroPrev');
+    var next  = document.getElementById('heroNext');
+  
+    var cur = 0, timer = null;
+    var AUTO = 5000;
+  
+    function ir(i) {
+      slides[cur].classList.remove('on');
+      if (dots[cur]) dots[cur].classList.remove('on');
+      cur = (i + slides.length) % slides.length;
+      slides[cur].classList.add('on');
+      if (dots[cur]) dots[cur].classList.add('on');
+      if (count) count.textContent = (cur + 1) + ' de ' + slides.length;
+    }
+    function play()  { stop(); timer = setInterval(function () { ir(cur + 1); }, AUTO); }
+    function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+    function reinit(){ stop(); play(); }
+  
+    if (prev) prev.addEventListener('click', function () { ir(cur - 1); reinit(); });
+    if (next) next.addEventListener('click', function () { ir(cur + 1); reinit(); });
+  
+    [].forEach.call(dots, function (d, i) {
+      d.addEventListener('click', function () { ir(i); reinit(); });
+    });
+  
+    /* Pausa al pasar el mouse (no roba la lectura) */
+    hero.addEventListener('mouseenter', stop, { passive: true });
+    hero.addEventListener('mouseleave', play, { passive: true });
+  
+    /* Swipe táctil */
+    var x0 = null;
+    hero.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) { ir(dx < 0 ? cur + 1 : cur - 1); reinit(); }
+      x0 = null;
+    }, { passive: true });
+  
+    /* Flechas del teclado cuando el hero tiene el foco dentro */
+    hero.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { ir(cur - 1); reinit(); }
+      if (e.key === 'ArrowRight') { ir(cur + 1); reinit(); }
+    });
+  
+    /* CWV: no gastamos CPU con la pestaña en segundo plano */
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else play();
+    });
+  
+    ir(0);
+    play();
+  })();
+  
+  
+  /* ── 2 · FEED "Para ti": vista lista / tarjetas ───────────────── */
+  (function () {
+    'use strict';
+  
+    var body  = document.getElementById('feedBody');
+    var bList = document.getElementById('viewList');
+    var bCard = document.getElementById('viewCards');
+    if (!body || !bList || !bCard) return;
+  
+    function set(modoTarjetas) {
+      body.classList.toggle('cards', modoTarjetas);
+      bCard.classList.toggle('on', modoTarjetas);
+      bList.classList.toggle('on', !modoTarjetas);
+    }
+    bList.addEventListener('click', function () { set(false); });
+    bCard.addEventListener('click', function () { set(true); });
+  })();
+  
+  
+  /* ── 3 · NEWSLETTER ───────────────────────────────────────────── */
+  (function () {
+    'use strict';
+  
+    /* El home usa nlInput/nlBtn y la nota usa nlE/nlB: soportamos ambos */
+    var input = document.getElementById('nlInput') || document.getElementById('nlE');
+    var btn   = document.getElementById('nlBtn')   || document.getElementById('nlB');
+    if (!input || !btn) return;
+  
+    var textoOriginal = btn.textContent;
+  
+    btn.addEventListener('click', function () {
+      var v = (input.value || '').trim();
+      if (v && v.indexOf('@') > 0 && v.indexOf('.') > 0) {
+        /* TODO: aquí va el POST real al CMS/servicio de newsletter */
+        btn.textContent = '✔ ¡Suscrito!';
+        input.value = '';
+        setTimeout(function () { btn.textContent = textoOriginal; }, 3000);
+      } else {
+        input.focus();
+        input.style.outline = '2px solid #c0392b';
+        setTimeout(function () { input.style.outline = ''; }, 1500);
+      }
+    });
+  })();
+  
+  
+  /* ── 4 · BACK TO TOP ──────────────────────────────────────────── */
+  (function () {
+    'use strict';
+  
+    var b = document.getElementById('btop');
+    if (!b) return;
+  
+    window.addEventListener('scroll', function () {
+      b.classList.toggle('show', window.scrollY > 300);
+    }, { passive: true });
+  
+    b.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  
+  
+  /* ── 5 · PREGUNTA DEL DÍA (demo sin backend) ──────────────────── */
+  (function () {
+    'use strict';
+  
+    var card = document.getElementById('pollCard');
+    if (!card) return;
+  
+    var opts   = card.querySelectorAll('.poll-opt');
+    var result = document.getElementById('pollResult');
+    var total  = document.getElementById('pollTotal');
+    if (!opts.length || !result) return;
+  
+    var KEY    = 'expresoPollVehiculo';
+    var counts = { si: 612, no: 384 };   /* ← en producción vendrá del CMS */
+  
+    function render(elegida) {
+      var sum = counts.si + counts.no;
+      ['si', 'no'].forEach(function (val) {
+        var pct  = sum ? Math.round((counts[val] / sum) * 100) : 0;
+        var fill = result.querySelector('.poll-bar-fill[data-opt="' + val + '"]');
+        var lbl  = result.querySelector('.poll-bar-pct[data-pct="' + val + '"]');
+        if (fill) fill.style.width = pct + '%';
+        if (lbl)  lbl.textContent  = pct + '%';
+      });
+      [].forEach.call(opts, function (b) {
+        b.classList.toggle('selected', b.dataset.val === elegida);
+      });
+      if (total) total.textContent = sum.toLocaleString('es-MX') + ' votos';
+      result.classList.add('show');
+    }
+  
+    var votada = sessionStorage.getItem(KEY);
+    if (votada) render(votada);
+  
+    [].forEach.call(opts, function (btn) {
+      btn.addEventListener('click', function () {
+        if (sessionStorage.getItem(KEY)) return;
+        var val = btn.dataset.val;
+        if (!counts.hasOwnProperty(val)) return;
+        counts[val]++;
+        sessionStorage.setItem(KEY, val);
+        render(val);
+      });
+    });
   })();
