@@ -614,6 +614,7 @@ a.logo {width: 150px; }
   .header > .wrap { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; row-gap: 8px; column-gap: 10px; }
   .header .logo:first-of-type  img { height: 40px; }
   .header .logo:nth-of-type(2) img { height: 30px; }
+  a.logo {width: 20%;}
   .header-actions { order: 4; margin-left: auto; }
   .search { order: 5; flex: 1 1 100%; max-width: none; }
   .btn-ghost { display: none; }
@@ -761,3 +762,29 @@ a.logo {width: 150px; }
 @media (max-width: 980px) {
   .art-wrap .ad-300-250 { display: flex; }
 }
+/* ═══════════════════════════════════════════════════════════════════════
+   27 · NAVBAR EN MÓVIL — scroll horizontal (solo móvil; no altera escritorio)
+   ───────────────────────────────────────────────────────────────────────
+   El navbar de escritorio es una fila de altura fija con 8 secciones + 4
+   pills. En pantallas chicas no cabe y se desborda. Aquí lo dejamos como
+   una tira que se desliza horizontalmente, con "Inicio" como pill negra.
+   ═══════════════════════════════════════════════════════════════════════ */
+   @media (max-width: 980px) {
+      .navbar .wrap {
+        height: auto;
+        align-items: center;
+        gap: 4px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .navbar .wrap::-webkit-scrollbar { display: none; }
+     
+      .nav-primary { flex-shrink: 0; }
+      .nav-primary a { flex-shrink: 0; white-space: nowrap; padding: 9px 13px; }
+      .nav-primary a:first-child { border-radius: var(--r-s); border-bottom: none; }
+     
+      .nav-secondary { margin-left: 6px; gap: 8px; flex-shrink: 0; }
+      .nav-secondary a { flex-shrink: 0; white-space: nowrap; padding: 7px 15px; }
