@@ -611,14 +611,16 @@ a.logo {width: 150px; }
 
 /* ── HEADER móvil: acomodo de logos y buscador ── */
 @media (max-width: 600px) {
-  .header > .wrap { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; row-gap: 8px; column-gap: 10px; }
-  .header .logo:first-of-type  img { height: 40px; }
-  .header .logo:nth-of-type(2) img { height: 30px; }
-  a.logo {width: 20%;}
-  .header-actions { order: 4; margin-left: auto; }
-  .search { order: 5; flex: 1 1 100%; max-width: none; }
-  .btn-ghost { display: none; }
-
+    /* Header móvil: logos en los extremos → buscador → botones */
+  .header > .wrap { flex-wrap: wrap; height: auto; align-items: center; row-gap: 16px; padding-top: 14px; padding-bottom: 14px; }
+  .header .logo { flex: 0 0 auto; margin: 0; }
+  .header .logo:nth-of-type(2) { margin-left: auto; } /* 2º logo al extremo derecho */
+  .header .logo img { height: 116px; width: auto; }
+  .search { order: 3; flex: 1 1 100%; max-width: none; }
+  .header-actions { order: 4; flex: 1 1 100%; margin-left: 0; gap: 10px; }
+  .btn-ghost { display: inline-flex; } /* volvemos a mostrar Ed. Impresa */
+  .header-actions .btn { flex: 1; text-align: center; }
+   a.logo {width: 100%;}  
   .subhero { grid-template-columns: 1fr; }
   .social-grid { grid-template-columns: 1fr; }
   .video-strip { grid-template-columns: 1fr; }
@@ -788,3 +790,39 @@ a.logo {width: 150px; }
      
       .nav-secondary { margin-left: 6px; gap: 8px; flex-shrink: 0; }
       .nav-secondary a { flex-shrink: 0; white-space: nowrap; padding: 7px 15px; }
+      /* ═══════════════════════════════════════════════════════════════════════
+   28 · VISTA DE GALERÍA (galeria.php)  +  NAVBAR ACTIVO DINÁMICO
+   Pega este bloque AL FINAL de tu css/styles.css.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Rejilla de la galería ── */
+.gal-page { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 8px 0 30px; }
+.gal-item { position: relative; display: block; border-radius: var(--r-s); overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--s-1); }
+.gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.gal-item:hover img { transform: scale(1.06); }
+.gal-item.wide { grid-column: span 2; aspect-ratio: 16 / 9; }
+.gal-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 10px; background: linear-gradient(transparent, rgba(0,0,0,.82)); color: #fff; font-size: 12px; line-height: 1.35; opacity: 0; transition: opacity .25s ease; }
+.gal-item:hover .gal-cap { opacity: 1; }
+
+@media (max-width: 700px) {
+  .gal-page { grid-template-columns: 1fr 1fr; }
+  .gal-cap { opacity: 1; } /* en táctil se muestra siempre */
+}
+@media (max-width: 460px) {
+  .gal-page { grid-template-columns: 1fr; }
+  .gal-item, .gal-item.wide { grid-column: span 1; aspect-ratio: 4 / 3; }
+}
+
+/* ── Navbar activo dinámico ──────────────────────────────────────────────
+   OPCIONAL pero recomendado con los partials PHP: hace que la pestaña
+   resaltada dependa de la sección (variable $active del navbar), no de
+   que sea siempre la primera. Para activarlo, en tu regla del navbar
+   CAMBIA el selector:
+       .nav-primary a:first-child  →  .nav-primary a.active
+   (o simplemente agrega la regla de abajo, que cubre ambos casos). */
+.nav-primary a.active {
+  background: var(--black);
+  color: #fff;
+  border-bottom: 2px solid var(--green-mid);
+}
+.nav-secondary a.active { box-shadow: 0 4px 12px rgba(0,150,65,.3); }
