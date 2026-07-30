@@ -612,7 +612,7 @@ a.logo {width: 150px; }
 /* ── HEADER móvil: acomodo de logos y buscador ── */
 @media (max-width: 600px) {
    /* Header móvil: logos en los extremos → buscador → botones */
-   a.logo {width: -50px; }
+   a.logo {width: auto; }
    .header > .wrap { flex-wrap: wrap; height: auto; align-items: center; row-gap: 16px; padding-top: 14px; padding-bottom: 14px; }
    .header .logo { flex: 0 0 auto; margin: 0; }
    img { max-width: none; }
