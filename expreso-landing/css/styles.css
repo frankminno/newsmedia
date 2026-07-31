@@ -135,7 +135,8 @@ img[data-ph], img[data-ph-hero] {
 .header { background: #fff; border-bottom: 1px solid var(--line); }
 .header .wrap { display: flex; align-items: center; gap: 24px; height: 180px; }
 
-
+img.exp {width:300px}
+img.aniv{width:200px}
 a.logo {width: 150px; }
 .logo { flex-shrink: 0; line-height: 1; }
 /* (logo-mark/logo-tag por si usas logo de texto; el markup actual usa <img>) */
