@@ -358,24 +358,41 @@
       <aside class="col-right">
 
         <!-- Clima -->
-        <div class="weather">
-          <div class="weather-hd">
-            <div class="weather-city">📍 Hermosillo, Sonora</div>
-            <div class="weather-main">
-              <div class="weather-temp">38°</div>
-              <div class="weather-info">
-                <div class="weather-desc">☀ Soleado</div>
-                <div class="weather-feel">Sensación: 41° · Hum. 18%</div>
-              </div>
-            </div>
-            <div class="weather-days">
-              <div class="weather-day"><div class="d">Hoy</div><div class="ic">☀</div><div class="t">38°/22°</div></div>
-              <div class="weather-day"><div class="d">Mié</div><div class="ic">⛅</div><div class="t">39°/23°</div></div>
-              <div class="weather-day"><div class="d">Jue</div><div class="ic">⛅</div><div class="t">37°/21°</div></div>
-            </div>
-          </div>
-          <a href="/clima" class="weather-cta">Revisar UV, calidad del aire y más →</a>
+        <div class="weather" data-weather-widget>
+  <div class="weather-hd">
+
+    <div class="weather-city">
+      📍 <span id="weatherCity">HERMOSILLO, SONORA</span>
+    </div>
+
+    <div class="weather-main">
+      <div class="weather-temp" id="weatherTemp">--°</div>
+
+      <div class="weather-info">
+        <div class="weather-desc">
+          <span id="weatherIcon">☀</span>
+          <span id="weatherDescription">Consultando clima…</span>
         </div>
+
+        <div class="weather-feel">
+          Sensación:
+          <span id="weatherFeels">--°</span>
+          · Hum.
+          <span id="weatherHumidity">--%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="weather-days" id="weatherDays">
+      <!-- Se genera con los datos actuales de EXPRESO -->
+    </div>
+
+  </div>
+
+  <a href="#" class="weather-cta">
+    Revisar UV, calidad del aire y más →
+  </a>
+</div>
 
         <!-- Ad 300×250 -->
         <div class="ad-box ad-300-250"><span class="ico">📢</span>Espacio publicitario<br>300 × 250</div>
