@@ -773,6 +773,82 @@
 
 })();
 
+const EXPRESO_WEATHER_ENDPOINT = 'AQUI_VA_EL_ENDPOINT_ACTUAL';
+
+async function getExpresoWeather() {
+  const response = await fetch(EXPRESO_WEATHER_ENDPOINT, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json'
+    },
+    cache: 'no-store'
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error del clima: HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function normalizeExpresoWeather(payload) {
+  /*
+   * Aquí se traducen los nombres reales de la respuesta actual:
+   *
+   * payload.temperatura
+   * payload.sensacion
+   * payload.humedad
+   * payload.descripcion
+   * payload.pronostico
+   *
+   * Los nombres definitivos dependerán del JSON actual.
+   */
+
+  return {
+    city: payload.city,
+    temperature: payload.temperature,
+    apparentTemperature: payload.apparentTemperature,
+    humidity: payload.humidity,
+    description: payload.description,
+    icon: payload.icon,
+    forecast: payload.forecast
+  };
+}
+
+function renderExpresoWeather(weather) {
+  document.getElementById('weatherCity').textContent =
+    weather.city.toUpperCase();
+
+  document.getElementById('weatherTemp').textContent =
+    `${Math.round(weather.temperature)}°`;
+
+  document.getElementById('weatherFeels').textContent =
+    `${Math.round(weather.apparentTemperature)}°`;
+
+  document.getElementById('weatherHumidity').textContent =
+    `${Math.round(weather.humidity)}%`;
+
+  document.getElementById('weatherDescription').textContent =
+    weather.description;
+
+  document.getElementById('weatherIcon').textContent =
+    weather.icon;
+
+  renderForecast(weather.forecast);
+}
+
+async function updateExpresoWeather() {
+  try {
+    const payload = await getExpresoWeather();
+    const weather = normalizeExpresoWeather(payload);
+
+    renderExpresoWeather(weather);
+  } catch (error) {
+    console.error('No fue posible actualizar el clima:', error);
+  }
+}
+
+
 
 /* ═══════════════════════════════════════════════════════════════
    MÓDULOS DE INTERFAZ — slider, feed, newsletter, back-to-top, encuesta
