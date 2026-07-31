@@ -357,41 +357,66 @@
       <!-- ═══ COLUMNA DERECHA ═══ -->
       <aside class="col-right">
 
-        <!-- Clima -->
-        <div class="weather" data-weather-widget>
+        <div class="weather" data-expreso-weather>
+
   <div class="weather-hd">
 
     <div class="weather-city">
-      📍 <span id="weatherCity">HERMOSILLO, SONORA</span>
+      📍 HERMOSILLO, SONORA
     </div>
 
     <div class="weather-main">
-      <div class="weather-temp" id="weatherTemp">--°</div>
+
+      <div
+        class="weather-temp"
+        id="weatherCardTemp"
+        aria-live="polite"
+      >
+        --°
+      </div>
 
       <div class="weather-info">
+
         <div class="weather-desc">
-          <span id="weatherIcon">☀</span>
-          <span id="weatherDescription">Consultando clima…</span>
+
+          <img
+            id="weatherCardIcon"
+            class="weather-current-icon"
+            src=""
+            alt=""
+            width="27"
+            height="27"
+          >
+
+          <span id="weatherCardDescription">
+            Clima actual
+          </span>
+
         </div>
 
         <div class="weather-feel">
-          Sensación:
-          <span id="weatherFeels">--°</span>
-          · Hum.
-          <span id="weatherHumidity">--%</span>
+          Datos actualizados por EXPRESO
         </div>
+
       </div>
+
     </div>
 
-    <div class="weather-days" id="weatherDays">
-      <!-- Se genera con los datos actuales de EXPRESO -->
-    </div>
+    <div
+      class="weather-days"
+      id="weatherForecast"
+      hidden
+    ></div>
 
   </div>
 
-  <a href="#" class="weather-cta">
+  <a
+    href="/newsmedia/expreso-landing/clima.html"
+    class="weather-cta"
+  >
     Revisar UV, calidad del aire y más →
   </a>
+
 </div>
 
         <!-- Ad 300×250 -->
