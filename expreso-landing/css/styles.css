@@ -137,7 +137,7 @@ img[data-ph], img[data-ph-hero] {
 
 img.exp {width:300px}
 img.aniv{width:200px}
-a.logo {width: 150px; }
+
 .logo { flex-shrink: 0; line-height: 1; }
 /* (logo-mark/logo-tag por si usas logo de texto; el markup actual usa <img>) */
 .header .logo-mark { font-size: 38px; font-weight: 900; letter-spacing: -1px; color: var(--black); }
