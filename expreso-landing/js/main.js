@@ -773,79 +773,138 @@
 
 })();
 
-const EXPRESO_WEATHER_ENDPOINT = 'AQUI_VA_EL_ENDPOINT_ACTUAL';
+/* ═══════════════════════════════════════════════════════════════
+   PUENTE DEL CLIMA ACTUAL DE EXPRESO AL NUEVO TEMPLATE
+   ═══════════════════════════════════════════════════════════════ */
 
-async function getExpresoWeather() {
-  const response = await fetch(EXPRESO_WEATHER_ENDPOINT, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json'
-    },
-    cache: 'no-store'
+/**
+ * Extrae un valor numérico de textos como:
+ * "41.9 °C", "41,9 °C" o "42 grados".
+ *
+ * @param {string} value
+ * @returns {number|null}
+ */
+function parseWeatherTemperature(value) {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalizedValue = value
+    .replace(',', '.')
+    .trim();
+
+  const match = normalizedValue.match(/-?\d+(?:\.\d+)?/);
+
+  if (!match) {
+    return null;
+  }
+
+  const temperature = Number(match[0]);
+
+  return Number.isFinite(temperature)
+    ? temperature
+    : null;
+}
+
+/**
+ * Copia la información del fragmento actual de EXPRESO
+ * hacia la tarjeta del nuevo diseño.
+ */
+function syncExpresoWeatherCard() {
+  const sourceTemperature =
+    document.getElementById('gradosclima');
+
+  const sourceIcon =
+    document.getElementById('imgclima');
+
+  const cardTemperature =
+    document.getElementById('weatherCardTemp');
+
+  const cardIcon =
+    document.getElementById('weatherCardIcon');
+
+  if (
+    !sourceTemperature ||
+    !sourceIcon ||
+    !cardTemperature ||
+    !cardIcon
+  ) {
+    return;
+  }
+
+  const temperature = parseWeatherTemperature(
+    sourceTemperature.textContent
+  );
+
+  if (temperature !== null) {
+    /*
+     * El diseño muestra la temperatura sin decimales.
+     * El dato original permanece intacto en #gradosclima.
+     */
+    cardTemperature.textContent =
+      `${Math.round(temperature)}°`;
+  }
+
+  const iconUrl =
+    sourceIcon.currentSrc ||
+    sourceIcon.getAttribute('src');
+
+  if (iconUrl) {
+    cardIcon.src = iconUrl;
+    cardIcon.alt =
+      sourceIcon.alt || 'Condición meteorológica actual';
+
+    cardIcon.hidden = false;
+  } else {
+    cardIcon.hidden = true;
+  }
+}
+
+/**
+ * Observa el fragmento generado por EXPRESO.
+ *
+ * Si el backend sustituye la temperatura, el icono o incluso
+ * el contenido completo de #climaheader, la tarjeta se actualiza.
+ */
+function initExpresoWeatherCard() {
+  const sourceContainer =
+    document.getElementById('weather-source');
+
+  const weatherCard =
+    document.querySelector('[data-expreso-weather]');
+
+  if (!sourceContainer || !weatherCard) {
+    return;
+  }
+
+  syncExpresoWeatherCard();
+
+  const observer = new MutationObserver(() => {
+    syncExpresoWeatherCard();
   });
 
-  if (!response.ok) {
-    throw new Error(`Error del clima: HTTP ${response.status}`);
-  }
+  observer.observe(sourceContainer, {
+    subtree: true,
+    childList: true,
+    characterData: true,
+    attributes: true,
+    attributeFilter: [
+      'src',
+      'alt'
+    ]
+  });
 
-  return response.json();
+  weatherCard.dataset.weatherReady = 'true';
 }
 
-function normalizeExpresoWeather(payload) {
-  /*
-   * Aquí se traducen los nombres reales de la respuesta actual:
-   *
-   * payload.temperatura
-   * payload.sensacion
-   * payload.humedad
-   * payload.descripcion
-   * payload.pronostico
-   *
-   * Los nombres definitivos dependerán del JSON actual.
-   */
-
-  return {
-    city: payload.city,
-    temperature: payload.temperature,
-    apparentTemperature: payload.apparentTemperature,
-    humidity: payload.humidity,
-    description: payload.description,
-    icon: payload.icon,
-    forecast: payload.forecast
-  };
-}
-
-function renderExpresoWeather(weather) {
-  document.getElementById('weatherCity').textContent =
-    weather.city.toUpperCase();
-
-  document.getElementById('weatherTemp').textContent =
-    `${Math.round(weather.temperature)}°`;
-
-  document.getElementById('weatherFeels').textContent =
-    `${Math.round(weather.apparentTemperature)}°`;
-
-  document.getElementById('weatherHumidity').textContent =
-    `${Math.round(weather.humidity)}%`;
-
-  document.getElementById('weatherDescription').textContent =
-    weather.description;
-
-  document.getElementById('weatherIcon').textContent =
-    weather.icon;
-
-  renderForecast(weather.forecast);
-}
-
-async function updateExpresoWeather() {
-  try {
-    const payload = await getExpresoWeather();
-    const weather = normalizeExpresoWeather(payload);
-
-    renderExpresoWeather(weather);
-  } catch (error) {
-    console.error('No fue posible actualizar el clima:', error);
-  }
+if (document.readyState === 'loading') {
+  document.addEventListener(
+    'DOMContentLoaded',
+    initExpresoWeatherCard,
+    { once: true }
+  );
+} else {
+  initExpresoWeatherCard();
 }
 
 
