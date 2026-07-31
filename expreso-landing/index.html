@@ -357,7 +357,40 @@
       <!-- ═══ COLUMNA DERECHA ═══ -->
       <aside class="col-right">
 
-        <div class="weather" data-expreso-weather>
+        <!-- ═══════════════════════════════════════════════════════════════
+     FUENTE ACTUAL DEL CLIMA DE EXPRESO
+     En producción, este fragmento debe seguir siendo generado
+     o actualizado por el sistema actual de EXPRESO.
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="weather-source" class="weather-source" aria-hidden="true">
+
+  <!--blob 07/30/2026 06:27:04.804 p. m. -->
+  <!--publishThread: 01:25:34.357 AM -->
+
+  <span id="climaheader" class="clima">
+
+    <img
+      id="imgclima"
+      name="imgclima"
+      src="https://cdn.weatherapi.com/weather/64x64/day/113.png"
+      alt="Clima actual"
+      width="25"
+      height="25"
+    >
+
+    <span id="gradosclima" name="gradosclima">
+      41.9 &deg;C
+    </span>
+
+  </span>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TARJETA VISUAL DEL NUEVO TEMPLATE
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="weather" data-expreso-weather>
 
   <div class="weather-hd">
 
@@ -384,8 +417,9 @@
             class="weather-current-icon"
             src=""
             alt=""
-            width="27"
-            height="27"
+            width="32"
+            height="32"
+            hidden
           >
 
           <span id="weatherCardDescription">
@@ -402,6 +436,10 @@
 
     </div>
 
+    <!--
+      Se mantiene oculto porque el fragmento actual solo entrega
+      temperatura e icono, no pronóstico de tres días.
+    -->
     <div
       class="weather-days"
       id="weatherForecast"
