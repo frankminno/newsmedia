@@ -794,7 +794,7 @@ img.aniv{width:200px}
       .nav-secondary a { flex-shrink: 0; white-space: nowrap; padding: 7px 15px; }
    }
 
-/* ═══════════════════════════════════════════════════════════════════════
+      /* ═══════════════════════════════════════════════════════════════════════
    28 · VISTA DE GALERÍA (galeria.php)  +  NAVBAR ACTIVO DINÁMICO
    Pega este bloque AL FINAL de tu css/styles.css.
    ═══════════════════════════════════════════════════════════════════════ */
@@ -831,27 +831,11 @@ img.aniv{width:200px}
 }
 .nav-secondary a.active { box-shadow: 0 4px 12px rgba(0,150,65,.3); }
 
-
 /* ═══════════════════════════════════════════════════════════════════════
-   29 · EXTENSIONES PARA LAS VISTAS DEL BOCETO DE ILLUSTRATOR
-   Conserva los componentes del index y añade únicamente nota, multimedia,
-   galería, video en vivo, wordmark local y visores de contenido.
+   29 · VISTAS INTERNAS — SELECTORES AISLADOS DEL INDEX
+   Las reglas siguientes solo complementan nota, galería, multimedia y en vivo.
+   No modifican el header, grid principal ni componentes del home.
    ═══════════════════════════════════════════════════════════════════════ */
-
-/* Wordmark sin dependencia de archivos gráficos externos */
-.logo-wordmark { display: block; min-width: 230px; }
-.logo-wordmark .logo-mark { font-size: 46px; font-weight: 900; letter-spacing: -2px; color: var(--ink); line-height: .9; }
-.logo-wordmark .logo-mark .e { color: var(--green); }
-.logo-wordmark .logo-tag { margin-top: 7px; font-size: 13px; font-weight: 800; letter-spacing: .12em; color: var(--g-700); text-transform: uppercase; }
-.logo-wordmark .logo-tag .hash { color: var(--green); }
-.anniversary-mark { width: 126px; min-height: 84px; border-left: 1px solid var(--linea); padding-left: 22px; display: flex; flex-direction: column; justify-content: center; color: var(--ink); line-height: 1; }
-.anniversary-mark strong { font-size: 38px; color: var(--green); letter-spacing: -2px; }
-.anniversary-mark span { margin-top: 6px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-
-/* Contexto activo del navbar en vistas internas */
-.navbar.nav-context .nav-primary a:first-child { background: transparent; color: var(--black); border-bottom: 0; }
-.navbar.nav-context .nav-primary a:first-child:hover { color: var(--green); }
-.navbar.nav-context .nav-primary a.active { background: var(--black); color: #fff; border-bottom: 2px solid var(--green-mid); }
 
 /* Contenedor editorial */
 .art-main { min-width: 0; background: var(--blanco); border-radius: var(--r); box-shadow: var(--s-1); padding: clamp(20px, 3vw, 38px); }
@@ -978,8 +962,6 @@ img.aniv{width:200px}
   .media-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 700px) {
-  .header .wrap { height: auto; min-height: 126px; padding-top: 18px; padding-bottom: 18px; }
-  .anniversary-mark { display: none; }
   .art-main { padding: 18px 15px; }
   .related-grid, .more-news-grid { grid-template-columns: 1fr; }
   .media-head { align-items: flex-start; flex-direction: column; }
@@ -992,8 +974,6 @@ img.aniv{width:200px}
   .content-lightbox .lb-caption { left: 18px; right: 18px; }
   .live-video .live-play { width: 62px; height: 62px; font-size: 24px; }
 }
-
-
 /* ═══════════════════════════════════════════════════════════════
    VISTA MULTIMEDIA V2 — módulo integrado en styles.css
    ═══════════════════════════════════════════════════════════════ */
@@ -1361,34 +1341,222 @@ img.aniv{width:200px}
 }
 
 
-/* ═══════════════════════════════════════════════════════════════════════
-   31 · CONSISTENCIA DE VISTAS INTERNAS
-   Nota, galería, multimedia y transmisión comparten el header del index.
-   ═══════════════════════════════════════════════════════════════════════ */
-.header .logo img.exp,
-.header .logo img.aniv {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
+/* Contexto de navegación y logotipos únicamente en vistas internas */
+body:is(.article-page,.gallery-page,.multimedia-page,.live-page) .navbar.nav-context .nav-primary a:first-child {
+  background: transparent; color: var(--black); border-bottom: 0;
 }
-
-.article-page .art-main,
-.gallery-page .art-main {
-  min-width: 0;
+body:is(.article-page,.gallery-page,.multimedia-page,.live-page) .navbar.nav-context .nav-primary a:first-child:hover { color: var(--green); }
+body:is(.article-page,.gallery-page,.multimedia-page,.live-page) .navbar.nav-context .nav-primary a.active {
+  background: var(--black); color: #fff; border-bottom: 2px solid var(--green-mid);
 }
-
-.article-page .art-body img,
-.gallery-page .art-body img,
-.live-page .live-copy img {
-  max-width: 100%;
-  height: auto;
+body:is(.article-page,.gallery-page,.multimedia-page,.live-page) .header .logo img.exp,
+body:is(.article-page,.gallery-page,.multimedia-page,.live-page) .header .logo img.aniv {
+  display: block; max-width: 100%; height: auto; object-fit: contain;
 }
-
+body.article-page .art-main, body.gallery-page .art-main { min-width: 0; }
+body.article-page .art-body img, body.gallery-page .art-body img, body.live-page .live-copy img { max-width: 100%; height: auto; }
 @media (max-width: 600px) {
-  .header .logo img.exp { height: auto; width: min(58vw, 230px); }
-  .header .logo img.aniv { height: auto; width: min(29vw, 115px); }
-  .article-page .art-wrap,
-  .gallery-page .art-wrap { width: 100%; }
-  .gal-item img { max-width: 100%; }
+  body:is(.article-page,.gallery-page,.multimedia-page,.live-page) .header .logo img.exp { height: auto; width: min(58vw, 230px); }
+  body:is(.article-page,.gallery-page,.multimedia-page,.live-page) .header .logo img.aniv { height: auto; width: min(29vw, 115px); }
+  body.article-page .art-wrap, body.gallery-page .art-wrap { width: 100%; }
+  body.gallery-page .gal-item img { max-width: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   E MEDIA · MENÚ FLOTANTE LATERAL
+   Se inyecta desde main.js únicamente en la portada, cuando existe #hero.
+   ═══════════════════════════════════════════════════════════════════════ */
+.emedia-dock {
+  position: fixed;
+  z-index: 1250;
+  top: 50%;
+  right: 0;
+  width: 282px;
+  height: 486px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.emedia-dock__toggle {
+  position: absolute;
+  z-index: 3;
+  top: 54px;
+  right: 0;
+  width: 93px;
+  height: 377px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  filter: drop-shadow(-5px 8px 8px rgba(0, 0, 0, .24));
+  transition: filter .2s ease, transform .25s ease;
+}
+
+.emedia-dock__toggle:hover,
+.emedia-dock__toggle:focus-visible {
+  filter: drop-shadow(-7px 10px 11px rgba(0, 0, 0, .3));
+}
+
+.emedia-dock__toggle:active {
+  transform: translateX(2px) scale(.985);
+}
+
+.emedia-dock__tab {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.emedia-dock__logo {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 70px;
+  height: auto;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.emedia-dock__items {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.emedia-dock__item {
+  --dock-delay: 0ms;
+  position: absolute;
+  z-index: 2;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateX(70px) scale(.35) rotate(12deg);
+  transform-origin: right center;
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity .22s ease var(--dock-delay),
+    transform .38s cubic-bezier(.22, 1, .36, 1) var(--dock-delay),
+    visibility 0s linear .4s;
+}
+
+.emedia-dock__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  transition: transform .2s ease, filter .2s ease;
+}
+
+.emedia-dock__item:hover img,
+.emedia-dock__item:focus-visible img {
+  transform: scale(1.08);
+  filter: brightness(1.06);
+}
+
+.emedia-dock__item::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 10px);
+  max-width: 170px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: rgba(0, 46, 30, .94);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(8px, -50%);
+  pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+}
+
+.emedia-dock__item:hover::after,
+.emedia-dock__item:focus-visible::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.emedia-dock__item:nth-child(1) { top: 0;   right: 43px;  --dock-delay: 25ms; }
+.emedia-dock__item:nth-child(2) { top: 78px;  right: 104px; --dock-delay: 55ms; }
+.emedia-dock__item:nth-child(3) { top: 156px; right: 143px; --dock-delay: 85ms; }
+.emedia-dock__item:nth-child(4) { top: 234px; right: 149px; --dock-delay: 115ms; }
+.emedia-dock__item:nth-child(5) { top: 312px; right: 112px; --dock-delay: 145ms; }
+.emedia-dock__item:nth-child(6) { top: 390px; right: 45px;  --dock-delay: 175ms; }
+
+.emedia-dock.is-open .emedia-dock__item {
+  opacity: 1;
+  transform: translateX(0) scale(1) rotate(0);
+  pointer-events: auto;
+  visibility: visible;
+  transition:
+    opacity .22s ease var(--dock-delay),
+    transform .38s cubic-bezier(.22, 1, .36, 1) var(--dock-delay),
+    visibility 0s linear 0s;
+}
+
+.emedia-dock:not(.is-open) .emedia-dock__toggle {
+  animation: emediaDockHint 4.8s ease-in-out 1.2s infinite;
+}
+
+@keyframes emediaDockHint {
+  0%, 82%, 100% { transform: translateX(0); }
+  88% { transform: translateX(-5px); }
+  94% { transform: translateX(0); }
+}
+
+@media (max-width: 1100px) {
+  .emedia-dock {
+    transform: translateY(-50%) scale(.84);
+    transform-origin: right center;
+  }
+}
+
+@media (max-width: 767px) {
+  .emedia-dock {
+    width: 184px;
+    height: 310px;
+    transform: translateY(-50%);
+  }
+
+  .emedia-dock__toggle {
+    top: 41px;
+    width: 58px;
+    height: 236px;
+  }
+
+  .emedia-dock__logo {
+    right: 5px;
+    width: 45px;
+  }
+
+  .emedia-dock__item {
+    width: 59px;
+    height: 59px;
+  }
+
+  .emedia-dock__item:nth-child(1) { top: 0;   right: 27px; }
+  .emedia-dock__item:nth-child(2) { top: 49px;  right: 67px; }
+  .emedia-dock__item:nth-child(3) { top: 98px;  right: 94px; }
+  .emedia-dock__item:nth-child(4) { top: 147px; right: 98px; }
+  .emedia-dock__item:nth-child(5) { top: 196px; right: 70px; }
+  .emedia-dock__item:nth-child(6) { top: 245px; right: 29px; }
+
+  .emedia-dock__item::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emedia-dock__toggle,
+  .emedia-dock__item,
+  .emedia-dock__item img {
+    animation: none !important;
+    transition: none !important;
+  }
 }
