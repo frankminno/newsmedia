@@ -1254,3 +1254,149 @@ if (document.readyState === 'loading') {
     button.textContent = showing ? 'Ver más' : 'Ver menos';
   });
 })();
+
+/* ═══════════════════════════════════════════════════════════════════════
+   E MEDIA · MENÚ FLOTANTE LATERAL
+   Se crea solo en la portada cuando detecta el slider #hero.
+
+   ENLACES: se pueden cambiar únicamente en el arreglo ITEMS.
+   ═══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  if (!document.getElementById('hero') || document.querySelector('[data-emedia-dock]')) return;
+
+  var ASSET_BASE = 'assets/emedia-dock/';
+
+  var ITEMS = [
+    {
+      label: '10-4 Noticias',
+      image: 'noticias-10-4.svg',
+      href: 'https://www.facebook.com/104NoticiasSonora',
+      external: true
+    },
+    {
+      label: 'Edición Impresa',
+      image: 'edicion-impresa.svg',
+      href: 'https://impreso.expreso.com.mx/',
+      external: true
+    },
+    {
+      label: 'Pop Extremo',
+      image: 'pop-extremo.svg',
+      href: 'https://popextremo.expreso.com.mx/',
+      external: true
+    },
+    {
+      label: 'Eventos Expreso',
+      image: 'eventos-expreso.svg',
+      href: 'https://www.expreso.com.mx/tags/eventos-expreso/75565',
+      external: true
+    },
+    {
+      label: 'Sonora Grupera',
+      image: 'sonora-grupera.svg',
+      href: 'https://sonoragrupera.expreso.com.mx/',
+      external: true
+    },
+    {
+      label: 'Expreso 24/7',
+      image: 'expreso-247.svg',
+      href: 'https://www.expreso.com.mx/tags/expreso-247/1289',
+      external: true
+    }
+  ];
+
+  var dock = document.createElement('aside');
+  dock.className = 'emedia-dock';
+  dock.setAttribute('data-emedia-dock', '');
+  dock.setAttribute('aria-label', 'Sitios de Expreso Media');
+
+  var button = document.createElement('button');
+  button.className = 'emedia-dock__toggle';
+  button.type = 'button';
+  button.setAttribute('aria-label', 'Abrir sitios de Expreso Media');
+  button.setAttribute('aria-controls', 'emediaDockItems');
+  button.innerHTML =
+    '<img class="emedia-dock__tab" src="' + ASSET_BASE + 'emedia-tab.svg" alt="" aria-hidden="true">' +
+    '<img class="emedia-dock__logo" src="' + ASSET_BASE + 'emedia-logo.svg" alt="eMedia">';
+
+  var nav = document.createElement('nav');
+  nav.className = 'emedia-dock__items';
+  nav.id = 'emediaDockItems';
+  nav.setAttribute('aria-label', 'Medios y servicios');
+
+  ITEMS.forEach(function (item) {
+    var link = document.createElement('a');
+    link.className = 'emedia-dock__item';
+    link.href = item.href;
+    link.setAttribute('data-label', item.label);
+    link.setAttribute('aria-label', item.label);
+
+    if (item.external) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+
+    var image = document.createElement('img');
+    image.src = ASSET_BASE + item.image;
+    image.alt = '';
+    image.setAttribute('aria-hidden', 'true');
+    image.decoding = 'async';
+
+    link.appendChild(image);
+    nav.appendChild(link);
+  });
+
+  dock.appendChild(nav);
+  dock.appendChild(button);
+  document.body.appendChild(dock);
+
+  var links = [].slice.call(nav.querySelectorAll('.emedia-dock__item'));
+  var desktopQuery = window.matchMedia('(min-width: 1000px)');
+  var open = desktopQuery.matches;
+
+  function render() {
+    dock.classList.toggle('is-open', open);
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute(
+      'aria-label',
+      open ? 'Cerrar sitios de Expreso Media' : 'Abrir sitios de Expreso Media'
+    );
+
+    links.forEach(function (link) {
+      link.tabIndex = open ? 0 : -1;
+      link.setAttribute('aria-hidden', String(!open));
+    });
+  }
+
+  function setOpen(value) {
+    open = Boolean(value);
+    render();
+  }
+
+  button.addEventListener('click', function () {
+    setOpen(!open);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && open) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+
+  document.addEventListener('pointerdown', function (event) {
+    if (!open || desktopQuery.matches || dock.contains(event.target)) return;
+    setOpen(false);
+  });
+
+  function syncViewport(event) {
+    setOpen(event.matches);
+  }
+
+  if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', syncViewport);
+  else if (desktopQuery.addListener) desktopQuery.addListener(syncViewport);
+
+  render();
+})();
