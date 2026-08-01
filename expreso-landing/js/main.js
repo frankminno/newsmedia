@@ -1400,3 +1400,64 @@ if (document.readyState === 'loading') {
 
   render();
 })();
+
+/* ═══════════════════════════════════════════════════════════════════════
+   VISTAS DE SECCIÓN · cargar más noticias
+   ═══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+  var buttons = [].slice.call(document.querySelectorAll('[data-section-more-button]'));
+  buttons.forEach(function (button) {
+    var root = button.closest('[data-section-list]');
+    if (!root) return;
+    var items = [].slice.call(root.querySelectorAll('[data-section-more]'));
+    if (!items.length) { button.hidden = true; return; }
+    button.addEventListener('click', function () {
+      var expanded = button.getAttribute('aria-expanded') === 'true';
+      items.forEach(function (item) { item.hidden = expanded; });
+      button.setAttribute('aria-expanded', String(!expanded));
+      button.textContent = expanded ? 'Cargar más noticias' : 'Mostrar menos';
+    });
+  });
+})();
+
+/* Multimedia - Galerías · filtros y expansión */
+(function () {
+  'use strict';
+  var grid = document.querySelector('[data-gallery-grid]');
+  if (!grid) return;
+  var cards = [].slice.call(grid.querySelectorAll('.gallery-index-card'));
+  var filters = [].slice.call(document.querySelectorAll('[data-gallery-filter]'));
+  var more = document.querySelector('[data-gallery-more]');
+  var activeFilter = 'all';
+  var expanded = false;
+
+  function render() {
+    var visibleIndex = 0;
+    cards.forEach(function (card) {
+      var matches = activeFilter === 'all' || card.getAttribute('data-gallery-type') === activeFilter;
+      var withinLimit = expanded || visibleIndex < 6;
+      card.hidden = !matches || !withinLimit;
+      if (matches) visibleIndex++;
+    });
+    if (more) {
+      var matchingCount = cards.filter(function (card) {
+        return activeFilter === 'all' || card.getAttribute('data-gallery-type') === activeFilter;
+      }).length;
+      more.hidden = matchingCount <= 6;
+      more.textContent = expanded ? 'Mostrar menos' : 'Ver más galerías';
+      more.setAttribute('aria-expanded', String(expanded));
+    }
+  }
+
+  filters.forEach(function (button) {
+    button.addEventListener('click', function () {
+      activeFilter = button.getAttribute('data-gallery-filter') || 'all';
+      expanded = false;
+      filters.forEach(function (item) { item.classList.toggle('active', item === button); });
+      render();
+    });
+  });
+  if (more) more.addEventListener('click', function () { expanded = !expanded; render(); });
+  render();
+})();
