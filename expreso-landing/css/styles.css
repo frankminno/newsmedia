@@ -2465,3 +2465,11 @@ html { scroll-padding-top: calc(var(--sticky-navbar-h) + 12px); }
     padding-right: 0;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   AJUSTE DE GALERÍA EN PORTADA · 2026-08-03 / integración 4
+   Mantiene el lightbox por encima del navbar sticky y del menú eMedia.
+   ═══════════════════════════════════════════════════════════════════════ */
+.content-lightbox { z-index: 1600; }
+#cardGaleria .gal-item { width: 100%; }
