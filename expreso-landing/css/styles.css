@@ -2521,3 +2521,104 @@ html { scroll-padding-top: calc(var(--sticky-navbar-h) + 12px); }
     gap: 10px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PORTADA · BOTÓN eMEDIA Y LOGO DE ANIVERSARIO · 2026-08-04 / integración 6
+   Alcance: únicamente index.html mediante body.home-page.
+   1) El menú flotante inicia debajo de la marquesina de Tendencias.
+   2) La pestaña flotante cambia a blanco, conservando el logotipo eMedia.
+   3) El logo del 21 aniversario se presenta en el footer.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* El dock completo comienza debajo del ticker en la carga inicial. */
+body.home-page .emedia-dock {
+  top: 310px;
+  transform: none;
+  transform-origin: top right;
+}
+
+/* La silueta del botón se vuelve blanca; el logo superpuesto conserva su color. */
+body.home-page .emedia-dock__tab {
+  filter: brightness(0) invert(1);
+}
+
+body.home-page .emedia-dock__toggle {
+  filter: drop-shadow(-5px 8px 10px rgba(0, 0, 0, .22));
+}
+
+body.home-page .emedia-dock__toggle:hover,
+body.home-page .emedia-dock__toggle:focus-visible {
+  filter: drop-shadow(-7px 10px 13px rgba(0, 0, 0, .28));
+}
+
+/* Evita que el dock se corte en equipos de escritorio con poca altura. */
+@media (min-width: 768px) and (max-height: 860px) {
+  body.home-page .emedia-dock {
+    transform: scale(.84);
+  }
+}
+
+@media (min-width: 768px) and (max-height: 720px) {
+  body.home-page .emedia-dock {
+    transform: scale(.74);
+  }
+}
+
+/* En móvil el header es más alto; el dock se coloca después del ticker. */
+@media (max-width: 767px) {
+  body.home-page .emedia-dock {
+    top: 390px;
+    transform: none;
+    transform-origin: top right;
+  }
+}
+
+@media (max-width: 767px) and (max-height: 740px) {
+  body.home-page .emedia-dock {
+    transform: scale(.84);
+  }
+}
+
+/* Logo de aniversario trasladado al footer solo en la portada. */
+body.home-page .footer-anniversary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: min(165px, 100%);
+  margin: 2px 0 14px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .16);
+  transition: transform var(--t), box-shadow var(--t);
+}
+
+body.home-page .footer-anniversary:hover,
+body.home-page .footer-anniversary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .22);
+}
+
+body.home-page .footer-anniversary img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 76px;
+  object-fit: contain;
+}
+
+/* Al quedar un solo logo, el header conserva equilibrio y el buscador gana espacio. */
+body.home-page .header .search {
+  max-width: none;
+}
+
+@media (max-width: 600px) {
+  body.home-page .header .logo:nth-of-type(2) {
+    margin-left: 0;
+  }
+
+  body.home-page .footer-anniversary {
+    width: 150px;
+  }
+}
+
