@@ -1550,12 +1550,13 @@ body.home-page .emedia-dock:not(.is-open) .emedia-dock__toggle {
 
   body.home-page .emedia-dock__toggle {
     top: 41px;
-    width: 58px;
+    width: 86px;
     height: 236px;
+    right:-15px; 
   }
 
   body.home-page .emedia-dock__logo {
-    right: 4px;
+    right: 15px;
     width: 47px;
     height: 47px;
   }
@@ -1566,12 +1567,12 @@ body.home-page .emedia-dock:not(.is-open) .emedia-dock__toggle {
     padding: 7px;
   }
 
-  body.home-page .emedia-dock__item:nth-child(1) { top: 0;   right: 27px; }
-  body.home-page .emedia-dock__item:nth-child(2) { top: 49px;  right: 67px; }
+  body.home-page .emedia-dock__item:nth-child(1) { top: 0;   right: 15px; }
+  body.home-page .emedia-dock__item:nth-child(2) { top: 49px;  right: 15px; }
   body.home-page .emedia-dock__item:nth-child(3) { top: 98px;  right: 94px; }
-  body.home-page .emedia-dock__item:nth-child(4) { top: 147px; right: 98px; }
-  body.home-page .emedia-dock__item:nth-child(5) { top: 196px; right: 70px; }
-  body.home-page .emedia-dock__item:nth-child(6) { top: 245px; right: 29px; }
+  body.home-page .emedia-dock__item:nth-child(4) { top: 105px; right: 81px; }
+  body.home-page .emedia-dock__item:nth-child(5) { top: 167px; right: 77px; }
+  body.home-page .emedia-dock__item:nth-child(6) { top: 267px; right: 4px; }
 
   body.home-page .emedia-dock__item::after { display: none; }
 }
