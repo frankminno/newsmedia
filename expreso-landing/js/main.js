@@ -663,7 +663,7 @@
   'use strict';
 
   var grid = document.querySelector('.social-grid');
-  if (!grid) return;
+  if (!grid || grid.hasAttribute('data-static-social')) return;
 
   var POLL = 5 * 60 * 1000; /* 5 min: la Graph API no da push en tiempo real */
   var LIMIT = 4;
@@ -1256,10 +1256,9 @@ if (document.readyState === 'loading') {
 })();
 
 /* ═══════════════════════════════════════════════════════════════════════
-   E MEDIA · MENÚ FLOTANTE LATERAL
+   E MEDIA · MENÚ FLOTANTE RADIAL
+   Conserva la lógica original de abanico y usa los logotipos oficiales.
    Se crea solo en la portada cuando detecta el slider #hero.
-
-   ENLACES: se pueden cambiar únicamente en el arreglo ITEMS.
    ═══════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -1267,43 +1266,42 @@ if (document.readyState === 'loading') {
   if (!document.getElementById('hero') || document.querySelector('[data-emedia-dock]')) return;
 
   var ASSET_BASE = 'assets/emedia-dock/';
-
   var ITEMS = [
     {
       label: '10-4 Noticias',
-      image: 'noticias-10-4.svg',
+      image: '10-4_Nuevo_logo.png',
       href: 'https://www.facebook.com/104NoticiasSonora',
       external: true
     },
     {
       label: 'Edición Impresa',
-      image: 'edicion-impresa.svg',
+      image: 'logo_edimp.png',
       href: 'https://impreso.expreso.com.mx/',
       external: true
     },
     {
       label: 'Pop Extremo',
-      image: 'pop-extremo.svg',
+      image: 'logo_pop.png',
       href: 'https://popextremo.expreso.com.mx/',
       external: true
     },
     {
       label: 'Eventos Expreso',
-      image: 'eventos-expreso.svg',
+      image: 'logo_eventos.png',
       href: 'https://www.expreso.com.mx/tags/eventos-expreso/75565',
       external: true
     },
     {
       label: 'Sonora Grupera',
-      image: 'sonora-grupera.svg',
+      image: 'logo_sonorag.png',
       href: 'https://sonoragrupera.expreso.com.mx/',
       external: true
     },
     {
       label: 'Expreso 24/7',
-      image: 'expreso-247.svg',
-      href: 'https://www.expreso.com.mx/tags/expreso-247/1289',
-      external: true
+      image: 'logo_247.png',
+      href: 'en-vivo.html',
+      external: false
     }
   ];
 
@@ -1319,7 +1317,7 @@ if (document.readyState === 'loading') {
   button.setAttribute('aria-controls', 'emediaDockItems');
   button.innerHTML =
     '<img class="emedia-dock__tab" src="' + ASSET_BASE + 'emedia-tab.svg" alt="" aria-hidden="true">' +
-    '<img class="emedia-dock__logo" src="' + ASSET_BASE + 'emedia-logo.svg" alt="eMedia">';
+    '<img class="emedia-dock__logo" src="' + ASSET_BASE + 'logo_menuemedia.png" alt="eMedia">';
 
   var nav = document.createElement('nav');
   nav.className = 'emedia-dock__items';
@@ -1342,6 +1340,7 @@ if (document.readyState === 'loading') {
     image.src = ASSET_BASE + item.image;
     image.alt = '';
     image.setAttribute('aria-hidden', 'true');
+    image.loading = 'lazy';
     image.decoding = 'async';
 
     link.appendChild(image);
@@ -1375,6 +1374,14 @@ if (document.readyState === 'loading') {
     render();
   }
 
+  function positionBelowTicker() {
+    var ticker = document.querySelector('.ticker');
+    if (!ticker) return;
+    var rect = ticker.getBoundingClientRect();
+    var top = Math.max(120, Math.round(rect.bottom + window.scrollY + 12));
+    dock.style.setProperty('--emedia-dock-top', top + 'px');
+  }
+
   button.addEventListener('click', function () {
     setOpen(!open);
   });
@@ -1393,13 +1400,17 @@ if (document.readyState === 'loading') {
 
   function syncViewport(event) {
     setOpen(event.matches);
+    positionBelowTicker();
   }
 
   if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', syncViewport);
   else if (desktopQuery.addListener) desktopQuery.addListener(syncViewport);
 
+  window.addEventListener('resize', positionBelowTicker, { passive: true });
+  positionBelowTicker();
   render();
 })();
+
 
 /* ═══════════════════════════════════════════════════════════════════════
    VISTAS DE SECCIÓN · cargar más noticias

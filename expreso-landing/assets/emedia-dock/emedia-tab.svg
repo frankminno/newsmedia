@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 356" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 340" aria-hidden="true">
   <defs>
-    <filter id="shadow" x="-45%" y="-12%" width="170%" height="130%">
-      <feDropShadow dx="-7" dy="5" stdDeviation="10" flood-color="#000000" flood-opacity=".22"/>
+    <filter id="s" x="-40%" y="-15%" width="160%" height="130%">
+      <feDropShadow dx="-5" dy="5" stdDeviation="8" flood-color="#000" flood-opacity=".20"/>
     </filter>
   </defs>
-  <path filter="url(#shadow)" fill="#ffffff"
-        d="M150 0V356H112C50 329 12 262 12 178S50 27 112 0H150Z"/>
+  <path filter="url(#s)" fill="#fff" d="M180 0v340h-46C72 310 35 244 35 170S72 30 134 0h46Z"/>
 </svg>
