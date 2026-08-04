@@ -1385,7 +1385,7 @@ body.home-page .emedia-dock__toggle {
   z-index: 3;
   top: 54px;
   right: 0;
-  width: 93px;
+  width: 150px;
   height: 377px;
   padding: 0;
   border: 0;
@@ -1442,8 +1442,8 @@ body.home-page .emedia-dock__item {
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 92px;
-  height: 92px;
+  width: 80px;
+  height: 80px;
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, .045);
   border-radius: 50%;
@@ -1507,11 +1507,11 @@ body.home-page .emedia-dock__item:focus-visible::after {
   transform: translate(0, -50%);
 }
 
-body.home-page .emedia-dock__item:nth-child(1) { top: 0;   right: 43px;  --dock-delay: 25ms; }
+body.home-page .emedia-dock__item:nth-child(1) { top: 15px;   right: 43px;  --dock-delay: 25ms; }
 body.home-page .emedia-dock__item:nth-child(2) { top: 78px;  right: 104px; --dock-delay: 55ms; }
 body.home-page .emedia-dock__item:nth-child(3) { top: 156px; right: 143px; --dock-delay: 85ms; }
 body.home-page .emedia-dock__item:nth-child(4) { top: 234px; right: 149px; --dock-delay: 115ms; }
-body.home-page .emedia-dock__item:nth-child(5) { top: 312px; right: 112px; --dock-delay: 145ms; }
+body.home-page .emedia-dock__item:nth-child(5) { top: 323px; right: 112px; --dock-delay: 145ms; }
 body.home-page .emedia-dock__item:nth-child(6) { top: 390px; right: 45px;  --dock-delay: 175ms; }
 
 body.home-page .emedia-dock.is-open .emedia-dock__item {
