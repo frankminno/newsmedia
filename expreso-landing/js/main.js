@@ -1377,8 +1377,17 @@ if (document.readyState === 'loading') {
   function positionBelowTicker() {
     var ticker = document.querySelector('.ticker');
     if (!ticker) return;
+
+    /*
+     * El dock usa position: fixed, por lo que la coordenada debe calcularse
+     * en relación con el viewport. Mientras la marquesina esté visible,
+     * el flotante permanece justo debajo; al salir de pantalla se mantiene
+     * una separación mínima respecto del borde superior.
+     */
     var rect = ticker.getBoundingClientRect();
-    var top = Math.max(120, Math.round(rect.bottom + window.scrollY + 12));
+    var gap = 12;
+    var top = Math.max(gap, Math.round(rect.bottom + gap));
+
     dock.style.setProperty('--emedia-dock-top', top + 'px');
   }
 
@@ -1407,6 +1416,7 @@ if (document.readyState === 'loading') {
   else if (desktopQuery.addListener) desktopQuery.addListener(syncViewport);
 
   window.addEventListener('resize', positionBelowTicker, { passive: true });
+  window.addEventListener('scroll', positionBelowTicker, { passive: true });
   positionBelowTicker();
   render();
 })();
