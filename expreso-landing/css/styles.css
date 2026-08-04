@@ -1568,9 +1568,9 @@ body.home-page .emedia-dock:not(.is-open) .emedia-dock__toggle {
   }
 
   body.home-page .emedia-dock__item:nth-child(1) { top: 0;   right: 15px; }
-  body.home-page .emedia-dock__item:nth-child(2) { top: 49px;  right: 15px; }
-  body.home-page .emedia-dock__item:nth-child(3) { top: 98px;  right: 94px; }
-  body.home-page .emedia-dock__item:nth-child(4) { top: 105px; right: 81px; }
+  body.home-page .emedia-dock__item:nth-child(2) { top: 49px;  right: 50px; }
+  body.home-page .emedia-dock__item:nth-child(3) { top: 104px;  right: 80px; }
+  body.home-page .emedia-dock__item:nth-child(4) { top: 225px; right: 51px; }
   body.home-page .emedia-dock__item:nth-child(5) { top: 167px; right: 77px; }
   body.home-page .emedia-dock__item:nth-child(6) { top: 267px; right: 4px; }
 
