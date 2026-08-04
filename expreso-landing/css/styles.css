@@ -1422,7 +1422,7 @@ body.home-page .emedia-dock__tab {
 body.home-page .emedia-dock__logo {
   position: absolute;
   top: 50%;
-  right: 50px;
+  right: 5px;
   width: 50px;
   height: 58px;
   object-fit: contain;
