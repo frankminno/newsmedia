@@ -1423,7 +1423,7 @@ body.home-page .emedia-dock__logo {
   position: absolute;
   top: 50%;
   right: 5px;
-  width: 50px;
+  width: 58px;
   height: 58px;
   object-fit: contain;
   transform: translateY(-50%);
@@ -2595,5 +2595,253 @@ body.home-page .footer-anniversary {
   body.home-page .header .logo:has(img.exp) img.exp {
     display: block;
     margin-inline: auto;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   HEADER Y FOOTER UNIFICADOS EN TODAS LAS VISTAS
+   Versión: 2026-08-04 / integración 10
+   - Un solo logo de Expreso en el encabezado.
+   - Logo del 21 aniversario integrado en el pie de página.
+   - Centrado del logo principal en dispositivos móviles.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Protección ante copias antiguas del marcado. */
+.header img.aniv { display: none !important; }
+
+.footer,
+.footer-top,
+.footer-bottom {
+  background: #003b2b;
+}
+
+.footer-anniversary {
+  display: block;
+  width: 128px;
+  height: auto;
+  max-height: none;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  body .header .logo {
+    order: 1;
+    display: flex;
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  body .header .logo img.exp {
+    display: block;
+    width: auto !important;
+    height: 95px !important;
+    max-width: min(90vw, 280px) !important;
+    margin-inline: auto;
+    object-fit: contain;
+  }
+
+  body .header .search {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  body .header .header-actions {
+    order: 4;
+    flex: 1 1 100%;
+    margin-left: 0;
+  }
+
+  .footer-anniversary { width: 110px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FOOTER EDITORIAL BLANCO Y NEGRO · TODAS LAS VISTAS
+   Versión: 2026-08-04 / integración 11
+   - Fondo blanco en el cuerpo principal del pie.
+   - Tipografía, divisores y controles en negro.
+   - Franja legal inferior negra.
+   - Sin referencias históricas no verificadas.
+   ═══════════════════════════════════════════════════════════════════════ */
+body .footer {
+  background: #fff;
+  color: #111;
+  border-top: 4px solid #111;
+}
+
+body .footer-top {
+  background: #fff;
+  padding: 42px 0 30px;
+  border-bottom: 1px solid #111;
+}
+
+body .footer-grid {
+  align-items: start;
+  gap: 34px;
+}
+
+body .footer .logo-mark {
+  color: #111;
+}
+
+body .footer-about {
+  max-width: 330px;
+  color: #242424;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+body .footer-contact {
+  color: #4b4b4b;
+  font-size: 11.5px;
+}
+
+body .footer-social {
+  gap: 8px;
+  margin-top: 16px;
+}
+
+body .footer-social a {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #111;
+  border-radius: 0;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+body .footer-social a:hover,
+body .footer-social a:focus-visible {
+  background: #fff;
+  color: #111;
+  transform: translateY(-2px);
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
+body .footer-col h5 {
+  color: #111;
+  margin-bottom: 14px;
+  padding-bottom: 9px;
+  border-bottom: 2px solid #111;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+body .footer-col li {
+  margin-bottom: 8px;
+}
+
+body .footer-col li a {
+  color: #242424;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+body .footer-col li a:hover,
+body .footer-col li a:focus-visible {
+  color: #000;
+  padding-left: 4px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+body .footer-anniversary {
+  width: 126px;
+  margin: 0 0 18px;
+  padding: 0;
+  background: transparent;
+  filter: none;
+}
+
+body .footer-bottom {
+  background: #111;
+  color: #fff;
+  border: 0;
+}
+
+body .footer-bottom .wrap {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+body .footer-bottom p,
+body .footer-legal a {
+  color: rgba(255,255,255,.78);
+}
+
+body .footer-legal a:hover,
+body .footer-legal a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 980px) {
+  body .footer-grid {
+    grid-template-columns: 1.35fr 1fr 1fr;
+  }
+
+  body .footer-brand {
+    grid-column: 1 / -1;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #cfcfcf;
+  }
+}
+
+@media (max-width: 700px) {
+  body .footer-top {
+    padding: 32px 0 22px;
+  }
+
+  body .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 20px;
+  }
+
+  body .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  body .footer-anniversary {
+    width: 110px;
+  }
+
+  body .footer-bottom .wrap {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  body .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body .footer-brand {
+    grid-column: auto;
+  }
+
+  body .footer-col {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d7d7d7;
+  }
+
+  body .footer-legal {
+    flex-wrap: wrap;
+    gap: 8px 14px;
   }
 }
