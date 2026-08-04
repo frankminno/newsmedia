@@ -1510,7 +1510,7 @@ body.home-page .emedia-dock__item:focus-visible::after {
 body.home-page .emedia-dock__item:nth-child(1) { top: 15px;   right: 43px;  --dock-delay: 25ms; }
 body.home-page .emedia-dock__item:nth-child(2) { top: 78px;  right: 104px; --dock-delay: 55ms; }
 body.home-page .emedia-dock__item:nth-child(3) { top: 156px; right: 143px; --dock-delay: 85ms; }
-body.home-page .emedia-dock__item:nth-child(4) { top: 234px; right: 149px; --dock-delay: 115ms; }
+body.home-page .emedia-dock__item:nth-child(4) { top: 242px; right: 149px; --dock-delay: 115ms; }
 body.home-page .emedia-dock__item:nth-child(5) { top: 323px; right: 112px; --dock-delay: 145ms; }
 body.home-page .emedia-dock__item:nth-child(6) { top: 390px; right: 45px;  --dock-delay: 175ms; }
 
