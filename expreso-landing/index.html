@@ -28,10 +28,10 @@
 <!-- LCP: en producción precarga aquí la 1ª imagen del hero para bajar el LCP:
      <link rel="preload" as="image" href="URL_REAL_DEL_HERO" fetchpriority="high"> -->
 
-<link rel="stylesheet" href="css/styles.css?v=20260804-4">
+<link rel="stylesheet" href="css/styles.css">
 <link   rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-<body class="home-page">
+<body>
 
 <!-- ════════ 1 · UTILITY BAR ════════ -->
 <div class="utility">
@@ -80,6 +80,10 @@
       <a href="https://impreso.expreso.com.mx/" class="btn btn-ghost">Ed. Impresa</a>
       <a href="https://www.expreso.com.mx/suscripciones" class="btn btn-primary">Suscribirse</a>
     </div>
+    <a href="index.html" class="logo" aria-label="Expreso — Inicio">
+       <img class="aniv" src="img/21Aniv.png">
+    </a>
+    
   </div>
 </header>
 
@@ -168,13 +172,28 @@
         <section class="card card-pad" id="cardExpresion">
           <h2 class="card-h">Expresión</h2>
           <div>
-            <a href="columna.html" class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynraymundo-riva-p-6a3974c9.png" alt="Estrictamente Personal · Raymundo Riva Palacio" data-ph><div><div class="col-name">Estrictamente Personal · Raymundo Riva Palacio</div><div class="col-title">Infantino y la Ley de Audiencias</div></div></a>
-            <a href="columna.html" class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynmr-x-650ed096.png" alt="Entre Nos · Mr. X" data-ph><div><div class="col-name">Entre Nos · Mr. X</div><div class="col-title">ALIVIO AL GASTO FAMILIAR</div></div></a>
-            <a href="columna.html" class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynsalvador-garcia-714c317c.png" alt="Serpientes y Escaleras · Salvador García Soto" data-ph><div><div class="col-name">Serpientes y Escaleras · Salvador García Soto</div><div class="col-title">Aviso dominical desde Washington</div></div></a>
-            <a href="columna.html" class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynmr-x-650ed096.png" alt="Entre Nos · Mr. X" data-ph><div><div class="col-name">Entre Nos · Mr. X</div><div class="col-title">GUSANO BARRENADOR</div></div></a>
-            <a href="columna.html" class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbyneunice-rendon-55840316.png" alt="Actitudes · Eunice Rendón" data-ph><div><div class="col-name">Actitudes · Eunice Rendón</div><div class="col-title">Lo que el examen de la UNAM nos obliga a discutir</div></div></a>
+            <div class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynraymundo-riva-p-6a3974c9.png" alt="Estrictamente Personal · Raymundo Riva Palacio" data-ph><div><div class="col-name">Estrictamente Personal · Raymundo Riva Palacio</div><div class="col-title">Infantino y la Ley de Audiencias</div></div></div>
+            <div class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynmr-x-650ed096.png" alt="Entre Nos · Mr. X" data-ph><div><div class="col-name">Entre Nos · Mr. X</div><div class="col-title">ALIVIO AL GASTO FAMILIAR</div></div></div>
+            <div class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynsalvador-garcia-714c317c.png" alt="Serpientes y Escaleras · Salvador García Soto" data-ph><div><div class="col-name">Serpientes y Escaleras · Salvador García Soto</div><div class="col-title">Aviso dominical desde Washington</div></div></div>
+            <div class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbynmr-x-650ed096.png" alt="Entre Nos · Mr. X" data-ph><div><div class="col-name">Entre Nos · Mr. X</div><div class="col-title">GUSANO BARRENADOR</div></div></div>
+            <div class="col-item"><img class="col-avatar" src="https://blob.expreso.com.mx/images/2025/12/12/expbyneunice-rendon-55840316.png" alt="Actitudes · Eunice Rendón" data-ph><div><div class="col-name">Actitudes · Eunice Rendón</div><div class="col-title">Lo que el examen de la UNAM nos obliga a discutir</div></div></div>
           </div>
           <a href="expresion.html" class="card-more" style="margin:12px -16px -16px">Ver todas las columnas →</a>
+        </section>
+
+        <!-- Pregunta del día -->
+        <section class="card card-pad" id="pollCard">
+          <h2 class="card-h">Pregunta del día</h2>
+          <p class="poll-q">¿Alguna vez le han intentado robar su vehículo?</p>
+          <div class="poll-opts">
+            <button class="poll-opt" data-val="si"><span class="poll-radio"></span><span class="poll-lbl">Sí</span></button>
+            <button class="poll-opt" data-val="no"><span class="poll-radio"></span><span class="poll-lbl">No</span></button>
+          </div>
+          <div class="poll-result" id="pollResult">
+            <div class="poll-bar-row"><span class="poll-bar-lbl">Sí</span><span class="poll-bar"><span class="poll-bar-fill" data-opt="si"></span></span><span class="poll-bar-pct" data-pct="si">0%</span></div>
+            <div class="poll-bar-row"><span class="poll-bar-lbl">No</span><span class="poll-bar"><span class="poll-bar-fill" data-opt="no"></span></span><span class="poll-bar-pct" data-pct="no">0%</span></div>
+            <div class="poll-total" id="pollTotal"></div>
+          </div>
         </section>
 
       </aside>
@@ -182,54 +201,39 @@
       <!-- ═══ COLUMNA CENTRO ═══ -->
       <div class="col-center">
 
-        <!-- Hero slider · 5 notas reales de EXPRESO -->
+        <!-- Hero slider -->
         <div class="hero" id="hero">
           <div class="hero-slide on">
-            <a class="hero-link" href="nota.html">
-              <img src="https://blob.expreso.com.mx/images/2026/08/03/entrega-de-uniformes-escolares-gratis-en-hermosillo-2026-5a7cbde5-focus-0-0-750-421.webp" alt="Familias acuden al CUM por los uniformes escolares gratuitos" width="750" height="421" fetchpriority="high" decoding="async">
-              <div class="hero-cap">
-                <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Hermosillo · 3 ago. 2026</div>
-                <h2 class="hero-title">Arranca entrega de uniformes escolares en Hermosillo: calendario y horarios</h2>
-              </div>
+            <a href="nota.html">
+            <img src="assets/real/uniformes-escolares.png" alt="Arranca entrega de uniformes escolares en Hermosillo: calendario y horarios" data-ph-hero>
+            <div class="hero-cap">
+              <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Hermosillo · 3 ago. 2026</div>
+              <h2 class="hero-title">Arranca entrega de uniformes escolares en Hermosillo: calendario y horarios</h2>
             </a>
+            </div>
           </div>
           <div class="hero-slide">
-            <a class="hero-link" href="https://www.expreso.com.mx/noticias/sonora/preven-dos-tormentas-fuertes-y-calor-extremo-en-sonora/261706">
-              <img src="https://blob.expreso.com.mx/images/2026/08/03/preven-dos-tormentas-fuertes-y-calor-extremo-en-sonora-9fb1044e-focus-0-0-750-421.webp" alt="Tormentas fuertes se aproximan a regiones de Sonora" width="750" height="421" decoding="async">
-              <div class="hero-cap">
-                <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Sonora · 3 ago. 2026</div>
-                <h2 class="hero-title">Tormentas no sueltan a estas regiones de Sonora; el calor aún no se va</h2>
-              </div>
-            </a>
+            <img src="" alt="Plan Sonora Energías" data-ph-hero>
+            <div class="hero-cap">
+              <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Sonora · 💬 94</div>
+              <h2 class="hero-title">Plan Sonora de Energías Sostenibles impulsa industrias automotriz y aeroespacial</h2>
+            </div>
           </div>
           <div class="hero-slide">
-            <a class="hero-link" href="https://www.expreso.com.mx/noticias/seguridad/sentencian-a-mujer-por-transportar-fentanilo-en-sonora/261702">
-              <img src="https://blob.expreso.com.mx/images/2026/08/03/sentencian-a-mujer-por-transportar-fentanilo-en-sonora-9231d4c1-focus-min0.61-0.49-750-421.webp" alt="Droga asegurada durante una revisión en un autobús de pasajeros" width="750" height="421" decoding="async">
-              <div class="hero-cap">
-                <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Seguridad · 3 ago. 2026</div>
-                <h2 class="hero-title">Mujer viajaba en autobús con 33 kg de fentanilo y más drogas; le dan 8 años</h2>
-              </div>
-            </a>
+            <img src="" alt="Naranjeros LMP" data-ph-hero>
+            <div class="hero-cap">
+              <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Béisbol · 💬 312</div>
+              <h2 class="hero-title">Naranjeros de Hermosillo anuncia tres refuerzos para la temporada 2026–27 de la LMP</h2>
+            </div>
           </div>
           <div class="hero-slide">
-            <a class="hero-link" href="en-vivo.html">
-              <img src="https://img.youtube.com/vi/E910LIwsr5Q/hqdefault.jpg" alt="Transmisión de Noticias Expreso 24/7 desde Hermosillo" width="750" height="421" decoding="async">
-              <div class="hero-cap">
-                <div class="hero-src"><span class="hero-badge">EN VIVO</span> Expreso Video · Hermosillo</div>
-                <h2 class="hero-title">Noticias Expreso 24/7 desde Hermosillo: sigue la transmisión en vivo</h2>
-              </div>
-            </a>
+            <img src="" alt="Aranceles Washington" data-ph-hero>
+            <div class="hero-cap">
+              <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Mundo · 💬 47</div>
+              <h2 class="hero-title">Washington impone nuevos aranceles a Asia; México analiza respuesta comercial</h2>
+            </div>
           </div>
-          <div class="hero-slide">
-            <a class="hero-link" href="https://www.expreso.com.mx/accion/otros-deportes/karim-lopez-recibe-consejos-de-tracy-mcgrady/261665">
-              <img src="https://blob.expreso.com.mx/images/2026/08/02/karim-lopez-recibe-consejos-de-tracy-mcgrady-0b6ff5a6-focus-0-0-750-421.webp" alt="Karim López conversa con la leyenda de la NBA Tracy McGrady" width="750" height="421" decoding="async">
-              <div class="hero-cap">
-                <div class="hero-src"><span class="hero-badge">EX</span> Expreso · Acción · 2 ago. 2026</div>
-                <h2 class="hero-title">Captan a Karim López recibiendo consejos de Tracy McGrady</h2>
-              </div>
-            </a>
-          </div>
-          <div class="hero-count" id="heroCount">1 de 5</div>
+          <div class="hero-count" id="heroCount">1 de 4</div>
           <button class="hero-arrow hero-prev" id="heroPrev" aria-label="Anterior">‹</button>
           <button class="hero-arrow hero-next" id="heroNext" aria-label="Siguiente">›</button>
           <div class="hero-dots" id="heroDots">
@@ -237,7 +241,6 @@
             <button class="hero-dot" aria-label="Slide 2"></button>
             <button class="hero-dot" aria-label="Slide 3"></button>
             <button class="hero-dot" aria-label="Slide 4"></button>
-            <button class="hero-dot" aria-label="Slide 5"></button>
           </div>
         </div>
 
@@ -431,22 +434,6 @@
           </ul>
         </section>
 
-
-        <!-- Pregunta del día -->
-        <section class="card card-pad" id="pollCard">
-          <h2 class="card-h">Pregunta del día</h2>
-          <p class="poll-q">¿Alguna vez le han intentado robar su vehículo?</p>
-          <div class="poll-opts">
-            <button class="poll-opt" data-val="si"><span class="poll-radio"></span><span class="poll-lbl">Sí</span></button>
-            <button class="poll-opt" data-val="no"><span class="poll-radio"></span><span class="poll-lbl">No</span></button>
-          </div>
-          <div class="poll-result" id="pollResult">
-            <div class="poll-bar-row"><span class="poll-bar-lbl">Sí</span><span class="poll-bar"><span class="poll-bar-fill" data-opt="si"></span></span><span class="poll-bar-pct" data-pct="si">0%</span></div>
-            <div class="poll-bar-row"><span class="poll-bar-lbl">No</span><span class="poll-bar"><span class="poll-bar-fill" data-opt="no"></span></span><span class="poll-bar-pct" data-pct="no">0%</span></div>
-            <div class="poll-total" id="pollTotal"></div>
-          </div>
-        </section>
-
         <!-- Edición Impresa -->
         <section class="card card-pad" id="cardEdimp">
           <h2 class="card-h">Edición Impresa</h2>
@@ -460,35 +447,13 @@
         <!-- Galería del día -->
         <section class="card" id="cardGaleria">
           <div style="padding:16px 16px 8px"><h2 class="card-h" style="margin:0">Galería del día</h2></div>
-          <div class="gallery-grid" aria-label="Avance de la galería del día">
-            <button class="gal-item" type="button" aria-label="Abrir fotografía 1 de la galería">
-              <img src="assets/real/uniformes-escolares.png" alt="Entrega de uniformes escolares en Hermosillo" loading="lazy" decoding="async">
-            </button>
-            <button class="gal-item" type="button" aria-label="Abrir fotografía 2 de la galería">
-              <img src="https://blob.expreso.com.mx/images/2026/08/03/mariachi-vargas-llegara-a-hermosillo-en-noviembre-09b1e2bd-focus-0-0-750-421.webp" alt="Mariachi Vargas llegará a Hermosillo" loading="lazy" decoding="async">
-            </button>
-            <button class="gal-item" type="button" aria-label="Abrir fotografía 3 de la galería">
-              <img src="https://blob.expreso.com.mx/images/2026/08/02/karim-lopez-recibe-consejos-de-tracy-mcgrady-0b6ff5a6-focus-0-0-750-421.webp" alt="Karim López recibe consejos de Tracy McGrady" loading="lazy" decoding="async">
-            </button>
-            <button class="gal-item" type="button" aria-label="Abrir fotografía 4 de la galería">
-              <img src="https://blob.expreso.com.mx/images/2026/07/16/cesar-lozano-llegara-a-hermosillo-con-felizmente-imperfectos-5da9323c-focus-0-0-750-421.webp" alt="César Lozano presentará FelizMente Imperfectos" loading="lazy" decoding="async">
-            </button>
+          <div class="gallery-grid">
+            <img src="assets/real/uniformes-escolares.png" alt="Entrega de uniformes escolares en Hermosillo" data-ph>
+            <img src="https://blob.expreso.com.mx/images/2026/08/03/mariachi-vargas-llegara-a-hermosillo-en-noviembre-09b1e2bd-focus-0-0-750-421.webp" alt="Mariachi Vargas llegará a Hermosillo" data-ph>
+            <img src="https://blob.expreso.com.mx/images/2026/08/02/karim-lopez-recibe-consejos-de-tracy-mcgrady-0b6ff5a6-focus-0-0-750-421.webp" alt="Karim López recibe consejos de Tracy McGrady" data-ph>
+            <img src="https://blob.expreso.com.mx/images/2026/07/16/cesar-lozano-llegara-a-hermosillo-con-felizmente-imperfectos-5da9323c-focus-0-0-750-421.webp" alt="César Lozano presentará FelizMente Imperfectos" data-ph>
           </div>
-          <div class="gallery-full-set" hidden aria-hidden="true">
-            <button class="gal-item" type="button" tabindex="-1">
-              <img src="https://blob.expreso.com.mx/images/2026/08/03/preven-dos-tormentas-fuertes-y-calor-extremo-en-sonora-9fb1044e-focus-0-0-750-421.webp" alt="Tormentas fuertes se aproximan a regiones de Sonora">
-            </button>
-            <button class="gal-item" type="button" tabindex="-1">
-              <img src="https://blob.expreso.com.mx/images/2026/08/03/sentencian-a-mujer-por-transportar-fentanilo-en-sonora-9231d4c1-focus-min0.61-0.49-750-421.webp" alt="Droga asegurada durante una revisión en un autobús de pasajeros">
-            </button>
-            <button class="gal-item" type="button" tabindex="-1">
-              <img src="assets/real/reunion-verde.png" alt="Reunión política registrada durante la jornada informativa">
-            </button>
-            <button class="gal-item" type="button" tabindex="-1">
-              <img src="assets/real/calor-sonora.png" alt="Altas temperaturas y condiciones meteorológicas en Sonora">
-            </button>
-          </div>
-          <a href="multimedia-galerias.html" class="card-more">Ver más galerías →</a>
+          <a href="multimedia-galerias.html" class="card-more">Ver todas las galerías →</a>
         </section>
 
       </aside>
@@ -505,15 +470,6 @@
 
   </div>
 </main>
-
-
-<div class="content-lightbox" role="dialog" aria-modal="true" aria-label="Galería del día" hidden>
-  <button class="lb-close" type="button" aria-label="Cerrar galería">×</button>
-  <button class="lb-prev" type="button" aria-label="Fotografía anterior">‹</button>
-  <img alt="">
-  <button class="lb-next" type="button" aria-label="Fotografía siguiente">›</button>
-  <div class="lb-caption" aria-live="polite"></div>
-</div>
 
 <!-- ════════ 7 · REDES SOCIALES ════════ -->
 <section class="social">
@@ -601,9 +557,6 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo-mark"><span class="e" style="color:#25a457">e</span>xpreso.</div>
-          <a class="footer-anniversary" href="index.html" aria-label="21 aniversario de Expreso">
-            <img src="img/21Aniv.png" alt="21 aniversario de Expreso" loading="lazy" decoding="async">
-          </a>
           <p class="footer-about">Plataforma líder en noticias en el noroeste de México. El periódico de Sonora desde 1986.</p>
           <div class="footer-contact">
             <div>📍 Blvd. Abelardo L. Rodríguez No. 16, Col. San Benito</div>
