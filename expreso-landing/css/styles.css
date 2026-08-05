@@ -2920,3 +2920,122 @@ body.home-page .footer-legal a {
   }
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FOOTER · AJUSTE DE ESPACIO PARA LOGO DE ANIVERSARIO
+   Mantiene el logo grande, pero reorganiza la primera columna para
+   aprovechar mejor el espacio sin desalinear las demás columnas.
+   Alcance: todas las vistas.
+   ═══════════════════════════════════════════════════════════════════════ */
+body .footer-grid,
+body.home-page .footer-grid {
+  grid-template-columns: minmax(430px, 1.55fr) repeat(4, minmax(140px, 1fr)) !important;
+  gap: 30px 28px !important;
+  align-items: start !important;
+}
+
+body .footer-brand,
+body.home-page .footer-brand {
+  display: grid !important;
+  grid-template-columns: minmax(210px, 260px) minmax(180px, 1fr);
+  grid-template-areas:
+    "anniv about"
+    "anniv contact"
+    "anniv social";
+  column-gap: 24px;
+  row-gap: 12px;
+  align-items: start;
+}
+
+body .footer-anniversary,
+body.home-page .footer-anniversary {
+  grid-area: anniv;
+  width: clamp(220px, 22vw, 280px) !important;
+  max-width: 280px !important;
+  margin: 0 !important;
+  justify-self: start;
+  align-self: start;
+}
+
+body .footer-about,
+body.home-page .footer-about {
+  grid-area: about;
+  margin: 8px 0 0 !important;
+}
+
+body .footer-contact,
+body.home-page .footer-contact {
+  grid-area: contact;
+  margin: 0 !important;
+}
+
+body .footer-social,
+body.home-page .footer-social {
+  grid-area: social;
+  margin-top: 2px !important;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1240px) {
+  body .footer-grid,
+  body.home-page .footer-grid {
+    grid-template-columns: repeat(3, minmax(180px, 1fr)) !important;
+  }
+
+  body .footer-brand,
+  body.home-page .footer-brand {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(210px, 260px) 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  body .footer-grid,
+  body.home-page .footer-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr)) !important;
+  }
+
+  body .footer-brand,
+  body.home-page .footer-brand {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(190px, 240px) 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  body .footer-grid,
+  body.home-page .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  body .footer-brand,
+  body.home-page .footer-brand {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "anniv"
+      "about"
+      "contact"
+      "social";
+    row-gap: 14px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  body .footer-anniversary,
+  body.home-page .footer-anniversary {
+    width: min(78vw, 260px) !important;
+    justify-self: center;
+  }
+
+  body .footer-about,
+  body.home-page .footer-about,
+  body .footer-contact,
+  body.home-page .footer-contact {
+    text-align: center;
+  }
+
+  body .footer-social,
+  body.home-page .footer-social {
+    justify-content: center;
+  }
+}
