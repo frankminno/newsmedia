@@ -1343,7 +1343,16 @@ if (document.readyState === 'loading') {
     image.loading = 'lazy';
     image.decoding = 'async';
 
-    link.appendChild(image);
+    /*
+     * La capa .menuf replica la presentación visual del flotante actual
+     * de Expreso sin modificar el enlace, su posición o la animación.
+     */
+    var menuFace = document.createElement('span');
+    menuFace.className = 'menuf';
+    menuFace.setAttribute('aria-hidden', 'true');
+    menuFace.appendChild(image);
+
+    link.appendChild(menuFace);
     nav.appendChild(link);
   });
 

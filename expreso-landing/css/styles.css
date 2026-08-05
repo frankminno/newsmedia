@@ -3039,3 +3039,94 @@ body.home-page .footer-social {
     justify-content: center;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PORTADA · CAPA VISUAL .menuf PARA LOS BOTONES eMEDIA
+   Replica el acabado del flotante actual de Expreso sin cambiar el arco,
+   posiciones, enlaces, apertura o animación ya aprobados.
+   ═══════════════════════════════════════════════════════════════════════ */
+body.home-page .emedia-dock__item {
+  /* El enlace conserva su posición; la capa visual crece al 160%. */
+  width: 42.5px;
+  height: 42.5px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+body.home-page .emedia-dock__item .menuf {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160%;
+  height: 160%;
+  border-radius: 50%;
+  background-color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: -12px 12px 35px #0000004d;
+  justify-content: start;
+  padding-left: .1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+
+body.home-page .emedia-dock__item .menuf img {
+  display: block;
+  width: 78%;
+  height: 78%;
+  margin-inline: auto;
+  object-fit: contain;
+  transform: none;
+  filter: none;
+}
+
+body.home-page .emedia-dock__item:hover,
+body.home-page .emedia-dock__item:focus-visible {
+  box-shadow: none;
+  outline: 0;
+}
+
+body.home-page .emedia-dock__item:hover .menuf,
+body.home-page .emedia-dock__item:focus-visible .menuf {
+  box-shadow: -14px 14px 38px rgba(0, 0, 0, .34),
+              0 0 0 2px rgba(37, 164, 87, .14);
+  transform: translate(-50%, -50%) scale(1.035);
+}
+
+body.home-page .emedia-dock__item:hover .menuf img,
+body.home-page .emedia-dock__item:focus-visible .menuf img {
+  transform: none;
+  filter: brightness(1.02);
+}
+
+/* Mantiene el diámetro visual aprobado en cada breakpoint. */
+@media (max-width: 1366px) and (min-width: 768px) {
+  body.home-page .emedia-dock__item {
+    width: 37.5px;
+    height: 37.5px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.home-page .emedia-dock__item {
+    width: 32.5px;
+    height: 32.5px;
+  }
+
+  body.home-page .emedia-dock__item .menuf {
+    box-shadow: -8px 9px 24px rgba(0, 0, 0, .25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home-page .emedia-dock__item .menuf {
+    transition: none !important;
+  }
+}
