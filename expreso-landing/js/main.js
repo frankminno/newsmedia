@@ -1347,12 +1347,16 @@ if (document.readyState === 'loading') {
      * La capa .menuf replica la presentación visual del flotante actual
      * de Expreso sin modificar el enlace, su posición o la animación.
      */
+    var menuAnchor = document.createElement('span');
+    menuAnchor.className = 'menuf-anchor';
+    menuAnchor.setAttribute('aria-hidden', 'true');
+
     var menuFace = document.createElement('span');
     menuFace.className = 'menuf';
-    menuFace.setAttribute('aria-hidden', 'true');
     menuFace.appendChild(image);
 
-    link.appendChild(menuFace);
+    menuAnchor.appendChild(menuFace);
+    link.appendChild(menuAnchor);
     nav.appendChild(link);
   });
 
