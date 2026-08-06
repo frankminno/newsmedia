@@ -2929,7 +2929,7 @@ body.home-page .footer-legal a {
    ═══════════════════════════════════════════════════════════════════════ */
 body .footer-grid,
 body.home-page .footer-grid {
-  grid-template-columns: minmax(430px, 1.55fr) repeat(4, minmax(140px, 1fr)) !important;
+  grid-template-columns: minmax(460px, 1.55fr) repeat(4, minmax(140px, 1fr)) !important;
   gap: 30px 28px !important;
   align-items: start !important;
 }
