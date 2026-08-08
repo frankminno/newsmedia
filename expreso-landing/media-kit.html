@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Media Kit 2026 de EXPRESO y eMedia: productos, audiencias, espacios publicitarios, medios digitales, radio y soluciones comerciales.">
+  <meta name="theme-color" content="#002e1e">
+  <title>Media Kit 2026 | EXPRESO</title>
+
+  <!-- Reutiliza la hoja general del template si el archivo se integra al proyecto -->
+  <link rel="preload" as="font" href="fonts/CanvaSans-VF.ttf" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="css/styles.css?v=20260808-3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       MEDIA KIT 2026 · MICROSITIO COMERCIAL
+       Scope: body.media-kit-page
+       ═══════════════════════════════════════════════════════════════ */
+
+    body.media-kit-page {
+      --mk-green: #159447;
+      --mk-green-2: #32b654;
+      --mk-deep: #003b2b;
+      --mk-soft: #edf6f0;
+      --mk-purple: #65539a;
+      --mk-yellow: #e7c500;
+      --mk-line: #dfe5e0;
+      background: #f3f5f3;
+    }
+
+    body.media-kit-page .navbar.nav-context .nav-primary a:first-child {
+      background: transparent;
+      color: var(--black);
+      border-bottom: 0;
+    }
+
+    body.media-kit-page .navbar.nav-context .nav-primary a:first-child:hover {
+      color: var(--green);
+    }
+
+    .mk-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      z-index: 2200;
+      background: linear-gradient(90deg, var(--mk-green), var(--mk-green-2));
+      box-shadow: 0 1px 6px rgba(21,148,71,.3);
+    }
+
+    .mk-hero {
+      position: relative;
+      min-height: min(720px, 78vh);
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(90deg, rgba(0,35,24,.94) 0%, rgba(0,59,43,.82) 46%, rgba(0,59,43,.22) 100%),
+        url("media-kit-assets/cover.webp") center/cover no-repeat;
+      color: #fff;
+    }
+
+    .mk-hero::before,
+    .mk-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .mk-hero::before {
+      width: 430px;
+      height: 430px;
+      right: -110px;
+      top: -120px;
+      background: rgba(50,182,84,.24);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      transform: rotate(20deg);
+    }
+
+    .mk-hero::after {
+      width: 300px;
+      height: 300px;
+      right: 13%;
+      bottom: -150px;
+      background: rgba(255,255,255,.08);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      transform: rotate(180deg);
+    }
+
+    .mk-hero__inner {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: clamp(90px, 12vw, 150px) 0 clamp(54px, 8vw, 90px);
+    }
+
+    .mk-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #93ebb1;
+    }
+
+    .mk-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .mk-hero h1 {
+      max-width: 820px;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(50px, 8vw, 104px);
+      line-height: .88;
+      letter-spacing: -.06em;
+    }
+
+    .mk-hero h1 span {
+      display: block;
+      margin-top: 14px;
+      color: #65d686;
+      font-size: .52em;
+      letter-spacing: -.035em;
+    }
+
+    .mk-hero__lead {
+      max-width: 690px;
+      margin: 24px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.55;
+    }
+
+    .mk-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .mk-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 45px;
+      padding: 0 19px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 850;
+      transition: transform var(--spring), background var(--t), color var(--t), box-shadow var(--t);
+    }
+
+    .mk-btn--primary {
+      background: var(--mk-green-2);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    }
+
+    .mk-btn--primary:hover {
+      transform: translateY(-2px);
+      background: #23a94a;
+    }
+
+    .mk-btn--ghost {
+      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.09);
+      color: #fff;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .mk-btn--ghost:hover {
+      transform: translateY(-2px);
+      background: #fff;
+      color: var(--mk-deep);
+    }
+
+    .mk-nav {
+      position: sticky;
+      top: var(--sticky-navbar-h, 44px);
+      z-index: 1150;
+      background: rgba(255,255,255,.92);
+      border-bottom: 1px solid var(--mk-line);
+      box-shadow: 0 8px 22px rgba(0,35,24,.07);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .mk-nav .wrap {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .mk-nav .wrap::-webkit-scrollbar { display: none; }
+
+    .mk-nav a {
+      flex: 0 0 auto;
+      padding: 7px 13px;
+      border-radius: 999px;
+      color: #4f5651;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: background var(--t), color var(--t);
+    }
+
+    .mk-nav a:hover,
+    .mk-nav a.is-active {
+      background: var(--mk-deep);
+      color: #fff;
+    }
+
+    .mk-main {
+      overflow: hidden;
+    }
+
+    .mk-section {
+      position: relative;
+      padding: clamp(58px, 8vw, 96px) 0;
+      scroll-margin-top: 100px;
+    }
+
+    .mk-section:nth-of-type(even) {
+      background: #fff;
+    }
+
+    .mk-section:nth-of-type(odd) {
+      background: #f3f5f3;
+    }
+
+    .mk-section--dark {
+      background: var(--mk-deep) !important;
+      color: #fff;
+    }
+
+    .mk-section--dark h2,
+    .mk-section--dark h3 {
+      color: #fff;
+    }
+
+    .mk-section__head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 26px;
+      margin-bottom: 30px;
+    }
+
+    .mk-section__head > div:first-child {
+      max-width: 760px;
+    }
+
+    .mk-kicker {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--mk-green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .mk-section--dark .mk-kicker {
+      color: #72df95;
+    }
+
+    .mk-section__head h2 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .mk-section__head p {
+      max-width: 650px;
+      margin: 9px 0 0;
+      color: #646c66;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .mk-section--dark .mk-section__head p {
+      color: rgba(255,255,255,.67);
+    }
+
+    .mk-reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1);
+    }
+
+    .mk-reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .mk-intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(300px,.8fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .mk-intro-copy {
+      padding: clamp(24px, 4vw, 42px);
+      border: 1px solid var(--mk-line);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 90% 12%, rgba(50,182,84,.12), transparent 30%),
+        #fff;
+      box-shadow: 0 12px 36px rgba(0,0,0,.05);
+    }
+
+    .mk-intro-copy p {
+      margin: 0 0 16px;
+      color: #424844;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .mk-intro-copy p:last-child { margin-bottom: 0; }
+
+    .mk-quote {
+      position: relative;
+      display: grid;
+      align-content: end;
+      min-height: 420px;
+      padding: 32px;
+      overflow: hidden;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, transparent 10%, rgba(0,35,24,.82) 100%),
+        url("media-kit-assets/expreso-products.webp") center/cover no-repeat;
+      box-shadow: 0 16px 44px rgba(0,0,0,.15);
+      color: #fff;
+    }
+
+    .mk-quote::before {
+      content: "“";
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      color: rgba(255,255,255,.12);
+      font-family: Georgia, serif;
+      font-size: 160px;
+      line-height: 1;
+    }
+
+    .mk-quote strong {
+      position: relative;
+      z-index: 1;
+      max-width: 360px;
+      color: #fff;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.12;
+    }
+
+    .mk-media-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .mk-media-card {
+      position: relative;
+      min-height: 285px;
+      overflow: hidden;
+      border: 1px solid var(--mk-line);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 8px 28px rgba(0,0,0,.05);
+      transition: transform var(--spring), box-shadow var(--t), border-color var(--t);
+    }
+
+    .mk-media-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(21,148,71,.22);
+      box-shadow: 0 18px 40px rgba(0,80,43,.11);
+    }
+
+    .mk-media-card__icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin: 22px 22px 12px;
+      border-radius: 14px;
+      background: var(--mk-soft);
+      color: var(--mk-green);
+      font-size: 20px;
+    }
+
+    .mk-media-card h3 {
+      margin: 0 22px 8px;
+      font-size: 22px;
+    }
+
+    .mk-media-card p {
+      margin: 0 22px;
+      color: #656c67;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    .mk-media-card ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 16px 22px 22px;
+    }
+
+    .mk-media-card li {
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: #f0f3f1;
+      color: #4e5550;
+      font-size: 10.5px;
+      font-weight: 750;
+    }
+
+    .mk-services {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .mk-service {
+      min-height: 140px;
+      padding: 18px;
+      border: 1px solid var(--mk-line);
+      border-radius: 16px;
+      background: #fff;
+      transition: transform var(--spring), border-color var(--t), background var(--t);
+    }
+
+    .mk-service:hover {
+      transform: translateY(-4px);
+      border-color: rgba(21,148,71,.28);
+      background: var(--mk-soft);
+    }
+
+    .mk-service i {
+      color: var(--mk-green);
+      font-size: 21px;
+    }
+
+    .mk-service strong {
+      display: block;
+      margin-top: 18px;
+      color: #161816;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .mk-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .mk-stat {
+      padding: 26px 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .mk-stat i {
+      color: #75df98;
+      font-size: 22px;
+    }
+
+    .mk-stat__number {
+      display: block;
+      margin-top: 18px;
+      color: #fff;
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 900;
+      line-height: .9;
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mk-stat__label {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,.67);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .mk-digital-stats .mk-stat__number {
+      color: #72df95;
+    }
+
+    .mk-audience {
+      display: grid;
+      grid-template-columns: minmax(260px,.72fr) minmax(0,1.28fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .mk-audience__tabs {
+      display: grid;
+      gap: 9px;
+      align-content: start;
+    }
+
+    .mk-audience-tab {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 46px minmax(0,1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--mk-line);
+      border-radius: 14px;
+      background: #fff;
+      text-align: left;
+      transition: border-color var(--t), background var(--t), transform var(--spring);
+    }
+
+    .mk-audience-tab:hover,
+    .mk-audience-tab.is-active {
+      transform: translateX(3px);
+      border-color: rgba(21,148,71,.3);
+      background: var(--mk-soft);
+    }
+
+    .mk-audience-tab i {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--mk-green);
+      box-shadow: 0 4px 12px rgba(0,80,43,.07);
+    }
+
+    .mk-audience-tab strong {
+      display: block;
+      color: #111;
+      font-size: 14px;
+    }
+
+    .mk-audience-tab small {
+      display: block;
+      margin-top: 2px;
+      color: #777;
+      font-size: 10.5px;
+    }
+
+    .mk-audience__panel {
+      display: grid;
+      grid-template-columns: minmax(240px,.9fr) minmax(0,1.1fr);
+      gap: 24px;
+      align-items: center;
+      padding: clamp(24px,4vw,40px);
+      border: 1px solid var(--mk-line);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 12px 34px rgba(0,0,0,.05);
+    }
+
+    .mk-donut {
+      --female: 43;
+      width: min(260px, 72vw);
+      aspect-ratio: 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+      margin-inline: auto;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          #26aa57 0 calc((100 - var(--female)) * 1%),
+          #d0d3d1 calc((100 - var(--female)) * 1%) 100%
+        );
+      box-shadow: 0 18px 38px rgba(0,0,0,.08);
+      transition: background .45s ease;
+    }
+
+    .mk-donut::after {
+      content: "";
+      width: 56%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: inset 0 0 0 1px #edf0ed;
+    }
+
+    .mk-donut__legend {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+
+    .mk-donut__legend strong {
+      color: #111;
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .mk-audience__copy h3 {
+      margin: 0 0 8px;
+      font-size: clamp(26px,4vw,38px);
+    }
+
+    .mk-audience__copy p {
+      margin: 0 0 18px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .mk-gender-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .mk-gender {
+      padding: 14px;
+      border-radius: 12px;
+      background: #f4f6f4;
+    }
+
+    .mk-gender span {
+      display: block;
+      color: #777;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .mk-gender strong {
+      display: block;
+      margin-top: 4px;
+      color: #111;
+      font-size: 28px;
+    }
+
+    .mk-gender--m strong { color: var(--mk-green); }
+
+    .mk-visual-split {
+      display: grid;
+      grid-template-columns: minmax(0,1.08fr) minmax(300px,.92fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .mk-visual {
+      min-height: 430px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #111;
+      box-shadow: 0 16px 42px rgba(0,0,0,.14);
+    }
+
+    .mk-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.22,1,.36,1);
+    }
+
+    .mk-visual:hover img { transform: scale(1.025); }
+
+    .mk-product-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mk-product-list > div {
+      display: grid;
+      grid-template-columns: 42px minmax(0,1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 13px 14px;
+      border: 1px solid var(--mk-line);
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .mk-product-list i {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--mk-soft);
+      color: var(--mk-green);
+    }
+
+    .mk-product-list strong {
+      display: block;
+      color: #111;
+      font-size: 13px;
+    }
+
+    .mk-product-list span {
+      display: block;
+      margin-top: 2px;
+      color: #737a75;
+      font-size: 11px;
+    }
+
+    .mk-table-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .mk-table-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .mk-table-tab {
+      padding: 7px 12px;
+      border: 1px solid var(--mk-line);
+      border-radius: 999px;
+      background: #fff;
+      color: #555;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .mk-table-tab.is-active,
+    .mk-table-tab:hover {
+      background: var(--mk-deep);
+      border-color: var(--mk-deep);
+      color: #fff;
+    }
+
+    .mk-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--mk-line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 28px rgba(0,0,0,.045);
+    }
+
+    .mk-table {
+      width: 100%;
+      min-width: 650px;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    .mk-table th,
+    .mk-table td {
+      padding: 11px 13px;
+      border-bottom: 1px solid #edf0ed;
+      text-align: left;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mk-table th {
+      position: sticky;
+      top: 0;
+      background: var(--mk-deep);
+      color: #fff;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .mk-table tr:nth-child(even) td {
+      background: #f7faf8;
+    }
+
+    .mk-table tr:hover td {
+      background: var(--mk-soft);
+    }
+
+    .mk-digital-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .mk-digital-tab {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--mk-line);
+      color: #555;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .mk-digital-tab.is-active,
+    .mk-digital-tab:hover {
+      background: var(--mk-green);
+      color: #fff;
+      border-color: var(--mk-green);
+    }
+
+    .mk-digital-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .mk-digital-item {
+      padding: 15px;
+      border: 1px solid var(--mk-line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .mk-digital-item i {
+      color: var(--mk-green);
+      font-size: 18px;
+    }
+
+    .mk-digital-item strong {
+      display: block;
+      margin-top: 14px;
+      color: #111;
+      font-size: 13px;
+    }
+
+    .mk-digital-item small {
+      display: block;
+      margin-top: 4px;
+      color: #777;
+      font-size: 10.5px;
+    }
+
+    .mk-radio-hero {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(340px,.9fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .mk-radio-visual {
+      position: relative;
+      min-height: 430px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 16px 44px rgba(0,0,0,.18);
+      background: #111;
+    }
+
+    .mk-radio-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      object-fit: cover;
+      transition: transform .65s ease;
+    }
+
+    .mk-radio-visual:hover img { transform: scale(1.025); }
+
+    .mk-radio-info {
+      display: grid;
+      align-content: center;
+      padding: clamp(24px,4vw,38px);
+      border-radius: 20px;
+      border: 1px solid var(--mk-line);
+      background: #fff;
+    }
+
+    .mk-radio-info h3 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+
+    .mk-radio-info p {
+      margin: 0 0 16px;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .mk-facts {
+      display: grid;
+      gap: 7px;
+    }
+
+    .mk-fact {
+      display: grid;
+      grid-template-columns: 118px minmax(0,1fr);
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #edf0ed;
+    }
+
+    .mk-fact:last-child { border-bottom: 0; }
+
+    .mk-fact span {
+      color: #898f8b;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .mk-fact strong {
+      color: #222;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .mk-coverage {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid var(--mk-green);
+    }
+
+    .mk-coverage strong {
+      color: var(--mk-green);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .mk-coverage p {
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .mk-schedule-shell {
+      margin-top: 24px;
+      overflow: hidden;
+      border: 1px solid var(--mk-line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .mk-schedule-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--mk-line);
+    }
+
+    .mk-schedule-head h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .mk-schedule-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mk-schedule-tab {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: #f1f3f1;
+      color: #555;
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .mk-schedule-tab.is-active {
+      background: var(--mk-deep);
+      color: #fff;
+    }
+
+    .mk-schedule {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1px;
+      background: #e8ece9;
+    }
+
+    .mk-program {
+      min-height: 92px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .mk-program time {
+      color: var(--mk-green);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .mk-program strong {
+      display: block;
+      margin-top: 5px;
+      color: #111;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .mk-program small {
+      display: block;
+      margin-top: 3px;
+      color: #888;
+      font-size: 10px;
+    }
+
+    .mk-special {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(30px,5vw,52px);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(93,222,133,.26), transparent 26%),
+        linear-gradient(135deg, #002e1e, #0a4a32);
+      color: #fff;
+      box-shadow: 0 18px 50px rgba(0,45,30,.18);
+    }
+
+    .mk-special::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -120px;
+      width: 320px;
+      height: 320px;
+      background: rgba(50,182,84,.18);
+      clip-path: polygon(50% 0,100% 100%,0 100%);
+      transform: rotate(-25deg);
+    }
+
+    .mk-special > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mk-special h3 {
+      max-width: 800px;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(30px,5vw,52px);
+      line-height: 1;
+    }
+
+    .mk-special p {
+      max-width: 900px;
+      margin: 15px 0 0;
+      color: rgba(255,255,255,.73);
+      line-height: 1.6;
+    }
+
+    .mk-special-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .mk-special-item {
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 13px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .mk-special-item i {
+      color: #70e095;
+    }
+
+    .mk-special-item strong {
+      display: block;
+      margin-top: 10px;
+      color: #fff;
+      font-size: 12.5px;
+    }
+
+    .mk-special-item span {
+      display: block;
+      margin-top: 3px;
+      color: rgba(255,255,255,.58);
+      font-size: 10.5px;
+      line-height: 1.4;
+    }
+
+    .mk-cta {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) auto;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(30px,5vw,52px);
+      border: 1px solid rgba(21,148,71,.24);
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(21,148,71,.13), rgba(255,255,255,.95));
+      box-shadow: 0 14px 38px rgba(0,80,43,.08);
+    }
+
+    .mk-cta h2 {
+      margin: 0;
+      font-size: clamp(30px,5vw,52px);
+      line-height: 1;
+    }
+
+    .mk-cta p {
+      margin: 10px 0 0;
+      color: #666;
+    }
+
+    .mk-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1300;
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--mk-green);
+      color: #fff;
+      box-shadow: -10px 12px 30px rgba(0,0,0,.24);
+      transition: transform var(--spring), background var(--t);
+    }
+
+    .mk-float:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: var(--mk-deep);
+    }
+
+    .mk-footer-mark {
+      grid-area: anniv;
+      align-self: start;
+      color: #111;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 900;
+      line-height: .9;
+      letter-spacing: -.05em;
+    }
+
+    .mk-footer-mark > span {
+      color: var(--mk-green);
+    }
+
+    .mk-footer-mark small {
+      display: block;
+      margin-top: 8px;
+      color: #555;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .02em;
+    }
+
+    @media (max-width: 980px) {
+      .mk-intro-grid,
+      .mk-audience,
+      .mk-visual-split,
+      .mk-radio-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .mk-media-grid { grid-template-columns: 1fr 1fr; }
+      .mk-services { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .mk-digital-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .mk-audience__tabs { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .mk-audience-tab { grid-template-columns: 1fr; text-align: center; }
+      .mk-audience-tab i { margin-inline: auto; }
+      .mk-special-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .mk-hero {
+        min-height: 650px;
+        background-position: 58% center;
+      }
+
+      .mk-section__head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .mk-media-grid,
+      .mk-stat-grid,
+      .mk-digital-grid,
+      .mk-special-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mk-services {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .mk-audience__tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .mk-audience-tab {
+        grid-template-columns: 46px minmax(0,1fr);
+        text-align: left;
+      }
+
+      .mk-audience-tab i { margin-inline: 0; }
+
+      .mk-audience__panel {
+        grid-template-columns: 1fr;
+      }
+
+      .mk-schedule {
+        grid-template-columns: 1fr;
+      }
+
+      .mk-cta {
+        grid-template-columns: 1fr;
+      }
+
+      .mk-cta .mk-actions {
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mk-services { grid-template-columns: 1fr; }
+      .mk-table-tools { align-items: flex-start; flex-direction: column; }
+      .mk-gender-row { grid-template-columns: 1fr; }
+      .mk-float { right: 14px; bottom: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mk-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .mk-progress { display: none; }
+    }
+  </style>
+</head>
+
+<body class="media-kit-page">
+  <div class="mk-progress" id="mkProgress" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#mediakit">Saltar al contenido</a>
+
+  <!-- ════════ UTILITY BAR ════════ -->
+  <div class="utility">
+    <div class="wrap">
+      <nav class="utility-links" aria-label="Enlaces institucionales">
+        <a href="directorio.html">Directorio</a>
+        <a href="contacto.html">Contáctanos</a>
+        <a href="media-kit.html" aria-current="page">Media Kit 2026</a>
+      </nav>
+
+      <div class="utility-social">
+        <a aria-label="Facebook" href="https://facebook.com/expresoweb" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+        <a aria-label="Instagram" href="https://instagram.com/expresomx" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a aria-label="YouTube" href="https://youtube.com/user/expresoweb" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a aria-label="X" href="https://x.com/Expresoweb" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        <a aria-label="TikTok" href="https://www.tiktok.com/@expresoweb" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ HEADER ════════ -->
+  <header class="header">
+    <div class="wrap">
+      <a aria-label="Expreso — Inicio" class="logo" href="index.html">
+        <img alt="Expreso" class="exp" src="media-kit-assets/expreso-logo.webp">
+      </a>
+
+      <div class="search">
+        <span aria-hidden="true" class="search-icon">🔍</span>
+        <div class="search-box"><input aria-label="Buscar en Expreso" placeholder="Buscar en Expreso…" type="search"></div>
+      </div>
+
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="https://impreso.expreso.com.mx/">Edición Impresa</a>
+        <a class="btn btn-primary" href="https://www.expreso.com.mx/suscripciones">Suscribirse</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════ NAVBAR ════════ -->
+  <nav aria-label="Navegación principal" class="navbar nav-context">
+    <div class="wrap">
+      <div class="nav-primary">
+        <a href="index.html">Inicio</a>
+        <a href="hermosillo.html">Hermosillo</a>
+        <a href="sonora.html">Sonora</a>
+        <a href="mexico.html">México</a>
+        <a href="mundo.html">Mundo</a>
+        <a href="seguridad.html">Seguridad</a>
+        <a href="negocios.html">Negocios</a>
+        <a href="viral.html">Viral</a>
+      </div>
+      <div class="nav-secondary">
+        <a href="accion.html">Acción</a>
+        <a href="estelar.html">Estelar</a>
+        <a href="expresion.html">Expresión</a>
+        <a href="conexion.html">Conexión</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="mk-hero" id="mediakit">
+    <div class="mk-hero__inner">
+      <span class="mk-eyebrow">eMedia · #SomosTodos</span>
+      <h1>Media Kit <span>2026</span></h1>
+      <p class="mk-hero__lead">
+        Una plataforma integral para conectar marcas con audiencias a través de periódico,
+        medios digitales, radio, producción multimedia, redes sociales y soluciones comerciales.
+      </p>
+      <div class="mk-actions">
+        <a class="mk-btn mk-btn--primary" href="mailto:contacto_ventas@expreso.com.mx?subject=Solicitud%20de%20propuesta%20Media%20Kit%202026">
+          <i class="fa-regular fa-paper-plane"></i> Solicitar propuesta
+        </a>
+        <a class="mk-btn mk-btn--ghost" href="MediaKit_2026.pdf" download>
+          <i class="fa-solid fa-file-arrow-down"></i> Descargar PDF
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ NAVEGACIÓN INTERNA ════════ -->
+  <nav class="mk-nav" aria-label="Secciones del Media Kit">
+    <div class="wrap">
+      <a href="#quienes">Quiénes somos</a>
+      <a href="#medios">Nuestros medios</a>
+      <a href="#productos">Productos</a>
+      <a href="#audiencias">Audiencias</a>
+      <a href="#digital">Digital</a>
+      <a href="#expreso">Expreso</a>
+      <a href="#radio">Radio</a>
+      <a href="#especiales">Especiales</a>
+      <a href="#ventas">Ventas</a>
+    </div>
+  </nav>
+
+  <main class="mk-main">
+
+    <!-- QUIÉNES SOMOS -->
+    <section class="mk-section" id="quienes">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">eMedia</span>
+            <h2>¿Quiénes somos?</h2>
+            <p>Comunicación integrada con presencia en radio, periódico y medios digitales.</p>
+          </div>
+        </div>
+
+        <div class="mk-intro-grid">
+          <article class="mk-intro-copy mk-reveal">
+            <p>
+              Somos un equipo apasionado y dedicado que ofrece una amplia gama de servicios en el mundo de la comunicación.
+              Con una combinación de radio, periódico y medios digitales, buscamos proporcionar a nuestros clientes una plataforma
+              completa para compartir sus historias, ideas y mensajes.
+            </p>
+            <p>
+              Buscamos destacar por la excelencia periodística, el compromiso con la verdad y la imparcialidad,
+              la adaptación a nuevas tendencias y tecnologías, y un servicio de calidad para nuestra audiencia y aliados comerciales.
+            </p>
+            <p>
+              Nuestra visión es establecer relaciones sólidas y duraderas con clientes, colaboradores y socios,
+              y desempeñar un papel relevante en el desarrollo y fortalecimiento de la comunidad.
+            </p>
+          </article>
+
+          <aside class="mk-quote mk-reveal">
+            <strong>Permítanos ser su socio confiable en la era de la comunicación moderna.</strong>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUESTROS MEDIOS -->
+    <section class="mk-section" id="medios">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">Ecosistema de medios</span>
+            <h2>Nuestros medios</h2>
+            <p>Formatos impresos, digitales y de radio para construir campañas con alcance multicanal.</p>
+          </div>
+        </div>
+
+        <div class="mk-media-grid">
+          <article class="mk-media-card mk-reveal">
+            <div class="mk-media-card__icon"><i class="fa-regular fa-newspaper"></i></div>
+            <h3>EXPRESO</h3>
+            <p>Noticias, edición impresa y plataforma digital con contenidos locales, nacionales, análisis, deportes y entretenimiento.</p>
+            <ul><li>Noticias</li><li>Impreso</li><li>Digital</li></ul>
+          </article>
+
+          <article class="mk-media-card mk-reveal">
+            <div class="mk-media-card__icon"><i class="fa-solid fa-radio"></i></div>
+            <h3>Sonora Grupera</h3>
+            <p>Programación de regional mexicano con cobertura en el sur de Sonora y presencia web nacional e internacional.</p>
+            <ul><li>FM</li><li>Radio online</li><li>Regional mexicano</li></ul>
+          </article>
+
+          <article class="mk-media-card mk-reveal">
+            <div class="mk-media-card__icon"><i class="fa-solid fa-headphones"></i></div>
+            <h3>POP! Extremo</h3>
+            <p>Estación de música Pop orientada a jóvenes y adultos, con cobertura regional y distribución digital.</p>
+            <ul><li>FM</li><li>Radio online</li><li>Música Pop</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="mk-section" id="productos">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">Soluciones comerciales</span>
+            <h2>Productos a la medida</h2>
+            <p>El Media Kit contempla soluciones para publicidad, contenido, producción y difusión en distintas plataformas.</p>
+          </div>
+        </div>
+
+        <div class="mk-services">
+          <article class="mk-service mk-reveal"><i class="fa-solid fa-bullhorn"></i><strong>Publicidad</strong></article>
+          <article class="mk-service mk-reveal"><i class="fa-solid fa-radio"></i><strong>Radio</strong></article>
+          <article class="mk-service mk-reveal"><i class="fa-solid fa-print"></i><strong>Imprenta comercial</strong></article>
+          <article class="mk-service mk-reveal"><i class="fa-solid fa-video"></i><strong>Producción multimedia</strong></article>
+          <article class="mk-service mk-reveal"><i class="fa-regular fa-envelope"></i><strong>Servicio de mailing</strong></article>
+          <article class="mk-service mk-reveal"><i class="fa-regular fa-calendar-check"></i><strong>Eventos</strong></article>
+          <article class="mk-service mk-reveal"><i class="fa-solid fa-pen-ruler"></i><strong>Branded content</strong></article>
+          <article class="mk-service mk-reveal"><i class="fa-solid fa-share-nodes"></i><strong>Redes sociales</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIENCIAS / LECTORES -->
+    <section class="mk-section mk-section--dark" id="audiencias">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">Alcance</span>
+            <h2>Nuestros lectores</h2>
+            <p>Datos presentados en el Media Kit 2026 para la audiencia de EXPRESO.</p>
+          </div>
+        </div>
+
+        <div class="mk-stat-grid">
+          <article class="mk-stat mk-reveal">
+            <i class="fa-regular fa-calendar-days"></i>
+            <strong class="mk-stat__number" data-counter="1784736">0</strong>
+            <span class="mk-stat__label">Personas han leído EXPRESO en los últimos 30 días.</span>
+          </article>
+
+          <article class="mk-stat mk-reveal">
+            <i class="fa-regular fa-newspaper"></i>
+            <strong class="mk-stat__number" data-counter="130137">0</strong>
+            <span class="mk-stat__label">Ejemplares circulan de lunes a domingo.</span>
+          </article>
+
+          <article class="mk-stat mk-reveal">
+            <i class="fa-regular fa-calendar"></i>
+            <strong class="mk-stat__number" data-counter="59492">0</strong>
+            <span class="mk-stat__label">Personas leyeron EXPRESO el día de ayer.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMOGRAFÍA INTERACTIVA -->
+    <section class="mk-section">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">Demografía</span>
+            <h2>Audiencias por medio</h2>
+            <p>Selecciona un medio para consultar la distribución demográfica reportada en el documento.</p>
+          </div>
+        </div>
+
+        <div class="mk-audience">
+          <div class="mk-audience__tabs mk-reveal">
+            <button class="mk-audience-tab is-active" type="button" data-audience="expreso">
+              <i class="fa-regular fa-newspaper"></i>
+              <span><strong>EXPRESO</strong><small>Lectores</small></span>
+            </button>
+            <button class="mk-audience-tab" type="button" data-audience="sonora">
+              <i class="fa-solid fa-radio"></i>
+              <span><strong>Sonora Grupera</strong><small>Navojoa · Guaymas · Cd. Obregón</small></span>
+            </button>
+            <button class="mk-audience-tab" type="button" data-audience="pop">
+              <i class="fa-solid fa-headphones"></i>
+              <span><strong>POP! Extremo</strong><small>Navojoa · Guaymas</small></span>
+            </button>
+          </div>
+
+          <div class="mk-audience__panel mk-reveal">
+            <div class="mk-donut" id="audienceDonut" style="--female:43">
+              <div class="mk-donut__legend"><strong id="audienceDonutTitle">EXPRESO<br>Audiencia</strong></div>
+            </div>
+            <div class="mk-audience__copy">
+              <h3 id="audienceTitle">EXPRESO</h3>
+              <p id="audienceDescription">Distribución demográfica reportada para los lectores del periódico.</p>
+              <div class="mk-gender-row">
+                <div class="mk-gender">
+                  <span>Femenino</span>
+                  <strong id="audienceFemale">43%</strong>
+                </div>
+                <div class="mk-gender mk-gender--m">
+                  <span>Masculino</span>
+                  <strong id="audienceMale">57%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMUNIDAD DIGITAL -->
+    <section class="mk-section mk-section--dark" id="digital">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">Comunidad digital</span>
+            <h2>Audiencia conectada</h2>
+            <p>Indicadores mensuales incluidos en el Media Kit 2026.</p>
+          </div>
+        </div>
+
+        <div class="mk-stat-grid mk-digital-stats">
+          <article class="mk-stat mk-reveal">
+            <i class="fa-regular fa-eye"></i>
+            <strong class="mk-stat__number" data-decimal-counter="31.6">0</strong>
+            <span class="mk-stat__label">Millones de vistas mensuales en expreso.com.mx.</span>
+          </article>
+          <article class="mk-stat mk-reveal">
+            <i class="fa-regular fa-circle-play"></i>
+            <strong class="mk-stat__number" data-decimal-counter="2.31">0</strong>
+            <span class="mk-stat__label">Millones de reproducciones mensuales de video.</span>
+          </article>
+          <article class="mk-stat mk-reveal">
+            <i class="fa-regular fa-comments"></i>
+            <strong class="mk-stat__number" data-decimal-counter="19.7">0</strong>
+            <span class="mk-stat__label">Millones de interacciones mensuales.</span>
+          </article>
+        </div>
+
+        <div style="height:28px"></div>
+
+        <div class="mk-digital-tabs mk-reveal">
+          <button class="mk-digital-tab is-active" type="button" data-digital="social">Redes sociales</button>
+          <button class="mk-digital-tab" type="button" data-digital="portal">Portal web</button>
+        </div>
+
+        <div class="mk-digital-grid mk-reveal" id="digitalGrid"></div>
+      </div>
+    </section>
+
+    <!-- EXPRESO / PRODUCTOS Y MEDIDAS -->
+    <section class="mk-section" id="expreso">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">Periódico + digital</span>
+            <h2>Productos y servicios EXPRESO</h2>
+            <p>Publicidad, suplementos, encartes, branded content, entrevistas, coberturas, avisos, publirreportajes, display ads, video y redes sociales.</p>
+          </div>
+        </div>
+
+        <div class="mk-visual-split">
+          <div class="mk-visual mk-reveal">
+            <img src="media-kit-assets/expreso-print.webp" alt="Periódico EXPRESO y edición digital">
+          </div>
+
+          <div class="mk-product-list">
+            <div class="mk-reveal"><i class="fa-regular fa-newspaper"></i><span><strong>Publicidad impresa</strong><span>Planas, dobles planas, robaplanas, cintillos, orejas y otras medidas.</span></span></div>
+            <div class="mk-reveal"><i class="fa-solid fa-layer-group"></i><span><strong>Suplementos y encartes</strong><span>Formatos especiales para campañas editoriales y comerciales.</span></span></div>
+            <div class="mk-reveal"><i class="fa-solid fa-pen-to-square"></i><span><strong>Contenido comercial</strong><span>Branded content, entrevistas, publirreportajes y coberturas de eventos.</span></span></div>
+            <div class="mk-reveal"><i class="fa-solid fa-display"></i><span><strong>Display Ads</strong><span>Espacios web y móvil, video y difusión en redes sociales.</span></span></div>
+          </div>
+        </div>
+
+        <div style="height:32px"></div>
+
+        <div class="mk-section__head mk-reveal" style="margin-bottom:16px">
+          <div>
+            <span class="mk-kicker">Espacios y medidas</span>
+            <h2 style="font-size:32px">Formatos impresos</h2>
+          </div>
+        </div>
+
+        <div class="mk-table-tools mk-reveal">
+          <div class="mk-table-tabs">
+            <button class="mk-table-tab is-active" type="button" data-print-table="general">Periódico · General</button>
+            <button class="mk-table-tab" type="button" data-print-table="otras">Otras secciones</button>
+            <button class="mk-table-tab" type="button" data-print-table="economicos">Económicos</button>
+          </div>
+        </div>
+        <div class="mk-table-wrap mk-reveal">
+          <table class="mk-table" id="printTable"></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- RADIO -->
+    <section class="mk-section" id="radio">
+      <div class="wrap">
+        <div class="mk-section__head mk-reveal">
+          <div>
+            <span class="mk-kicker">Radio FM + online</span>
+            <h2>Presencia en el sur de Sonora</h2>
+            <p>Dos propuestas musicales con cobertura regional y alcance web nacional e internacional.</p>
+          </div>
+        </div>
+
+        <div class="mk-radio-hero">
+          <div class="mk-radio-visual mk-reveal">
+            <img src="media-kit-assets/sonora-grupera.webp" alt="Sonora Grupera">
+          </div>
+
+          <article class="mk-radio-info mk-reveal">
+            <span class="mk-kicker">Sonora Grupera</span>
+            <h3>Regional mexicano</h3>
+            <p>Auditorio de jóvenes y adultos; nivel socioeconómico B, C y D, de 16 años en adelante.</p>
+            <div class="mk-facts">
+              <div class="mk-fact"><span>Cobertura</span><strong>Sur del estado de Sonora</strong></div>
+              <div class="mk-fact"><span>Cobertura web</span><strong>Nacional e internacional</strong></div>
+              <div class="mk-fact"><span>Navojoa</span><strong>XHPNAV-FM · 89.7 FM</strong></div>
+              <div class="mk-fact"><span>Guaymas</span><strong>XHPMAS-FM · 100.5 FM</strong></div>
+              <div class="mk-fact"><span>Cd. Obregón</span><strong>XHCCCJ-FM · 91.7 FM</strong></div>
+            </div>
+            <div class="mk-coverage">
+              <strong>Cobertura reportada</strong>
+              <p>Guaymas, Empalme, Bácum, Ciudad Obregón, San Ignacio Río Muerto, Saquí Grande, La Colorada, Ónavas, Yécora, San Javier, Benito Juárez, Navojoa, Etchojoa, Huatabampo y Álamos.</p>
+            </div>
+          </article>
+        </div>
+
+        <div style="height:28px"></div>
+
+        <div class="mk-radio-hero">
+          <article class="mk-radio-info mk-reveal">
+            <span class="mk-kicker" style="color:#65539a">POP! Extremo</span>
+            <h3>Música Pop</h3>
+            <p>Auditorio de jóvenes y adultos; nivel socioeconómico B, C y D, de 16 años en adelante.</p>
+            <div class="mk-facts">
+              <div class="mk-fact"><span>Cobertura</span><strong>Sur del estado de Sonora</strong></div>
+              <div class="mk-fact"><span>Cobertura web</span><strong>Nacional e internacional</strong></div>
+              <div class="mk-fact"><span>Navojoa</span><strong>XHPJOA · 98.1 FM</strong></div>
+              <div class="mk-fact"><span>Guaymas</span><strong>XHPUAY · 90.9 FM</strong></div>
+            </div>
+            <div class="mk-coverage" style="border-color:#65539a">
+              <strong style="color:#65539a">Cobertura reportada</strong>
+              <p>Guaymas, Empalme, Bácum, San Ignacio Río Muerto, Saquí Grande, La Colorada, Onavas, Yécora, San Javier, Benito Juárez, Navojoa, Etchojoa, Huatabampo y Álamos.</p>
+            </div>
+          </article>
+
+          <div class="mk-radio-visual mk-reveal">
+            <img src="media-kit-assets/pop-extremo.webp" alt="POP! Extremo">
+          </div>
+        </div>
+
+        <!-- Programación interactiva simplificada a partir de la barra semanal -->
+        <div class="mk-schedule-shell mk-reveal">
+          <div class="mk-schedule-head">
+            <h3>Programación destacada</h3>
+            <div class="mk-schedule-tabs">
+              <button class="mk-schedule-tab is-active" type="button" data-schedule="sonora">Sonora Grupera</button>
+              <button class="mk-schedule-tab" type="button" data-schedule="pop">POP! Extremo</button>
+            </div>
+          </div>
+          <div class="mk-schedule" id="scheduleGrid"></div>
+        </div>
+
+        <div style="height:28px"></div>
+
+        <div class="mk-section__head mk-reveal" style="margin-bottom:16px">
+          <div>
+            <span class="mk-kicker">Productos de radio</span>
+            <h2 style="font-size:32px">Formatos comerciales y producción</h2>
+          </div>
+        </div>
+
+        <div class="mk-table-wrap mk-reveal">
+          <table class="mk-table">
+            <thead><tr><th>Producto</th><th>Duración / formato</th></tr></thead>
+            <tbody>
+              <tr><td>Control remoto</td><td>1 hora</td></tr>
+              <tr><td>Entrevista</td><td>5 minutos</td></tr>
+              <tr><td>Entrevista</td><td>3 minutos</td></tr>
+              <tr><td>Noticiero vivo · instalación</td><td>1 hora</td></tr>
+              <tr><td>Cortinilla</td><td>5"</td></tr>
+              <tr><td>Comentario</td><td>20" · 30" · 40"</td></tr>
+              <tr><td>Spot</td><td>10" · 20" · 30" · 40" · 50"</td></tr>
+              <tr><td>Mini cápsula informativa</td><td>90"</td></tr>
+              <tr><td>Patrocinio</td><td>Sección / hora</td></tr>
+              <tr><td>Producción en casa · Video</td><td>10" · 20" · 30" · 40" · 60" · 180" · 300"</td></tr>
+              <tr><td>Producción en casa · Spot Audio</td><td>10" · 20" · 30" · 40" · 60" · 180" · 300"</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESPECIALES -->
+    <section class="mk-section" id="especiales">
+      <div class="wrap">
+        <div class="mk-special mk-reveal">
+          <span class="mk-kicker">Caso incluido en el documento</span>
+          <h3>Presencia que se expande</h3>
+          <p>
+            El Media Kit presenta como ejemplo los servicios especiales diseñados para EXPO NEGOCIOS 2025:
+            una cobertura estratégica antes, durante y después del evento, combinando prensa, radio, web y activaciones.
+          </p>
+
+          <div class="mk-special-grid">
+            <div class="mk-special-item"><i class="fa-solid fa-clapperboard"></i><strong>Reels promocionales</strong><span>Piezas audiovisuales cortas para redes sociales.</span></div>
+            <div class="mk-special-item"><i class="fa-regular fa-newspaper"></i><strong>Notas e historias digitales</strong><span>Contenido editorial en portales y redes sociales.</span></div>
+            <div class="mk-special-item"><i class="fa-solid fa-microphone-lines"></i><strong>Entrevistas exclusivas</strong><span>Participación en noticiario previo al evento.</span></div>
+            <div class="mk-special-item"><i class="fa-solid fa-tv"></i><strong>Pantallas digitales</strong><span>Exposición visual en zonas de alta circulación.</span></div>
+            <div class="mk-special-item"><i class="fa-solid fa-mobile-screen-button"></i><strong>Tótem interactivo</strong><span>Conexión de asistentes con contenido digital.</span></div>
+            <div class="mk-special-item"><i class="fa-solid fa-layer-group"></i><strong>Estrategia multiplataforma</strong><span>Presencia de marca en todos los canales disponibles.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENTAS -->
+    <section class="mk-section" id="ventas">
+      <div class="wrap">
+        <div class="mk-cta mk-reveal">
+          <div>
+            <span class="mk-kicker">Ventas</span>
+            <h2>Construyamos una solución para tu marca</h2>
+            <p>Contacto comercial: <strong>contacto_ventas@expreso.com.mx</strong></p>
+          </div>
+          <div class="mk-actions">
+            <a class="mk-btn mk-btn--primary" href="mailto:contacto_ventas@expreso.com.mx?subject=Media%20Kit%202026">
+              <i class="fa-regular fa-envelope"></i> Escribir a Ventas
+            </a>
+            <a class="mk-btn" style="background:#fff;color:#0e5228;border:1px solid rgba(8,124,69,.2)" href="contacto.html">
+              <i class="fa-regular fa-address-card"></i> Contacto
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="mk-footer-mark"><span>e</span>XPRESO <small>· eMedia</small></div>
+            <p class="footer-about">Noticias de Hermosillo, Sonora, México y el mundo.</p>
+            <div class="footer-contact">
+              <div>📍 Blvd. Abelardo L. Rodríguez No. 16, Col. San Benito</div>
+              <div>Hermosillo, Sonora, CP 83190 · 📞 (662) 108-3000</div>
+            </div>
+            <div class="footer-social">
+              <a href="https://facebook.com/expresoweb" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="https://instagram.com/expresomx" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://youtube.com/user/expresoweb" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              <a href="https://x.com/Expresoweb" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="https://www.tiktok.com/@expresoweb" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h5>Noticias</h5>
+            <ul><li><a href="hermosillo.html">Hermosillo</a></li><li><a href="sonora.html">Sonora</a></li><li><a href="mexico.html">México</a></li><li><a href="mundo.html">Mundo</a></li><li><a href="seguridad.html">Seguridad</a></li><li><a href="negocios.html">Negocios</a></li></ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Acción · Estelar</h5>
+            <ul><li><a href="accion.html">Deportes locales</a></li><li><a href="accion.html">Fútbol</a></li><li><a href="accion.html">Béisbol</a></li><li><a href="estelar.html">Música</a></li><li><a href="estelar.html">Cine</a></li></ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Expresión</h5>
+            <ul><li><a href="columna.html">Entre Nos</a></li><li><a href="expresion.html">En Privado</a></li><li><a href="columna.html">Estrictamente Personal</a></li><li><a href="columna.html">Fuera de Ruta</a></li></ul>
+          </div>
+
+          <div class="footer-col">
+            <h5>Servicios</h5>
+            <ul><li><a href="https://www.expreso.com.mx/suscripciones">Suscripciones</a></li><li><a href="https://impreso.expreso.com.mx/">Edición impresa</a></li><li><a href="multimedia.html">Videos</a></li><li><a href="directorio.html">Directorio</a></li><li><a href="contacto.html">Contacto</a></li><li><a href="media-kit.html">Media Kit 2026</a></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="wrap">
+        <p>© 2026 Expreso · Medios y Editorial de Sonora, S.A. de C.V. · Todos los derechos reservados · Hermosillo, Sonora, México</p>
+        <div class="footer-legal"><a href="contacto.html">Contacto</a><a href="#">Términos de uso</a><a href="https://www.expreso.com.mx/politica-de-privacidad">Aviso de privacidad</a><a href="https://www.expreso.com.mx/aviso-legal">Aviso legal</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="mk-float" href="mailto:contacto_ventas@expreso.com.mx?subject=Media%20Kit%202026" aria-label="Contactar a Ventas" title="Contactar a Ventas">
+    <i class="fa-regular fa-envelope"></i>
+  </a>
+
+  <button aria-label="Volver arriba" class="btop" id="btop">↑</button>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* Barra de progreso */
+      var progress = document.getElementById('mkProgress');
+      function updateProgress() {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var value = max > 0 ? (window.scrollY / max) * 100 : 0;
+        if (progress) progress.style.width = Math.min(100, Math.max(0, value)) + '%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      /* Reveal */
+      var reveals = document.querySelectorAll('.mk-reveal');
+      if ('IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12 });
+        reveals.forEach(function (el) { revealObserver.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      /* Contadores */
+      var animated = new WeakSet();
+      function animateCounter(el, target, decimals) {
+        if (animated.has(el)) return;
+        animated.add(el);
+        var start = performance.now();
+        var duration = 1300;
+        function frame(now) {
+          var p = Math.min(1, (now - start) / duration);
+          var eased = 1 - Math.pow(1 - p, 3);
+          var value = target * eased;
+          if (decimals) {
+            el.textContent = value.toFixed(decimals);
+          } else {
+            el.textContent = Math.round(value).toLocaleString('es-MX');
+          }
+          if (p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      var counterEls = document.querySelectorAll('[data-counter],[data-decimal-counter]');
+      var counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          if (el.hasAttribute('data-counter')) {
+            animateCounter(el, Number(el.dataset.counter), 0);
+          } else {
+            var n = String(el.dataset.decimalCounter);
+            var d = (n.split('.')[1] || '').length;
+            animateCounter(el, Number(n), d);
+          }
+          counterObserver.unobserve(el);
+        });
+      }, { threshold: .35 });
+      counterEls.forEach(function (el) { counterObserver.observe(el); });
+
+      /* Navegación interna activa */
+      var internalLinks = Array.from(document.querySelectorAll('.mk-nav a'));
+      var sections = internalLinks
+        .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+        .filter(Boolean);
+
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          internalLinks.forEach(function (a) {
+            a.classList.toggle('is-active', a.getAttribute('href') === '#' + entry.target.id);
+          });
+        });
+      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+      sections.forEach(function (s) { sectionObserver.observe(s); });
+
+      /* Audiencias */
+      var audienceData = {
+        expreso: {
+          title: 'EXPRESO',
+          donut: 'EXPRESO<br>Audiencia',
+          description: 'Distribución demográfica reportada para los lectores del periódico.',
+          female: 43,
+          male: 57
+        },
+        sonora: {
+          title: 'Sonora Grupera',
+          donut: 'Sonora Grupera<br>Audiencia',
+          description: 'Demografía reportada para la audiencia de Navojoa, Guaymas y Ciudad Obregón.',
+          female: 55,
+          male: 45
+        },
+        pop: {
+          title: 'POP! Extremo',
+          donut: 'POP! Extremo<br>Audiencia',
+          description: 'Demografía reportada para la audiencia de Navojoa y Guaymas.',
+          female: 57,
+          male: 43
+        }
+      };
+
+      var audienceTabs = document.querySelectorAll('[data-audience]');
+      var donut = document.getElementById('audienceDonut');
+      var audienceTitle = document.getElementById('audienceTitle');
+      var audienceDescription = document.getElementById('audienceDescription');
+      var audienceFemale = document.getElementById('audienceFemale');
+      var audienceMale = document.getElementById('audienceMale');
+      var audienceDonutTitle = document.getElementById('audienceDonutTitle');
+
+      audienceTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var data = audienceData[btn.dataset.audience];
+          audienceTabs.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          donut.style.setProperty('--female', data.female);
+          audienceTitle.textContent = data.title;
+          audienceDescription.textContent = data.description;
+          audienceFemale.textContent = data.female + '%';
+          audienceMale.textContent = data.male + '%';
+          audienceDonutTitle.innerHTML = data.donut;
+        });
+      });
+
+      /* Espacios digitales */
+      var digitalData = {
+        social: [
+          ['fa-brands fa-facebook-f','Facebook · Cortinilla','Redes sociales'],
+          ['fa-brands fa-facebook-f','Facebook · Historia','Redes sociales'],
+          ['fa-brands fa-facebook-f','Facebook · Galería','Redes sociales'],
+          ['fa-brands fa-facebook-f','Facebook · Live','Redes sociales'],
+          ['fa-brands fa-facebook-f','Facebook · Reel','Redes sociales'],
+          ['fa-brands fa-facebook-f','Facebook · Publicación','Redes sociales'],
+          ['fa-brands fa-instagram','Instagram · Cortinilla','Redes sociales'],
+          ['fa-brands fa-instagram','Instagram · Historia','Redes sociales'],
+          ['fa-brands fa-instagram','Instagram · Live','Redes sociales'],
+          ['fa-brands fa-instagram','Instagram · Reel','Redes sociales'],
+          ['fa-brands fa-instagram','Instagram · Publicación','Redes sociales'],
+          ['fa-brands fa-x-twitter','X / Twitter · Cortinilla','Redes sociales'],
+          ['fa-brands fa-x-twitter','X / Twitter · Imagen de portada','Redes sociales'],
+          ['fa-brands fa-x-twitter','X / Twitter · Live','Redes sociales'],
+          ['fa-brands fa-x-twitter','X / Twitter · Publicación','Redes sociales']
+        ],
+        portal: [
+          ['fa-solid fa-house','Zonas HOME','expreso.com.mx'],
+          ['fa-regular fa-folder-open','Zonas SECCIÓN','expreso.com.mx'],
+          ['fa-regular fa-file-lines','Zonas ARTÍCULO','expreso.com.mx'],
+          ['fa-solid fa-rectangle-ad','Pre HOME','expreso.com.mx'],
+          ['fa-solid fa-link','Nota Link','expreso.com.mx'],
+          ['fa-solid fa-pen-nib','Nota Editorial','expreso.com.mx'],
+          ['fa-solid fa-pen-ruler','Publireportaje','expreso.com.mx']
+        ]
+      };
+
+      var digitalGrid = document.getElementById('digitalGrid');
+      var digitalTabs = document.querySelectorAll('[data-digital]');
+      function renderDigital(type) {
+        digitalGrid.innerHTML = digitalData[type].map(function (item) {
+          return '<article class="mk-digital-item"><i class="' + item[0] + '"></i><strong>' +
+            item[1] + '</strong><small>' + item[2] + '</small></article>';
+        }).join('');
+      }
+      renderDigital('social');
+      digitalTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          digitalTabs.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          renderDigital(btn.dataset.digital);
+        });
+      });
+
+      /* Medidas impresas */
+      var printData = {
+        general: [
+          ['Plana','50.50','26.00','1,313'],
+          ['Doble Plana','50.50','54.00','2,727'],
+          ['Roba Plana','40.50','21.50','871'],
+          ['1/2 Plana V','50.50','12.70','641'],
+          ['1/2 Plana H','25.50','26.00','663'],
+          ['1/4 Plana','25.50','12.70','324'],
+          ['1/8 Plana','12.75','12.70','162'],
+          ['1/12 Plana','12.50','8.30','104'],
+          ['Cintillo','8.00','26.00','208'],
+          ['Oreja','8.00','8.30','66'],
+          ['Ofertero','50.00','4.00','200'],
+          ['Publireportaje','25.50','26.00','663'],
+          ['Publireportaje 2','25.50','12.70','324']
+        ],
+        otras: [
+          ['Plana','50.50','26.00','1,313'],
+          ['Doble Plana','50.50','54.00','2,727'],
+          ['Roba Plana','40.50','21.50','871'],
+          ['1/2 Plana V','50.50','12.70','641'],
+          ['1/2 Plana H','25.50','26.00','663'],
+          ['1/4 Plana','25.50','12.70','324'],
+          ['1/8 Plana','12.75','12.70','162'],
+          ['1/12 Plana','12.50','8.30','104'],
+          ['Cintillo','8.00','26.00','208'],
+          ['Oreja','8.00','8.30','66']
+        ],
+        economicos: [
+          ['Módulo Económicos','4.00','4.00','16'],
+          ['Económicos 5 × 3','26.00','25.50','663'],
+          ['Económicos 7 × 5','26.00','25.50','663'],
+          ['Económicos 10 × 15','26.00','25.50','—']
+        ]
+      };
+
+      var printTable = document.getElementById('printTable');
+      var printTabs = document.querySelectorAll('[data-print-table]');
+      function renderPrint(type) {
+        printTable.innerHTML =
+          '<thead><tr><th>Producto</th><th>Alto</th><th>Ancho</th><th>Área</th></tr></thead><tbody>' +
+          printData[type].map(function (r) {
+            return '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td>' + r[3] + '</td></tr>';
+          }).join('') +
+          '</tbody>';
+      }
+      renderPrint('general');
+      printTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          printTabs.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          renderPrint(btn.dataset.printTable);
+        });
+      });
+
+      /* Programación destacada */
+      var schedules = {
+        sonora: [
+          ['07:00–09:00','EXPRESO 24/7','Lunes a viernes'],
+          ['09:00–11:00','Carolino Show','Lunes a viernes'],
+          ['11:00–13:00','La Bitachera','Lunes a viernes'],
+          ['14:00–16:00','De Fiesta con la Kim','Lunes a viernes'],
+          ['16:00–18:00','Canozano Grupero','Lunes a viernes'],
+          ['18:00–19:00','Al Cierre','Lunes a viernes'],
+          ['20:00–24:00','Jess y Clarissa Show','Lunes a viernes'],
+          ['Fin de semana','Barra musical','Sábado y domingo']
+        ],
+        pop: [
+          ['07:00–09:00','EXPRESO 24/7','Lunes a viernes'],
+          ['09:00–11:00','Morning Rush','Lunes a viernes'],
+          ['11:00–13:00','Ondas Urbanas','Lunes a viernes'],
+          ['14:00–15:00','MAC Deportes','Lunes a viernes'],
+          ['16:00–18:00','Jimena Aguilar','Lunes a viernes'],
+          ['19:00–23:00','Los + Buenos de la Radio','Lunes a viernes'],
+          ['Fin de semana','Barra musical','Sábado y domingo']
+        ]
+      };
+      var scheduleGrid = document.getElementById('scheduleGrid');
+      var scheduleTabs = document.querySelectorAll('[data-schedule]');
+      function renderSchedule(type) {
+        scheduleGrid.innerHTML = schedules[type].map(function (r) {
+          return '<article class="mk-program"><time>' + r[0] + '</time><strong>' +
+            r[1] + '</strong><small>' + r[2] + '</small></article>';
+        }).join('');
+      }
+      renderSchedule('sonora');
+      scheduleTabs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          scheduleTabs.forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          renderSchedule(btn.dataset.schedule);
+        });
+      });
+
+      /* Volver arriba */
+      var btop = document.getElementById('btop');
+      if (btop) {
+        window.addEventListener('scroll', function () {
+          btop.classList.toggle('show', window.scrollY > 400);
+        }, { passive: true });
+        btop.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
