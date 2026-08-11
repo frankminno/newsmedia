@@ -604,6 +604,18 @@ img.aniv{width:200px}
 }
 
 /* ── FEED / VIDEO en pantallas medianas ── */
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  body.home-page .social-grid.social-grid--instagram {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body.home-page .social-card.social-card--instagram iframe {
+    height: 820px !important;
+    min-height: 820px !important;
+  }
+}
+
 @media (max-width: 760px) {
   .video-layout { grid-template-columns: 1fr; }
   .video-playlist { display: none; }
@@ -3565,7 +3577,7 @@ html body.home-page .emedia-dock__item:nth-child(6) .menuf img { width: 95% !imp
 /* ═══════════════════════════════════════════════════════════════════════
    PORTADA · AJUSTES 2026-08-11 / integración 2
    - Footer: cinco redes en una sola línea.
-   - Instagram real: 2 columnas en escritorio, 1 en móvil, sin recorte.
+   - Instagram real: 4 columnas en escritorio, 2 en tablet y 1 en móvil, sin recorte.
    ═══════════════════════════════════════════════════════════════════════ */
 
 body .footer-social,
@@ -3623,7 +3635,7 @@ body.home-page .social-profile-link:hover {
 
 body.home-page .social-grid.social-grid--instagram {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   align-items: start !important;
   gap: 18px !important;
 }
@@ -3651,8 +3663,8 @@ body.home-page .social-card.social-card--instagram::after {
 body.home-page .social-card.social-card--instagram iframe {
   display: block !important;
   width: 100% !important;
-  height: 900px !important;
-  min-height: 900px !important;
+  height: 690px !important;
+  min-height: 690px !important;
   max-height: none !important;
   border: 0 !important;
   border-radius: 12px !important;
@@ -3694,3 +3706,21 @@ body.home-page .social-card.social-card--instagram iframe {
     height: 28px !important;
   }
 }
+
+/* Cuatro publicaciones alineadas con la misma altura visual en desktop */
+@media (min-width: 1101px) {
+  body.home-page .social-grid.social-grid--instagram {
+    gap: 14px !important;
+  }
+
+  body.home-page .social-card.social-card--instagram {
+    height: 690px !important;
+    overflow: hidden !important;
+  }
+
+  body.home-page .social-card.social-card--instagram iframe {
+    height: 690px !important;
+    min-height: 690px !important;
+  }
+}
+
