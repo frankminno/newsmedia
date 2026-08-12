@@ -440,7 +440,7 @@ img.aniv{width:200px}
 /* Tarjetas de post de Instagram (las genera el JS) */
 .ig-post { display: flex; flex-direction: column; overflow: hidden; padding: 0; min-height: 0; text-decoration: none; color: inherit; align-items: stretch; justify-content: flex-start; }
 .ig-thumb { position: relative; display: block; }
-.ig-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; transition: filter .25s ease, transform .4s ease; }
+.ig-img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; transition: filter .25s ease, transform .4s ease; }
 .ig-post:hover .ig-img { filter: brightness(.95); transform: scale(1.02); }
 .ig-badge { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; }
 .ig-body { padding: 10px 12px 12px; display: block; width: 100%; }
@@ -3801,7 +3801,7 @@ body.home-page .social-head--clean {
 body.home-page .social-media-grid {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 10px !important;
+  gap: 12px !important;
   width: 100%;
 }
 
@@ -3809,7 +3809,7 @@ body.home-page .social-media-item {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   min-width: 0;
   overflow: hidden;
   border-radius: 10px;
@@ -3863,9 +3863,67 @@ body.home-page .social-media-item:focus-visible {
   }
   body.home-page .social-media-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 4px !important;
+    gap: 6px !important;
   }
   body.home-page .social-media-item {
     border-radius: 3px;
   }
+}
+
+
+/* Banner flotante inferior */
+.floating-ad {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1200;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  padding: 0 12px 10px;
+}
+.floating-ad__inner {
+  position: relative;
+  width: min(970px, calc(100% - 24px));
+  pointer-events: auto;
+}
+.floating-ad__inner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -8px 24px rgba(0,0,0,.18);
+}
+.floating-ad__close {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.96);
+  color: #8a8a8a;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,.16);
+}
+@media (max-width: 700px) {
+  .floating-ad { padding: 0 8px 8px; }
+  .floating-ad__inner { width: calc(100% - 16px); }
+  .floating-ad__inner img { border-radius: 8px 8px 0 0; }
+  .floating-ad__close {
+    right: -4px;
+    top: -8px;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+  }
+}
+@media print {
+  .floating-ad { display:none !important; }
 }
