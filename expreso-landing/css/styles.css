@@ -3724,3 +3724,148 @@ body.home-page .social-card.social-card--instagram iframe {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════
+   EXPRESO · PUBLICIDAD SIMULADA · 2026-08-12
+   SOLO VISUAL: sin GAM, sin GPT y sin JavaScript adicional.
+   ═══════════════════════════════════════════════════════════════════════ */
+.mock-ad {
+  width:100%;
+  display:block;
+  margin:18px auto;
+  text-align:center;
+  line-height:0;
+  min-width:0;
+}
+.mock-ad picture { display:block; width:100%; }
+.mock-ad img {
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0 auto;
+  border-radius:10px;
+  box-shadow:0 7px 22px rgba(0,46,30,.08);
+}
+.mock-ad--billboard { width:min(970px, calc(100% - 32px)); margin-top:18px; margin-bottom:22px; }
+.mock-ad--leaderboard,
+.mock-ad--bottom { width:min(970px, calc(100% - 32px)); margin-top:26px; margin-bottom:26px; }
+.mock-ad--rectangle { width:min(300px,100%); margin:0 auto var(--gap,16px); }
+.mock-ad--halfpage { width:min(300px,100%); margin:0 auto var(--gap,16px); }
+.mock-ad--incontent { width:min(728px,100%); margin:30px auto; }
+.mock-ad--mobile { display:none; width:min(320px,calc(100% - 20px)); }
+
+/* El banner dentro del cuerpo conserva la clase rv de la nota, pero no altera texto ni jerarquía editorial. */
+body.article-page .art-body > .mock-ad--incontent { margin-top:28px; margin-bottom:28px; }
+body.article-page .art-side .mock-ad--rectangle,
+body.section-page .section-sidebar .mock-ad--rectangle,
+body.home-page .col-right .mock-ad--rectangle { flex:0 0 auto; }
+
+@media (max-width:900px) {
+  .mock-ad--billboard, .mock-ad--leaderboard, .mock-ad--bottom { width:min(760px,calc(100% - 24px)); }
+}
+@media (max-width:700px) {
+  .mock-ad { margin-top:14px; margin-bottom:14px; }
+  .mock-ad--billboard, .mock-ad--leaderboard, .mock-ad--bottom, .mock-ad--incontent { width:calc(100% - 20px); }
+  .mock-ad--mobile { display:block; }
+  body.home-page .col-right .mock-ad--rectangle,
+  body.section-page .section-sidebar .mock-ad--rectangle,
+  body.article-page .art-side .mock-ad--rectangle,
+  body.home-page .col-right .mock-ad--halfpage,
+  body.section-page .section-sidebar .mock-ad--halfpage,
+  body.article-page .art-side .mock-ad--halfpage { display:none; }
+  .mock-ad img { border-radius:8px; }
+}
+@media print { .mock-ad { display:none !important; } }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   EXPRESO · REDES SOCIALES · MOSAICO EDITORIAL ESTÁTICO
+   2026-08-12
+   Sin embeds, sin UI de Instagram y sin integración automática.
+   ═══════════════════════════════════════════════════════════════════════ */
+body.home-page .social--media-grid {
+  background: var(--g-100);
+}
+
+body.home-page .social--media-grid .wrap {
+  padding-top: 28px;
+  padding-bottom: 30px;
+}
+
+body.home-page .social-head--clean {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+body.home-page .social-media-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100%;
+}
+
+body.home-page .social-media-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #ddd;
+  box-shadow: none;
+  line-height: 0;
+  isolation: isolate;
+}
+
+body.home-page .social-media-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background var(--t, .2s ease);
+  pointer-events: none;
+}
+
+body.home-page .social-media-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.001);
+  transition: transform .32s cubic-bezier(.2,.7,.2,1);
+}
+
+@media (hover: hover) {
+  body.home-page .social-media-item:hover img {
+    transform: scale(1.045);
+  }
+  body.home-page .social-media-item:hover::after {
+    background: rgba(0, 0, 0, .08);
+  }
+}
+
+body.home-page .social-media-item:focus-visible {
+  outline: 3px solid var(--green, #009641);
+  outline-offset: 3px;
+}
+
+/* En tablet y móvil se comporta como el mosaico compacto de una red social. */
+@media (max-width: 760px) {
+  body.home-page .social--media-grid .wrap {
+    padding-top: 22px;
+    padding-bottom: 24px;
+  }
+  body.home-page .social-head--clean {
+    margin-bottom: 10px;
+  }
+  body.home-page .social-media-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+  }
+  body.home-page .social-media-item {
+    border-radius: 3px;
+  }
+}
