@@ -3927,3 +3927,110 @@ body.home-page .social-media-item:focus-visible {
 @media print {
   .floating-ad { display:none !important; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   EXPRESO · REDES SOCIALES DESTACADAS · 2026-08-13
+   Carrusel editorial horizontal, tarjetas 4:5, sin interfaz de Instagram.
+   ═══════════════════════════════════════════════════════════════════════ */
+body.home-page .social-featured {
+  background:#fff;
+  border-top:1px solid var(--linea);
+  border-bottom:1px solid var(--linea);
+  padding:30px 0 36px;
+}
+body.home-page .social-featured__head {
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+  padding-top:20px; margin-bottom:22px; border-top:2px solid #d6d6d6;
+}
+body.home-page .social-featured__head h2 {
+  margin:0; color:var(--ink); font-size:clamp(25px,2vw,32px); line-height:1;
+  font-weight:850; letter-spacing:-.035em; text-transform:uppercase;
+}
+body.home-page .social-featured__nav { display:flex; gap:10px; flex:0 0 auto; }
+body.home-page .social-featured__nav a {
+  width:40px; height:40px; display:grid; place-items:center; border:1px solid #d9d9d9;
+  border-radius:50%; background:#fff; color:#777; text-decoration:none; font-size:31px;
+  line-height:1; transition:border-color var(--t),color var(--t),transform var(--t);
+}
+body.home-page .social-featured__nav a:hover { color:var(--green); border-color:var(--green); transform:translateY(-1px); }
+body.home-page .social-featured__track {
+  display:flex; gap:16px; width:100%; overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory; scroll-behavior:smooth; overscroll-behavior-inline:contain;
+  scrollbar-width:none; padding:0 2px 7px;
+}
+body.home-page .social-featured__track::-webkit-scrollbar { display:none; }
+body.home-page .social-featured__card {
+  flex:0 0 clamp(220px,18.6vw,236px); min-width:0; scroll-snap-align:start;
+  overflow:hidden; border:1px solid #d8d8d8; border-radius:10px; background:#fff;
+  color:inherit; text-decoration:none; transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+body.home-page .social-featured__card:hover {
+  transform:translateY(-3px); border-color:rgba(0,150,65,.55); box-shadow:0 10px 26px rgba(0,0,0,.09);
+}
+body.home-page .social-featured__media {
+  position:relative; width:100%; aspect-ratio:4/5; overflow:hidden; margin:0; background:#111;
+}
+body.home-page .social-featured__media::after {
+  content:""; position:absolute; inset:30% 0 0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.80)); pointer-events:none;
+}
+body.home-page .social-featured__media img {
+  width:100%; height:100%; display:block; object-fit:cover; object-position:center;
+  transition:transform .42s cubic-bezier(.2,.7,.2,1);
+}
+body.home-page .social-featured__card:hover .social-featured__media img { transform:scale(1.035); }
+body.home-page .social-featured__brand {
+  position:absolute; z-index:2; top:12px; right:12px; color:#fff; font-size:10px;
+  font-weight:850; letter-spacing:.09em; text-shadow:0 1px 4px rgba(0,0,0,.75);
+}
+body.home-page .social-featured__media figcaption {
+  position:absolute; z-index:2; left:14px; right:14px; bottom:16px; color:#fff;
+  font-size:clamp(17px,1.3vw,20px); line-height:1.17; font-weight:850; letter-spacing:-.015em;
+  text-transform:uppercase; text-shadow:0 2px 7px rgba(0,0,0,.65);
+}
+body.home-page .social-featured__body { min-height:126px; padding:12px 13px 14px; }
+body.home-page .social-featured__body > span { display:block; color:var(--g-500); font-size:12px; margin-bottom:7px; }
+body.home-page .social-featured__body h3 {
+  margin:0; color:var(--ink); font-size:16px; line-height:1.28; font-weight:800; letter-spacing:-.015em;
+  display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;
+}
+body.home-page .social-featured__body small { display:block; margin-top:9px; color:var(--g-400); font-size:11px; }
+
+/* Dos anuncios móviles 320x100 exactamente antes del slider del hero. */
+.mobile-prehero-ads { display:none; }
+@media (max-width:700px) {
+  body.home-page .mock-ad--desktop-top { display:none !important; }
+  body.home-page .mobile-prehero-ads {
+    display:grid; grid-template-columns:1fr; gap:10px; width:100%; margin:0 0 14px;
+  }
+  body.home-page .mock-ad--mobile-prehero {
+    display:block; width:min(320px,100%); margin:0 auto; line-height:0;
+  }
+  body.home-page .mock-ad--mobile-prehero img {
+    display:block; width:100%; height:auto; aspect-ratio:320/100; object-fit:cover; border-radius:8px;
+  }
+  body.home-page .social-featured { padding:22px 0 28px; }
+  body.home-page .social-featured__head { padding-top:16px; margin-bottom:16px; }
+  body.home-page .social-featured__head h2 { font-size:24px; }
+  body.home-page .social-featured__nav a { width:34px; height:34px; font-size:27px; }
+  body.home-page .social-featured__track { gap:12px; padding-right:21vw; }
+  body.home-page .social-featured__card { flex-basis:min(72vw,270px); }
+}
+
+/* Banner flotante inferior 728x90: solo desktop/tablet. Cierre 100% CSS. */
+.floating-ad728 {
+  position:fixed; left:50%; bottom:0; z-index:1600; width:728px; max-width:calc(100vw - 28px);
+  transform:translateX(-50%); margin:0; padding:0; pointer-events:none;
+}
+.floating-ad728__toggle { position:absolute; opacity:0; pointer-events:none; }
+.floating-ad728__panel { position:relative; width:100%; pointer-events:auto; filter:drop-shadow(0 -7px 16px rgba(0,0,0,.20)); }
+.floating-ad728__panel img { display:block; width:100%; height:auto; aspect-ratio:728/90; object-fit:cover; border-radius:8px 8px 0 0; }
+.floating-ad728__close {
+  position:absolute; right:-12px; top:-15px; z-index:2; width:32px; height:32px; display:grid; place-items:center;
+  border:1px solid #d8d8d8; border-radius:50%; background:#fff; color:#9a9a9a; font-size:24px;
+  font-family:Arial,sans-serif; line-height:1; font-weight:700; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,.14);
+}
+.floating-ad728__toggle:checked + .floating-ad728__panel { display:none; }
+@media (max-width:700px) { .floating-ad728 { display:none !important; } }
+@media print { .floating-ad728,.mobile-prehero-ads { display:none !important; } }
