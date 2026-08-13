@@ -1,0 +1,207 @@
+name: Actualizar Redes Sociales EXPRESO
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: expreso-redes-auto
+  cancel-in-progress: true
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Obtener los 8 posts públicos más recientes
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const { chromium } = require('playwright');
+
+          const ROOT = path.join(process.cwd(), 'expreso-landing');
+          const INDEX = path.join(ROOT, 'index.html');
+          const IMG_DIR = path.join(ROOT, 'assets', 'social', 'auto');
+          const PROFILE = 'https://www.instagram.com/expresomx/';
+          const LIMIT = 8;
+
+          fs.mkdirSync(IMG_DIR, { recursive: true });
+
+          const esc = (s='') => String(s)
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+          const clean = (s='') => s.replace(/\s+/g,' ').trim();
+
+          function makeTitle(text='') {
+            let t = clean(text)
+              .replace(/#[\p{L}\p{N}_]+/gu,'')
+              .replace(/^[^:]{0,160}:\s*/, '')
+              .trim();
+            if (!t) return 'Actualización de EXPRESO';
+            let first = t.split(/(?<=[.!?])\s+/)[0];
+            return first.length > 108 ? first.slice(0,105).trim() + '…' : first;
+          }
+
+          function category(text='') {
+            const t = text.toLowerCase();
+            if (/seguridad|polic|deten|fiscal|amic|homicid|accidente/.test(t)) return 'Seguridad';
+            if (/hermosillo|sonora|lluv|clima|calor|tormenta/.test(t)) return 'Sonora';
+            if (/deporte|fútbol|futbol|béisbol|beisbol|partido|liga/.test(t)) return 'Acción';
+            if (/música|musica|cine|arte|cultura|festival|concierto|coreograf/.test(t)) return 'Cultura';
+            if (/precio|canasta|dólar|dolar|econom|empresa|servicio/.test(t)) return 'Servicio';
+            return 'Actualidad';
+          }
+
+          async function saveImage(url, dest) {
+            const response = await fetch(url, {
+              headers: { 'user-agent': 'Mozilla/5.0 Chrome/128 Safari/537.36' }
+            });
+            if (!response.ok) throw new Error(`Imagen HTTP ${response.status}`);
+            fs.writeFileSync(dest, Buffer.from(await response.arrayBuffer()));
+          }
+
+          (async () => {
+            if (!fs.existsSync(INDEX)) throw new Error('No existe expreso-landing/index.html');
+
+            const browser = await chromium.launch({ headless: true });
+            const context = await browser.newContext({
+              locale: 'es-MX',
+              viewport: { width: 1440, height: 1200 },
+              userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/128 Safari/537.36'
+            });
+
+            const page = await context.newPage();
+            await page.goto(PROFILE, { waitUntil: 'domcontentloaded', timeout: 60000 });
+            await page.waitForTimeout(5000);
+
+            // Intentar cerrar diálogos de cookies/login si aparecen.
+            for (const label of ['Permitir todas las cookies','Allow all cookies','Ahora no','Not now']) {
+              const btn = page.getByText(label, { exact: true });
+              if (await btn.count()) {
+                try { await btn.first().click({ timeout: 1200 }); } catch (_) {}
+              }
+            }
+
+            await page.waitForTimeout(1500);
+
+            // Solo posts normales /p/. No incluye /reel/ por ahora.
+            const urls = await page.evaluate((limit) => {
+              const seen = new Set();
+              const result = [];
+              document.querySelectorAll('a[href*="/p/"]').forEach(a => {
+                let href = a.href || '';
+                if (!href.includes('instagram.com')) return;
+                href = href.split('?')[0];
+                if (!seen.has(href)) {
+                  seen.add(href);
+                  result.push(href);
+                }
+              });
+              return result.slice(0, limit + 6);
+            }, LIMIT);
+
+            if (urls.length < LIMIT) {
+              throw new Error(`Instagram solo expuso ${urls.length} posts públicos. Se conserva la versión anterior.`);
+            }
+
+            const posts = [];
+
+            for (const url of urls) {
+              if (posts.length >= LIMIT) break;
+              const p = await context.newPage();
+              try {
+                await p.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+                await p.waitForTimeout(1200);
+                const meta = await p.evaluate(() => ({
+                  image: document.querySelector('meta[property="og:image"]')?.content || '',
+                  description: document.querySelector('meta[property="og:description"]')?.content || '',
+                  title: document.querySelector('meta[property="og:title"]')?.content || ''
+                }));
+                if (!meta.image) continue;
+
+                const raw = meta.description || meta.title || '';
+                const title = makeTitle(raw);
+                const cat = category(raw);
+                const ext = /\.png(?:\?|$)/i.test(meta.image) ? 'png' : 'jpg';
+                const name = `post-${String(posts.length + 1).padStart(2,'0')}.${ext}`;
+                await saveImage(meta.image, path.join(IMG_DIR, name));
+
+                posts.push({ url, title, category: cat, img: `assets/social/auto/${name}` });
+              } catch (err) {
+                console.warn('Omitido:', url, err.message);
+              } finally {
+                await p.close();
+              }
+            }
+
+            await browser.close();
+
+            if (posts.length < LIMIT) {
+              throw new Error(`Solo se pudieron preparar ${posts.length} posts. Se conserva la versión anterior.`);
+            }
+
+            // Elimina únicamente imágenes automáticas antiguas no usadas.
+            const keep = new Set(posts.map(p => path.basename(p.img)));
+            for (const file of fs.readdirSync(IMG_DIR)) {
+              if (!keep.has(file)) fs.rmSync(path.join(IMG_DIR, file), { force: true });
+            }
+
+            const cards = posts.map((post, i) => `
+      <a class="social-featured__card" id="social-card-${i + 1}" href="${esc(post.url)}" target="_blank" rel="noopener noreferrer">
+        <figure class="social-featured__media">
+          <img src="${esc(post.img)}" alt="${esc(post.title)}" loading="lazy" decoding="async">
+          <span class="social-featured__brand">EXPRESO</span>
+          <figcaption>${esc(post.title)}</figcaption>
+        </figure>
+        <div class="social-featured__body"><span>${esc(post.category)}</span><h3>${esc(post.title)}</h3></div>
+      </a>`).join('\n');
+
+            const replacement = `<div class="social-featured__track" id="socialFeaturedTrack">${cards}\n    </div>`;
+            let html = fs.readFileSync(INDEX, 'utf8');
+            const START = '<!-- SOCIAL_AUTO_START -->';
+            const END = '<!-- SOCIAL_AUTO_END -->';
+            const a = html.indexOf(START);
+            const b = html.indexOf(END);
+            if (a < 0 || b < 0 || b <= a) throw new Error('Faltan marcadores SOCIAL_AUTO_START/SOCIAL_AUTO_END');
+
+            html = html.slice(0, a + START.length) + '\n    ' + replacement + '\n    ' + html.slice(b);
+            fs.writeFileSync(INDEX, html, 'utf8');
+            console.log(`Listo: ${posts.length} posts actualizados.`);
+          })().catch(err => {
+            console.error(err.message);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Guardar cambios solo si hubo actualización
+        run: |
+          if git diff --quiet; then
+            echo "Sin cambios."
+            exit 0
+          fi
+          git config user.name "expreso-social-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add expreso-landing/index.html expreso-landing/assets/social/auto/
+          git commit -m "Actualiza 8 posts destacados de EXPRESO"
+          git push
