@@ -1444,3 +1444,66 @@ if (document.readyState === 'loading') {
   });
 })();
 
+
+/* ═══════════════════════════════════════════════════════════════
+   MULTIMEDIA VIDEO · LIGHTBOX NATIVO · 2026-08-15
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var modal = document.getElementById('videoLightbox');
+  if (!modal) return;
+
+  var frame = document.getElementById('videoLightboxFrame');
+  var title = document.getElementById('videoLightboxTitle');
+  var provider = document.getElementById('videoLightboxProvider');
+  var lastTrigger = null;
+
+  function openVideo(trigger) {
+    var src = trigger.getAttribute('data-video-src');
+    if (!src) return;
+
+    lastTrigger = trigger;
+    title.textContent = trigger.getAttribute('data-video-title') || 'Video';
+    provider.textContent = trigger.getAttribute('data-video-provider') || 'EXPRESO';
+    frame.src = src;
+
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('video-lightbox-open');
+
+    var close = modal.querySelector('.video-lightbox__close');
+    if (close) close.focus({ preventScroll: true });
+  }
+
+  function closeVideo() {
+    frame.src = '';
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('video-lightbox-open');
+    if (lastTrigger) lastTrigger.focus({ preventScroll: true });
+  }
+
+  document.addEventListener('click', function (event) {
+    var trigger = event.target.closest('[data-video-src]');
+    if (trigger) {
+      event.preventDefault();
+      openVideo(trigger);
+      return;
+    }
+
+    if (event.target.closest('[data-video-close]')) {
+      event.preventDefault();
+      closeVideo();
+    }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (modal.hidden) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeVideo();
+    }
+  });
+})();
+
