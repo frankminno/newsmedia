@@ -1150,16 +1150,32 @@ if (document.readyState === 'loading') {
 })();
 
 
-/* ── 4 · BACK TO TOP ──────────────────────────────────────────── */
+/* ── 4 · BACK TO TOP · BOTÓN FLOTANTE GLOBAL ───────────────── */
 (function () {
   'use strict';
 
+  /*
+   * Garantiza que TODAS las vistas tengan el botón flotante,
+   * incluso si alguna plantilla HTML no lo incluyó.
+   */
   var b = document.getElementById('btop');
-  if (!b) return;
 
-  window.addEventListener('scroll', function () {
+  if (!b) {
+    b = document.createElement('button');
+    b.className = 'btop';
+    b.id = 'btop';
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Volver arriba');
+    b.innerHTML = '<span aria-hidden="true">↑</span>';
+    document.body.appendChild(b);
+  }
+
+  function syncBackToTop() {
     b.classList.toggle('show', window.scrollY > 300);
-  }, { passive: true });
+  }
+
+  window.addEventListener('scroll', syncBackToTop, { passive: true });
+  syncBackToTop();
 
   b.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
