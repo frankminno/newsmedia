@@ -773,6 +773,126 @@
 
 })();
 
+
+/* ═══════════════════════════════════════════════════════════════
+   SIDEBAR GLOBAL · MISMA COLUMNA DERECHA DEL INDEX
+   2026-08-15
+   ----------------------------------------------------------------
+   Unifica cualquier columna derecha interna que todavía conserve
+   módulos antiguos. No toca el index y tampoco vuelve a construir
+   una columna que ya tenga Mercado + Galería del día.
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  if (document.body.classList.contains('home-page')) return;
+
+  var sidebars = document.querySelectorAll(
+    'aside.art-side, aside.section-sidebar, aside.mx-sidebar, aside.col-right'
+  );
+
+  if (!sidebars.length) return;
+
+  function sidebarHTML() {
+    return [
+      '<div class="weather" data-expreso-weather>',
+        '<div class="weather-hd">',
+          '<div class="weather-city">📍 HERMOSILLO, SONORA</div>',
+          '<div class="weather-main">',
+            '<div class="weather-temp" id="weatherCardTemp" aria-live="polite">--°</div>',
+            '<div class="weather-info">',
+              '<div class="weather-desc">',
+                '<img id="weatherCardIcon" class="weather-current-icon" src="" alt="" width="32" height="32" hidden>',
+                '<span id="weatherCardDescription">Clima actual</span>',
+              '</div>',
+            '</div>',
+          '</div>',
+          '<div class="weather-days" id="weatherForecast" hidden></div>',
+        '</div>',
+        '<a href="/newsmedia/expreso-landing/clima.html" class="weather-cta">Revisar UV, calidad del aire y más →</a>',
+      '</div>',
+
+      '<div class="mock-ad mock-ad--rectangle" aria-label="Publicidad simulada">',
+        '<img src="assets/ads-mock/mock-rectangle-300x250.svg" alt="Espacio publicitario simulado 300 por 250" loading="lazy" decoding="async">',
+      '</div>',
+
+      '<section class="card card-pad" id="cardMercado">',
+        '<h2 class="card-h">Mercado</h2>',
+        '<ul class="market">',
+          '<li><span class="sym">USD/MXN</span><span class="val">$17.32</span><span class="chg down">Apertura</span></li>',
+          '<li><span class="sym">Magna HMO</span><span class="val">$23.96</span><span class="chg up">por litro</span></li>',
+          '<li><span class="sym">Premium HMO</span><span class="val">$29.14</span><span class="chg up">por litro</span></li>',
+          '<li><span class="sym">Diésel HMO</span><span class="val">$26.94</span><span class="chg down">por litro</span></li>',
+          '<li><span class="sym">Beca Rita Cetina</span><span class="val">$2,500</span><span class="chg up">pago anual</span></li>',
+        '</ul>',
+      '</section>',
+
+      '<section class="card card-pad" id="pollCard">',
+        '<h2 class="card-h">Pregunta del día</h2>',
+        '<p class="poll-q">¿Alguna vez le han intentado robar su vehículo?</p>',
+        '<div class="poll-opts">',
+          '<button class="poll-opt" data-val="si"><span class="poll-radio"></span><span class="poll-lbl">Sí</span></button>',
+          '<button class="poll-opt" data-val="no"><span class="poll-radio"></span><span class="poll-lbl">No</span></button>',
+        '</div>',
+        '<div class="poll-result" id="pollResult">',
+          '<div class="poll-bar-row"><span class="poll-bar-lbl">Sí</span><span class="poll-bar"><span class="poll-bar-fill" data-opt="si"></span></span><span class="poll-bar-pct" data-pct="si">0%</span></div>',
+          '<div class="poll-bar-row"><span class="poll-bar-lbl">No</span><span class="poll-bar"><span class="poll-bar-fill" data-opt="no"></span></span><span class="poll-bar-pct" data-pct="no">0%</span></div>',
+          '<div class="poll-total" id="pollTotal"></div>',
+        '</div>',
+      '</section>',
+
+      '<section class="card card-pad" id="cardEdimp">',
+        '<h2 class="card-h">Edición Impresa</h2>',
+        '<a href="https://impreso.expreso.com.mx/" class="edimp-cover">',
+          '<img src="assets/real/edicion-impresa.png" alt="Portada de la edición impresa de Expreso" loading="lazy" decoding="async">',
+          '<span class="edimp-cap">Consulta la portada y las noticias de la edición impresa de hoy</span>',
+        '</a>',
+        '<a href="https://impreso.expreso.com.mx/" class="card-more" style="margin:0 -16px -16px">Leer edición de hoy →</a>',
+      '</section>',
+
+      '<section class="card" id="cardGaleria">',
+        '<div style="padding:16px 16px 8px"><h2 class="card-h" style="margin:0">Galería del día</h2></div>',
+        '<div class="gallery-grid" aria-label="Avance de la galería del día">',
+          '<a class="gal-item" href="multimedia-galerias.html" aria-label="Ver galerías de EXPRESO"><img src="assets/real/uniformes-escolares.png" alt="Entrega de uniformes escolares en Hermosillo" loading="lazy" decoding="async"></a>',
+          '<a class="gal-item" href="multimedia-galerias.html" aria-label="Ver galerías de EXPRESO"><img src="https://blob.expreso.com.mx/images/2026/08/03/mariachi-vargas-llegara-a-hermosillo-en-noviembre-09b1e2bd-focus-0-0-750-421.webp" alt="Mariachi Vargas llegará a Hermosillo" loading="lazy" decoding="async"></a>',
+          '<a class="gal-item" href="multimedia-galerias.html" aria-label="Ver galerías de EXPRESO"><img src="https://blob.expreso.com.mx/images/2026/08/02/karim-lopez-recibe-consejos-de-tracy-mcgrady-0b6ff5a6-focus-0-0-750-421.webp" alt="Karim López recibe consejos de Tracy McGrady" loading="lazy" decoding="async"></a>',
+          '<a class="gal-item" href="multimedia-galerias.html" aria-label="Ver galerías de EXPRESO"><img src="https://blob.expreso.com.mx/images/2026/07/16/cesar-lozano-llegara-a-hermosillo-con-felizmente-imperfectos-5da9323c-focus-0-0-750-421.webp" alt="César Lozano presentará FelizMente Imperfectos" loading="lazy" decoding="async"></a>',
+        '</div>',
+        '<a href="multimedia-galerias.html" class="card-more">Ver más galerías →</a>',
+      '</section>'
+    ].join('');
+  }
+
+  var normalized = false;
+
+  [].forEach.call(sidebars, function (sidebar) {
+    /*
+     * Si la columna ya corresponde a la versión nueva del index,
+     * la dejamos intacta. Esto evita duplicar IDs o alterar páginas
+     * de sección que ya fueron actualizadas.
+     */
+    if (
+      sidebar.querySelector('#cardMercado') &&
+      sidebar.querySelector('#pollCard') &&
+      sidebar.querySelector('#cardEdimp') &&
+      sidebar.querySelector('#cardGaleria')
+    ) return;
+
+    if (normalized) {
+      /*
+       * Solo puede existir una columna editorial principal por vista.
+       * Evita IDs duplicados si una plantilla incluyera un segundo aside
+       * técnico con alguna de las clases anteriores.
+       */
+      return;
+    }
+
+    sidebar.innerHTML = sidebarHTML();
+    sidebar.classList.add('sidebar-index-standard');
+    normalized = true;
+  });
+})();
+
 /* ═══════════════════════════════════════════════════════════════
    PUENTE DEL CLIMA ACTUAL DE EXPRESO AL NUEVO TEMPLATE
    ═══════════════════════════════════════════════════════════════ */
@@ -1146,422 +1266,22 @@ if (document.readyState === 'loading') {
 
 
 /* ═══════════════════════════════════════════════════════════════
-   EXTENSIONES DE LAS VISTAS DEL BOCETO: galería, multimedia y video
-   Se activan solamente cuando existe su marcado correspondiente.
-   ═══════════════════════════════════════════════════════════════ */
-
-/* Lightbox accesible para la galería editorial */
-(function () {
-  'use strict';
-  var modal = document.querySelector('.content-lightbox');
-  var items = [].slice.call(document.querySelectorAll('.gal-item img'));
-  if (!modal || !items.length) return;
-
-  var image = modal.querySelector('img');
-  var caption = modal.querySelector('.lb-caption');
-  var close = modal.querySelector('.lb-close');
-  var prev = modal.querySelector('.lb-prev');
-  var next = modal.querySelector('.lb-next');
-  var current = 0;
-  var opener = null;
-
-  function show(index) {
-    current = (index + items.length) % items.length;
-    var source = items[current];
-    image.src = source.currentSrc || source.src;
-    image.alt = source.alt || '';
-    if (caption) caption.textContent = source.alt || ('Fotografía ' + (current + 1));
-  }
-  function open(index, trigger) {
-    opener = trigger || null;
-    show(index);
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
-    if (close) close.focus();
-  }
-  function hide() {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-    image.removeAttribute('src');
-    if (opener) opener.focus();
-  }
-
-  items.forEach(function (img, index) {
-    var trigger = img.closest('.gal-item');
-    if (!trigger) return;
-    trigger.addEventListener('click', function () { open(index, trigger); });
-  });
-  if (close) close.addEventListener('click', hide);
-  if (prev) prev.addEventListener('click', function () { show(current - 1); });
-  if (next) next.addEventListener('click', function () { show(current + 1); });
-  modal.addEventListener('click', function (event) { if (event.target === modal) hide(); });
-  document.addEventListener('keydown', function (event) {
-    if (modal.hidden) return;
-    if (event.key === 'Escape') hide();
-    if (event.key === 'ArrowLeft') show(current - 1);
-    if (event.key === 'ArrowRight') show(current + 1);
-  });
-})();
-
-/* Modal de video para multimedia y transmisiones */
-(function () {
-  'use strict';
-  var triggers = [].slice.call(document.querySelectorAll('[data-video-id]'));
-  var modal = document.querySelector('.content-video-modal');
-  if (!triggers.length || !modal) return;
-
-  var frame = modal.querySelector('.content-video-frame');
-  var title = modal.querySelector('.content-video-title');
-  var close = modal.querySelector('.content-video-close');
-  var opener = null;
-
-  function hide() {
-    modal.hidden = true;
-    frame.innerHTML = '';
-    document.body.style.overflow = '';
-    if (opener) opener.focus();
-  }
-  function open(trigger) {
-    var id = trigger.getAttribute('data-video-id');
-    if (!id) return;
-    opener = trigger;
-    frame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0" title="Reproductor de video Expreso" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-    if (title) title.textContent = trigger.getAttribute('data-video-title') || trigger.getAttribute('aria-label') || 'Video Expreso';
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
-    if (close) close.focus();
-  }
-
-  triggers.forEach(function (trigger) {
-    trigger.addEventListener('click', function () { open(trigger); });
-  });
-  if (close) close.addEventListener('click', hide);
-  modal.addEventListener('click', function (event) { if (event.target === modal) hide(); });
-  document.addEventListener('keydown', function (event) { if (!modal.hidden && event.key === 'Escape') hide(); });
-})();
-
-/* Botón Ver más de Multimedia */
-(function () {
-  'use strict';
-  var button = document.getElementById('mediaMore');
-  if (!button) return;
-  var hiddenCards = [].slice.call(document.querySelectorAll('.media-card[data-more]'));
-  if (!hiddenCards.length) { button.hidden = true; return; }
-  button.addEventListener('click', function () {
-    var showing = button.getAttribute('aria-expanded') === 'true';
-    hiddenCards.forEach(function (card) { card.hidden = showing; });
-    button.setAttribute('aria-expanded', String(!showing));
-    button.textContent = showing ? 'Ver más' : 'Ver menos';
-  });
-})();
-
-/* ═══════════════════════════════════════════════════════════════════════
-   E MEDIA · MENÚ FLOTANTE RADIAL
-   Conserva la lógica original de abanico y usa los logotipos oficiales.
-   Se crea solo en la portada cuando detecta el slider #hero.
-   ═══════════════════════════════════════════════════════════════════════ */
-(function () {
-  'use strict';
-
-  if (!document.getElementById('hero') || document.querySelector('[data-emedia-dock]')) return;
-
-  var ASSET_BASE = 'assets/emedia-dock/';
-  var ITEMS = [
-    {
-      label: '10-4 Noticias',
-      image: '10-4_Nuevo_logo.png',
-      href: 'https://www.facebook.com/104NoticiasSonora',
-      external: true
-    },
-    {
-      label: 'Edición Impresa',
-      image: 'logo_edimp.png',
-      href: 'https://impreso.expreso.com.mx/',
-      external: true
-    },
-    {
-      label: 'Pop Extremo',
-      image: 'logo_pop.png',
-      href: 'https://popextremo.expreso.com.mx/',
-      external: true
-    },
-    {
-      label: 'Eventos Expreso',
-      image: 'logo_eventos.png',
-      href: 'https://www.expreso.com.mx/tags/eventos-expreso/75565',
-      external: true
-    },
-    {
-      label: 'Sonora Grupera',
-      image: 'logo_sonorag.png',
-      href: 'https://sonoragrupera.expreso.com.mx/',
-      external: true
-    },
-    {
-      label: 'Expreso 24/7',
-      image: 'logo_247.png',
-      href: 'en-vivo.html',
-      external: false
-    }
-  ];
-
-  var dock = document.createElement('aside');
-  dock.className = 'emedia-dock';
-  dock.setAttribute('data-emedia-dock', '');
-  dock.setAttribute('aria-label', 'Sitios de Expreso Media');
-
-  var button = document.createElement('button');
-  button.className = 'emedia-dock__toggle';
-  button.type = 'button';
-  button.setAttribute('aria-label', 'Abrir sitios de Expreso Media');
-  button.setAttribute('aria-controls', 'emediaDockItems');
-  button.innerHTML =
-    '<img class="emedia-dock__tab" src="' + ASSET_BASE + 'emedia-tab.svg" alt="" aria-hidden="true">' +
-    '<img class="emedia-dock__logo" src="' + ASSET_BASE + 'logo_menuemedia.png" alt="eMedia">';
-
-  var nav = document.createElement('nav');
-  nav.className = 'emedia-dock__items';
-  nav.id = 'emediaDockItems';
-  nav.setAttribute('aria-label', 'Medios y servicios');
-
-  ITEMS.forEach(function (item) {
-    var link = document.createElement('a');
-    link.className = 'emedia-dock__item';
-    link.href = item.href;
-    link.setAttribute('data-label', item.label);
-    link.setAttribute('aria-label', item.label);
-
-    if (item.external) {
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-    }
-
-    var image = document.createElement('img');
-    image.src = ASSET_BASE + item.image;
-    image.alt = '';
-    image.setAttribute('aria-hidden', 'true');
-    image.loading = 'lazy';
-    image.decoding = 'async';
-
-    /*
-     * La capa .menuf replica la presentación visual del flotante actual
-     * de Expreso sin modificar el enlace, su posición o la animación.
-     */
-    var menuAnchor = document.createElement('span');
-    menuAnchor.className = 'menuf-anchor';
-    menuAnchor.setAttribute('aria-hidden', 'true');
-
-    var menuFace = document.createElement('span');
-    menuFace.className = 'menuf';
-    menuFace.appendChild(image);
-
-    menuAnchor.appendChild(menuFace);
-    link.appendChild(menuAnchor);
-    nav.appendChild(link);
-  });
-
-  dock.appendChild(nav);
-  dock.appendChild(button);
-  document.body.appendChild(dock);
-
-  var links = [].slice.call(nav.querySelectorAll('.emedia-dock__item'));
-  var desktopQuery = window.matchMedia('(min-width: 1000px)');
-  var open = desktopQuery.matches;
-
-  function render() {
-    dock.classList.toggle('is-open', open);
-    button.setAttribute('aria-expanded', String(open));
-    button.setAttribute(
-      'aria-label',
-      open ? 'Cerrar sitios de Expreso Media' : 'Abrir sitios de Expreso Media'
-    );
-
-    links.forEach(function (link) {
-      link.tabIndex = open ? 0 : -1;
-      link.setAttribute('aria-hidden', String(!open));
-    });
-  }
-
-  function setOpen(value) {
-    open = Boolean(value);
-    render();
-  }
-
-  function positionBelowTicker() {
-    var ticker = document.querySelector('.ticker');
-    if (!ticker) return;
-
-    /*
-     * El dock usa position: fixed, por lo que la coordenada debe calcularse
-     * en relación con el viewport. Mientras la marquesina esté visible,
-     * el flotante permanece justo debajo; al salir de pantalla se mantiene
-     * una separación mínima respecto del borde superior.
-     */
-    var rect = ticker.getBoundingClientRect();
-    var gap = 12;
-    var top = Math.max(gap, Math.round(rect.bottom + gap));
-
-    dock.style.setProperty('--emedia-dock-top', top + 'px');
-  }
-
-  button.addEventListener('click', function () {
-    setOpen(!open);
-  });
-
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape' && open) {
-      setOpen(false);
-      button.focus();
-    }
-  });
-
-  document.addEventListener('pointerdown', function (event) {
-    if (!open || desktopQuery.matches || dock.contains(event.target)) return;
-    setOpen(false);
-  });
-
-  function syncViewport(event) {
-    setOpen(event.matches);
-    positionBelowTicker();
-  }
-
-  if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', syncViewport);
-  else if (desktopQuery.addListener) desktopQuery.addListener(syncViewport);
-
-  window.addEventListener('resize', positionBelowTicker, { passive: true });
-  window.addEventListener('scroll', positionBelowTicker, { passive: true });
-  positionBelowTicker();
-  render();
-})();
-
-
-/* ═══════════════════════════════════════════════════════════════════════
-   VISTAS DE SECCIÓN · cargar más noticias
-   ═══════════════════════════════════════════════════════════════════════ */
-(function () {
-  'use strict';
-  var buttons = [].slice.call(document.querySelectorAll('[data-section-more-button]'));
-  buttons.forEach(function (button) {
-    var root = button.closest('[data-section-list]');
-    if (!root) return;
-    var items = [].slice.call(root.querySelectorAll('[data-section-more]'));
-    if (!items.length) { button.hidden = true; return; }
-    button.addEventListener('click', function () {
-      var expanded = button.getAttribute('aria-expanded') === 'true';
-      items.forEach(function (item) { item.hidden = expanded; });
-      button.setAttribute('aria-expanded', String(!expanded));
-      button.textContent = expanded ? 'Cargar más noticias' : 'Mostrar menos';
-    });
-  });
-})();
-
-/* Multimedia - Galerías · filtros y expansión */
-(function () {
-  'use strict';
-  var grid = document.querySelector('[data-gallery-grid]');
-  if (!grid) return;
-  var cards = [].slice.call(grid.querySelectorAll('.gallery-index-card'));
-  var filters = [].slice.call(document.querySelectorAll('[data-gallery-filter]'));
-  var more = document.querySelector('[data-gallery-more]');
-  var activeFilter = 'all';
-  var expanded = false;
-
-  function render() {
-    var visibleIndex = 0;
-    cards.forEach(function (card) {
-      var matches = activeFilter === 'all' || card.getAttribute('data-gallery-type') === activeFilter;
-      var withinLimit = expanded || visibleIndex < 6;
-      card.hidden = !matches || !withinLimit;
-      if (matches) visibleIndex++;
-    });
-    if (more) {
-      var matchingCount = cards.filter(function (card) {
-        return activeFilter === 'all' || card.getAttribute('data-gallery-type') === activeFilter;
-      }).length;
-      more.hidden = matchingCount <= 6;
-      more.textContent = expanded ? 'Mostrar menos' : 'Ver más galerías';
-      more.setAttribute('aria-expanded', String(expanded));
-    }
-  }
-
-  filters.forEach(function (button) {
-    button.addEventListener('click', function () {
-      activeFilter = button.getAttribute('data-gallery-filter') || 'all';
-      expanded = false;
-      filters.forEach(function (item) { item.classList.toggle('active', item === button); });
-      render();
-    });
-  });
-  if (more) more.addEventListener('click', function () { expanded = !expanded; render(); });
-  render();
-})();
-
-
-/* ═══════════════════════════════════════════════════════════════
-   NOTA — copiar enlace y compartir nativo
-   Se activa únicamente cuando existen [data-copy-url] o [data-native-share].
+   LO MÁS RECIENTE · eliminar marca "Expreso" duplicada al final
+   Conserva intacto el autor que aparece después del distintivo EX.
    ═══════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
-  var copyButtons = [].slice.call(document.querySelectorAll('[data-copy-url]'));
-  var shareButtons = [].slice.call(document.querySelectorAll('[data-native-share]'));
-  if (!copyButtons.length && !shareButtons.length) return;
 
-  var toast = document.createElement('div');
-  toast.className = 'copy-toast';
-  toast.setAttribute('role', 'status');
-  toast.setAttribute('aria-live', 'polite');
-  document.body.appendChild(toast);
-  var toastTimer;
-
-  function notify(text) {
-    toast.textContent = text;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1800);
+  function limpiarMarcaDuplicada() {
+    document.querySelectorAll('#feedBody .feed-m').forEach(function (meta) {
+      meta.innerHTML = meta.innerHTML.replace(
+        /\s*<span class="feed-sep">·<\/span>\s*Expreso\s*$/i,
+        ''
+      );
+    });
   }
 
-  function fallbackCopy(text) {
-    var input = document.createElement('textarea');
-    input.value = text;
-    input.setAttribute('readonly', '');
-    input.style.position = 'fixed';
-    input.style.opacity = '0';
-    document.body.appendChild(input);
-    input.select();
-    var ok = false;
-    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-    input.remove();
-    return ok;
-  }
+  limpiarMarcaDuplicada();
 
-  copyButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      var url = button.getAttribute('data-copy-url') || location.href;
-      var done = function () {
-        button.classList.add('is-copied');
-        notify('Enlace copiado');
-        setTimeout(function () { button.classList.remove('is-copied'); }, 1600);
-      };
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(url).then(done).catch(function () {
-          fallbackCopy(url) ? done() : notify('No se pudo copiar el enlace');
-        });
-      } else {
-        fallbackCopy(url) ? done() : notify('No se pudo copiar el enlace');
-      }
-    });
-  });
-
-  shareButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      var url = button.getAttribute('data-share-url') || location.href;
-      if (navigator.share) {
-        navigator.share({ title: document.title, url: url }).catch(function () {});
-      } else {
-        var copyButton = document.querySelector('[data-copy-url]');
-        if (copyButton) copyButton.click();
-      }
-    });
-  });
+  document.addEventListener('expreso:rss-updated', limpiarMarcaDuplicada);
 })();
