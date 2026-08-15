@@ -1431,3 +1431,16 @@ if (document.readyState === 'loading') {
 })();
 
 
+/* MULTIMEDIA · ENLACES REALES EXPRESO · 2026-08-15 */
+(function () {
+  'use strict';
+  document.addEventListener('click', function (event) {
+    var trigger = event.target.closest('[data-expreso-url]');
+    if (!trigger) return;
+    var url = trigger.getAttribute('data-expreso-url');
+    if (!url) return;
+    event.preventDefault();
+    window.location.href = url;
+  });
+})();
+
