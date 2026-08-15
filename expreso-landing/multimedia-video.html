@@ -7,6 +7,45 @@
 <meta name="description" content="Videos y transmisiones recientes de EXPRESO con contenido real de expreso.com.mx"><title>Multimedia - Videos | Expreso</title>
 <link rel="stylesheet" href="css/styles.css?v=20260815-multimedia-real1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style id="multimedia-video-lightbox-styles">
+.video-gallery-intro{margin:4px 0 18px;color:#58635d;font-size:14px}
+.video-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.video-gallery-card{min-width:0}
+.video-gallery-card__button{display:block;width:100%;padding:0;border:0;background:#fff;text-align:left;cursor:pointer;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,46,30,.08);transition:transform .18s ease,box-shadow .18s ease}
+.video-gallery-card__button:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,46,30,.14)}
+.video-gallery-card__media{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#07110c}
+.video-gallery-card__media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.video-gallery-card__button:hover img{transform:scale(1.025)}
+.video-gallery-card__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.35))}
+.video-gallery-card__play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(0,46,30,.92);color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.28);font-size:17px}
+.video-gallery-card__provider{position:absolute;right:10px;top:10px;padding:5px 8px;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.video-gallery-card__body{display:block;padding:13px 14px 15px}
+.video-gallery-card__body strong{display:block;color:#142019;font-size:15px;line-height:1.28}
+.video-gallery-card__body small{display:block;margin-top:7px;color:#68736d;font-size:10.5px}
+
+.video-lightbox[hidden]{display:none!important}
+.video-lightbox{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:22px}
+.video-lightbox__backdrop{position:absolute;inset:0;background:rgba(0,15,9,.86);backdrop-filter:blur(5px)}
+.video-lightbox__panel{position:relative;z-index:1;width:min(1000px,94vw);overflow:hidden;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#07110c;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.video-lightbox__top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 17px;color:#fff}
+.video-lightbox__eyebrow{display:block;margin-bottom:3px;color:#69d58d;font-size:9px;font-weight:900;letter-spacing:.11em}
+.video-lightbox__top h2{margin:0;color:#fff;font-size:16px;line-height:1.3}
+.video-lightbox__close{flex:0 0 auto;width:38px;height:38px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:27px;line-height:1;cursor:pointer}
+.video-lightbox__frame{aspect-ratio:16/9;background:#000}
+.video-lightbox__frame iframe{display:block;width:100%;height:100%;border:0}
+.video-lightbox__foot{display:flex;justify-content:space-between;gap:12px;padding:10px 17px 12px;color:rgba(255,255,255,.62);font-size:10px}
+body.video-lightbox-open{overflow:hidden}
+@media(max-width:700px){
+  .video-gallery-grid{grid-template-columns:1fr;gap:14px}
+  .video-lightbox{padding:8px}
+  .video-lightbox__panel{width:100%;border-radius:14px}
+  .video-lightbox__top{padding:12px}
+  .video-lightbox__top h2{font-size:14px}
+  .video-lightbox__foot{padding:8px 12px 10px}
+}
+</style>
+
 </head>
 <body class="multimedia-page">
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -45,29 +84,125 @@
 <main id="contenido" class="main mx-shell"><div class="wrap"><div class="mx-layout">
 <section class="mx-content" aria-labelledby="mxTitle">
 <header class="mx-heading"><div class="mx-heading-title"><span class="mx-heading-rule"></span><h1 id="mxTitle">Multimedia - <strong>Videos</strong></h1></div><a class="mx-gallery-link" href="multimedia-galerias.html">Galerías más recientes</a></header>
-<section class="mx-stage" aria-label="Videos destacados">
-<div class="mx-teaser-grid"><article class="mx-teaser"><button type="button" data-expreso-url="https://www.expreso.com.mx/noticias/sonora/al-cierre-noticias-de-mexico-y-el-mundo-en-tiempo-real/239676" aria-label="Abrir Al Cierre, noticiero con lo más relevante de México y el mundo"><img src="https://blob.expreso.com.mx/images/2025/09/29/whatsapp-image-2025-09-29-at-41535-pm-b77fd103-focus-0.47-0.49-364-303.webp" alt="Al Cierre, noticiero con lo más relevante de México y el mundo"><span class="mx-play" aria-hidden="true">▶</span></button></article><article class="mx-teaser"><button type="button" data-expreso-url="https://www.expreso.com.mx/noticias/sonora/conferencia-de-prensa-semanal-del-gobernador-durazo/259892" aria-label="Abrir En Vivo: Conferencia de prensa semanal del Gobernador Durazo"><img src="https://blob.expreso.com.mx/images/2026/07/07/conferencia-de-prensa-semanal-del-gobernador-durazo-3402d44f-focus-0-0-364-303.webp" alt="En Vivo: Conferencia de prensa semanal del Gobernador Durazo"><span class="mx-play" aria-hidden="true">▶</span></button></article><article class="mx-teaser"><button type="button" data-expreso-url="https://www.expreso.com.mx/noticias/sonora/donde-transmiten-informe-de-sheinbaum-en-hermosillo-sonora/257289" aria-label="Abrir Ver EN VIVO el informe de rendición de cuentas de Claudia Sheinbaum"><img src="https://blob.expreso.com.mx/images/2026/05/31/donde-transmiten-informe-de-sheinbaum-en-hermosillo-sonora-9b5ea181-focus-min0.17-0.5-364-303.webp" alt="Ver EN VIVO el informe de rendición de cuentas de Claudia Sheinbaum"><span class="mx-play" aria-hidden="true">▶</span></button></article></div>
-<article class="mx-live-card"><div class="mx-live-copy"><h2><span>Video:</span> Al Cierre, noticiero con lo más relevante de México y el mundo</h2><p class="mx-live-meta"><strong>Karla Tellechea</strong> · Agosto 11, 2026</p></div>
-<button class="mx-live-player" type="button" data-expreso-url="https://www.expreso.com.mx/noticias/sonora/al-cierre-noticias-de-mexico-y-el-mundo-en-tiempo-real/239676" aria-label="Abrir Al Cierre, noticiero con lo más relevante de México y el mundo"><img src="https://blob.expreso.com.mx/images/2025/09/29/whatsapp-image-2025-09-29-at-41535-pm-b77fd103-focus-0.47-0.49-364-303.webp" alt="Al Cierre, noticiero con lo más relevante de México y el mundo"><span class="mx-play">▶</span></button>
-<p class="mx-live-summary">Al Cierre es el noticiero multiplataforma de Expreso que informa en tiempo real sobre lo más importante de México y el mundo.</p></article>
+<section class="video-gallery-intro">
+  <p>Selecciona un video para reproducirlo sin salir de la página.</p>
 </section>
-<section class="mx-card-grid" aria-label="Videos recientes"><article class="mx-story">
-      <button type="button" data-expreso-url="https://www.expreso.com.mx/noticias/sonora/conferencia-de-prensa-semanal-del-gobernador-durazo/259892" aria-label="Abrir En Vivo: Conferencia de prensa semanal del Gobernador Durazo"><img src="https://blob.expreso.com.mx/images/2026/07/07/conferencia-de-prensa-semanal-del-gobernador-durazo-3402d44f-focus-0-0-364-303.webp" alt="En Vivo: Conferencia de prensa semanal del Gobernador Durazo"><span class="mx-play" aria-hidden="true">▶</span></button>
-      <div class="mx-story-body"><div class="mx-story-meta"><span>EX</span> Noticias</div><h3>En Vivo: Conferencia de prensa semanal del Gobernador Durazo</h3><p>El gobernador de Sonora informó en conferencia de prensa sobre avances, decisiones y resultados de la administración estatal.</p><small>Redacción · Julio 07, 2026</small></div>
-    </article><article class="mx-story">
-      <button type="button" data-expreso-url="https://www.expreso.com.mx/noticias/sonora/donde-transmiten-informe-de-sheinbaum-en-hermosillo-sonora/257289" aria-label="Abrir Ver EN VIVO el informe de rendición de cuentas de Claudia Sheinbaum"><img src="https://blob.expreso.com.mx/images/2026/05/31/donde-transmiten-informe-de-sheinbaum-en-hermosillo-sonora-9b5ea181-focus-min0.17-0.5-364-303.webp" alt="Ver EN VIVO el informe de rendición de cuentas de Claudia Sheinbaum"><span class="mx-play" aria-hidden="true">▶</span></button>
-      <div class="mx-story-body"><div class="mx-story-meta"><span>EX</span> Noticias</div><h3>Ver EN VIVO el informe de rendición de cuentas de Claudia Sheinbaum</h3><p>La convocatoria en Hermosillo permitió seguir el mensaje presidencial desde el Centro de Usos Múltiples.</p><small>Angie Alvarado · Mayo 31, 2026</small></div>
-    </article><article class="mx-story">
-      <button type="button" data-expreso-url="https://www.expreso.com.mx/multimedia/videos" aria-label="Abrir Encabeza Claudia Sheinbaum Plan de Justicia para el pueblo Seri-Comca’ac"><img src="https://blob.expreso.com.mx/images/2026/05/09/captura-de-pantalla-2026-05-08-a-las-63959pm-2197c8c4-focus-0-0-364-303.webp" alt="Encabeza Claudia Sheinbaum Plan de Justicia para el pueblo Seri-Comca’ac"><span class="mx-play" aria-hidden="true">▶</span></button>
-      <div class="mx-story-body"><div class="mx-story-meta"><span>EX</span> Noticias</div><h3>Encabeza Claudia Sheinbaum Plan de Justicia para el pueblo Seri-Comca’ac</h3><p>La presidenta de México encabezó los trabajos del Plan de Justicia para el pueblo Seri-Comca’ac en Hermosillo.</p><small>Frank Ramos · Mayo 08, 2026</small></div>
-    </article><article class="mx-story">
-      <button type="button" data-expreso-url="https://www.expreso.com.mx/multimedia/videos" aria-label="Abrir Sheinbaum participa en cumbre de democracia en Barcelona"><img src="https://blob.expreso.com.mx/images/2026/04/18/crop-w1918-h1079-sheinbaum-en-vivo-desde-barcelona-en-cumbre-democratica-50a82408-focus-0.05-0.42-364-303.webp" alt="Sheinbaum participa en cumbre de democracia en Barcelona"><span class="mx-play" aria-hidden="true">▶</span></button>
-      <div class="mx-story-body"><div class="mx-story-meta"><span>EX</span> Noticias</div><h3>Sheinbaum participa en cumbre de democracia en Barcelona</h3><p>La presidenta llamó a fortalecer una democracia basada en justicia social, paz y soberanía.</p><small>Aldo Uribe · Abril 18, 2026</small></div>
-    </article><article class="mx-story">
-      <button type="button" data-expreso-url="https://www.expreso.com.mx/multimedia/videos" aria-label="Abrir Recuerdan la juventud de Carin León en la Secundaria 4 de Hermosillo"><img src="https://blob.expreso.com.mx/images/2026/04/11/carin-leon-en-la-secundaria-4-de-hermosillo-testimonios-703d70e2-focus-0-0-364-303.webp" alt="Recuerdan la juventud de Carin León en la Secundaria 4 de Hermosillo"><span class="mx-play" aria-hidden="true">▶</span></button>
-      <div class="mx-story-body"><div class="mx-story-meta"><span>EX</span> Noticias</div><h3>Recuerdan la juventud de Carin León en la Secundaria 4 de Hermosillo</h3><p>Maestros y excompañeros recuerdan la etapa estudiantil del cantante sonorense.</p><small>Alberto Duarte · Abril 11, 2026</small></div>
-    </article></section>
-<div class="mx-more-wrap"><a class="mx-more" href="https://www.expreso.com.mx/multimedia/videos">Ver más videos en EXPRESO</a></div>
+
+<section class="video-gallery-grid" aria-label="Videos recientes de EXPRESO">
+<article class="video-gallery-card">
+  <button class="video-gallery-card__button" type="button"
+          data-video-src="https://www.youtube.com/embed/E910LIwsr5Q?rel=0&modestbranding=1&autoplay=1"
+          data-video-title="Noticias Expreso 24/7 desde Hermosillo"
+          data-video-provider="YouTube"
+          aria-label="Reproducir: Noticias Expreso 24/7 desde Hermosillo">
+    <span class="video-gallery-card__media">
+      <img src="https://img.youtube.com/vi/E910LIwsr5Q/hqdefault.jpg" alt="Noticias Expreso 24/7 desde Hermosillo" loading="lazy" decoding="async">
+      <span class="video-gallery-card__shade"></span>
+      <span class="video-gallery-card__play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+      <span class="video-gallery-card__provider">YouTube</span>
+    </span>
+    <span class="video-gallery-card__body">
+      <strong>Noticias Expreso 24/7 desde Hermosillo</strong>
+      <small>EXPRESO 24/7 · En vivo / reciente</small>
+    </span>
+  </button>
+</article>
+<article class="video-gallery-card">
+  <button class="video-gallery-card__button" type="button"
+          data-video-src="https://www.youtube.com/embed/S6OuO-oYUKI?rel=0&modestbranding=1&autoplay=1"
+          data-video-title="Entrevista en EXPRESO: conversación y análisis"
+          data-video-provider="YouTube"
+          aria-label="Reproducir: Entrevista en EXPRESO: conversación y análisis">
+    <span class="video-gallery-card__media">
+      <img src="https://img.youtube.com/vi/S6OuO-oYUKI/hqdefault.jpg" alt="Entrevista en EXPRESO: conversación y análisis" loading="lazy" decoding="async">
+      <span class="video-gallery-card__shade"></span>
+      <span class="video-gallery-card__play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+      <span class="video-gallery-card__provider">YouTube</span>
+    </span>
+    <span class="video-gallery-card__body">
+      <strong>Entrevista en EXPRESO: conversación y análisis</strong>
+      <small>EXPRESO · Video</small>
+    </span>
+  </button>
+</article>
+<article class="video-gallery-card">
+  <button class="video-gallery-card__button" type="button"
+          data-video-src="https://www.youtube.com/embed/K_T7ujz5Bhw?rel=0&modestbranding=1&autoplay=1"
+          data-video-title="Nissan X-Trail e-POWER con e-4ORCE: prueba y experiencia"
+          data-video-provider="YouTube"
+          aria-label="Reproducir: Nissan X-Trail e-POWER con e-4ORCE: prueba y experiencia">
+    <span class="video-gallery-card__media">
+      <img src="https://img.youtube.com/vi/K_T7ujz5Bhw/hqdefault.jpg" alt="Nissan X-Trail e-POWER con e-4ORCE: prueba y experiencia" loading="lazy" decoding="async">
+      <span class="video-gallery-card__shade"></span>
+      <span class="video-gallery-card__play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+      <span class="video-gallery-card__provider">YouTube</span>
+    </span>
+    <span class="video-gallery-card__body">
+      <strong>Nissan X-Trail e-POWER con e-4ORCE: prueba y experiencia</strong>
+      <small>Bajo la Lupa · EXPRESO</small>
+    </span>
+  </button>
+</article>
+<article class="video-gallery-card">
+  <button class="video-gallery-card__button" type="button"
+          data-video-src="https://www.dailymotion.com/embed/video/xa1ty1i?autoplay=1"
+          data-video-title="Educación en Sonora: avances, retos y apoyos escolares"
+          data-video-provider="Dailymotion"
+          aria-label="Reproducir: Educación en Sonora: avances, retos y apoyos escolares">
+    <span class="video-gallery-card__media">
+      <img src="https://www.dailymotion.com/thumbnail/video/xa1ty1i" alt="Educación en Sonora: avances, retos y apoyos escolares" loading="lazy" decoding="async">
+      <span class="video-gallery-card__shade"></span>
+      <span class="video-gallery-card__play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+      <span class="video-gallery-card__provider">Dailymotion</span>
+    </span>
+    <span class="video-gallery-card__body">
+      <strong>Educación en Sonora: avances, retos y apoyos escolares</strong>
+      <small>EXPRESO 24/7 · Dailymotion</small>
+    </span>
+  </button>
+</article>
+<article class="video-gallery-card">
+  <button class="video-gallery-card__button" type="button"
+          data-video-src="https://www.youtube.com/embed/j1xGPD5dG0s?rel=0&modestbranding=1&autoplay=1"
+          data-video-title="Cobertura especial: información desde EXPRESO"
+          data-video-provider="YouTube"
+          aria-label="Reproducir: Cobertura especial: información desde EXPRESO">
+    <span class="video-gallery-card__media">
+      <img src="https://img.youtube.com/vi/j1xGPD5dG0s/hqdefault.jpg" alt="Cobertura especial: información desde EXPRESO" loading="lazy" decoding="async">
+      <span class="video-gallery-card__shade"></span>
+      <span class="video-gallery-card__play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+      <span class="video-gallery-card__provider">YouTube</span>
+    </span>
+    <span class="video-gallery-card__body">
+      <strong>Cobertura especial: información desde EXPRESO</strong>
+      <small>EXPRESO · YouTube</small>
+    </span>
+  </button>
+</article>
+<article class="video-gallery-card">
+  <button class="video-gallery-card__button" type="button"
+          data-video-src="https://www.youtube.com/embed/t8d6Aqv48Zk?rel=0&modestbranding=1&autoplay=1"
+          data-video-title="Contenido vertical de EXPRESO: actualidad en video"
+          data-video-provider="YouTube"
+          aria-label="Reproducir: Contenido vertical de EXPRESO: actualidad en video">
+    <span class="video-gallery-card__media">
+      <img src="https://img.youtube.com/vi/t8d6Aqv48Zk/hqdefault.jpg" alt="Contenido vertical de EXPRESO: actualidad en video" loading="lazy" decoding="async">
+      <span class="video-gallery-card__shade"></span>
+      <span class="video-gallery-card__play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+      <span class="video-gallery-card__provider">YouTube</span>
+    </span>
+    <span class="video-gallery-card__body">
+      <strong>Contenido vertical de EXPRESO: actualidad en video</strong>
+      <small>EXPRESO · YouTube Shorts</small>
+    </span>
+  </button>
+</article>
+</section>
+
+<div class="mx-more-wrap">
+  <a class="mx-more" href="https://www.expreso.com.mx/multimedia/videos">Ver más videos en EXPRESO</a>
+</div>
+
 <div class="ad-box ad-banner mx-bottom-ad"><span class="ico">📢</span>Espacio publicitario</div>
 </section>
 <aside class="mx-sidebar" aria-label="Información complementaria">
@@ -82,6 +217,27 @@
   <section class="card" id="cardGaleria"><div style="padding:16px 16px 8px"><h2 class="card-h" style="margin:0">Galería del día</h2></div><div class="gallery-grid"><a class="gal-item" href="galeria.html"><img src="https://blob.expreso.com.mx/images/2026/08/10/img5374-d68330c9.jpg" alt="Galería Mochomos"></a><a class="gal-item" href="multimedia-galerias.html"><img src="https://blob.expreso.com.mx/images/2026/08/07/1-img5280-17a705fa.jpg" alt="Galería Bol 300"></a><a class="gal-item" href="multimedia-galerias.html"><img src="https://blob.expreso.com.mx/images/2026/08/07/1-img4986-a9aa73d5.jpg" alt="Galería Mona Café"></a><a class="gal-item" href="multimedia-galerias.html"><img src="https://blob.expreso.com.mx/images/2026/08/08/crop-w1280-h1024-1-69b79570-f5e6-4f33-a68f-190b9026-cc3e2eaf.jpg" alt="Galería Infiniti"></a></div><a href="multimedia-galerias.html" class="card-more">Ver más galerías →</a></section>
 </aside>
 </div></div></main>
+
+<div class="video-lightbox" id="videoLightbox" role="dialog" aria-modal="true" aria-labelledby="videoLightboxTitle" aria-hidden="true" hidden>
+  <div class="video-lightbox__backdrop" data-video-close></div>
+  <div class="video-lightbox__panel" role="document">
+    <div class="video-lightbox__top">
+      <div>
+        <span class="video-lightbox__eyebrow">EXPRESO VIDEO</span>
+        <h2 id="videoLightboxTitle">Video</h2>
+      </div>
+      <button class="video-lightbox__close" type="button" data-video-close aria-label="Cerrar video">×</button>
+    </div>
+    <div class="video-lightbox__frame">
+      <iframe id="videoLightboxFrame" src="" title="Reproductor de video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    </div>
+    <div class="video-lightbox__foot">
+      <span id="videoLightboxProvider">EXPRESO</span>
+      <span>Contenido multimedia</span>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   <div class="footer-top"><div class="wrap"><div class="footer-grid">
     <div class="footer-brand">
@@ -104,6 +260,6 @@
   <div class="footer-bottom"><div class="wrap"><p>© 2026 Expreso · Medios y Editorial de Sonora, S.A. de C.V. · Todos los derechos reservados.</p><div class="footer-legal"><a href="https://www.expreso.com.mx/contacto">Contacto</a><a href="https://www.expreso.com.mx/politica-de-privacidad">Aviso de Privacidad</a><a href="https://www.expreso.com.mx/aviso-legal">Aviso Legal</a></div></div></div>
 </footer>
 <button class="btop" id="btop" aria-label="Volver arriba">↑</button>
-<script src="js/main.js?v=20260815-multimedia-real1" defer></script>
+<script src="js/main.js?v=20260815-video-lightbox1" defer></script>
 </body>
 </html>
