@@ -1285,3 +1285,149 @@ if (document.readyState === 'loading') {
 
   document.addEventListener('expreso:rss-updated', limpiarMarcaDuplicada);
 })();
+
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHTBOX GLOBAL DE GALERÍAS · 2026-08-15
+   Abre fotografías sin navegación ni recarga de página.
+   Funciona en galeria.html y en cualquier galería con botones
+   .gal-item y un contenedor .content-lightbox.
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var lightbox = document.querySelector('.content-lightbox');
+  if (!lightbox) return;
+
+  var image = lightbox.querySelector('img');
+  var caption = lightbox.querySelector('.lb-caption');
+  var closeBtn = lightbox.querySelector('.lb-close');
+  var prevBtn = lightbox.querySelector('.lb-prev');
+  var nextBtn = lightbox.querySelector('.lb-next');
+
+  if (!image || !closeBtn || !prevBtn || !nextBtn) return;
+
+  /*
+   * Solo tratamos como lightbox los botones de galerías.
+   * Los enlaces de la mini-galería del sidebar siguen navegando
+   * normalmente hacia multimedia-galerias.html.
+   */
+  var items = Array.prototype.slice.call(
+    document.querySelectorAll(
+      '.gal-page button.gal-item, .gallery-grid button.gal-item, .gallery-full-set button.gal-item'
+    )
+  ).filter(function (item) {
+    return !!item.querySelector('img');
+  });
+
+  if (!items.length) return;
+
+  var currentIndex = 0;
+  var lastFocused = null;
+  var previousBodyOverflow = '';
+
+  function itemData(index) {
+    var item = items[index];
+    var img = item.querySelector('img');
+    var cap = item.querySelector('.gal-cap');
+    return {
+      src: img.currentSrc || img.src,
+      alt: img.alt || '',
+      caption: cap ? cap.textContent.trim() : (img.alt || '')
+    };
+  }
+
+  function render(index) {
+    if (!items.length) return;
+    currentIndex = (index + items.length) % items.length;
+
+    var data = itemData(currentIndex);
+    image.src = data.src;
+    image.alt = data.alt;
+    if (caption) caption.textContent = data.caption;
+
+    lightbox.setAttribute(
+      'aria-label',
+      'Fotografía ' + (currentIndex + 1) + ' de ' + items.length
+    );
+  }
+
+  function openLightbox(index, trigger) {
+    lastFocused = trigger || document.activeElement;
+    previousBodyOverflow = document.body.style.overflow;
+
+    render(index);
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    window.requestAnimationFrame(function () {
+      closeBtn.focus({ preventScroll: true });
+    });
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+    image.removeAttribute('src');
+    document.body.style.overflow = previousBodyOverflow;
+
+    if (lastFocused && typeof lastFocused.focus === 'function') {
+      lastFocused.focus({ preventScroll: true });
+    }
+  }
+
+  items.forEach(function (item, index) {
+    item.setAttribute('aria-haspopup', 'dialog');
+    item.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      openLightbox(index, item);
+    });
+  });
+
+  closeBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    closeLightbox();
+  });
+
+  prevBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    render(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    render(currentIndex + 1);
+  });
+
+  lightbox.addEventListener('click', function (event) {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (lightbox.hidden) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeLightbox();
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      render(currentIndex - 1);
+      return;
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      render(currentIndex + 1);
+    }
+  });
+
+  /* Estado accesible inicial. */
+  lightbox.setAttribute('aria-hidden', lightbox.hidden ? 'true' : 'false');
+})();
+
+
