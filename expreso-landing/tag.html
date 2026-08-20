@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Noticias relacionadas con precio del dólar hoy en EXPRESO."><title>Precio del dólar hoy | EXPRESO</title>
+<link rel="stylesheet" href="css/styles.css?v=20260820-taxonomy-author1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+/* TAG + AUTOR · PROPUESTA VISUAL 2026 */
+.tax-page{background:linear-gradient(180deg,#f7faf8 0,#fff 420px)}
+.tax-shell{max-width:1240px;margin:0 auto;padding:26px 18px 56px}
+.tax-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:26px;align-items:start}
+.tax-main{min-width:0}
+.tax-hero{position:relative;overflow:hidden;border-radius:24px;background:#002e1e;color:#fff;box-shadow:0 24px 70px rgba(0,46,30,.18);margin-bottom:24px}
+.tax-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(37,164,87,.45),transparent 32%),linear-gradient(135deg,rgba(255,255,255,.06),transparent 55%)}
+.tax-hero__inner{position:relative;z-index:1;padding:34px}
+.tax-kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#8ee2aa}
+.tax-kicker::before{content:"";width:24px;height:3px;border-radius:4px;background:#25a457}
+.tax-hero h1{margin:10px 0 8px;font-size:clamp(38px,6vw,66px);line-height:.98;letter-spacing:-.035em}
+.tax-hero p{max-width:720px;margin:0;color:rgba(255,255,255,.76);font-size:16px;line-height:1.5}
+.tax-meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tax-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.07);font-size:11px;color:#fff}
+.tax-feature{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin:0 0 26px}
+.tax-feature__main,.tax-feature__side{border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 12px 34px rgba(0,46,30,.09)}
+.tax-feature__media{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#dfe8e3}
+.tax-feature__media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.tax-feature a:hover img{transform:scale(1.025)}
+.tax-feature__body{padding:18px}
+.tax-cat{font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#1a7c3e}
+.tax-feature h2,.tax-feature h3{margin:7px 0 7px;color:#07140d;line-height:1.12}
+.tax-feature h2{font-size:27px}.tax-feature h3{font-size:19px}
+.tax-feature p{margin:0;color:#66716b;font-size:13px;line-height:1.45}
+.tax-time{display:block;margin-top:11px;color:#8b948f;font-size:10px}
+.tax-list-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:28px 0 12px;padding-bottom:10px;border-bottom:2px solid #0e5228}
+.tax-list-head h2{margin:0;font-size:23px;color:#0d1b13}.tax-list-head span{font-size:11px;color:#758078}
+.tax-card{display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px;padding:18px 0;border-bottom:1px solid #e3e8e5}
+.tax-card__img{aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#edf1ef}
+.tax-card__img img{width:100%;height:100%;object-fit:cover;display:block}
+.tax-card h3{margin:5px 0 7px;font-size:21px;line-height:1.17;color:#0e1b14}
+.tax-card p{margin:0;color:#69736d;font-size:13px;line-height:1.45}
+.tax-card small{display:block;margin-top:10px;color:#909892;font-size:10px}
+.tax-more{display:flex;justify-content:center;margin-top:24px}.tax-more button{border:0;border-radius:999px;padding:12px 22px;background:#0e5228;color:#fff;font-weight:800;cursor:pointer}
+
+/* AUTHOR */
+.author-hero{display:grid;grid-template-columns:230px minmax(0,1fr);gap:30px;align-items:center}
+.author-photo{position:relative;width:210px;aspect-ratio:1;border-radius:28px;overflow:hidden;border:5px solid rgba(255,255,255,.12);box-shadow:0 18px 45px rgba(0,0,0,.22)}
+.author-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.author-role{display:inline-flex;margin-top:14px;padding:7px 10px;border-radius:999px;background:#25a457;color:#fff;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.author-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
+.author-stat{padding:13px 14px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13)}
+.author-stat b{display:block;font-size:18px}.author-stat span{font-size:10px;color:rgba(255,255,255,.65)}
+.author-feature{display:grid;grid-template-columns:1.35fr .65fr;gap:16px;margin-bottom:24px}
+.author-lead{border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 12px 35px rgba(0,46,30,.10)}
+.author-lead img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.author-lead__body{padding:20px}.author-lead h2{margin:7px 0 8px;font-size:28px;line-height:1.1}
+.author-mini-stack{display:grid;gap:14px}.author-mini{border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 10px 28px rgba(0,46,30,.08)}
+.author-mini img{width:100%;aspect-ratio:16/8.5;object-fit:cover;display:block}.author-mini div{padding:13px}.author-mini h3{margin:5px 0 0;font-size:16px;line-height:1.2}
+
+/* sidebar uses existing site classes, with minimal guard */
+.tax-sidebar{display:flex;flex-direction:column;gap:16px}
+.tax-sidebar .mock-ad img{display:block;width:100%;height:auto}
+.tax-sidebar .edimp-cover img{width:100%;height:auto;object-fit:contain}
+
+@media(max-width:980px){.tax-layout{grid-template-columns:1fr}.tax-sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.tax-feature,.author-feature{grid-template-columns:1fr}}
+@media(max-width:700px){
+ .tax-shell{padding:16px 12px 42px}.tax-hero{border-radius:18px}.tax-hero__inner{padding:24px 20px}.tax-hero h1{font-size:40px}
+ .tax-feature{grid-template-columns:1fr}.tax-card{grid-template-columns:118px minmax(0,1fr);gap:12px}.tax-card__img{border-radius:10px}.tax-card h3{font-size:16px}.tax-card p{display:none}
+ .author-hero{grid-template-columns:1fr;text-align:center}.author-photo{width:150px;margin:auto}.author-stats{grid-template-columns:1fr 1fr 1fr}.tax-sidebar{grid-template-columns:1fr}
+}
+</style>
+</head><body class="tax-page tag-page">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div class="utility"><div class="wrap"><nav class="utility-links"><a href="directorio.html">Directorio</a><a href="https://www.expreso.com.mx/contacto">Contáctanos</a><a href="https://www.expreso.com.mx/publicidad">Media Kit 2026</a></nav><div class="utility-social"><a href="https://facebook.com/expresoweb"><i class="fa-brands fa-facebook-f"></i></a><a href="https://instagram.com/expresomx"><i class="fa-brands fa-instagram"></i></a><a href="https://youtube.com/user/expresoweb"><i class="fa-brands fa-youtube"></i></a><a href="https://x.com/Expresoweb"><i class="fa-brands fa-x-twitter"></i></a><a href="https://www.tiktok.com/@expresoweb"><i class="fa-brands fa-tiktok"></i></a></div></div></div>
+<header class="header"><div class="wrap"><a href="index.html" class="logo"><img class="exp" src="img/expreso logo.png" alt="Expreso"></a><div class="search"><span class="search-icon">🔍</span><div class="search-box"><input type="search" placeholder="Buscar en Expreso…" aria-label="Buscar en Expreso"></div></div><div class="header-actions"><a href="https://impreso.expreso.com.mx/" class="btn btn-ghost">Edición Impresa</a><a href="#" class="btn btn-primary">Suscribirse</a></div></div></header>
+<nav class="navbar nav-context"><div class="wrap"><div class="nav-primary"><a href="index.html">Inicio</a><a href="hermosillo.html">Hermosillo</a><a href="sonora.html">Sonora</a><a href="mexico.html">México</a><a href="mundo.html">Mundo</a><a href="seguridad.html">Seguridad</a><a href="negocios.html">Negocios</a><a href="viral.html">Viral</a></div><div class="nav-secondary"><a href="accion.html">Acción</a><a href="estelar.html">Estelar</a><a href="expresion.html">Expresión</a><a href="conexion.html">Conexión</a></div></div></nav>
+<div class="ticker"><div class="ticker-tag"><span class="dot"></span> Tendencias</div><div class="ticker-track"><div class="ticker-items"><a href="#">Sonora</a><span class="sep">·</span><a href="#">Hermosillo</a><span class="sep">·</span><a href="#">Negocios</a><span class="sep">·</span><a href="#">Seguridad</a></div></div></div>
+
+<main id="contenido" class="tax-shell"><div class="tax-layout"><section class="tax-main">
+<section class="tax-hero"><div class="tax-hero__inner"><span class="tax-kicker">Tema en seguimiento</span><h1>Precio del dólar hoy</h1><p>Noticias, referencias bancarias y movimientos del tipo de cambio peso-dólar reunidos en una sola cobertura.</p><div class="tax-meta-row"><span class="tax-chip"><i class="fa-solid fa-chart-line"></i> Negocios</span><span class="tax-chip"><i class="fa-regular fa-clock"></i> Cobertura recurrente</span><span class="tax-chip"><i class="fa-solid fa-dollar-sign"></i> Tipo de cambio</span></div></div></section>
+<section class="tax-feature">
+<article class="tax-feature__main"><a href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-sabado-4-de-julio-de-2026-en-mexico/257000"><span class="tax-feature__media"><img src="https://blob.expreso.com.mx/images/2025/07/31/preciodelolarjueves31jul-ae7129b7-focus-0-0-360-300.webp" alt="El peso mexicano cotiza en 17.56 unidades por dólar este sábado"></span><div class="tax-feature__body"><span class="tax-cat">Última actualización</span><h2>El peso mexicano cotiza en 17.56 unidades por dólar este sábado</h2><p>Consulta el precio del dólar y las referencias de compra y venta en bancos y centros cambiarios.</p><small class="tax-time">Angie Alvarado · 4 jul. 2026</small></div></a></article>
+<div class="tax-feature__side"><div class="tax-feature__body"><span class="tax-cat">Contexto</span><h3>Todo el seguimiento del dólar en un solo lugar</h3><p>La vista prioriza la nota más reciente y conserva un histórico visual para identificar rápidamente cambios y tendencias.</p></div></div>
+</section>
+<div class="tax-list-head"><h2>Más sobre precio del dólar hoy</h2><span>Ordenado por publicación</span></div>
+<article class="tax-card"><a class="tax-card__img" href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-26-de-mayo-2026-tipo-de-cambio-1727/256912"><img src="https://blob.expreso.com.mx/images/2026/05/26/precio-del-dolar-hoy-26-de-mayo-2026-tipo-de-cambio-1727-79f1ec85-focus-0-0-360-300.webp" alt="Peso sigue ganando terreno ante el dólar: Amanece así el tipo de cambio"></a><div><span class="tax-cat">Negocios</span><h3><a href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-26-de-mayo-2026-tipo-de-cambio-1727/256912">Peso sigue ganando terreno ante el dólar: Amanece así el tipo de cambio</a></h3><p>Este es el valor de referencia del dólar en México al inicio de la jornada.</p><small>Angie Alvarado · 26 may. 2026</small></div></article>
+<article class="tax-card"><a class="tax-card__img" href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-25-de-mayo-2026-1726-pesos-por-dolar/256831"><img src="https://blob.expreso.com.mx/images/2026/05/25/precio-del-dolar-hoy-25-de-mayo-2026-1726-pesos-por-dolar-8e761856-focus-0-0-360-300.webp" alt="Peso tiembla frente al dólar este lunes: Tipo de cambio hoy"></a><div><span class="tax-cat">Negocios</span><h3><a href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-25-de-mayo-2026-1726-pesos-por-dolar/256831">Peso tiembla frente al dólar este lunes: Tipo de cambio hoy</a></h3><p>El mercado cambiario inicia la semana con movimientos frente a la moneda estadounidense.</p><small>Angie Alvarado · 25 may. 2026</small></div></article>
+<article class="tax-card"><a class="tax-card__img" href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-22-de-mayo-2026-1734-pesos-por-dolar/256634"><img src="https://blob.expreso.com.mx/images/2026/05/22/billetes20la20g20banxico-cf136ad9-focus-0-0-360-300.webp" alt="Peso mexicano se recupera ante el dólar: Así amaneció el tipo de cambio"></a><div><span class="tax-cat">Negocios</span><h3><a href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-22-de-mayo-2026-1734-pesos-por-dolar/256634">Peso mexicano se recupera ante el dólar: Así amaneció el tipo de cambio</a></h3><p>El peso mexicano registró una recuperación frente al dólar al inicio de la jornada.</p><small>Angie Alvarado · 22 may. 2026</small></div></article>
+<article class="tax-card"><a class="tax-card__img" href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-20-de-mayo-2026-1736-pesos-por-dolar/256490"><img src="https://blob.expreso.com.mx/images/2026/05/20/precio-del-dolar-hoy-fecha-mes-0000-pesos-por-dolar-c26de8ca-focus-0-0-360-300.webp" alt="Peso tiembla ante el dólar este 20 de mayo: Así amaneció"></a><div><span class="tax-cat">Negocios</span><h3><a href="https://www.expreso.com.mx/noticias/negocios/precio-del-dolar-hoy-20-de-mayo-2026-1736-pesos-por-dolar/256490">Peso tiembla ante el dólar este 20 de mayo: Así amaneció</a></h3><p>El tipo de cambio inicia la jornada con cautela en los mercados.</p><small>Angie Alvarado · 20 may. 2026</small></div></article>
+<div class="tax-more"><button type="button">Ver más publicaciones</button></div>
+</section>
+<aside class="tax-sidebar col-right">
+  <div class="weather" data-expreso-weather><div class="weather-hd"><div class="weather-city">📍 HERMOSILLO, SONORA</div><div class="weather-main"><div class="weather-temp" id="weatherCardTemp">--°</div><div class="weather-info"><div class="weather-desc"><img id="weatherCardIcon" class="weather-current-icon" src="" alt="" width="32" height="32" hidden><span id="weatherCardDescription">Clima actual</span></div></div></div><div class="weather-days" id="weatherForecast" hidden></div></div><a href="clima.html" class="weather-cta">Revisar UV, calidad del aire y más →</a></div>
+  <div class="mock-ad mock-ad--rectangle"><img src="assets/ads-mock/mock-rectangle-300x250.svg" alt="Publicidad 300 por 250"></div>
+  <section class="card card-pad" id="cardMercado"><h2 class="card-h">Mercado</h2><ul class="market"><li><span class="sym">USD/MXN</span><span class="val">$17.32</span><span class="chg down">Apertura</span></li><li><span class="sym">Magna HMO</span><span class="val">$23.96</span><span class="chg up">por litro</span></li><li><span class="sym">Premium HMO</span><span class="val">$29.14</span><span class="chg up">por litro</span></li><li><span class="sym">Diésel HMO</span><span class="val">$26.94</span><span class="chg down">por litro</span></li></ul></section>
+  <section class="card card-pad" id="cardEdimp"><h2 class="card-h">Edición Impresa</h2><a class="edimp-cover" href="https://impreso.expreso.com.mx/"><img src="assets/real/edicion-impresa.png" alt="Edición impresa"><span class="edimp-cap">Consulta la edición impresa de hoy</span></a></section>
+</aside>
+</div></main>
+<footer class="footer"><div class="footer-bottom"><div class="wrap"><p>© 2026 Expreso · Medios y Editorial de Sonora, S.A. de C.V.</p><div class="footer-legal"><a href="https://www.expreso.com.mx/contacto">Contacto</a><a href="https://www.expreso.com.mx/politica-de-privacidad">Aviso de Privacidad</a></div></div></div></footer>
+<button class="btop" id="btop" aria-label="Volver arriba">↑</button>
+<script src="js/main.js?v=20260820-taxonomy-author1" defer></script>
+</body></html>
